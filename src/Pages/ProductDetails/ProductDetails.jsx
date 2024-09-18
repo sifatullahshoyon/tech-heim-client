@@ -6,6 +6,11 @@ import { LuShieldCheck } from 'react-icons/lu';
 import { FaAngleRight, FaCheck } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { RiDiscountPercentFill } from 'react-icons/ri';
+import frame1 from '../../assets/Photos/Product-Details/Frame 1.png'
+import frame2 from '../../assets/Photos/Product-Details/Frame 2.png'
+import frame3 from '../../assets/Photos/Product-Details/Frame 3.png'
+import frame4 from '../../assets/Photos/Product-Details/Frame 4.png'
+import frame5 from '../../assets/Photos/Product-Details/Frame 5.png'
 const ProductDetails = () => {
     const [selectedColor, setSelectedColor] = useState('');
 
@@ -13,18 +18,29 @@ const ProductDetails = () => {
         setSelectedColor(color);
     };
     return (
-        <div className='lg:max-w-screen-xl	max-w-screen-sm mx-auto '>
+        <div >
             <div className="hero ">
                 <div className="hero-content gap-10 flex-col lg:flex-row">
-                    <div>
-                        <img
-                            src={laptop1}
-                            className="w-full h-full rounded-lg " />
-                    </div>
+
+
+                    <img
+                        src={laptop1}
+                        className="w-full h-full rounded-lg "
+                    />
+                    {/* <div className='flex items-center gap-4'>
+                        <img src={frame1} className='w-20 h-20' alt="" />
+                        <img src={frame1} className='w-20 h-20' alt="" />
+                        <img src={frame1} className='w-20 h-20' alt="" />
+                        <img src={frame1} className='w-20 h-20' alt="" />
+                        <img src={frame1} className='w-20 h-20' alt="" />
+
+                    </div> */}
+
+
 
 
                     {/* card-1  */}
-                    <div className=" bg-base-100 ">
+                    <div className=" bg-base-100  ">
                         <div className="card-body">
                             <h2 className="text-3xl">MacBook Pro M2 MNEJ3 2022 LLA 13.3 inch</h2>
 
