@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.active {
+  @apply text-blue-400  font-semibold  text-lg;
+}
+
+.default {
+  @apply text-black  font-light  text-lg;
+}
