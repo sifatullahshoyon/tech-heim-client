@@ -10,10 +10,16 @@ import devices from "../../assets/devices.png";
 import data from "../../assets/data.png";
 import headphones from "../../assets/headphones.png";
 import close from "../../assets/close.png";
+
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { MdOutlineArrowDropUp } from "react-icons/md";
 
+import ProductCard from "../../Components/ProductCard/ProductCard";
+import Advertising from "../../Components/Advertising/Advertising";
+
 const Shop = () => {
+  //  Tab state
+  const [activeTab, setActiveTab] = useState("Laptop");
   //  filter  state
   const [brand, setBrand] = useState(false);
   const [color, setColor] = useState(false);
@@ -98,85 +104,175 @@ const Shop = () => {
       {/* Breadcrumb end  */}
       {/* Tab button start  */}
       <div className="flex justify-center items-center mb-[56px]">
-        <div className="grid grid-cols-9 gap-[10px] ">
-          <div className="cursor-pointer px-[15px] py-[8px]">
-            <div className="w-[48px] h-[48px] mx-auto ">
-              <img className="w-full h-full hover:opacity-50 " src={Laptop} alt="" />
+        <div className="flex gap-[10px] overflow-x-auto flex-nowrap sm:grid sm:grid-cols-9 scrollbar-hide">
+          <button
+            onClick={() => setActiveTab("Laptop")}
+            className={`cursor-pointer px-[15px] py-[8px] ${
+              activeTab === "Laptop" ? "active" : ""
+            }`}
+          >
+            <div className="w-[48px] h-[48px] mx-auto">
+              <img className="w-full h-full hover:opacity-50" src={Laptop} alt="" />
             </div>
-            <p className="text-[#444444] text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ">
+            <p
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
+                activeTab === "Laptop" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+              }`}
+            >
               Laptop
             </p>
-          </div>
-          <div className="cursor-pointer px-[15px] py-[8px]">
-            <div className="w-[48px] h-[48px] mx-auto ">
+          </button>
+
+          <button
+            onClick={() => setActiveTab("Camera")}
+            className={`cursor-pointer px-[15px] py-[8px] ${
+              activeTab === "Camera" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+            }`}
+          >
+            <div className="w-[48px] h-[48px] mx-auto">
               <img className="w-full h-full hover:opacity-50" src={camera} alt="" />
             </div>
-            <p className="text-[#444444] text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ">
-              camera
+            <p
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
+                activeTab === "Camera" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+              }`}
+            >
+              Camera
             </p>
-          </div>
-          <div className="cursor-pointer px-[15px] py-[8px]">
-            <div className="w-[48px] h-[48px] mx-auto ">
+          </button>
+
+          <button
+            onClick={() => setActiveTab("Watch")}
+            className={`cursor-pointer px-[15px] py-[8px] ${
+              activeTab === "Watch" ? "active underline" : ""
+            }`}
+          >
+            <div className="w-[48px] h-[48px] mx-auto">
               <img className="w-full h-full hover:opacity-50" src={watch} alt="" />
             </div>
-            <p className="text-[#444444] text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ">
-              watch
+            <p
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
+                activeTab === "Watch" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+              }`}
+            >
+              Watch
             </p>
-          </div>
-          <div className="cursor-pointer px-[15px] py-[8px]">
-            <div className="w-[48px] h-[48px] mx-auto ">
+          </button>
+
+          <button
+            onClick={() => setActiveTab("Tab")}
+            className={`cursor-pointer px-[15px] py-[8px] ${
+              activeTab === "Tab" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+            }`}
+          >
+            <div className="w-[48px] h-[48px] mx-auto">
               <img className="w-full h-full hover:opacity-50" src={tab} alt="" />
             </div>
-            <p className="text-[#444444] text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ">
-              tab
+            <p
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
+                activeTab === "Tab" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+              }`}
+            >
+              Tab
             </p>
-          </div>
-          <div className="cursor-pointer px-[15px] py-[8px]">
-            <div className="w-[48px] h-[48px] mx-auto ">
-              <img className="w-full h-full  hover:opacity-50" src={mobile} alt="" />
+          </button>
+
+          <button
+            onClick={() => setActiveTab("Mobile")}
+            className={`cursor-pointer px-[15px] py-[8px] ${
+              activeTab === "Mobile" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+            }`}
+          >
+            <div className="w-[48px] h-[48px] mx-auto">
+              <img className="w-full h-full hover:opacity-50" src={mobile} alt="" />
             </div>
-            <p className="text-[#444444] text-[20px] font-light mt-[16px] text-center  uppercase">
-              mobile
+            <p
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
+                activeTab === "Mobile" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+              }`}
+            >
+              Mobile
             </p>
-          </div>
-          <div className="cursor-pointer px-[15px] py-[8px]">
-            <div className="w-[48px] h-[48px] mx-auto ">
+          </button>
+
+          <button
+            onClick={() => setActiveTab("Game")}
+            className={`cursor-pointer px-[15px] py-[8px] ${
+              activeTab === "Game" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+            }`}
+          >
+            <div className="w-[48px] h-[48px] mx-auto">
               <img className="w-full h-full hover:opacity-50" src={game} alt="" />
             </div>
-            <p className="text-[#444444] text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase">
-              game
+            <p
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
+                activeTab === "Game" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+              }`}
+            >
+              Game
             </p>
-          </div>
-          <div className="cursor-pointer px-[15px] py-[8px]">
-            <div className="w-[48px] h-[48px] mx-auto ">
+          </button>
+
+          <button
+            onClick={() => setActiveTab("Devices")}
+            className={`cursor-pointer px-[15px] py-[8px] ${
+              activeTab === "Devices" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+            }`}
+          >
+            <div className="w-[48px] h-[48px] mx-auto">
               <img className="w-full h-full hover:opacity-50" src={devices} alt="" />
             </div>
-            <p className="text-[#444444] text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase">
-              devices
+            <p
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
+                activeTab === "Devices" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+              }`}
+            >
+              Devices
             </p>
-          </div>
-          <div className="cursor-pointer px-[15px] py-[8px]">
-            <div className="w-[48px] h-[48px] mx-auto ">
+          </button>
+
+          <button
+            onClick={() => setActiveTab("Data")}
+            className={`cursor-pointer px-[15px] py-[8px] ${
+              activeTab === "Data" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+            }`}
+          >
+            <div className="w-[48px] h-[48px] mx-auto">
               <img className="w-full h-full hover:opacity-50" src={data} alt="" />
             </div>
-            <p className="text-[#444444] text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase">
-              data
+            <p
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
+                activeTab === "Data" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+              }`}
+            >
+              Data
             </p>
-          </div>
-          <div className="cursor-pointer px-[15px] py-[8px]">
-            <div className="w-[48px] h-[48px] mx-auto ">
+          </button>
+
+          <button
+            onClick={() => setActiveTab("Headphones")}
+            className={`cursor-pointer px-[15px] py-[8px] ${
+              activeTab === "Headphones" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+            }`}
+          >
+            <div className="w-[48px] h-[48px] mx-auto">
               <img className="w-full h-full hover:opacity-50" src={headphones} alt="" />
             </div>
-            <p className="text-[#444444] text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase">
-              headphones
+            <p
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
+                activeTab === "Headphones" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+              }`}
+            >
+              Headphones
             </p>
-          </div>
+          </button>
         </div>
       </div>
+
       {/* Tab button end  */}
       {/* Filter review box start  */}
-      <div className="mb-[40px]">
-        <div className="flex">
+      <div className="mb-[40px] px-[8px]">
+        <div className="flex flex-wrap gap-[8px]">
           {selectedBrands
             .concat(selectedColors)
             .concat(selectedRamSizes)
@@ -187,9 +283,9 @@ const Shop = () => {
             .map((filter) => (
               <div
                 key={filter}
-                className="flex justify-between items-center w-[133px] h-[40px] rounded-[8px] border-[1px] border-solid border-black px-[10px] py-[8px] mr-[8px]"
+                className="flex justify-between items-center w-[100px] sm:w-[100px] md:w-[200px] h-[40px] rounded-[8px] border-[1px] border-solid border-black px-[10px] py-[8px]"
               >
-                <p>{filter}</p>
+                <p className="text-sm truncate">{filter}</p>
                 <button
                   onClick={() => {
                     setSelectedBrands((prev) => prev.filter((name) => name !== filter));
@@ -201,7 +297,7 @@ const Shop = () => {
                     setSelectedScreenSize((prev) => prev.filter((name) => name !== filter));
                   }}
                 >
-                  <img className="w-[24px] h-[24px]" src={close} alt="close" />
+                  <img className="w-[16px] h-[16px]" src={close} alt="close" />
                 </button>
               </div>
             ))}
@@ -209,26 +305,24 @@ const Shop = () => {
       </div>
 
       {/* Filter review box end */}
+
       {/* filter and Product start div */}
-      <div className="flex ">
-        <div className="w-1/4  mr-[24px] px-[16px]">
-          <div className="flex justify-between items-center ">
-            <p className="text-[24px] font-medium">Filters</p>
-            <button
-              onClick={() => handleClearAll()}
-              className="text-[16px] text-[#0C68F4]  font-normal"
-            >
+      <div className="flex flex-col lg:flex-row">
+        <div className="w-full lg:w-1/4 p-4 lg:p-6">
+          <div className="flex justify-between items-center mb-4">
+            <p className="text-lg lg:text-xl font-medium">Filters</p>
+            <button onClick={() => handleClearAll()} className="text-sm lg:text-base text-blue-600">
               Clear All
             </button>
           </div>
 
           {/* Filter with Brand */}
-          <div>
+          <div className="mb-4">
             <button
               onClick={() => setBrand(!brand)}
-              className="text-[20px] font-light w-full border-b-[1px] border-t-[1px]"
+              className="text-lg lg:text-xl font-light w-full border-b border-t"
             >
-              <div className="flex justify-between items-center w-full py-[16px]">
+              <div className="flex justify-between items-center py-2 lg:py-3">
                 <p>Brand</p>
                 {brand ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
               </div>
@@ -240,14 +334,14 @@ const Shop = () => {
             >
               <div>
                 {["Asus", "Acer", "Apple", "Dell"].map((brandName) => (
-                  <div key={brandName} className="form-control">
-                    <label className="label cursor-pointer px-[20px]">
-                      <p className="label-text text-[20px] font-light">
-                        {brandName} <span className="text-[14px] text-[#B4B4B4]">(183)</span>
+                  <div key={brandName} className="form-control mb-2">
+                    <label className="label cursor-pointer flex items-center">
+                      <p className="label-text text-lg lg:text-xl">
+                        {brandName} <span className="text-sm text-gray-400">(183)</span>
                       </p>
                       <input
                         type="checkbox"
-                        className="checkbox"
+                        className="checkbox ml-2"
                         checked={selectedBrands.includes(brandName)}
                         onChange={() => handleBrandChange(brandName)}
                       />
@@ -259,12 +353,12 @@ const Shop = () => {
           </div>
 
           {/* Filter with Color */}
-          <div>
+          <div className="mb-4">
             <button
               onClick={() => setColor(!color)}
-              className="text-[20px] font-light w-full border-b-[1px]"
+              className="text-lg lg:text-xl font-light w-full border-b"
             >
-              <div className="flex justify-between items-center w-full py-[16px]">
+              <div className="flex justify-between items-center py-2 lg:py-3">
                 <p>Color</p>
                 {color ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
               </div>
@@ -276,14 +370,14 @@ const Shop = () => {
             >
               <div>
                 {["Red", "Blue", "Silver", "White"].map((colorName) => (
-                  <div key={colorName} className="form-control">
-                    <label className="label cursor-pointer px-[20px]">
-                      <p className="label-text text-[20px] font-light">
-                        {colorName} <span className="text-[14px] text-[#B4B4B4]">(183)</span>
+                  <div key={colorName} className="form-control mb-2">
+                    <label className="label cursor-pointer flex items-center">
+                      <p className="label-text text-lg lg:text-xl">
+                        {colorName} <span className="text-sm text-gray-400">(183)</span>
                       </p>
                       <input
                         type="checkbox"
-                        className="checkbox"
+                        className="checkbox ml-2"
                         checked={selectedColors.includes(colorName)}
                         onChange={() => handleColorChange(colorName)}
                       />
@@ -293,13 +387,14 @@ const Shop = () => {
               </div>
             </div>
           </div>
-          {/* filter with RAM start */}
-          <div className=" ">
+
+          {/* Filter with RAM */}
+          <div className="mb-4">
             <button
               onClick={() => setRam(!ram)}
-              className="text-[20px] font-light w-full border-b-[1px] "
+              className="text-lg lg:text-xl font-light w-full border-b"
             >
-              <div className="flex justify-between items-center w-full py-[16px]">
+              <div className="flex justify-between items-center py-2 lg:py-3">
                 <p>RAM</p>
                 {ram ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
               </div>
@@ -311,14 +406,14 @@ const Shop = () => {
             >
               <div>
                 {["32 GB", "16 GB", "12 GB", "8 GB"].map((ramSize) => (
-                  <div className="form-control" key={ramSize}>
-                    <label className="label cursor-pointer px-[20px]">
-                      <p className="label-text text-[20px] font-light">
-                        {ramSize} <span className="text-[14px] text-[#B4B4B4] fon">(183)</span>
+                  <div className="form-control mb-2" key={ramSize}>
+                    <label className="label cursor-pointer flex items-center">
+                      <p className="label-text text-lg lg:text-xl">
+                        {ramSize} <span className="text-sm text-gray-400">(183)</span>
                       </p>
                       <input
                         type="checkbox"
-                        className="checkbox"
+                        className="checkbox ml-2"
                         checked={selectedRamSizes.includes(ramSize)}
                         onChange={() => handleRamChange(ramSize)}
                       />
@@ -328,15 +423,14 @@ const Shop = () => {
               </div>
             </div>
           </div>
-          {/* filter with RAM end */}
 
-          {/* filter with Drive Size start */}
-          <div className=" ">
+          {/* Filter with Drive Size */}
+          <div className="mb-4">
             <button
               onClick={() => setDrive(!drive)}
-              className="text-[20px] font-light w-full border-b-[1px] "
+              className="text-lg lg:text-xl font-light w-full border-b"
             >
-              <div className="flex justify-between items-center w-full py-[16px]">
+              <div className="flex justify-between items-center py-2 lg:py-3">
                 <p>Drive Size</p>
                 {drive ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
               </div>
@@ -348,14 +442,14 @@ const Shop = () => {
             >
               <div>
                 {["512 GB", "256 GB", "128 GB", "64 GB"].map((driveSize) => (
-                  <div className="form-control" key={driveSize}>
-                    <label className="label cursor-pointer px-[20px]">
-                      <p className="label-text text-[20px] font-light">
-                        {driveSize} <span className="text-[14px] text-[#B4B4B4] fon">(183)</span>
+                  <div className="form-control mb-2" key={driveSize}>
+                    <label className="label cursor-pointer flex items-center">
+                      <p className="label-text text-lg lg:text-xl">
+                        {driveSize} <span className="text-sm text-gray-400">(183)</span>
                       </p>
                       <input
                         type="checkbox"
-                        className="checkbox"
+                        className="checkbox ml-2"
                         checked={selectedDriveSizes.includes(driveSize)}
                         onChange={() => handleDriveChange(driveSize)}
                       />
@@ -365,15 +459,14 @@ const Shop = () => {
               </div>
             </div>
           </div>
-          {/* filter with Drive Size end */}
 
-          {/* filter with GPU Brand start */}
-          <div className=" ">
+          {/* Filter with GPU Brand */}
+          <div className="mb-4">
             <button
               onClick={() => setGpu(!gpu)}
-              className="text-[20px] font-light w-full border-b-[1px] "
+              className="text-lg lg:text-xl font-light w-full border-b"
             >
-              <div className="flex justify-between items-center w-full py-[16px]">
+              <div className="flex justify-between items-center py-2 lg:py-3">
                 <p>GPU Brand</p>
                 {gpu ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
               </div>
@@ -385,14 +478,14 @@ const Shop = () => {
             >
               <div>
                 {["NVIDIA", "Intel", "AMD", "Apple"].map((gpuBrand) => (
-                  <div className="form-control" key={gpuBrand}>
-                    <label className="label cursor-pointer px-[20px]">
-                      <p className="label-text text-[20px] font-light">
-                        {gpuBrand} <span className="text-[14px] text-[#B4B4B4] fon">(183)</span>
+                  <div className="form-control mb-2" key={gpuBrand}>
+                    <label className="label cursor-pointer flex items-center">
+                      <p className="label-text text-lg lg:text-xl">
+                        {gpuBrand} <span className="text-sm text-gray-400">(183)</span>
                       </p>
                       <input
                         type="checkbox"
-                        className="checkbox"
+                        className="checkbox ml-2"
                         checked={selectedGpuBrands.includes(gpuBrand)}
                         onChange={() => handleGpuChange(gpuBrand)}
                       />
@@ -402,15 +495,14 @@ const Shop = () => {
               </div>
             </div>
           </div>
-          {/* filter with GPU Brand end */}
 
-          {/* filter with Processor start */}
-          <div className=" ">
+          {/* Filter with Processor */}
+          <div className="mb-4">
             <button
               onClick={() => setProcessor(!processor)}
-              className="text-[20px] font-light w-full border-b-[1px] "
+              className="text-lg lg:text-xl font-light w-full border-b"
             >
-              <div className="flex justify-between items-center w-full py-[16px]">
+              <div className="flex justify-between items-center py-2 lg:py-3">
                 <p>Processor</p>
                 {processor ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
               </div>
@@ -423,15 +515,14 @@ const Shop = () => {
               <div>
                 {["Intel Core i5", "Intel Core i7", "Intel Core i9", "AMD Ryzen 9"].map(
                   (processorType) => (
-                    <div className="form-control" key={processorType}>
-                      <label className="label cursor-pointer px-[20px]">
-                        <p className="label-text text-[20px] font-light">
-                          {processorType}{" "}
-                          <span className="text-[14px] text-[#B4B4B4] fon">(183)</span>
+                    <div className="form-control mb-2" key={processorType}>
+                      <label className="label cursor-pointer flex items-center">
+                        <p className="label-text text-lg lg:text-xl">
+                          {processorType} <span className="text-sm text-gray-400">(183)</span>
                         </p>
                         <input
                           type="checkbox"
-                          className="checkbox"
+                          className="checkbox ml-2"
                           checked={selectedProcessor.includes(processorType)}
                           onChange={() => handleProcessorChange(processorType)}
                         />
@@ -448,9 +539,9 @@ const Shop = () => {
           <div className=" ">
             <button
               onClick={() => setScreen(!screen)}
-              className="text-[20px] font-light w-full border-b-[1px] "
+              className="text-lg lg:text-xl font-light w-full border-b"
             >
-              <div className="flex justify-between items-center w-full py-[16px]">
+              <div className="flex justify-between items-center py-2 lg:py-3">
                 <p>Screen Size</p>
                 {screen ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
               </div>
@@ -481,10 +572,140 @@ const Shop = () => {
           </div>
           {/* filter with Screen Size end */}
         </div>
-        <div className="w-3/4 ">
-          <p>p</p>
+        <div className="w-full lg:w-3/4 p-4 lg:p-6">
+          {/* sort start */}
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-end mb-4">
+            <select className="select select-bordered select-sm w-[200px] max-w-xs ">
+              <option disabled selected>
+                Sort BY
+              </option>
+              <option>Price: ascending </option>
+              <option>Price: descending </option>
+              <option>New Arrivals</option>
+            </select>
+          </div>
+          {/* sort end */}
+
+          {/*showing product  start */}
+          {activeTab === "Laptop" && (
+            <div className="mt-8 md:mt-10 lg:mt-12">
+              {([1, 2, 3, 4, 5, 6, 7, 8, 9] || []).length > 0 ? (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((pc) => (
+                    <ProductCard key={pc} />
+                  ))}
+                </div>
+              ) : (
+                <div className="flex justify-center items-center h-32">
+                  <p className="text-center text-gray-500 text-base md:text-lg lg:text-xl">
+                    No products available
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab == "Camera" && (
+            <div className="mt-[30px]">
+              {[].length > 0 ? (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
+                  {[1].map((pc) => (
+                    <ProductCard></ProductCard>
+                  ))}
+                </div>
+              ) : (
+                <div>
+                  {" "}
+                  <p className="text-center text-[30px] font-bold text-gray-500">
+                    No products available
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab == "Watch" && (
+            <div className="mt-[30px]">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
+                {[1, 2].map((pc) => (
+                  <ProductCard></ProductCard>
+                ))}
+              </div>
+            </div>
+          )}
+          {activeTab == "Tab" && (
+            <div className="mt-[30px]">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
+                {[1, 2, 3].map((pc) => (
+                  <ProductCard></ProductCard>
+                ))}
+              </div>
+            </div>
+          )}
+          {activeTab == "Mobile" && (
+            <div className="mt-[30px]">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
+                {[1, 2, 3, 4].map((pc) => (
+                  <ProductCard></ProductCard>
+                ))}
+              </div>
+            </div>
+          )}
+          {activeTab == "Game" && (
+            <div className="mt-[30px]">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
+                {[1, 2, 3, 4, 5].map((pc) => (
+                  <ProductCard></ProductCard>
+                ))}
+              </div>
+            </div>
+          )}
+          {activeTab == "Devices" && (
+            <div className="mt-[30px]">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
+                {[1, 2, 3, 4, 5, 6].map((pc) => (
+                  <ProductCard></ProductCard>
+                ))}
+              </div>
+            </div>
+          )}
+          {activeTab == "Data" && (
+            <div className="mt-[30px]">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
+                {[1, 2, 3, 4, 5, 6, 7].map((pc) => (
+                  <ProductCard></ProductCard>
+                ))}
+              </div>
+            </div>
+          )}
+          {activeTab == "Headphones" && (
+            <div className="mt-[30px]">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((pc) => (
+                  <ProductCard></ProductCard>
+                ))}
+              </div>
+            </div>
+          )}
+          {/*showing product end */}
+
+          {/* product pagination start */}
+          <div className="flex justify-center mt-[20px]">
+            <div className="join">
+              <button className="join-item btn btn-sm">1</button>
+              <button className="join-item btn btn-sm btn-active">2</button>
+              <button className="join-item btn btn-sm">3</button>
+              <button className="join-item btn btn-sm">4</button>
+            </div>
+          </div>
+          {/* product pagination end */}
+
+          {/* Advertising start */}
+          <Advertising></Advertising>
+          {/* Advertising end */}
         </div>
       </div>
+      {/* filter and Product end div */}
     </div>
   );
 };
