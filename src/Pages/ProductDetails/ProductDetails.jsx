@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { RiDiscountPercentFill } from 'react-icons/ri';
 import { BsFillCartCheckFill } from 'react-icons/bs';
 import TabListProduct from './TabListProduct';
+import ImageSlider from './ImageSlider';
 
 
 
@@ -23,8 +24,8 @@ const ProductDetails = () => {
                 <div className="hero-content gap-10 flex-col lg:flex-row">
 
 
-                    <img src={laptop1} alt="" />
-
+                    {/* <img src={laptop1} alt="" /> */}
+                    <ImageSlider />
 
                     {/* card-1  */}
                     <div className=" bg-base-100  ">
@@ -175,6 +176,9 @@ const ProductDetails = () => {
 
             {/* tablist-components  */}
             <TabListProduct></TabListProduct>
+
+            {/* Review  */}
+
         </div>
     );
 };
