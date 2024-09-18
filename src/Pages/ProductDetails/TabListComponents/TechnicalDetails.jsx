@@ -3,7 +3,7 @@ import { FaAngleDown } from 'react-icons/fa';
 
 const TechnicalDetails = () => {
     return (
-        <div className='my-20'>
+        <div className='my-20 lg:max-w-screen-2xl mx-auto'>
             <h1 className='text-3xl  font-semibold mb-6 text-[#0C68F4]'>Technical Details</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">

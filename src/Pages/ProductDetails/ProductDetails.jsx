@@ -18,7 +18,7 @@ const ProductDetails = () => {
         setSelectedColor(color);
     };
     return (
-        <div className='lg:max-w-screen-xl	max-w-screen-sm mx-auto '>
+        <div className='lg:max-w-screen-2xl	max-w-screen-md mx-auto '>
             <div className="hero ">
                 <div className="hero-content gap-10 flex-col lg:flex-row">
 

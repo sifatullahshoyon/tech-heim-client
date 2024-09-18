@@ -10,8 +10,8 @@ const TabListProduct = () => {
     return (
         <div className='mt-20'>
             <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-                <TabList role="tablist" className="tabs  tabs-bordered" >
-                    <Tab role="tab" className="tab pr-4 [--tab-bg:yellow] text-2xl font-semibold">Technical Details</Tab>
+                <TabList role="tablist" className='tabs  tabs-bordered lg:max-w-screen-xl	max-w-screen-sm mx-auto '>
+                    <Tab role="tab" className="tab pr-4  text-2xl font-semibold">Technical Details</Tab>
                     <Tab role="tab" className="tab text-2xl font-semibold">Similar Product</Tab>
                     <Tab role="tab" className="tab text-2xl font-semibold">Comments</Tab>
                 </TabList>
