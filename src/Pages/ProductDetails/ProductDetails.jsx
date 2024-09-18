@@ -6,11 +6,11 @@ import { LuShieldCheck } from 'react-icons/lu';
 import { FaAngleRight, FaCheck } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { RiDiscountPercentFill } from 'react-icons/ri';
-import frame1 from '../../assets/Photos/Product-Details/Frame 1.png'
-import frame2 from '../../assets/Photos/Product-Details/Frame 2.png'
-import frame3 from '../../assets/Photos/Product-Details/Frame 3.png'
-import frame4 from '../../assets/Photos/Product-Details/Frame 4.png'
-import frame5 from '../../assets/Photos/Product-Details/Frame 5.png'
+import { BsFillCartCheckFill } from 'react-icons/bs';
+import TabListProduct from './TabListProduct';
+
+
+
 const ProductDetails = () => {
     const [selectedColor, setSelectedColor] = useState('');
 
@@ -18,31 +18,18 @@ const ProductDetails = () => {
         setSelectedColor(color);
     };
     return (
-        <div >
+        <div className='lg:max-w-screen-xl	max-w-screen-sm mx-auto '>
             <div className="hero ">
                 <div className="hero-content gap-10 flex-col lg:flex-row">
 
 
-                    <img
-                        src={laptop1}
-                        className="w-full h-full rounded-lg "
-                    />
-                    {/* <div className='flex items-center gap-4'>
-                        <img src={frame1} className='w-20 h-20' alt="" />
-                        <img src={frame1} className='w-20 h-20' alt="" />
-                        <img src={frame1} className='w-20 h-20' alt="" />
-                        <img src={frame1} className='w-20 h-20' alt="" />
-                        <img src={frame1} className='w-20 h-20' alt="" />
-
-                    </div> */}
-
-
+                    <img src={laptop1} alt="" />
 
 
                     {/* card-1  */}
                     <div className=" bg-base-100  ">
                         <div className="card-body">
-                            <h2 className="text-3xl">MacBook Pro M2 MNEJ3 2022 LLA 13.3 inch</h2>
+                            <h2 className="text-3xl ">MacBook Pro M2 MNEJ3 2022 LLA 13.3 inch</h2>
 
                             <div className='flex my-2 items-center gap-4'>
                                 <div className='flex items-center gap-1 bg-[#063A88] text-white border rounded-lg px-2 p-1'>
@@ -150,7 +137,7 @@ const ProductDetails = () => {
                             <div className='flex whitespace-nowrap  items-center gap-20'>
                                 <h2 className="text-3xl text-black font-semibold">$ 1299.00</h2>
                                 {/* discount-price  */}
-                                <p className='text-2xl font-bold flex items-center text-[#F45E0C]'><RiDiscountPercentFill className='w-7 h-7' />-12%</p>
+                                <p className='text-2xl ml-44 font-bold flex items-center text-[#F45E0C]'><RiDiscountPercentFill className='w-7 h-7' />-12%</p>
                             </div>
                             {/* last price  */}
                             <p className='text-xl font-semibold text-gray-500'>Last price $ 1410,87</p>
@@ -174,10 +161,10 @@ const ProductDetails = () => {
                                 <div className="card bg-base-300 hover:border border-[#0C68F4] text-xl  hover:text-[#0C68F4] rounded-xl  grid h-24 w-28 flex-grow place-items-center font-semibold ">18 Months</div>
 
                             </div>
-                            <div className='text-xl my-2 text-gray-600 '> <span className='font-semibold'>$433.00/</span> <span >Month</span></div>
+                            <div className='text-xl my-2 text-gray-600 '> <span className='font-semibold'>$ 433.00/</span> <span >Month</span></div>
                             {/* btn  */}
-                            <button className=" btn text-center rounded-lg bg-[#0C68F4] text-white border-white border-2 hover:text-[#0C68F4] hover:border-[#0C68F4] btn-lg hover:bg-white text-lg ">Buy Now</button>
-                            <button className="btn rounded-lg btn-lg border-[#0C68F4] bg-white text-[#0C68F4]  border-2 hover:text-white hover:border-[#0C68F4] hover:bg-[#0C68F4] text-lg  w-full ">Add to cart</button>
+                            <button className=" btn text-center rounded-lg bg-[#0C68F4] text-white border-white border-2 hover:text-[#0C68F4] hover:border-[#0C68F4] btn-lg hover:bg-white text-xl text-semibold">Buy Now</button>
+                            <button className="btn rounded-lg btn-lg border-[#0C68F4] bg-white text-[#0C68F4]  border-2 hover:text-white hover:border-[#0C68F4] hover:bg-[#0C68F4]   w-full text-xl text-semibold">Add to cart <BsFillCartCheckFill className='h-7 w-7' /></button>
                         </div>
 
 
@@ -185,6 +172,9 @@ const ProductDetails = () => {
 
                 </div>
             </div>
+
+            {/* tablist-components  */}
+            <TabListProduct></TabListProduct>
         </div>
     );
 };
