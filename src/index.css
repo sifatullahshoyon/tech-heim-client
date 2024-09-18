@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+
+
+
+
+
+
+ /* Style for breadcrumb start */
+.breadcrumb {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+  }
+  .breadcrumb-item {
+    text-transform: capitalize;
+  }
+  .breadcrumb-item + .breadcrumb-item:before {
+    content: '>';
+    margin: 0 8px;
+  }
+  
+.active-page {
+    color: #0C68F4;
+    
+   
+  }
+  /* Style for breadcrumb end */
