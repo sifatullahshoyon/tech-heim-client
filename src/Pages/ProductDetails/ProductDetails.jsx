@@ -140,7 +140,6 @@ const ProductDetails = () => {
                             <p className='text-xl font-semibold text-gray-500'>Last price $ 1410,87</p>
 
                             <div >
-
                                 <div className='flex items-center gap-4 my-4'>
                                     <input type="radio" name="color" value="yellow" className='w-8 h-8' />
                                     <div className='text-2xl text-gray-600 font-semibold'>Pay Now</div>
@@ -150,9 +149,22 @@ const ProductDetails = () => {
                                     <div className='text-2xl text-gray-600 font-semibold'>Buy in installments</div>
                                 </div>
                                 <p className='ml-12 whitespace-nowrap text-gray-600 text-xl'> Choose your installments period</p>
+                            </div>
+
+                            <div className='flex items-center gap-4'>
+                                <div className="card bg-base-300 hover:border border-[#0C68F4] text-xl  hover:text-[#0C68F4] rounded-xl  grid h-24 w-28 flex-grow place-items-center  font-semibold">3 Months</div>
+                                <div className="card bg-base-300 hover:border border-[#0C68F4] text-xl  hover:text-[#0C68F4] rounded-xl  grid h-24 w-28 flex-grow place-items-center  font-semibold">6 Months</div>
+                                <div className="card bg-base-300 hover:border border-[#0C68F4] text-xl  hover:text-[#0C68F4] rounded-xl  grid h-24 w-28 flex-grow place-items-center font-semibold">12 Months</div>
+                                <div className="card bg-base-300 hover:border border-[#0C68F4] text-xl  hover:text-[#0C68F4] rounded-xl  grid h-24 w-28 flex-grow place-items-center font-semibold ">18 Months</div>
 
                             </div>
+                            <div className='text-xl my-2 text-gray-600 '> <span className='font-semibold'>$433.00/</span> <span >Month</span></div>
+                            {/* btn  */}
+                            <button className=" btn text-center rounded-lg bg-[#0C68F4] text-white border-white border-2 hover:text-[#0C68F4] hover:border-[#0C68F4] btn-lg hover:bg-white text-lg ">Buy Now</button>
+                            <button className="btn rounded-lg btn-lg border-[#0C68F4] bg-white text-[#0C68F4]  border-2 hover:text-white hover:border-[#0C68F4] hover:bg-[#0C68F4] text-lg  w-full ">Add to cart</button>
                         </div>
+
+
                     </div>
 
                 </div>
