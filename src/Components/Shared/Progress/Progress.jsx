@@ -6,8 +6,8 @@ import progress3 from '../../../assets/Photos/Product-Details/progressIcon3.png'
 import progress4 from '../../../assets/Photos/Product-Details/progressIcon4.png'
 const Progress = () => {
     return (
-        <div className='mx-20 mt-10'>
-            <Marquee speed={60} gradientWidth={100} gradient={true} pauseOnClick={false} className="h-full gap-20 my-10">
+        <div className='mx-20 my-20'>
+            <Marquee speed={60} gradientWidth={100} gradient={true} pauseOnClick={true} className="h-full gap-20 my-10">
                 {/* card 1 */}
                 <div className="card bg-base-100 mr-44">
                     <div className="card-body items-center">

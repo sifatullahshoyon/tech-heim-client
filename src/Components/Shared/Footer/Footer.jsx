@@ -11,29 +11,29 @@ const Footer = () => {
                 <nav className='lg:ml-10 gap-6'>
 
                     <h6 className="footer-title text-xl">Company</h6>
-                    <a className="link link-hover">About us</a>
-                    <a className="link link-hover">Blogs</a>
-                    <a className="link link-hover">Returns</a>
-                    <a className="link link-hover">Oder Status</a>
+                    <a className="link link-hover text-xl">About us</a>
+                    <a className="link link-hover text-xl">Blogs</a>
+                    <a className="link link-hover text-xl">Returns</a>
+                    <a className="link link-hover text-xl">Oder Status</a>
                 </nav>
                 <nav className='gap-6'>
                     <h6 className="footer-title text-xl">Info</h6>
-                    <a className="link link-hover">How it works?</a>
-                    <a className="link link-hover">Our promises</a>
-                    <a className="link link-hover">FAQ</a>
-                    <a className="link link-hover">Advertisement</a>
+                    <a className="link link-hover text-xl">How it works?</a>
+                    <a className="link link-hover text-xl">Our promises</a>
+                    <a className="link link-hover text-xl">FAQ</a>
+                    <a className="link link-hover text-xl">Advertisement</a>
 
                 </nav>
                 <nav className='gap-6'>
                     <h6 className="footer-title text-xl">Contact Us</h6>
                     <a className="link link-hover flex items-center gap-2">
-                        <IoLocationOutline className='w-8 h-8' /><span>123 Main Street, Anytown,USA</span>
+                        <IoLocationOutline className='w-8 h-8' /><span className='text-xl'>123 Main Street, Anytown,USA</span>
                     </a>
                     <a className="link mt-1 link-hover flex items-center gap-2">
-                        <LuPhoneCall className='w-6 h-6' /><span>+1 (555) 123-4567</span>
+                        <LuPhoneCall className='w-6 h-6' /><span className='text-xl'>+1 (555) 123-4567</span>
                     </a>
                     <a className="link mt-1 link-hover flex items-center gap-2">
-                        <MdMarkEmailRead className='w-6 h-6' /><span>fashionHouseSupport@gmail.com</span>
+                        <MdMarkEmailRead className='w-6 h-6' /><span className='text-xl'>fashionHouseSupport@gmail.com</span>
                     </a>
 
 
