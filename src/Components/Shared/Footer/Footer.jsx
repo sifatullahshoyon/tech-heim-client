@@ -7,8 +7,8 @@ import { MdMarkEmailRead } from 'react-icons/md';
 const Footer = () => {
     return (
         <div >
-            <footer className="footer bg-[#021736] text-gray-100 p-10">
-                <nav className='ml-10 gap-6'>
+            <footer className="footer bg-[#021736] text-gray-100 p-12 mt-10">
+                <nav className='lg:ml-10 gap-6'>
 
                     <h6 className="footer-title text-xl">Company</h6>
                     <a className="link link-hover">About us</a>
