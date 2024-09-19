@@ -45,7 +45,7 @@ const RecentPost = () => {
     <div className="mt-8 w-full mx-auto ">
       <h2 className="text-2xl font-semibold">Recent Posts</h2>
 
-      <div className="w-full mx-auto space-y-4 my-4">
+      <div className="max-w-[700px] w-full  space-y-4 my-4">
         {blogs.map((blog) => (
           <div
             key={blog.id}

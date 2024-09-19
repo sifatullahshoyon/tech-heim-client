@@ -1,6 +1,8 @@
 import React from "react";
 import BlogCard from "./BlogCard";
 import RecentPost from "./RecentPost";
+import VideoCard from "./Videos/VideoCard";
+import Pagination from "./Pagination";
 
 const BlogsMain = () => {
   return (
@@ -30,8 +32,11 @@ const BlogsMain = () => {
         </div>
         {/* Right Section */}
         <div className="col-span-1">
-          <div className="size-44 bg-blue-400"></div>
+          <VideoCard />
         </div>
+      </div>
+      <div className="my-4 mb-8">
+        <Pagination />
       </div>
     </div>
   );
