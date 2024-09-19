@@ -7,7 +7,6 @@ import Pagination from "./Pagination";
 const BlogsMain = () => {
   return (
     <div className="container mx-auto px-4 my-2">
-      {/* Breadcrumb Navigation */}
       <div className="my-6 flex items-center space-x-2">
         <span>Home</span>
         <span>
