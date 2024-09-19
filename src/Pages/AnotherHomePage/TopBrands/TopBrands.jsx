@@ -8,11 +8,11 @@ import huawei from '../../../assets/Photos/Product-Details/huawei.png'
 import topBanner from '../../../assets/Photos/Product-Details/topBanner.png'
 const TopBrands = () => {
     return (
-        <div className='mx-28'>
+        <div className='lg:mx-20 mx-8'>
             <h1 className='text-5xl font-semibold'>Top Brands</h1>
             <div className="divider divider-neutral"></div>
 
-            <div className='mx-20  grid grid-cols-6 my-28 gap-28 justify-items-center align-middle '>
+            <div className='mx-20  grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 my-28 gap-28 justify-items-center align-middle '>
 
                 <img src={apple} className='-mt-4' alt="" />
 
@@ -41,7 +41,7 @@ const TopBrands = () => {
 
             </div>
 
-            <img src={topBanner} className='w-full' alt="" />
+            <img src={topBanner} className='w-full h-full' alt="" />
         </div>
     );
 };
