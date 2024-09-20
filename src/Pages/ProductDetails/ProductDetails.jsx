@@ -19,13 +19,15 @@ const ProductDetails = () => {
         setSelectedColor(color);
     };
     return (
-        <div className='lg:max-w-screen-2xl	max-w-screen-md mx-auto '>
+        <div className='container mx-auto '>
             <div className="hero ">
-                <div className="hero-content gap-10 flex-col lg:flex-row">
+                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-10 my-12 sm:my-16 lg:my-28">
 
 
                     {/* <img src={laptop1} alt="" /> */}
-                    <ImageSlider />
+                    <div>
+                        <ImageSlider />
+                    </div>
 
                     {/* card-1  */}
                     <div className=" bg-base-100  ">
@@ -42,9 +44,9 @@ const ProductDetails = () => {
                                 </div>
                             </div>
 
-                            <div className="flex my-4 items-center gap-4 flex-nowrap w-full">
+                            <div className="flex my-4 items-center gap-2 flex-rap w-full">
                                 {/* number-1 */}
-                                <div className="flex items-center gap-2 whitespace-nowrap">
+                                <div className="flex items-center whitespace-nowrap">
                                     <TbHomeRibbon className="w-7 h-7 text-blue-500" />
                                     <p className="text-gray-500 font-semibold">In Stock</p>
                                 </div>
@@ -132,13 +134,15 @@ const ProductDetails = () => {
                         </div>
                     </div>
                     {/* card-2  */}
-                    <div className="card bg-base-100 shadow-xl">
+                    <div className="card w-full bg-base-100 shadow-xl">
                         <div className="card-body">
                             {/* price */}
-                            <div className='flex whitespace-nowrap  items-center gap-20'>
-                                <h2 className="text-3xl text-black font-semibold">$ 1299.00</h2>
-                                {/* discount-price  */}
-                                <p className='text-2xl ml-44 font-bold flex items-center text-[#F45E0C]'><RiDiscountPercentFill className='w-7 h-7' />-12%</p>
+
+                            <div className="flex justify-between items-center mb-4">
+                                <h3 className="text-2xl sm:text-3xl font-semibold text-black">$1,299.00</h3>
+                                <div className="flex items-center text-[#F45E0C] font-bold text-lg sm:text-xl">
+                                    <RiDiscountPercentFill className="w-6 h-6 mr-1" /> -12%
+                                </div>
                             </div>
                             {/* last price  */}
                             <p className='text-xl font-semibold text-gray-500'>Last price $ 1410,87</p>
@@ -152,15 +156,18 @@ const ProductDetails = () => {
                                     <input type="radio" name="color" value="yellow" className='w-8 h-8' />
                                     <div className='text-2xl text-gray-600 font-semibold'>Buy in installments</div>
                                 </div>
-                                <p className='ml-12 whitespace-nowrap text-gray-600 text-xl'> Choose your installments period</p>
+                                <p className=' text-gray-600 text-xl'> Choose your installments period</p>
                             </div>
 
-                            <div className='flex items-center gap-4'>
-                                <div className="card bg-base-300 hover:border border-[#0C68F4] text-xl  hover:text-[#0C68F4] rounded-xl  grid h-24 w-28 flex-grow place-items-center  font-semibold">3 Months</div>
-                                <div className="card bg-base-300 hover:border border-[#0C68F4] text-xl  hover:text-[#0C68F4] rounded-xl  grid h-24 w-28 flex-grow place-items-center  font-semibold">6 Months</div>
-                                <div className="card bg-base-300 hover:border border-[#0C68F4] text-xl  hover:text-[#0C68F4] rounded-xl  grid h-24 w-28 flex-grow place-items-center font-semibold">12 Months</div>
-                                <div className="card bg-base-300 hover:border border-[#0C68F4] text-xl  hover:text-[#0C68F4] rounded-xl  grid h-24 w-28 flex-grow place-items-center font-semibold ">18 Months</div>
-
+                            <div className="flex flex-wrap gap-4 mb-4">
+                                {['3 Months', '6 Months', '12 Months', '18 Months'].map((period) => (
+                                    <div
+                                        key={period}
+                                        className="flex-grow bg-gray-200 hover:border-blue-500 border-2 border-transparent text-center text-lg font-semibold py-4 rounded-lg cursor-pointer transition-all duration-200"
+                                    >
+                                        {period}
+                                    </div>
+                                ))}
                             </div>
                             <div className='text-xl my-2 text-gray-600 '> <span className='font-semibold'>$ 433.00/</span> <span >Month</span></div>
                             {/* btn  */}

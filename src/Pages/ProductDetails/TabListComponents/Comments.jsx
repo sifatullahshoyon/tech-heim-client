@@ -104,6 +104,23 @@ const Comments = () => {
                     </div>
                 </div>
             </div>
+
+
+            {/* <div className='flex flex-col'>
+                <div className='w-1/4'>
+
+                </div>
+                <div className='w-3/4'>
+                    <div>
+                        <div>
+
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+            </div> */}
         </div>
     );
 };
