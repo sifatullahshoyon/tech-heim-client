@@ -1,14 +1,14 @@
 import React from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
-import ProductCards from "./ProductCards";
+import SellersCard from "./SellersCard";
 
-const NewProducts = () => {
+const BestSellers = () => {
   return (
     <section className="max-w-[1440px] mx-auto px-6 mb-12">
       <>
         {/* heading */}
         <div className="flex justify-between">
-          <h1 className="text-[32px] text-black font-medium">New Products</h1>
+          <h1 className="text-[32px] text-black font-medium">Best Sellers</h1>
           <p className="flex items-center text-['#0C0C0C'] text-sm lg:text-base font-normal">
             View all
             <RiArrowRightSLine />
@@ -16,11 +16,11 @@ const NewProducts = () => {
         </div>
         {/* Divider */}
         <div class="divider divider-neutral"></div>
-        {/* Product Card */}
-        <ProductCards />
+        {/* Sellers Card */}
+        <SellersCard />
       </>
     </section>
   );
 };
 
-export default NewProducts;
+export default BestSellers;

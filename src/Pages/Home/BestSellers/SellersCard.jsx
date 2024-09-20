@@ -2,7 +2,7 @@ import React from "react";
 import img1 from "../../../assets/images/products/laptop.png";
 import ProductCard from "../../../Components/Shared/Cards/ProductCard";
 
-const ProductCards = () => {
+const SellersCard = () => {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
       {newProducts?.slice(0, 4)?.map((pd) => (
@@ -12,7 +12,7 @@ const ProductCards = () => {
   );
 };
 
-export default ProductCards;
+export default SellersCard;
 
 const newProducts = [
   {
