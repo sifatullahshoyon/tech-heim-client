@@ -4,16 +4,18 @@ import { IoStar } from 'react-icons/io5';
 
 const Comments = () => {
     return (
-        <div className='my-20'>
-            <h1 className='text-3xl ml-4 font-semibold mb-8 text-[#0C68F4]'>Comments</h1>
-            {/* section-1  */}
-            <div class="grid grid-rows-3 grid-flow-col gap-8">
-                <div class="row-span-3 ...">
-                    <div className="card bg-base-100 lg:w-96 w-60 ml-4">
+        <div className='my-20 '>
+
+            <div className='flex flex-col lg:flex-row lg:gap-14'>
+                {/* section-1  */}
+                <div className='lg:w-1/4 w-full p-4 lg:p-6'>
+                    <h1 className='text-3xl  font-semibold mb-8 text-[#0C68F4]'>Comments</h1>
+                    <div className="card bg-base-100 lg:w-96 w-full ">
+
                         <div>
                             <h2 className="text-2xl mb-6">leave your comments here for other customers</h2>
 
-                            <input type="text" placeholder="Share your thoughts about this product here" className="input input-bordered w-full max-w-lg h-20" />
+                            <input type="text" placeholder="Share your thoughts about this product here" className="input input-bordered w-full  h-20" />
                             <button className="btn rounded-lg btn-lg border-[#0C68F4] bg-white text-[#0C68F4]  border-2 hover:text-white hover:border-[#0C68F4] hover:bg-[#0C68F4]   w-full text-xl text-semibold mt-6">Add to cart <FaCommentDots className='h-7 w-7' /></button>
 
                             <div>
@@ -37,13 +39,17 @@ const Comments = () => {
                         </div>
                     </div>
                 </div>
-                {/* comment-1  */}
-                <div class="col-span-2 ...">
-                    <div className="card lg:card-side bg-base-100 shadow-xl">
+
+                {/* section-2  */}
+                <div className='lg:w-3/4 lg:ml-10 w-full p-4 lg:p-6'>
+
+                    {/* card-1  */}
+
+                    <div className="card mb-6  lg:card-side bg-base-100 shadow-xl">
 
 
                         <div className="card-body">
-                            <div className='flex items-center justify-between w-full lg:gap-96 gap-4'>
+                            <div className='flex items-center justify-between w-full  gap-4'>
                                 <div className='flex items-center gap-4'>
                                     <div className="avatar">
                                         <div className="w-20 rounded-full">
@@ -69,9 +75,9 @@ const Comments = () => {
                         </div>
 
                     </div>
-                </div>
-                {/* section-2  */}
-                <div class="row-span-2 col-span-2 ...">
+
+                    {/* card-2  */}
+
                     <div className="card lg:card-side bg-base-100 shadow-xl">
 
                         {/* comment-1  */}
@@ -102,25 +108,10 @@ const Comments = () => {
                         </div>
 
                     </div>
+
+
                 </div>
             </div>
-
-
-            {/* <div className='flex flex-col'>
-                <div className='w-1/4'>
-
-                </div>
-                <div className='w-3/4'>
-                    <div>
-                        <div>
-
-                        </div>
-                        <div>
-
-                        </div>
-                    </div>
-                </div>
-            </div> */}
         </div>
     );
 };

@@ -160,12 +160,12 @@ const ProductDetails = () => {
                             </div>
 
                             <div className="flex flex-wrap gap-4 mb-4">
-                                {['3 Months', '6 Months', '12 Months', '18 Months'].map((period) => (
+                                {['3 ', '6 ', '12 ', '18 '].map((period) => (
                                     <div
                                         key={period}
-                                        className="flex-grow bg-gray-200 hover:border-blue-500 border-2 border-transparent text-center text-lg font-semibold py-4 rounded-lg cursor-pointer transition-all duration-200"
+                                        className="flex-grow bg-gray-200 hover:border-blue-500 border-2 border-transparent text-center  font-semibold py-2 rounded-lg cursor-pointer transition-all duration-200"
                                     >
-                                        {period}
+                                        <span className='text-xl'>{period}</span> <br /> Month
                                     </div>
                                 ))}
                             </div>
