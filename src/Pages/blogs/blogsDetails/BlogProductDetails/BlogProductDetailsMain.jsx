@@ -1,5 +1,6 @@
 import React from "react";
 import BlogProductDetails from "./blogProductDetails/BlogProductDetails";
+import BlogProductCategoryName from "./BlogProductCategory/BlogProductCategoryName";
 
 const BlogProductDetailsMain = () => {
   return (
@@ -31,12 +32,14 @@ const BlogProductDetailsMain = () => {
       </div>
 
       {/* Main grid layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 w-full gap-4 max-w-[1200px] my-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 w-full gap-6 max-w-[1200px] my-6">
         <div className="col-span-1 lg:col-span-2 w-full">
           <BlogProductDetails />
         </div>
         {/* Right Section */}
-        <div className="col-span-1">asdfa</div>
+        <div className="col-span-1 w-full  lg:mt-16 md:ml-3">
+          <BlogProductCategoryName />
+        </div>
       </div>
     </div>
   );

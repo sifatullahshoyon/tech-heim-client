@@ -13,7 +13,7 @@ const BlogProductDetails = () => {
       <div>
         <img
           src={headphone}
-          className="max-w-[808px] max-h-[414px] object-cover mb-6"
+          className="max-w-[808px] w-full h-full max-h-[414px] object-contain mb-6"
           alt=""
         />
 
