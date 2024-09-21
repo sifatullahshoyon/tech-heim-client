@@ -4,6 +4,10 @@ import { Link, NavLink } from "react-router-dom";
 import bagIcon from "../../../assets/images/icon/bag.png";
 import searchIcon from "../../../assets/images/icon/search-normal.png";
 import userIcon from "../../../assets/images/icon/user.png";
+import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { FaRegHeart } from "react-icons/fa";
+import { AiOutlineDollar } from "react-icons/ai";
+import { CiLogout } from "react-icons/ci";
 
 const Navbar = () => {
   const [showInput, setShowInput] = useState(false);
@@ -46,14 +50,27 @@ const Navbar = () => {
                       <ul className="p-2">
                         {item.subItems.map((subItem) => (
                           <li key={subItem.name}>
-                            <NavLink className={({ isActive}) =>(isActive? "active" : "default")  
-                    } to={subItem.path}>{subItem.name}</NavLink>
+                            <NavLink
+                              className={({ isActive }) =>
+                                isActive ? "active" : "default"
+                              }
+                              to={subItem.path}
+                            >
+                              {subItem.name}
+                            </NavLink>
                           </li>
                         ))}
                       </ul>
                     </>
                   ) : (
-                    <NavLink className={({ isActive }) => (isActive ? "default" : "active")} to={item.path}>{item.name}</NavLink>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "default" : "active"
+                      }
+                      to={item.path}
+                    >
+                      {item.name}
+                    </NavLink>
                   )}
                 </li>
               ))}
@@ -78,14 +95,18 @@ const Navbar = () => {
                     </NavLink>
                     <ul className="absolute left-0 top-full hidden group-hover:block bg-base-100 shadow-lg p-2">
                       {item.subItems.map((subItem) => (
-                        <li key={subItem.name}>
-                          <NavLink
-                            to={subItem.path}
-                            className={({ isActive }) => (isActive ? "default" : "active ") }
-                          >
-                            {subItem.name}
-                          </NavLink>
-                        </li>
+                        <>
+                          <li key={subItem.name}>
+                            <NavLink
+                              to={subItem.path}
+                              className={({ isActive }) =>
+                                isActive ? "default" : "active "
+                              }
+                            >
+                              {subItem.name}
+                            </NavLink>
+                          </li>
+                        </>
                       ))}
                     </ul>
                   </>
@@ -97,19 +118,76 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-4">
             {/* Search Button */}
-       
-            <div className="flex space-x-2">
-              <div className="flex">
-                {/* Show the search icon initially */}
+            <img src={searchIcon} alt="bag Icon" />
+            <img src={bagIcon} alt="bag Icon" />
+            {/* <img src={userIcon} alt="user Icon" /> */}
+            <div className="dropdown dropdown-bottom dropdown-end">
+              <div tabIndex={0} role="button" className="btn m-1">
+                <img src={userIcon} alt="user Icon" />
+              </div>
+              <div
+                tabIndex={0}
+                className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 pt-3 p-3 shadow"
+              >
+                <div className="flex items-center gap-6 mb-6">
+                  <div className="w-6">
+                    <img src={userIcon} alt="user Icon" className="w-full" />
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    <p className="text-[#0C68F4] text-sm md:text-lg font-normal">
+                      user name
+                    </p>
+                    <p className="font-normal text-black text-sm text-balance">
+                      use email
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4 mb-6">
+                  <p className="text-black text-sm md:text-lg font-normal">
+                    <HiOutlineShoppingBag />
+                  </p>
+                  <p className="font-normal text-black text-sm text-balance">
+                    Orders
+                  </p>
+                </div>
+                <div className="flex items-center gap-4 mb-6">
+                  <p className="text-black text-sm md:text-lg font-normal">
+                    <FaRegHeart />
+                  </p>
+                  <p className="font-normal text-black text-sm text-balance">
+                    Wish List
+                  </p>
+                </div>
+                <div className="flex items-center gap-4 mb-6">
+                  <p className="text-black text-sm md:text-lg font-normal">
+                    <AiOutlineDollar />
+                  </p>
+                  <p className="font-normal text-black text-sm text-balance">
+                    Payments
+                  </p>
+                </div>
+                <div className="flex items-center gap-4 mb-6">
+                  <p className="text-black text-sm md:text-lg font-normal">
+                    <CiLogout />
+                  </p>
+                  <p className="font-normal text-black text-sm text-balance">
+                    Log out
+                  </p>
+                </div>
+              </div>
+            </div>
+            {/* <div className="flex">
+              <div className="flex ">
+                Show the search icon initially
                 {!showInput && (
                   <div onClick={handleSearchClick} className="cursor-pointer">
                     <img src={searchIcon} alt="Search Icon" />
                   </div>
                 )}
 
-                {/* Show the input field when the search icon is clicked */}
+                Show the input field when the search icon is clicked
                 {showInput && (
                   <label className="input input-bordered flex items-center gap-2 space-x-4">
                     <input type="text" className="grow" placeholder="Search" />
@@ -127,25 +205,13 @@ const Navbar = () => {
                     </svg>
                   </label>
                 )}
+                
                 <div className="flex">
                     <img src={bagIcon} alt="bag Icon" />
                     <img src={userIcon} alt="user Icon" />
                 </div>
               </div>
-              {/* <div>
-                <img src={bagIcon} alt="bag Icon" />
-              </div>
-              <div>
-                <img src={userIcon} alt="user Icon" />
-              </div> */}
-            </div>
-            {/* <div>
-                <img src={bagIcon} alt="bag Icon" />
-                <img src={userIcon} alt="user Icon" />
-              </div> */}
-              {/* <div>
-                <img src={userIcon} alt="user Icon" />
-              </div> */}
+            </div> */}
           </div>
         </div>
       </div>
