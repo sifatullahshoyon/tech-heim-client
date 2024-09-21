@@ -16,6 +16,7 @@ import { MdOutlineArrowDropUp } from "react-icons/md";
 
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import Advertising from "../../Components/Advertising/Advertising";
+import Progress from "../../Components/Shared/Progress/Progress";
 
 const Shop = () => {
   //  Tab state
@@ -714,6 +715,7 @@ const Shop = () => {
         </div>
       </div>
       {/* filter and Product end div */}
+      <Progress></Progress>
     </div>
   );
 };
