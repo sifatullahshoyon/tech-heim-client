@@ -1,5 +1,6 @@
 import React from "react";
 import headphone from "../../../../../assets/headphone.png";
+import CommentCard from "../BlogsComments/CommentCard";
 const BlogProductDetails = () => {
   return (
     <div>
@@ -117,6 +118,10 @@ const BlogProductDetails = () => {
 
             <span>3 Likes</span>
           </span>
+        </div>
+        <div className="h-px w-full bg-gray-400"></div>
+        <div>
+          <CommentCard />
         </div>
       </div>
     </div>
