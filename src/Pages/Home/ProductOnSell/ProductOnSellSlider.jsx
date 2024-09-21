@@ -12,10 +12,29 @@ const ProductOnSellSlider = () => {
   const nextRef = useRef(null);
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <Swiper
-        slidesPerView={5}
-        spaceBetween={20}
+        // Responsiveness for Swiper based on screen size
+        slidesPerView={1}
+        spaceBetween={10}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 15,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 20,
+          },
+          1280: {
+            slidesPerView: 5,
+            spaceBetween: 20,
+          },
+        }}
         navigation={{
           prevEl: prevRef.current, // Custom previous button
           nextEl: nextRef.current, // Custom next button
@@ -31,25 +50,29 @@ const ProductOnSellSlider = () => {
       >
         {productOnSell?.map((pd) => (
           <SwiperSlide key={pd._id}>
-            <div className="flex gap-2">
-              <div className="rounded-lg h-[237px] hover:h-[240px] transition-all w-[184px] bg-white overflow-hidden relative px-2">
-                <div className="badge absolute top-2 rounded bg-[#FDDBC9]">
+            <div className="flex justify-center">
+              <div className="rounded-lg hover:transition h-[237px]  hover:ease-in hover:duration-300  lg:max-w-[184px] bg-white overflow-hidden relative p-2 sm:w-auto ">
+                <div className="badge absolute top-2 left-2 rounded bg-[#FDDBC9] text-black p-1">
                   -{pd.discount}%
                 </div>
                 <ImageDisplayControl>
-                  <img src={pd.img} />
+                  <img
+                    src={pd.img}
+                    alt={pd.title}
+                    className="w-full object-cover h-[150px] sm:h-[130px]"
+                  />
                 </ImageDisplayControl>
-                <h4 className="text-balance text-xs text-black font-light">
+                <h4 className="text-xs text-black font-light mt-2">
                   {pd.title.length > 30
                     ? pd.title.slice(0, 30) + "..."
                     : pd.title}
                 </h4>
-                <div className="flex justify-between">
-                  <p className="mt-8 text-[#717171] line-through">
-                    ${parseFloat(pd.lastPrice)}
+                <div className="flex justify-between mt-2">
+                  <p className="text-gray-500 line-through text-sm sm:text-xs">
+                    ${parseFloat(pd.lastPrice).toFixed(2)}
                   </p>
-                  <p className="mt-8 text-black ">
-                    ${parseFloat(pd.currentPrice)}
+                  <p className="text-black font-semibold text-sm sm:text-xs">
+                    ${parseFloat(pd.currentPrice).toFixed(2)}
                   </p>
                 </div>
               </div>
@@ -59,16 +82,16 @@ const ProductOnSellSlider = () => {
       </Swiper>
 
       {/* Custom position for navigation buttons */}
-      <div className="absolute -bottom-[51px] right-0 z-10 flex flex-row items-center gap-2 p-4">
+      <div className="absolute bottom-2 lg:-bottom-10 right-2 z-10 flex items-center gap-2">
         <div
           ref={prevRef}
-          className="swiper-button-prev-custom bg-white text-black p-2 rounded-full cursor-pointer"
+          className="swiper-button-prev-custom bg-white shadow-lg text-black p-2 rounded-full cursor-pointer"
         >
           <IoIosArrowBack />
         </div>
         <div
           ref={nextRef}
-          className="swiper-button-next-custom bg-white text-black p-2 rounded-full cursor-pointer"
+          className="swiper-button-next-custom bg-white shadow-lg text-black p-2 rounded-full cursor-pointer"
         >
           <IoIosArrowForward />
         </div>

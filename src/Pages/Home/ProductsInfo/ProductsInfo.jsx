@@ -10,7 +10,7 @@ import SingleProduct from "./SingleProduct";
 const ProductsInfo = () => {
   return (
     <section className="max-w-[1440px] mx-auto px-6 mb-12">
-      <div className="flex gap-6 flex-wrap">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
         {someProductsInfo?.map((pd) => (
           <SingleProduct key={pd.id} pd={pd} />
         ))}
