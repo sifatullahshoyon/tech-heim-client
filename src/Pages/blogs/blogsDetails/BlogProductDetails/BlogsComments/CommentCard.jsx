@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import image1 from "../../../../../assets/headphone.png"; // Assuming you have an image here
 import { FaThumbsUp, FaThumbsDown, FaStar, FaCaretDown } from "react-icons/fa";
+import Textarea from "./TextArea";
 
 const CommentCard = () => {
   const [expandedComments, setExpandedComments] = useState({});
@@ -103,6 +104,11 @@ const CommentCard = () => {
           </div>
         ))}
       </div>
+
+      {/* Comment Box */}
+      <h2 className="text-lg font-semibold my-10">Leave a Comment</h2>
+
+      <Textarea />
     </div>
   );
 };
