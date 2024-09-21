@@ -3,6 +3,7 @@ import image1 from "../../../../../assets/headphone.png"; // Assuming you have a
 import { FaThumbsUp, FaThumbsDown, FaStar, FaCaretDown } from "react-icons/fa";
 
 const CommentCard = () => {
+  const [expandedComments, setExpandedComments] = useState({});
   const comments = [
     {
       id: "1",
@@ -31,8 +32,6 @@ const CommentCard = () => {
       dislike: "2",
     },
   ];
-
-  const [expandedComments, setExpandedComments] = useState({});
 
   const toggleExpand = (id) => {
     setExpandedComments((prevExpandedComments) => ({
