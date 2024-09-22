@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@frameright/react-image-display-control": "^1.0.7",
     "@react-icons/all-files": "^4.1.0",
     "axios": "^1.7.7",
+    "emailjs-com": "^3.2.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
     "react": "^18.3.1",
@@ -26,8 +28,10 @@
     "react-tabs": "^6.0.2",
     "react-toastify": "^10.0.5",
     "sort-by": "^1.2.0",
+    "sweetalert": "^2.1.2",
     "sweetalert2": "^11.14.0",
-    "swiper": "^11.1.14"
+    "swiper": "^11.1.14",
+    "tw-elements": "^2.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
