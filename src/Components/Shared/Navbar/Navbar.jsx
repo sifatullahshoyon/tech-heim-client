@@ -37,14 +37,14 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm gap-2 dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               {navItems.map((item) => (
                 <li key={item.name}>
                   {item.subItems ? (
                     <>
                       <a>{item.name}</a>
-                      <ul className="p-2">
+                      <ul className="p-2 ">
                         {item.subItems.map((subItem) => (
                           <li key={subItem.name}>
                             <NavLink
@@ -74,7 +74,7 @@ const Navbar = () => {
             </ul>
           </div>
           <Link to="/">
-            <img src={logo} alt="logo" />
+            <img src={logo} className="w-12 h-12" alt="logo" />
           </Link>
         </div>
         {/* Desktop */}
@@ -283,5 +283,9 @@ const navItems = [
   {
     name: "About Us",
     path: "/aboutUs",
+  },
+  {
+    name: "Dashboard",
+    path: "/dashboard",
   },
 ];
