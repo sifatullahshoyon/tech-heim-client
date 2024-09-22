@@ -1,21 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "../../../assets/images/logo/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import bagIcon from "../../../assets/images/icon/bag.png";
 import searchIcon from "../../../assets/images/icon/search-normal.png";
 import userIcon from "../../../assets/images/icon/user.png";
-import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { HiOutlineShoppingBag, HiOutlineXMark } from "react-icons/hi2";
 import { FaRegHeart } from "react-icons/fa";
 import { AiOutlineDollar } from "react-icons/ai";
 import { CiLogout } from "react-icons/ci";
+import Form from "../../Form/Form";
+import MenuShoppingCart from "../../MenuShoppingCart/MenuShoppingCart";
+import SearchItems from "../../SearchItems/SearchItems";
 
 const Navbar = () => {
-  const [showInput, setShowInput] = useState(false);
-
-  // Function to toggle the visibility
-  const handleSearchClick = () => {
-    setShowInput(true); // Show the input field when the search icon is clicked
-  };
   return (
     <div className="max-w-[1440px] px-6 mx-auto">
       <div className="navbar bg-base-100">
@@ -120,11 +117,59 @@ const Navbar = () => {
         <div className="navbar-end">
           <div className="flex items-center space-x-4">
             {/* Search Button */}
-            <img src={searchIcon} alt="bag Icon" />
-            <img src={bagIcon} alt="bag Icon" />
-            {/* <img src={userIcon} alt="user Icon" /> */}
+
+            {/* You can open the modal using document.getElementById('ID').showModal() method */}
+            <button
+              onClick={() => document.getElementById("my_modal_4").showModal()}
+            >
+              <img src={searchIcon} alt="bag Icon" />
+            </button>
+            <dialog id="my_modal_4" className="modal">
+              <div className="modal-box w-11/12 max-w-5xl">
+                <SearchItems />
+                <div className="modal-action">
+                  <form method="dialog">
+                    <button className="text-xl mt-0 font-bold">
+                      <HiOutlineXMark />
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
+            {/* close Modal */}
+
+            {/* Shopping Cart Button */}
+
+            {/* Open the modal using document.getElementById('ID').showModal() method */}
+            <button
+              className=""
+              onClick={() => document.getElementById("my_modal_5").showModal()}
+            >
+              <div className="indicator">
+                <span className="indicator-item badge badge-info">0</span>
+                <img src={bagIcon} alt="bag Icon" />
+              </div>
+            </button>
+            <dialog
+              id="my_modal_5"
+              className="modal modal-center sm:modal-middle"
+            >
+              <div className="modal-box w-11/12 lg:w-full mx-auto">
+                {/* open shopping cart */}
+                <MenuShoppingCart />
+                <div className="modal-action">
+                  <form method="dialog">
+                    <button className="text-xl font-bold">
+                      <HiOutlineXMark />
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
+            {/* close Modal */}
+            {/* User Button */}
             <div className="dropdown dropdown-bottom dropdown-end">
-              <div tabIndex={0} role="button" className="btn m-1">
+              <div tabIndex={0} role="button" className=" m-1">
                 <img src={userIcon} alt="user Icon" />
               </div>
               <div
@@ -172,46 +217,35 @@ const Navbar = () => {
                   <p className="text-black text-sm md:text-lg font-normal">
                     <CiLogout />
                   </p>
-                  <p className="font-normal text-black text-sm text-balance">
+                  {/* Open the modal using document.getElementById('ID').showModal() method */}
+                  <button
+                    className=""
+                    onClick={() =>
+                      document.getElementById("my_modal_6").showModal()
+                    }
+                  >
                     Log out
-                  </p>
+                  </button>
+                  <dialog
+                    id="my_modal_6"
+                    className="modal modal-center sm:modal-middle"
+                  >
+                    <div className="modal-box w-11/12 lg:w-full mx-auto">
+                      <Form />
+                      <div className="modal-action">
+                        <form method="dialog">
+                          {/* if there is a button in form, it will close the modal */}
+                          <button className="text-xl font-bold">
+                            <HiOutlineXMark />
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </dialog>
+                  {/* close Modal */}
                 </div>
               </div>
             </div>
-            {/* <div className="flex">
-              <div className="flex ">
-                Show the search icon initially
-                {!showInput && (
-                  <div onClick={handleSearchClick} className="cursor-pointer">
-                    <img src={searchIcon} alt="Search Icon" />
-                  </div>
-                )}
-
-                Show the input field when the search icon is clicked
-                {showInput && (
-                  <label className="input input-bordered flex items-center gap-2 space-x-4">
-                    <input type="text" className="grow" placeholder="Search" />
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 16 16"
-                      fill="currentColor"
-                      className="h-4 w-4 opacity-70"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </label>
-                )}
-                
-                <div className="flex">
-                    <img src={bagIcon} alt="bag Icon" />
-                    <img src={userIcon} alt="user Icon" />
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
