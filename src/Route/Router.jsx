@@ -7,6 +7,20 @@ import Shop from "../Pages/Shop/Shop";
 import BlogsMain from "../Pages/blogs/BlogsMain";
 import BlogProductDetailsMain from "../Pages/blogs/blogsDetails/BlogProductDetails/BlogProductDetailsMain";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import PersonalData from "../Pages/DashboardPages/UserPages/PersonalData/PersonalData";
+import PaymentInstalment from "../Pages/DashboardPages/UserPages/PaymentInstalment/PaymentInstalment";
+import SecurityAccess from "../Pages/DashboardPages/UserPages/SecurityAccess/SecurityAccess";
+import Notification from "../Pages/DashboardPages/UserPages/Notification/Notification";
+import ContactUs from "../Pages/DashboardPages/UserPages/ContactUs/ContactUs";
+import WishList from "../Pages/DashboardPages/UserPages/WishList/WishList";
+import Orders from "../Pages/DashboardPages/UserPages/Orders/Orders";
+import Discount from "../Pages/DashboardPages/UserPages/Discount/Discount";
+import AdminHome from "../Pages/DashboardPages/AdminPages/AdminHome/AdminHome";
+import AddProducts from "../Pages/DashboardPages/AdminPages/AddProducts/AddProducts";
+import ManageProducts from "../Pages/DashboardPages/AdminPages/ManageProducts/ManageProducts";
+import ManageBookings from "../Pages/DashboardPages/AdminPages/ManageBookings/ManageBookings";
+import AllUsers from "../Pages/DashboardPages/AdminPages/AllUsers/AllUsers";
 
 const router = createBrowserRouter([
   {
@@ -43,5 +57,65 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '/dashboard',
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      /////// Admin Route /////////
+      {
+        path: 'admin-home',
+        element: <AdminHome />
+      },
+      {
+        path: 'add-products',
+        element: <AddProducts />
+      },
+      {
+        path: 'manage-products',
+        element: <ManageProducts />
+      },
+      {
+        path: 'manage-bookings',
+        element: <ManageBookings />
+      },
+      {
+        path: 'all-users',
+        element: <AllUsers />
+      },
+      /////// user Route /////////
+      {
+        path: 'personal-data',
+        element: <PersonalData />
+      },
+      {
+        path: 'payment-instalment',
+        element: <PaymentInstalment />
+      },
+      {
+        path: 'orders',
+        element: <Orders />
+      },
+      {
+        path: 'wish-list',
+        element: <WishList />
+      },
+      {
+        path: 'discount',
+        element: <Discount />
+      },
+      {
+        path: 'security-access',
+        element: <SecurityAccess />
+      },
+      {
+        path: 'notification',
+        element: <Notification />
+      },
+      {
+        path: 'contact-us',
+        element: <ContactUs />
+      },
+    ]
+  }
 ]);
 export default router;
