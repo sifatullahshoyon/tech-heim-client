@@ -3,13 +3,14 @@ import { FaRegUser, FaMagnifyingGlassLocation, FaSignsPost } from 'react-icons/f
 import { FiPhone } from 'react-icons/fi';
 import { GoPasskeyFill } from 'react-icons/go';
 import { MdMarkEmailUnread } from 'react-icons/md';
+import PopUpModal from './PopUpModal';
 
 const PersonalData = () => {
     return (
-        <div className="container mx-auto p-4">
+        <div className=" mx-auto p-4">
             <div className='mb-6'>
-                <h1 className="text-3xl md:text-4xl font-bold text-center mb-2">Identification </h1>
-                <p className=' text-center'>Verify your identity</p>
+                <h1 className="text-3xl md:text-4xl font-bold hover:text-teal-600 text-center mb-2">Identification </h1>
+                <p className=' text-center text-xl hover:text-teal-600 '>Verify your identity</p>
             </div>
             <div className="hero">
                 <div className="hero-content flex flex-col lg:flex-row items-center lg:items-start">
@@ -23,6 +24,9 @@ const PersonalData = () => {
 
                     {/* Data Section */}
                     <div className="w-full lg:w-1/2">
+                        <div className='flex justify-end '>
+                            <PopUpModal></PopUpModal>
+                        </div>
                         <div className="space-y-6">
                             {/* Row 1: Full Name & Email */}
                             <div className="flex flex-col sm:flex-row sm:justify-between gap-6">
@@ -50,7 +54,7 @@ const PersonalData = () => {
                                 {/* Phone Number */}
                                 <div className="flex-1">
                                     <span className="block text-sm text-gray-600">Phone Number</span>
-                                    <div className="flex items-center bg-base-200 hover:text-teal-600 py-4 pr-4 pl-3 border rounded-xl gap-3 mt-1">
+                                    <div className="flex text-nowrap items-center bg-base-200 hover:text-teal-600 py-4 pr-4 pl-3 border rounded-xl gap-3 mt-1">
                                         <FiPhone className="w-6 h-6 text-gray-700" />
                                         <span className="font-semibold text-lg md:text-xl">+123-456-78912</span>
                                     </div>
