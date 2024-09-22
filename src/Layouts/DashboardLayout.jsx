@@ -16,7 +16,7 @@ import { CgLogOut } from 'react-icons/cg';
 const user = false;
 
 // admin
-const isAdmin = true;
+const isAdmin = false;
 
 const DashboardLayout = () => {
     return (
