@@ -9,6 +9,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { AiOutlineDollar } from "react-icons/ai";
 import { CiLogout } from "react-icons/ci";
 import Form from "../../Form/Form";
+import MenuShoppingCart from "../../MenuShoppingCart/MenuShoppingCart";
 
 const Navbar = () => {
   const [showInput, setShowInput] = useState(false);
@@ -122,7 +123,38 @@ const Navbar = () => {
           <div className="flex items-center space-x-4">
             {/* Search Button */}
             <img src={searchIcon} alt="bag Icon" />
-            <img src={bagIcon} alt="bag Icon" />
+            {/* Open the modal using document.getElementById('ID').showModal() method */}
+            <button
+              className=""
+              onClick={() => document.getElementById("my_modal_5").showModal()}
+            >
+              <div className="indicator">
+                <span className="indicator-item badge badge-primary">0</span>
+                <img src={bagIcon} alt="bag Icon" />
+              </div>
+            </button>
+            <dialog
+              id="my_modal_5"
+              className="modal modal-center sm:modal-middle"
+            >
+              <div className="modal-box w-11/12 lg:w-full mx-auto">
+                {/* open shopping cart */}
+                <MenuShoppingCart />
+                <div className="modal-action">
+                  <form method="dialog">
+                    {/* if there is a button in form, it will close the modal */}
+                    <button className="text-xl font-bold">
+                      <HiOutlineXMark />
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
+            {/* close Modal */}
+            {/* <div className="indicator">
+  <span className="indicator-item badge badge-primary">0</span>
+  <img src={bagIcon} alt="bag Icon" />
+</div> */}
             {/* <img src={userIcon} alt="user Icon" /> */}
             <div className="dropdown dropdown-bottom dropdown-end">
               <div tabIndex={0} role="button" className=" m-1">
