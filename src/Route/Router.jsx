@@ -25,7 +25,7 @@ import AllUsers from "../Pages/DashboardPages/AdminPages/AllUsers/AllUsers";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout></MainLayout>,
+    element: <MainLayout />,
     children: [
       {
         path: "/",

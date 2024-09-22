@@ -45,7 +45,7 @@ const PopUpModal = () => {
                             <input type="location" placeholder="location" className="input input-bordered" required />
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn ml-4 rounded-lg bg-gray-700 text-white border-white border-2 hover:text-gray-700 hover:border-gray-700 hover:bg-white text-xl flex items-center "> <MdOutlineDownloadDone /> Submit</button>
+                            <button className="btn rounded-lg bg-gray-700 text-white border-white border-2 hover:text-gray-700 hover:border-gray-700 hover:bg-white text-xl flex items-center "> <MdOutlineDownloadDone /> Submit</button>
                         </div>
                     </form>
                 </div>
