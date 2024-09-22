@@ -21,6 +21,7 @@ import AddProducts from "../Pages/DashboardPages/AdminPages/AddProducts/AddProdu
 import ManageProducts from "../Pages/DashboardPages/AdminPages/ManageProducts/ManageProducts";
 import ManageBookings from "../Pages/DashboardPages/AdminPages/ManageBookings/ManageBookings";
 import AllUsers from "../Pages/DashboardPages/AdminPages/AllUsers/AllUsers";
+import Blogs from "../Pages/DashboardPages/AdminPages/Blogs/Blogs";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: 'all-users',
         element: <AllUsers />
+      },
+      {
+        path: 'blogs',
+        element: <Blogs />
       },
       /////// user Route /////////
       {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import Navbar from '../Components/Shared/Navbar/Navbar';
-import { FaBook, FaHome, FaList, FaRegHeart, FaUsers, FaWindowRestore } from 'react-icons/fa';
+import { FaBook, FaBuffer, FaHome, FaList, FaRegHeart, FaUsers, FaWindowRestore } from 'react-icons/fa';
 import { MdContactMail, MdFormatListBulletedAdd, MdMenuOpen, MdOutlineAddCard, MdOutlineNotificationsActive } from 'react-icons/md';
 import { FaCartShopping, FaUserPen } from 'react-icons/fa6';
 import userPhoto from "../assets/images/logo/user-profile-icon-free-vector.jpg";
@@ -104,6 +104,18 @@ const DashboardLayout = () => {
                                         to={'/Dashboard/All-Users'}
                                     >
                                         <FaUsers />  All Users
+                                    </NavLink>
+                                </li>
+                                <li className="mt-2">
+                                    <NavLink
+                                        className={({ isActive }) =>
+                                            isActive
+                                                ? 'text-teal-700 bg-white  border-teal-600  text-lg    hover:bg-white border-2  px-3  rounded-lg  font-medium'
+                                                : '  bg-white border-teal-600 border-2  border-none hover:bg-white  hover:text-teal-700 px-3  rounded-lg text-lg font-medium'
+                                        }
+                                        to={'/Dashboard/blogs'}
+                                    >
+                                        <FaBuffer /> Blogs
                                     </NavLink>
                                 </li>
                             </> :
