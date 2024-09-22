@@ -4,10 +4,11 @@ import { Link, NavLink } from "react-router-dom";
 import bagIcon from "../../../assets/images/icon/bag.png";
 import searchIcon from "../../../assets/images/icon/search-normal.png";
 import userIcon from "../../../assets/images/icon/user.png";
-import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { HiOutlineShoppingBag, HiOutlineXMark } from "react-icons/hi2";
 import { FaRegHeart } from "react-icons/fa";
 import { AiOutlineDollar } from "react-icons/ai";
 import { CiLogout } from "react-icons/ci";
+import Form from "../../Form/Form";
 
 const Navbar = () => {
   const [showInput, setShowInput] = useState(false);
@@ -124,7 +125,7 @@ const Navbar = () => {
             <img src={bagIcon} alt="bag Icon" />
             {/* <img src={userIcon} alt="user Icon" /> */}
             <div className="dropdown dropdown-bottom dropdown-end">
-              <div tabIndex={0} role="button" className="btn m-1">
+              <div tabIndex={0} role="button" className=" m-1">
                 <img src={userIcon} alt="user Icon" />
               </div>
               <div
@@ -172,9 +173,32 @@ const Navbar = () => {
                   <p className="text-black text-sm md:text-lg font-normal">
                     <CiLogout />
                   </p>
-                  <p className="font-normal text-black text-sm text-balance">
+                  {/* Open the modal using document.getElementById('ID').showModal() method */}
+                  <button
+                    className=""
+                    onClick={() =>
+                      document.getElementById("my_modal_5").showModal()
+                    }
+                  >
                     Log out
-                  </p>
+                  </button>
+                  <dialog
+                    id="my_modal_5"
+                    className="modal modal-center sm:modal-middle"
+                  >
+                    <div className="modal-box w-11/12 lg:w-full mx-auto">
+                      <Form />
+                      <div className="modal-action">
+                        <form method="dialog">
+                          {/* if there is a button in form, it will close the modal */}
+                          <button className="text-xl font-bold">
+                            <HiOutlineXMark />
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </dialog>
+                  {/* close Modal */}
                 </div>
               </div>
             </div>
