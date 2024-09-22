@@ -240,10 +240,14 @@ const navItems = [
   },
   {
     name: "FAQ",
-    path: "/faq",
+    path: "/faqs",
   },
   {
     name: "Contact Us",
-    path: "/contact-us",
+    path: "/contactUs",
+  },
+  {
+    name: "About Us",
+    path: "/aboutUs",
   },
 ];

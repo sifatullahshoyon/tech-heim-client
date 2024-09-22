@@ -10,6 +10,9 @@ import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import PaymentMethods from "../Pages/PaymentsAndInstallMents/PaymentsCard/PaymentMethod";
 import PaymentTable from "../Pages/PaymentsAndInstallMents/PaymentsCard/PaymentTable";
 import DiscountSection from "../Pages/DiscountSection/DiscountSection";
+import FAQs from "../Pages/FAQs/FAQs";
+import ContactUS from "../Pages/ContactUs/ContactUS";
+import AboutUS from "../Pages/AboutUS/AboutUS";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +58,18 @@ const router = createBrowserRouter([
       {
         path: "/productDetails",
         element: <ProductDetails />,
+      },
+      {
+        path: "/faqs",
+        element: <FAQs />,
+      },
+      {
+        path: "/contactUs",
+        element: <ContactUS />,
+      },
+      {
+        path: "/aboutUs",
+        element: <AboutUS />,
       },
     ],
   },
