@@ -7,6 +7,9 @@ import Shop from "../Pages/Shop/Shop";
 import BlogsMain from "../Pages/blogs/BlogsMain";
 import BlogProductDetailsMain from "../Pages/blogs/blogsDetails/BlogProductDetails/BlogProductDetailsMain";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
+import PaymentMethods from "../Pages/PaymentsAndInstallMents/PaymentsCard/PaymentMethod";
+import PaymentTable from "../Pages/PaymentsAndInstallMents/PaymentsCard/PaymentTable";
+import DiscountSection from "../Pages/DiscountSection/DiscountSection";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +35,18 @@ const router = createBrowserRouter([
       {
         path: "/blog",
         element: <BlogsMain />,
+      },
+      {
+        path: "/discount",
+        element: <DiscountSection />,
+      },
+      {
+        path: "/payments",
+        element: <PaymentMethods />,
+      },
+      {
+        path: "/payments/table",
+        element: <PaymentTable />,
       },
       {
         path: "/blog/blogDetails",
