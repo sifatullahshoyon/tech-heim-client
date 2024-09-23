@@ -3,10 +3,9 @@ import OrderHistory from "./OrderHistory/OrderHistory";
 
 const Orders = () => {
   return (
-    <div>
-      <h1>This is orders</h1>
+    <>
       <OrderHistory />
-    </div>
+    </>
   );
 };
 
