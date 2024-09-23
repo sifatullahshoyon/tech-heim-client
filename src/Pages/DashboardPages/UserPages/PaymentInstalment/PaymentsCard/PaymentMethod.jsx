@@ -111,10 +111,7 @@ const PaymentMethods = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 p-4">
-      {/* Sidebar or Placeholder */}
-      <div className="hidden md:block md:w-64 h-screen bg-blue-100"></div>
-
+    <>
       <div className="w-full max-w-xl p-6">
         {/* Cards Section */}
         <div>
@@ -171,14 +168,14 @@ const PaymentMethods = () => {
         <div>
           <h2 className="text-sm text-gray-600 font-medium">Instalments</h2>
           <Link
-            to="/payments/table"
+            to="/dashboard/payment-istalment/table"
             className="text-blue-500 text-sm mt-2 inline-block"
           >
             Manage your Instalment &rarr;
           </Link>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
