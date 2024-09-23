@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
+import PaymentMethods from "./PaymentsCard/PaymentMethod";
 
 const PaymentInstalment = () => {
-    return (
-        <div>
-            <h1> Payment Instalment</h1>
-        </div>
-    );
+  return (
+    <>
+      <PaymentMethods />
+    </>
+  );
 };
 
 export default PaymentInstalment;

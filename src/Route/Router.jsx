@@ -7,9 +7,9 @@ import Shop from "../Pages/Shop/Shop";
 import BlogsMain from "../Pages/blogs/BlogsMain";
 import BlogProductDetailsMain from "../Pages/blogs/blogsDetails/BlogProductDetails/BlogProductDetailsMain";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
-import PaymentMethods from "../Pages/PaymentsAndInstallMents/PaymentsCard/PaymentMethod";
-import PaymentTable from "../Pages/PaymentsAndInstallMents/PaymentsCard/PaymentTable";
-import DiscountSection from "../Pages/DiscountSection/DiscountSection";
+import PaymentMethods from "../Pages/DashboardPages/UserPages/PaymentInstalment/PaymentsCard/PaymentMethod";
+import PaymentTable from "../Pages/DashboardPages/UserPages/PaymentInstalment/PaymentsCard/PaymentTable";
+import DiscountSection from "../Pages/DashboardPages/UserPages/Discount/DiscountSection/DiscountSection";
 import FAQs from "../Pages/FAQs/FAQs";
 import ContactUS from "../Pages/ContactUs/ContactUS";
 import AboutUS from "../Pages/AboutUS/AboutUS";
@@ -54,18 +54,7 @@ const router = createBrowserRouter([
         path: "/blog",
         element: <BlogsMain />,
       },
-      {
-        path: "/discount",
-        element: <DiscountSection />,
-      },
-      {
-        path: "/payments",
-        element: <PaymentMethods />,
-      },
-      {
-        path: "/payments/table",
-        element: <PaymentTable />,
-      },
+
       {
         path: "/blog/blogDetails",
         element: <BlogProductDetailsMain />,
@@ -89,68 +78,81 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: <DashboardLayout></DashboardLayout>,
     children: [
       /////// Admin Route /////////
       {
-        path: 'admin-home',
-        element: <AdminHome />
+        path: "admin-home",
+        element: <AdminHome />,
       },
       {
-        path: 'add-products',
-        element: <AddProducts />
+        path: "add-products",
+        element: <AddProducts />,
       },
       {
-        path: 'manage-products',
-        element: <ManageProducts />
+        path: "manage-products",
+        element: <ManageProducts />,
       },
       {
-        path: 'manage-bookings',
-        element: <ManageBookings />
+        path: "manage-bookings",
+        element: <ManageBookings />,
       },
       {
-        path: 'all-users',
-        element: <AllUsers />
+        path: "all-users",
+        element: <AllUsers />,
       },
       {
-        path: 'blogs',
-        element: <Blogs />
+        path: "blogs",
+        element: <Blogs />,
       },
       /////// user Route /////////
       {
-        path: 'personal-data',
-        element: <PersonalData />
+        path: "personal-data",
+        element: <PersonalData />,
       },
       {
-        path: 'payment-instalment',
-        element: <PaymentInstalment />
+        path: "payment-instalment",
+        element: <PaymentInstalment />,
       },
       {
-        path: 'orders',
-        element: <Orders />
+        path: "payment-istalment/table",
+        element: <PaymentTable />,
       },
       {
-        path: 'wish-list',
-        element: <WishList />
+        path: "discount",
+        element: <DiscountSection />,
+      },
+      // {
+      //   path: "payments",
+      //   element: <PaymentMethods />,
+      // },
+
+      {
+        path: "orders",
+        element: <Orders />,
       },
       {
-        path: 'discount',
-        element: <Discount />
+        path: "wish-list",
+        element: <WishList />,
       },
       {
-        path: 'security-access',
-        element: <SecurityAccess />
+        path: "discount",
+        element: <Discount />,
       },
       {
-        path: 'notification',
-        element: <Notification />
+        path: "security-access",
+        element: <SecurityAccess />,
       },
       {
-        path: 'contact-us',
-        element: <ContactUs />
+        path: "notification",
+        element: <Notification />,
       },
-    ]
-  }
+      {
+        path: "contact-us",
+        element: <ContactUs />,
+      },
+    ],
+  },
 ]);
 export default router;

@@ -10,10 +10,8 @@ const DiscountSection = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 p-4">
-      <div className="hidden md:block md:w-64 h-screen bg-blue-100"></div>
-
-      <div className="p-6  max-w-lg  rounded-lg">
+    <>
+      <div className="p-6  max-w-lg shadow-md rounded-lg">
         {/* Breadcrumb */}
         <div className="text-sm breadcrumbs mb-4">
           <ul className="flex flex-wrap gap-2">
@@ -68,7 +66,7 @@ const DiscountSection = () => {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

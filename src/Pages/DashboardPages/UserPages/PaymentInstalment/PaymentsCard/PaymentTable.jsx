@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import image1 from "../../../assets/Photos/Product-Details/apple.png";
+import image1 from "../../../../../assets/Photos/Product-Details/apple.png";
 import { Link } from "react-router-dom";
 
 const data = [
@@ -56,14 +56,14 @@ const PaymentTable = () => {
     .reduce((acc, item) => acc + parseFloat(item.total.replace("$", "")), 0);
 
   return (
-    <div className="p-6 bg-white">
+    <div className="p-6 bg-white w-full">
       {/* Breadcrumb */}
       <div className="text-sm breadcrumbs mb-4">
         <ul className="flex flex-wrap gap-2">
           <li>Home</li>
           <li>Account</li>
           <li>
-            <Link to="/payments" className=" cursor-pointer">
+            <Link to="/dashboard/payment-istalment" className=" cursor-pointer">
               Payment & Instalments
             </Link>
           </li>
@@ -74,7 +74,7 @@ const PaymentTable = () => {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto w-full">
         <table className="table w-full mt-4">
           <thead>
             <tr>
@@ -115,7 +115,7 @@ const PaymentTable = () => {
                   {item.status === "Paid" ? (
                     <span className="badge badge-success">Paid</span>
                   ) : (
-                    <span className="badge badge-info  py-4 md:py-2">
+                    <span className="badge badge-info py-4 md:py-2">
                       On schedule
                     </span>
                   )}
@@ -128,12 +128,12 @@ const PaymentTable = () => {
       </div>
 
       {/* Subtotal and Payment Button */}
-      <div className="flex flex-wrap p-4 gap-4 h-[48px]">
-        <div className="flex  justify-between items-center max-w-xs w-full rounded-lg bg-gray-100 mt-4 gap-4 px-4">
+      <div className="flex flex-wrap p-4 gap-4">
+        <div className="flex justify-between items-center max-w-xs w-full rounded-lg bg-gray-100 mt-4 gap-4 px-4">
           <span className="font-bold text-lg">Subtotal</span>
           <span className="font-semibold text-lg">${subtotal.toFixed(2)}</span>
         </div>
-        <div className=" mt-4">
+        <div className="mt-4">
           <button className="btn btn-primary w-full px-12">Pay</button>
         </div>
       </div>
