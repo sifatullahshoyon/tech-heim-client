@@ -1,16 +1,18 @@
+import NavigationBreadcrumb from "../../../../Components/Shared/NavigationBreadcrumb/NavigationBreadcrumb";
+import WishProduct from "../../../../Components/WishProduct/WishProduct";
 import img1 from "../../../../assets/product/image1.png";
 import img2 from "../../../../assets/product/image2.png";
 import img3 from "../../../../assets/product/image3.png";
 import img4 from "../../../../assets/product/image4.png";
 import img5 from "../../../../assets/product/image5.png";
 import img6 from "../../../../assets/product/image6.png";
-import line from "../../../../assets/product/Line.png";
-import { BsCart4 } from "react-icons/bs";
-import { RiDeleteBin2Fill } from "react-icons/ri";
-import NavigationBreadcrumb from "../../../../Components/Shared/NavigationBreadcrumb/NavigationBreadcrumb";
+
+
 const WishList = () => {
+    const img=[img1,img2,img3,img4,img5,img6]
+    console.log(img)
   return (
-    <div className="container mx-auto px-[10px] md:px-[10px]  ">
+    <div className="container mx-auto px-[10px] md:px-[10px] mb-[100px]  ">
       {/* Breadcrumb start  */}
       <NavigationBreadcrumb></NavigationBreadcrumb>
       {/* Breadcrumb end  */}
@@ -20,27 +22,10 @@ const WishList = () => {
       </div>
 
       <div>
-        {([1, 2, 3, 4, 5, 6, 7, 8, 9] || []).length > 0 ? (
+        { img.length > 0 ? (
           <div className="grid grid-cols-1 gap-[24px] sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((pc) => (
-              <div className="p-[16px] rounded-[8px] shadow-md  mx-auto">
-                <div className="text-center">
-                  <img className="w-[255px] h-[190px] mx-auto" src={img1} alt="" />
-                  <img className=" my-[16px] " src={line} alt="" />
-                </div>
-                <p className="text-[16px] font-light text-[#063A88]">
-                  APPLE iPad Pro 11” M2 Chip (4th Generation) Wi-Fi 128GB Silver
-                </p>
-                <div className="mt-[8px] flex items-center justify-between">
-                  <button className="btn text-[#0C68F4] text-[16px] font-normal rounded-[8px]">
-                    <BsCart4></BsCart4>
-                    Add to cart
-                  </button>
-                  <button>
-                    <RiDeleteBin2Fill className="text-[red] text-[24px]"></RiDeleteBin2Fill>
-                  </button>
-                </div>
-              </div>
+            {img.map((pc,i) => (
+              <WishProduct key={i} pc={pc}></WishProduct>
             ))}
           </div>
         ) : (
