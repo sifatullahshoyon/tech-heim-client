@@ -28,6 +28,7 @@ import ManageProducts from "../Pages/DashboardPages/AdminPages/ManageProducts/Ma
 import ManageBookings from "../Pages/DashboardPages/AdminPages/ManageBookings/ManageBookings";
 import AllUsers from "../Pages/DashboardPages/AdminPages/AllUsers/AllUsers";
 import Blogs from "../Pages/DashboardPages/AdminPages/Blogs/Blogs";
+import OrderStatus from "../Pages/DashboardPages/UserPages/Orders/OrderStatus/OrderStatus";
 
 const router = createBrowserRouter([
   {
@@ -123,14 +124,14 @@ const router = createBrowserRouter([
         path: "discount",
         element: <DiscountSection />,
       },
-      // {
-      //   path: "payments",
-      //   element: <PaymentMethods />,
-      // },
 
       {
         path: "orders",
         element: <Orders />,
+      },
+      {
+        path: "order-status",
+        element: <OrderStatus />,
       },
       {
         path: "wish-list",
