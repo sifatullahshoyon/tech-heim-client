@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 import Navbar from '../Components/Shared/Navbar/Navbar';
 import { FaBook, FaBuffer, FaHome, FaList, FaRegHeart, FaUsers, FaWindowRestore } from 'react-icons/fa';
 import { MdContactMail, MdFormatListBulletedAdd, MdMenuOpen, MdOutlineAddCard, MdOutlineNotificationsActive } from 'react-icons/md';
-import { FaCartShopping, FaUserPen } from 'react-icons/fa6';
+import { FaUserPen } from 'react-icons/fa6';
 import userPhoto from "../assets/images/logo/user-profile-icon-free-vector.jpg";
 import { CiDollar } from 'react-icons/ci';
 import { HiOutlineShoppingBag } from 'react-icons/hi2';
