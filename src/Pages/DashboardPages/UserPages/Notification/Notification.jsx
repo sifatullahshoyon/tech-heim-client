@@ -1,6 +1,5 @@
 import React from "react";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
-// import SecurityAccessModal from "./SecurityAccessModal";
 import NavigationBreadcrumb from "../../../../Components/Shared/NavigationBreadcrumb/NavigationBreadcrumb";
 
 const Notification = () => {
