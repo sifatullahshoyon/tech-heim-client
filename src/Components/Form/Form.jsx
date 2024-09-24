@@ -18,6 +18,7 @@ const Form = () => {
   const { signIn } = useContext(AuthContext)
   const { createUser } = useContext(AuthContext)
 
+
   // use form
   const {
     register,
@@ -44,7 +45,7 @@ const Form = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-
+    console.log(email, password)
     signIn(email, password)
       .then(result => {
         const user = result.user;
@@ -58,6 +59,7 @@ const Form = () => {
   const handleCheckboxChange = (e) => {
     setIsChecked(e.target.checked); // Update the checkbox state
   };
+
   return (
     <div className="mx-auto w-full max-w-sm overflow-hidden rounded-lg  bg-white  ">
       <div

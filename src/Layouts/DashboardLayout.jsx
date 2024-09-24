@@ -1,24 +1,40 @@
-import React from 'react';
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
 import Navbar from '../Components/Shared/Navbar/Navbar';
 import { FaBook, FaBuffer, FaHome, FaList, FaRegHeart, FaUsers, FaWindowRestore } from 'react-icons/fa';
 import { MdContactMail, MdFormatListBulletedAdd, MdMenuOpen, MdOutlineAddCard, MdOutlineNotificationsActive } from 'react-icons/md';
-import { FaCartShopping, FaUserPen } from 'react-icons/fa6';
+import { FaUserPen } from 'react-icons/fa6';
 import userPhoto from "../assets/images/logo/user-profile-icon-free-vector.jpg";
 import { CiDollar } from 'react-icons/ci';
 import { HiOutlineShoppingBag } from 'react-icons/hi2';
 import { GiChipsBag } from 'react-icons/gi';
 import { SiSpringsecurity } from 'react-icons/si';
-import { FiLogOut } from 'react-icons/fi';
 import { CgLogOut } from 'react-icons/cg';
-
-// auth state user information
-const user = false;
-
-// admin
-const isAdmin = false;
+import { toast } from 'react-toastify';
+import useAuth from '../Components/Hooks/useAuth/useAuth';
 
 const DashboardLayout = () => {
+
+    const { user, logOut } = useAuth()
+    // const navigate = useNavigate();
+    const handleLogeOut = () => {
+
+        const successSignOut = logOut();
+        if (successSignOut) {
+            alert("Do you want to logout...?");
+            toast.success("Successfully Logout");
+            // localStorage.removeItem('access-token');
+        }
+    }
+
+    // useEffect(() => {
+    //     if (!user) {
+    //         navigate('/')
+    //     }
+    // }, [user, navigate])
+
+    // admin
+    const isAdmin = false;
     return (
         <div>
             <Navbar></Navbar>
@@ -214,6 +230,7 @@ const DashboardLayout = () => {
                         <div className="divider"></div>
                         {/* Logout */}
                         <button
+                            onClick={handleLogeOut}
                             className="btn ml-4 rounded-lg bg-error text-white border-white border-2 hover:text-error hover:border-error hover:bg-white text-xl flex items-center "
                         // onClick={handleSignOut}
                         >
