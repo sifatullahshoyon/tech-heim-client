@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../../assets/images/logo/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import bagIcon from "../../../assets/images/icon/bag.png";
@@ -11,8 +11,20 @@ import { CiLogout } from "react-icons/ci";
 import Form from "../../Form/Form";
 import MenuShoppingCart from "../../MenuShoppingCart/MenuShoppingCart";
 import SearchItems from "../../SearchItems/SearchItems";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext)
+  const handleLogeOut = () => {
+    logOut()
+      .then(() => {
+
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
   return (
     <div className="max-w-[1440px] px-6 mx-auto">
       <div className="navbar bg-base-100">
@@ -218,14 +230,37 @@ const Navbar = () => {
                     <CiLogout />
                   </p>
                   {/* Open the modal using document.getElementById('ID').showModal() method */}
-                  <button
-                    className=""
-                    onClick={() =>
-                      document.getElementById("my_modal_6").showModal()
-                    }
-                  >
-                    Log out
-                  </button>
+                  {
+                    user ? <>
+                      <button
+                        className="hover:text-red-600"
+                        onClick={handleLogeOut}
+                      >
+                        Log out
+                      </button>
+                    </> :
+                      <>
+                        <button
+                          className=""
+                          onClick={() =>
+                            document.getElementById("my_modal_6").showModal()
+                          }
+                        >
+                          Sign In
+                        </button>
+
+                        {/* <button
+                          className=""
+                          onClick={() =>
+                            document.getElementById("my_modal_6").showModal()
+                          }
+                        >
+                          Sign Up
+                        </button> */}
+                      </>
+                  }
+
+
                   <dialog
                     id="my_modal_6"
                     className="modal modal-center sm:modal-middle"
