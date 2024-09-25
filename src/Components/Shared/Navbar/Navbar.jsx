@@ -29,7 +29,7 @@ const Navbar = () => {
     <div className="max-w-[1440px] px-6 mx-auto">
       <div className="navbar bg-base-100">
         <div className="navbar-start">
-          {/* Mobile Devices */}
+          {/* Mobile Device s*/}
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
