@@ -13,16 +13,5 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_appId,
 };
 
-///////////////// use this firebase key ////////////
-
-// VITE_apiKey=AIzaSyDD8Gvptzyjtmmew3zeUm0HSPk0oqkjHas
-// VITE_authDomain=tech-heim-6aad2.firebaseapp.com
-// VITE_projectId=tech-heim-6aad2
-// VITE_storageBucket=tech-heim-6aad2.appspot.com
-// VITE_messagingSenderId=858150678851
-// VITE_appId=1:858150678851:web:fd5d1842588b912a0b3ff6
-
-///////////////// use this firebase key ////////////
-
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);

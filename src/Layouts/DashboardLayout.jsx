@@ -34,7 +34,7 @@ const DashboardLayout = () => {
     // }, [user, navigate])
 
     // admin
-    const isAdmin = true;
+    const isAdmin = user;
     return (
         <div>
             <Navbar></Navbar>
