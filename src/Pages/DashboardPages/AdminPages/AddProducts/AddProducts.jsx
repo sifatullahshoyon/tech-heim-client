@@ -79,7 +79,7 @@ const AddProducts = () => {
       galleryImages: galleryImageUrls,
     };
 
-    console.log(productData)
+    console.log(productData);
 
     // Make API call to add product
     try {
