@@ -1,4 +1,5 @@
 import { useState } from "react";
+import NavigationBreadcrumb from "../../../../Components/Shared/NavigationBreadcrumb/NavigationBreadcrumb";
 
 const ManageProducts = () => {
   const [editMode, setEditMode] = useState(null); // To track which product is being edited
@@ -201,6 +202,9 @@ const ManageProducts = () => {
   };
   return (
     <div className="container mx-auto p-4 sm:p-6">
+      {/* Breadcrumb start  */}
+      <NavigationBreadcrumb></NavigationBreadcrumb>
+      {/* Breadcrumb end  */}
       <h1 className="text-lg sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-700">
         Manage All Products
       </h1>
