@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavigationBreadcrumb from "../../../../Components/Shared/NavigationBreadcrumb/NavigationBreadcrumb";
+import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
 
 const ManageProducts = () => {
   const [editMode, setEditMode] = useState(null); // To track which product is being edited
@@ -12,128 +13,145 @@ const ManageProducts = () => {
     stock: false,
   });
 
-  const sampleProducts = [
-    {
-      id: 1,
-      image: "https://via.placeholder.com/150",
-      name: "Product 1",
-      category: "Laptop",
-      regularPrice: "$100",
-      offerPrice: "$80",
-      stock: true,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Laptop",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Camera",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Mobile",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Tab",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Headphone",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Game",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "watch",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Data",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Device",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    // Add more products as needed
-  ];
-  const [products, setProducts] = useState(sampleProducts);
+  // const sampleProducts = [
+  //   {
+  //     id: 1,
+  //     image: "https://via.placeholder.com/150",
+  //     name: "Product 1",
+  //     category: "Laptop",
+  //     regularPrice: "$100",
+  //     offerPrice: "$80",
+  //     stock: true,
+  //   },
+  //   {
+  //     id: 2,
+  //     image: "https://via.placeholder.com/150",
+  //     name: "Product 2",
+  //     category: "Laptop",
+  //     regularPrice: "$120",
+  //     offerPrice: "$100",
+  //     stock: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     image: "https://via.placeholder.com/150",
+  //     name: "Product 2",
+  //     category: "Camera",
+  //     regularPrice: "$120",
+  //     offerPrice: "$100",
+  //     stock: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     image: "https://via.placeholder.com/150",
+  //     name: "Product 2",
+  //     category: "Mobile",
+  //     regularPrice: "$120",
+  //     offerPrice: "$100",
+  //     stock: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     image: "https://via.placeholder.com/150",
+  //     name: "Product 2",
+  //     category: "Tab",
+  //     regularPrice: "$120",
+  //     offerPrice: "$100",
+  //     stock: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     image: "https://via.placeholder.com/150",
+  //     name: "Product 2",
+  //     category: "Headphone",
+  //     regularPrice: "$120",
+  //     offerPrice: "$100",
+  //     stock: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     image: "https://via.placeholder.com/150",
+  //     name: "Product 2",
+  //     category: "Game",
+  //     regularPrice: "$120",
+  //     offerPrice: "$100",
+  //     stock: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     image: "https://via.placeholder.com/150",
+  //     name: "Product 2",
+  //     category: "watch",
+  //     regularPrice: "$120",
+  //     offerPrice: "$100",
+  //     stock: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     image: "https://via.placeholder.com/150",
+  //     name: "Product 2",
+  //     category: "Data",
+  //     regularPrice: "$120",
+  //     offerPrice: "$100",
+  //     stock: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     image: "https://via.placeholder.com/150",
+  //     name: "Product 2",
+  //     category: "Device",
+  //     regularPrice: "$120",
+  //     offerPrice: "$100",
+  //     stock: false,
+  //   },
+  //   // Add more products as needed
+  // ];
+  // 
+  const [products, setProducts] = useState([]);
+  console.log(products)
+  const axiosSecure = useAxiosSecure();
+
   // tab category filter state
   const [productsLaptop, setProductsLaptop] = useState(
-    sampleProducts.filter((cat) => cat.category == "Laptop")
+    products.filter((cat) => cat.category == "Laptop")
   );
   const [productsCamera, setProductsCamera] = useState(
-    sampleProducts.filter((cat) => cat.category == "Camera")
+    products.filter((cat) => cat.category == "Camera")
   );
   const [productsWatch, setProductsWatch] = useState(
-    sampleProducts.filter((cat) => cat.category == "Watch")
+    products.filter((cat) => cat.category == "Watch")
   );
   const [productsTab, setProductsTab] = useState(
-    sampleProducts.filter((cat) => cat.category == "Tab")
+    products.filter((cat) => cat.category == "Tab")
   );
   const [productsMobile, setProductsMobile] = useState(
-    sampleProducts.filter((cat) => cat.category == "Mobile")
+    products.filter((cat) => cat.category == "Mobile")
   );
   const [productsGame, setProductsGame] = useState(
-    sampleProducts.filter((cat) => cat.category == "Game")
+    products.filter((cat) => cat.category == "Game")
   );
   const [productsDevice, setProductsDevice] = useState(
-    sampleProducts.filter((cat) => cat.category == "Device")
+    products.filter((cat) => cat.category == "Device")
   );
   const [productsData, setProductsData] = useState(
-    sampleProducts.filter((cat) => cat.category == "Data")
+    products.filter((cat) => cat.category == "Data")
   );
   const [productsHeadphone, setProductsHeadphone] = useState(
-    sampleProducts.filter((cat) => cat.category == "Headphone")
+    products.filter((cat) => cat.category == "Headphone")
   );
+
+  // get all   product details and make an API call
+
+
+
+  useEffect(() => {
+    axiosSecure.get('/products/all')
+      .then(data => {
+        setProducts(data?.data)
+        setProductsWatch(data?.data.filter((cat) => cat.category == "Watch"))
+      })
+  }, [])
+
 
   // Delete the  product details and make an API call
   const handleDelete = async (id) => {
@@ -605,14 +623,14 @@ const ManageProducts = () => {
                     // Loop through products if they exist
                     productsWatch.map((product) => (
                       <tr
-                        key={product.id}
+                        key={product?._id}
                         className="border-b transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg rounded-lg"
                       >
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
-                            alt={product.name}
+                            src={product?.featureImage}
+                            alt={product?.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
                         </td>
@@ -625,7 +643,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="name"
-                                value={editProduct.name}
+                                value={editProduct?.name}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -636,7 +654,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="category"
-                                value={editProduct.category}
+                                value={editProduct?.category}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -647,7 +665,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="regularPrice"
-                                value={editProduct.regularPrice}
+                                value={editProduct?.regularPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -658,7 +676,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="offerPrice"
-                                value={editProduct.offerPrice}
+                                value={editProduct?.sellPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -669,7 +687,7 @@ const ManageProducts = () => {
                               <input
                                 type="checkbox"
                                 name="stock"
-                                checked={editProduct.stock}
+                                checked={editProduct?.stock}
                                 onChange={handleChange}
                                 className="w-4 h-4"
                               />
@@ -694,16 +712,16 @@ const ManageProducts = () => {
                         ) : (
                           <>
                             {/* Display Product Info */}
-                            <td className="p-2 sm:p-4 text-sm sm:text-base">{product.name}</td>
-                            <td className="p-2 sm:p-4 text-sm sm:text-base">{product.category}</td>
+                            <td className="p-2 sm:p-4 text-sm sm:text-base">{product?.name}</td>
+                            <td className="p-2 sm:p-4 text-sm sm:text-base">{product?.category}</td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
-                              {product.regularPrice}
+                              {product?.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
-                              {product.stock ? "In Stock" : "Out of Stock"}
+                              {product?.stock ? "In Stock" : "Out of Stock"}
                             </td>
 
                             {/* Edit/Delete Buttons */}
@@ -715,7 +733,7 @@ const ManageProducts = () => {
                                 Edit
                               </button>
                               <button
-                                onClick={() => handleDelete(product.id)}
+                                onClick={() => handleDelete(product?._id)}
                                 className="bg-red-500 hover:bg-red-700 text-white text-xs sm:text-sm font-bold py-1 sm:py-2 px-2 sm:px-4 rounded"
                               >
                                 Delete

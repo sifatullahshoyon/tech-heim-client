@@ -1,8 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
 import NavigationBreadcrumb from "../../../../Components/Shared/NavigationBreadcrumb/NavigationBreadcrumb";
+import { toast } from "react-toastify";
+import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
 
 const AddProducts = () => {
+  const axiosSecure = useAxiosSecure()
   const [product, setProduct] = useState({
     name: "",
     rate: "",
@@ -83,8 +86,9 @@ const AddProducts = () => {
 
     // Make API call to add product
     try {
-      await axios.post("YOUR_API_URL/products", productData);
+      await axiosSecure.post("/products/add", productData);
       alert("Product added successfully!");
+      toast.success('Product added successfully!')
     } catch (error) {
       console.error("Failed to add product:", error);
       alert("Failed to add product.");

@@ -11,7 +11,7 @@ createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
       <RouterProvider router={router} />
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </AuthProvider>
 
     {/* <QueryClientProvider client={queryClient}>
