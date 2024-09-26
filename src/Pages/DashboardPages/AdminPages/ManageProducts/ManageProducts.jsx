@@ -33,30 +33,34 @@ const ManageProducts = () => {
 
   // get all   product details and make an API call
 
-  useEffect(() => {
-    axiosSecure.get("/products/all").then((data) => {
-      setProducts(data?.data);
-      setProductsLaptop(data?.data.filter((cat) => cat.category == "Laptop"));
-      setProductsCamera(data?.data.filter((cat) => cat.category == "Camera"));
-      setProductsWatch(data?.data.filter((cat) => cat.category == "Watch"));
-      setProductsTab(data?.data.filter((cat) => cat.category == "Tab"));
-      setProductsMobile(data?.data.filter((cat) => cat.category == "Mobile"));
-      setProductsGame(data?.data.filter((cat) => cat.category == "Game"));
-      setProductsDevice(data?.data.filter((cat) => cat.category == "Device"));
-      setProductsData(data?.data.filter((cat) => cat.category == "Data"));
-      setProductsHeadphone(data?.data.filter((cat) => cat.category == "Headphone"));
-    });
-  }, []);
+  // Function to fetch all products and update state initial call
+const fetchProducts = async () => {
+  try {
+    const response = await axiosSecure.get("/products/all");
+    const data = response.data;
 
-  // tan stack query
-  const { data: editProducts = [], refetch } = useQuery({
-    queryKey: ['editProducts'],
-    queryFn: async () => {
-      const response = await axiosSecure.get(`/products/all`)
-      return response.data
-    }
-  })
-  console.log(editProducts)
+    setProducts(data);
+    setProductsLaptop(data.filter((cat) => cat.category === "Laptop"));
+    setProductsCamera(data.filter((cat) => cat.category === "Camera"));
+    setProductsWatch(data.filter((cat) => cat.category === "Watch"));
+    setProductsTab(data.filter((cat) => cat.category === "Tab"));
+    setProductsMobile(data.filter((cat) => cat.category === "Mobile"));
+    setProductsGame(data.filter((cat) => cat.category === "Game"));
+    setProductsDevice(data.filter((cat) => cat.category === "Device"));
+    setProductsData(data.filter((cat) => cat.category === "Data"));
+    setProductsHeadphone(data.filter((cat) => cat.category === "Headphone"));
+  } catch (error) {
+    console.error("Error fetching products:", error);
+  }
+};
+
+// Fetch products on component mount
+useEffect(() => {
+  fetchProducts();
+}, []);
+
+ 
+  
   // Delete the  product details and make an API call
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this product?");
@@ -66,19 +70,13 @@ const ManageProducts = () => {
         const response = await axiosSecure.delete(`/products/delete/${id}`)
           .then((res => {
             if (res?.data?.deletedCount > 0) {
-              refetch()
+               fetchProducts(); // Call fetchProducts to refresh the product list
               setProducts(products.filter((product) => product._id !== id));
               toast.success('Product deleted successfully!')
             }
           }))
 
-        // if (response.status === 200) {
-        //   // If the deletion was successful, update the frontend state
-         
-        //   // alert("Product deleted successfully!");
-        // } else {
-        //   alert("Failed to delete the product. Please try again.");
-        // }
+        
       } catch (error) {
         console.error("Error deleting product:", error);
         alert("An error occurred while deleting the product.");
@@ -116,7 +114,7 @@ const ManageProducts = () => {
         .then((res) => {
           console.log(res.data)
           if (res.data.modifiedCount > 0) {
-            refetch();
+             fetchProducts(); // Call fetchProducts to refresh the product list
             toast.success('Successfully Make admin')
           }
         })

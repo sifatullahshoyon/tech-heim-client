@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
 
 const AddProducts = () => {
-  const axiosSecure = useAxiosSecure()
+  const [loader, setLoader] = useState(false);
+  const axiosSecure = useAxiosSecure();
   const [product, setProduct] = useState({
     name: "",
     rate: "",
@@ -66,6 +67,7 @@ const AddProducts = () => {
   };
 
   const handleSubmit = async (e) => {
+    setLoader(true);
     e.preventDefault();
 
     // Upload feature image
@@ -82,17 +84,36 @@ const AddProducts = () => {
       galleryImages: galleryImageUrls,
     };
 
-    console.log(productData);
-
     // Make API call to add product
     try {
-      await axiosSecure.post("/products/add", productData);
-      alert("Product added successfully!");
-      toast.success('Product added successfully!')
+      await axiosSecure.post("/products/add", productData).then((res) => {
+        if (res?.status == 200) {
+          toast.success("Successfully Make admin");
+          setLoader(false);
+        }
+      });
     } catch (error) {
       console.error("Failed to add product:", error);
       alert("Failed to add product.");
+      setLoader(false);
     }
+
+    setProduct({
+      name: "",
+      rate: "",
+      regularPrice: "",
+      sellPrice: "",
+      brand: "",
+      modelName: "",
+      screenSize: "",
+      driveSize: "",
+      ram: "",
+      processor: "",
+      color: "",
+      gpuBrand: "",
+      category: "Laptop",
+      stock: true,
+    });
   };
   return (
     <div className="container mx-auto p-4 sm:p-6">
@@ -305,12 +326,21 @@ const AddProducts = () => {
         </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
-        >
-          Add Product
-        </button>
+        {loader ? (
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
+          >
+            <span className="loading loading-dots loading-lg"></span>
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
+          >
+            Add Product
+          </button>
+        )}
       </form>
     </div>
   );
