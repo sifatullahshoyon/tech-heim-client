@@ -43,7 +43,9 @@ const Login = () => {
           </div>
           {/* form side  */}
           <div className="mx-auto w-full max-w-md space-y-4 rounded-lg border bg-white p-10 shadow-lg ">
-            <h1 className="text-3xl text-center font-bold mb-3">Sign In</h1>
+            <h1 className="text-3xl text-center font-bold mb-3">
+              Sign In Tech Heim
+            </h1>
             <form onSubmit={handleLogin} className="space-y-6">
               <div className="text-sm ">
                 <input
