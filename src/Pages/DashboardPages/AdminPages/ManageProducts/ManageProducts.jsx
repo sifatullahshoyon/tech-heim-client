@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import NavigationBreadcrumb from "../../../../Components/Shared/NavigationBreadcrumb/NavigationBreadcrumb";
 import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
+import { useQuery } from '@tanstack/react-query'
+import { toast } from "react-toastify";
 
 const ManageProducts = () => {
   const [editMode, setEditMode] = useState(null); // To track which product is being edited
@@ -13,7 +15,7 @@ const ManageProducts = () => {
     stock: false,
   });
 
-  
+
   const [products, setProducts] = useState([]);
   console.log(editProduct);
   const axiosSecure = useAxiosSecure();
@@ -46,14 +48,28 @@ const ManageProducts = () => {
     });
   }, []);
 
+  // tan stack query
+  const { data: editProducts = [], refetch } = useQuery({
+    queryKey: ['editProducts'],
+    queryFn: async () => {
+      const response = await axiosSecure.get(`/products/all`)
+      return response.data
+    }
+  })
+  console.log(editProducts)
   // Delete the  product details and make an API call
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this product?");
 
     if (confirmDelete) {
       try {
-        // Make the DELETE request to your backend API
-        const response = await axios.delete(`${apiEndpoint}/products/${id}`);
+        const response = await axiosSecure.delete(`/products/delete/${id}`)
+          .then((res => {
+            if (res?.data?.deletedCount > 0) {
+              refetch()
+              toast.success('Product deleted successfully!')
+            }
+          }))
 
         if (response.status === 200) {
           // If the deletion was successful, update the frontend state
@@ -94,19 +110,23 @@ const ManageProducts = () => {
 
   // Save the updated product details and make an API call
   const handleSave = async () => {
-    console.log(editProduct);
     try {
-      const response = await axios.put(`${apiEndpoint}/products/${editProduct._id}`, editProduct);
-      if (response.status === 200) {
-        alert("Product updated successfully!"); // Alert on successful update
-      } else {
-        alert("Failed to update product."); // Handle failure
-      }
+      axiosSecure.patch(`/products/edit/${editProduct.id}`, editProduct)
+        .then((res) => {
+          console.log(res.data)
+          if (res.data.modifiedCount > 0) {
+            refetch();
+            toast.success('Successfully Make admin')
+          }
+        })
+      await refetch(); // Call refetch to update data
+
+      alert("Product updated successfully!");
     } catch (error) {
-      console.error("Error updating product:", error);
-      alert("An error occurred while updating the product.");
+      // console.error("Error updating product:", error);
+      // alert("An error occurred while updating the product.");
     }
-    setEditMode(null); // Exit edit mode after saving
+    setEditMode(null);
   };
 
   // Cancel editing
