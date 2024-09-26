@@ -67,17 +67,18 @@ const ManageProducts = () => {
           .then((res => {
             if (res?.data?.deletedCount > 0) {
               refetch()
+              setProducts(products.filter((product) => product._id !== id));
               toast.success('Product deleted successfully!')
             }
           }))
 
-        if (response.status === 200) {
-          // If the deletion was successful, update the frontend state
-          setProducts(products.filter((product) => product._id !== id));
-          alert("Product deleted successfully!");
-        } else {
-          alert("Failed to delete the product. Please try again.");
-        }
+        // if (response.status === 200) {
+        //   // If the deletion was successful, update the frontend state
+         
+        //   // alert("Product deleted successfully!");
+        // } else {
+        //   alert("Failed to delete the product. Please try again.");
+        // }
       } catch (error) {
         console.error("Error deleting product:", error);
         alert("An error occurred while deleting the product.");
@@ -198,7 +199,7 @@ const ManageProducts = () => {
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
@@ -287,7 +288,8 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
+                               
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -371,7 +373,7 @@ const ManageProducts = () => {
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
@@ -460,7 +462,7 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -717,7 +719,7 @@ const ManageProducts = () => {
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
@@ -806,7 +808,7 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -890,7 +892,7 @@ const ManageProducts = () => {
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
@@ -979,7 +981,7 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -1063,7 +1065,7 @@ const ManageProducts = () => {
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
@@ -1152,7 +1154,7 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -1236,7 +1238,7 @@ const ManageProducts = () => {
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
@@ -1325,7 +1327,7 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -1409,7 +1411,7 @@ const ManageProducts = () => {
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
@@ -1498,7 +1500,7 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -1582,7 +1584,7 @@ const ManageProducts = () => {
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
@@ -1671,7 +1673,7 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
