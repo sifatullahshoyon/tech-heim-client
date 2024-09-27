@@ -63,27 +63,20 @@ const ManageProducts = () => {
 
     if (confirmDelete) {
       try {
-        const response = await axiosSecure.delete(`/products/delete/${id}`)
-          .then((res => {
-            if (res?.data?.deletedCount > 0) {
-              refetch()
-              toast.success('Product deleted successfully!')
-            }
-          }))
-
-        if (response.status === 200) {
-          // If the deletion was successful, update the frontend state
-          setProducts(products.filter((product) => product._id !== id));
-          alert("Product deleted successfully!");
+        const response = await axiosSecure.delete(`/products/delete/${id}`);
+        if (response?.data?.deletedCount > 0) {
+          refetch(); // Automatically refetch the updated product list
+          toast.success('Product deleted successfully!');
         } else {
-          alert("Failed to delete the product. Please try again.");
+          toast.error('Failed to delete the product.');
         }
       } catch (error) {
         console.error("Error deleting product:", error);
-        alert("An error occurred while deleting the product.");
+        toast.error('An error occurred while deleting the product.');
       }
     }
   };
+
 
   // Handle edit button click
 
