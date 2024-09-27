@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavigationBreadcrumb from "../../../../Components/Shared/NavigationBreadcrumb/NavigationBreadcrumb";
+import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
+import { useQuery } from '@tanstack/react-query'
+import { toast } from "react-toastify";
 
 const ManageProducts = () => {
   const [editMode, setEditMode] = useState(null); // To track which product is being edited
@@ -8,149 +11,74 @@ const ManageProducts = () => {
     name: "",
     category: "",
     regularPrice: "",
-    offerPrice: "",
+    sellPrice: "",
     stock: false,
   });
 
-  const sampleProducts = [
-    {
-      id: 1,
-      image: "https://via.placeholder.com/150",
-      name: "Product 1",
-      category: "Laptop",
-      regularPrice: "$100",
-      offerPrice: "$80",
-      stock: true,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Laptop",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Camera",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Mobile",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Tab",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Headphone",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Game",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "watch",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Data",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    {
-      id: 2,
-      image: "https://via.placeholder.com/150",
-      name: "Product 2",
-      category: "Device",
-      regularPrice: "$120",
-      offerPrice: "$100",
-      stock: false,
-    },
-    // Add more products as needed
-  ];
-  const [products, setProducts] = useState(sampleProducts);
-  // tab category filter state
-  const [productsLaptop, setProductsLaptop] = useState(
-    sampleProducts.filter((cat) => cat.category == "Laptop")
-  );
-  const [productsCamera, setProductsCamera] = useState(
-    sampleProducts.filter((cat) => cat.category == "Camera")
-  );
-  const [productsWatch, setProductsWatch] = useState(
-    sampleProducts.filter((cat) => cat.category == "Watch")
-  );
-  const [productsTab, setProductsTab] = useState(
-    sampleProducts.filter((cat) => cat.category == "Tab")
-  );
-  const [productsMobile, setProductsMobile] = useState(
-    sampleProducts.filter((cat) => cat.category == "Mobile")
-  );
-  const [productsGame, setProductsGame] = useState(
-    sampleProducts.filter((cat) => cat.category == "Game")
-  );
-  const [productsDevice, setProductsDevice] = useState(
-    sampleProducts.filter((cat) => cat.category == "Device")
-  );
-  const [productsData, setProductsData] = useState(
-    sampleProducts.filter((cat) => cat.category == "Data")
-  );
-  const [productsHeadphone, setProductsHeadphone] = useState(
-    sampleProducts.filter((cat) => cat.category == "Headphone")
-  );
 
+  const [products, setProducts] = useState([]);
+  console.log(editProduct);
+  const axiosSecure = useAxiosSecure();
+
+  // tab category filter state
+  const [productsLaptop, setProductsLaptop] = useState([]);
+  const [productsCamera, setProductsCamera] = useState([]);
+  const [productsWatch, setProductsWatch] = useState([]);
+  const [productsTab, setProductsTab] = useState([]);
+  const [productsMobile, setProductsMobile] = useState([]);
+  const [productsGame, setProductsGame] = useState([]);
+  const [productsDevice, setProductsDevice] = useState([]);
+  const [productsData, setProductsData] = useState([]);
+  const [productsHeadphone, setProductsHeadphone] = useState([]);
+
+  // get all   product details and make an API call
+
+  useEffect(() => {
+    axiosSecure.get("/products/all").then((data) => {
+      setProducts(data?.data);
+      setProductsLaptop(data?.data.filter((cat) => cat.category == "Laptop"));
+      setProductsCamera(data?.data.filter((cat) => cat.category == "Camera"));
+      setProductsWatch(data?.data.filter((cat) => cat.category == "Watch"));
+      setProductsTab(data?.data.filter((cat) => cat.category == "Tab"));
+      setProductsMobile(data?.data.filter((cat) => cat.category == "Mobile"));
+      setProductsGame(data?.data.filter((cat) => cat.category == "Game"));
+      setProductsDevice(data?.data.filter((cat) => cat.category == "Device"));
+      setProductsData(data?.data.filter((cat) => cat.category == "Data"));
+      setProductsHeadphone(data?.data.filter((cat) => cat.category == "Headphone"));
+    });
+  }, []);
+
+  // tan stack query
+  const { data: editProducts = [], refetch } = useQuery({
+    queryKey: ['editProducts'],
+    queryFn: async () => {
+      const response = await axiosSecure.get(`/products/all`)
+      return response.data
+    }
+  })
+  console.log(editProducts)
   // Delete the  product details and make an API call
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this product?");
 
     if (confirmDelete) {
       try {
-        // Make the DELETE request to your backend API
-        const response = await axios.delete(`${apiEndpoint}/products/${id}`);
+        const response = await axiosSecure.delete(`/products/delete/${id}`)
+          .then((res => {
+            if (res?.data?.deletedCount > 0) {
+              refetch()
+              setProducts(products.filter((product) => product._id !== id));
+              toast.success('Product deleted successfully!')
+            }
+          }))
 
-        if (response.status === 200) {
-          // If the deletion was successful, update the frontend state
-          setProducts(products.filter((product) => product.id !== id));
-          alert("Product deleted successfully!");
-        } else {
-          alert("Failed to delete the product. Please try again.");
-        }
+        // if (response.status === 200) {
+        //   // If the deletion was successful, update the frontend state
+         
+        //   // alert("Product deleted successfully!");
+        // } else {
+        //   alert("Failed to delete the product. Please try again.");
+        // }
       } catch (error) {
         console.error("Error deleting product:", error);
         alert("An error occurred while deleting the product.");
@@ -159,14 +87,15 @@ const ManageProducts = () => {
   };
 
   // Handle edit button click
+
   const onEdit = (product) => {
-    setEditMode(product.id);
+    setEditMode(product._id);
     setEditProduct({
-      id: product.id,
+      id: product._id,
       name: product.name,
       category: product.category,
       regularPrice: product.regularPrice,
-      offerPrice: product.offerPrice,
+      sellPrice: product.sellPrice,
       stock: product.stock,
     });
   };
@@ -183,17 +112,22 @@ const ManageProducts = () => {
   // Save the updated product details and make an API call
   const handleSave = async () => {
     try {
-      const response = await axios.put(`${apiEndpoint}/products/${editProduct.id}`, editProduct);
-      if (response.status === 200) {
-        alert("Product updated successfully!"); // Alert on successful update
-      } else {
-        alert("Failed to update product."); // Handle failure
-      }
+      axiosSecure.patch(`/products/edit/${editProduct.id}`, editProduct)
+        .then((res) => {
+          console.log(res.data)
+          if (res.data.modifiedCount > 0) {
+            refetch();
+            toast.success('Successfully Make admin')
+          }
+        })
+      await refetch(); // Call refetch to update data
+
+      alert("Product updated successfully!");
     } catch (error) {
-      console.error("Error updating product:", error);
-      alert("An error occurred while updating the product.");
+      // console.error("Error updating product:", error);
+      // alert("An error occurred while updating the product.");
     }
-    setEditMode(null); // Exit edit mode after saving
+    setEditMode(null);
   };
 
   // Cancel editing
@@ -259,27 +193,27 @@ const ManageProducts = () => {
                     // Loop through products if they exist
                     productsLaptop.map((product) => (
                       <tr
-                        key={product.id}
+                        key={product._id}
                         className="border-b transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg rounded-lg"
                       >
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
                         </td>
 
                         {/* Editable fields if in edit mode */}
-                        {editMode === product.id ? (
+                        {editMode === product._id ? (
                           <>
                             {/* Product Name */}
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
                                 name="name"
-                                value={editProduct.name}
+                                value={editProduct?.name}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -290,7 +224,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="category"
-                                value={editProduct.category}
+                                value={editProduct?.category}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -301,7 +235,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="regularPrice"
-                                value={editProduct.regularPrice}
+                                value={editProduct?.regularPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -311,8 +245,8 @@ const ManageProducts = () => {
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
-                                name="offerPrice"
-                                value={editProduct.offerPrice}
+                                name="sellPrice"
+                                value={editProduct?.sellPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -323,7 +257,7 @@ const ManageProducts = () => {
                               <input
                                 type="checkbox"
                                 name="stock"
-                                checked={editProduct.stock}
+                                checked={editProduct?.stock}
                                 onChange={handleChange}
                                 className="w-4 h-4"
                               />
@@ -354,7 +288,8 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
+                               
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -369,7 +304,7 @@ const ManageProducts = () => {
                                 Edit
                               </button>
                               <button
-                                onClick={() => handleDelete(product.id)}
+                                onClick={() => handleDelete(product._id)}
                                 className="bg-red-500 hover:bg-red-700 text-white text-xs sm:text-sm font-bold py-1 sm:py-2 px-2 sm:px-4 rounded"
                               >
                                 Delete
@@ -432,27 +367,27 @@ const ManageProducts = () => {
                     // Loop through products if they exist
                     productsCamera.map((product) => (
                       <tr
-                        key={product.id}
+                        key={product._id}
                         className="border-b transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg rounded-lg"
                       >
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
                         </td>
 
                         {/* Editable fields if in edit mode */}
-                        {editMode === product.id ? (
+                        {editMode === product._id ? (
                           <>
                             {/* Product Name */}
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
                                 name="name"
-                                value={editProduct.name}
+                                value={editProduct?.name}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -463,7 +398,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="category"
-                                value={editProduct.category}
+                                value={editProduct?.category}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -474,7 +409,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="regularPrice"
-                                value={editProduct.regularPrice}
+                                value={editProduct?.regularPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -484,8 +419,8 @@ const ManageProducts = () => {
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
-                                name="offerPrice"
-                                value={editProduct.offerPrice}
+                                name="sellPrice"
+                                value={editProduct?.sellPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -496,7 +431,7 @@ const ManageProducts = () => {
                               <input
                                 type="checkbox"
                                 name="stock"
-                                checked={editProduct.stock}
+                                checked={editProduct?.stock}
                                 onChange={handleChange}
                                 className="w-4 h-4"
                               />
@@ -527,7 +462,7 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -542,7 +477,7 @@ const ManageProducts = () => {
                                 Edit
                               </button>
                               <button
-                                onClick={() => handleDelete(product.id)}
+                                onClick={() => handleDelete(product._id)}
                                 className="bg-red-500 hover:bg-red-700 text-white text-xs sm:text-sm font-bold py-1 sm:py-2 px-2 sm:px-4 rounded"
                               >
                                 Delete
@@ -605,27 +540,27 @@ const ManageProducts = () => {
                     // Loop through products if they exist
                     productsWatch.map((product) => (
                       <tr
-                        key={product.id}
+                        key={product?._id}
                         className="border-b transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg rounded-lg"
                       >
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
-                            alt={product.name}
+                            src={product?.featureImage}
+                            alt={product?.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
                         </td>
 
                         {/* Editable fields if in edit mode */}
-                        {editMode === product.id ? (
+                        {editMode === product._id ? (
                           <>
                             {/* Product Name */}
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
                                 name="name"
-                                value={editProduct.name}
+                                value={editProduct?.name}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -636,7 +571,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="category"
-                                value={editProduct.category}
+                                value={editProduct?.category}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -647,7 +582,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="regularPrice"
-                                value={editProduct.regularPrice}
+                                value={editProduct?.regularPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -657,8 +592,8 @@ const ManageProducts = () => {
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
-                                name="offerPrice"
-                                value={editProduct.offerPrice}
+                                name="sellPrice"
+                                value={editProduct?.sellPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -669,7 +604,7 @@ const ManageProducts = () => {
                               <input
                                 type="checkbox"
                                 name="stock"
-                                checked={editProduct.stock}
+                                checked={editProduct?.stock}
                                 onChange={handleChange}
                                 className="w-4 h-4"
                               />
@@ -694,16 +629,16 @@ const ManageProducts = () => {
                         ) : (
                           <>
                             {/* Display Product Info */}
-                            <td className="p-2 sm:p-4 text-sm sm:text-base">{product.name}</td>
-                            <td className="p-2 sm:p-4 text-sm sm:text-base">{product.category}</td>
+                            <td className="p-2 sm:p-4 text-sm sm:text-base">{product?.name}</td>
+                            <td className="p-2 sm:p-4 text-sm sm:text-base">{product?.category}</td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
-                              {product.regularPrice}
+                              {product?.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
-                              {product.stock ? "In Stock" : "Out of Stock"}
+                              {product?.stock ? "In Stock" : "Out of Stock"}
                             </td>
 
                             {/* Edit/Delete Buttons */}
@@ -715,7 +650,7 @@ const ManageProducts = () => {
                                 Edit
                               </button>
                               <button
-                                onClick={() => handleDelete(product.id)}
+                                onClick={() => handleDelete(product?._id)}
                                 className="bg-red-500 hover:bg-red-700 text-white text-xs sm:text-sm font-bold py-1 sm:py-2 px-2 sm:px-4 rounded"
                               >
                                 Delete
@@ -778,27 +713,27 @@ const ManageProducts = () => {
                     // Loop through products if they exist
                     productsTab.map((product) => (
                       <tr
-                        key={product.id}
+                        key={product._id}
                         className="border-b transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg rounded-lg"
                       >
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
                         </td>
 
                         {/* Editable fields if in edit mode */}
-                        {editMode === product.id ? (
+                        {editMode === product._id ? (
                           <>
                             {/* Product Name */}
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
                                 name="name"
-                                value={editProduct.name}
+                                value={editProduct?.name}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -809,7 +744,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="category"
-                                value={editProduct.category}
+                                value={editProduct?.category}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -820,7 +755,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="regularPrice"
-                                value={editProduct.regularPrice}
+                                value={editProduct?.regularPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -830,8 +765,8 @@ const ManageProducts = () => {
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
-                                name="offerPrice"
-                                value={editProduct.offerPrice}
+                                name="sellPrice"
+                                value={editProduct?.sellPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -842,7 +777,7 @@ const ManageProducts = () => {
                               <input
                                 type="checkbox"
                                 name="stock"
-                                checked={editProduct.stock}
+                                checked={editProduct?.stock}
                                 onChange={handleChange}
                                 className="w-4 h-4"
                               />
@@ -873,7 +808,7 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -888,7 +823,7 @@ const ManageProducts = () => {
                                 Edit
                               </button>
                               <button
-                                onClick={() => handleDelete(product.id)}
+                                onClick={() => handleDelete(product._id)}
                                 className="bg-red-500 hover:bg-red-700 text-white text-xs sm:text-sm font-bold py-1 sm:py-2 px-2 sm:px-4 rounded"
                               >
                                 Delete
@@ -951,27 +886,27 @@ const ManageProducts = () => {
                     // Loop through products if they exist
                     productsMobile.map((product) => (
                       <tr
-                        key={product.id}
+                        key={product._id}
                         className="border-b transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg rounded-lg"
                       >
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
                         </td>
 
                         {/* Editable fields if in edit mode */}
-                        {editMode === product.id ? (
+                        {editMode === product._id ? (
                           <>
                             {/* Product Name */}
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
                                 name="name"
-                                value={editProduct.name}
+                                value={editProduct?.name}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -982,7 +917,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="category"
-                                value={editProduct.category}
+                                value={editProduct?.category}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -993,7 +928,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="regularPrice"
-                                value={editProduct.regularPrice}
+                                value={editProduct?.regularPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1003,8 +938,8 @@ const ManageProducts = () => {
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
-                                name="offerPrice"
-                                value={editProduct.offerPrice}
+                                name="sellPrice"
+                                value={editProduct?.sellPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1015,7 +950,7 @@ const ManageProducts = () => {
                               <input
                                 type="checkbox"
                                 name="stock"
-                                checked={editProduct.stock}
+                                checked={editProduct?.stock}
                                 onChange={handleChange}
                                 className="w-4 h-4"
                               />
@@ -1046,7 +981,7 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -1061,7 +996,7 @@ const ManageProducts = () => {
                                 Edit
                               </button>
                               <button
-                                onClick={() => handleDelete(product.id)}
+                                onClick={() => handleDelete(product._id)}
                                 className="bg-red-500 hover:bg-red-700 text-white text-xs sm:text-sm font-bold py-1 sm:py-2 px-2 sm:px-4 rounded"
                               >
                                 Delete
@@ -1124,27 +1059,27 @@ const ManageProducts = () => {
                     // Loop through products if they exist
                     productsGame.map((product) => (
                       <tr
-                        key={product.id}
+                        key={product._id}
                         className="border-b transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg rounded-lg"
                       >
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
                         </td>
 
                         {/* Editable fields if in edit mode */}
-                        {editMode === product.id ? (
+                        {editMode === product._id ? (
                           <>
                             {/* Product Name */}
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
                                 name="name"
-                                value={editProduct.name}
+                                value={editProduct?.name}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1155,7 +1090,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="category"
-                                value={editProduct.category}
+                                value={editProduct?.category}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1166,7 +1101,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="regularPrice"
-                                value={editProduct.regularPrice}
+                                value={editProduct?.regularPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1176,8 +1111,8 @@ const ManageProducts = () => {
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
-                                name="offerPrice"
-                                value={editProduct.offerPrice}
+                                name="sellPrice"
+                                value={editProduct?.sellPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1188,7 +1123,7 @@ const ManageProducts = () => {
                               <input
                                 type="checkbox"
                                 name="stock"
-                                checked={editProduct.stock}
+                                checked={editProduct?.stock}
                                 onChange={handleChange}
                                 className="w-4 h-4"
                               />
@@ -1219,7 +1154,7 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -1234,7 +1169,7 @@ const ManageProducts = () => {
                                 Edit
                               </button>
                               <button
-                                onClick={() => handleDelete(product.id)}
+                                onClick={() => handleDelete(product._id)}
                                 className="bg-red-500 hover:bg-red-700 text-white text-xs sm:text-sm font-bold py-1 sm:py-2 px-2 sm:px-4 rounded"
                               >
                                 Delete
@@ -1297,27 +1232,27 @@ const ManageProducts = () => {
                     // Loop through products if they exist
                     productsDevice.map((product) => (
                       <tr
-                        key={product.id}
+                        key={product._id}
                         className="border-b transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg rounded-lg"
                       >
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
                         </td>
 
                         {/* Editable fields if in edit mode */}
-                        {editMode === product.id ? (
+                        {editMode === product._id ? (
                           <>
                             {/* Product Name */}
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
                                 name="name"
-                                value={editProduct.name}
+                                value={editProduct?.name}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1328,7 +1263,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="category"
-                                value={editProduct.category}
+                                value={editProduct?.category}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1339,7 +1274,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="regularPrice"
-                                value={editProduct.regularPrice}
+                                value={editProduct?.regularPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1349,8 +1284,8 @@ const ManageProducts = () => {
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
-                                name="offerPrice"
-                                value={editProduct.offerPrice}
+                                name="sellPrice"
+                                value={editProduct?.sellPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1361,7 +1296,7 @@ const ManageProducts = () => {
                               <input
                                 type="checkbox"
                                 name="stock"
-                                checked={editProduct.stock}
+                                checked={editProduct?.stock}
                                 onChange={handleChange}
                                 className="w-4 h-4"
                               />
@@ -1392,7 +1327,7 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -1407,7 +1342,7 @@ const ManageProducts = () => {
                                 Edit
                               </button>
                               <button
-                                onClick={() => handleDelete(product.id)}
+                                onClick={() => handleDelete(product._id)}
                                 className="bg-red-500 hover:bg-red-700 text-white text-xs sm:text-sm font-bold py-1 sm:py-2 px-2 sm:px-4 rounded"
                               >
                                 Delete
@@ -1470,27 +1405,27 @@ const ManageProducts = () => {
                     // Loop through products if they exist
                     productsData.map((product) => (
                       <tr
-                        key={product.id}
+                        key={product._id}
                         className="border-b transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg rounded-lg"
                       >
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
                         </td>
 
                         {/* Editable fields if in edit mode */}
-                        {editMode === product.id ? (
+                        {editMode === product._id ? (
                           <>
                             {/* Product Name */}
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
                                 name="name"
-                                value={editProduct.name}
+                                value={editProduct?.name}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1501,7 +1436,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="category"
-                                value={editProduct.category}
+                                value={editProduct?.category}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1512,7 +1447,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="regularPrice"
-                                value={editProduct.regularPrice}
+                                value={editProduct?.regularPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1522,8 +1457,8 @@ const ManageProducts = () => {
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
-                                name="offerPrice"
-                                value={editProduct.offerPrice}
+                                name="sellPrice"
+                                value={editProduct?.sellPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1534,7 +1469,7 @@ const ManageProducts = () => {
                               <input
                                 type="checkbox"
                                 name="stock"
-                                checked={editProduct.stock}
+                                checked={editProduct?.stock}
                                 onChange={handleChange}
                                 className="w-4 h-4"
                               />
@@ -1565,7 +1500,7 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -1580,7 +1515,7 @@ const ManageProducts = () => {
                                 Edit
                               </button>
                               <button
-                                onClick={() => handleDelete(product.id)}
+                                onClick={() => handleDelete(product._id)}
                                 className="bg-red-500 hover:bg-red-700 text-white text-xs sm:text-sm font-bold py-1 sm:py-2 px-2 sm:px-4 rounded"
                               >
                                 Delete
@@ -1643,27 +1578,27 @@ const ManageProducts = () => {
                     // Loop through products if they exist
                     productsHeadphone.map((product) => (
                       <tr
-                        key={product.id}
+                        key={product._id}
                         className="border-b transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg rounded-lg"
                       >
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                            src={product.image}
+                           src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
                         </td>
 
                         {/* Editable fields if in edit mode */}
-                        {editMode === product.id ? (
+                        {editMode === product._id ? (
                           <>
                             {/* Product Name */}
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
                                 name="name"
-                                value={editProduct.name}
+                                value={editProduct?.name}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1674,7 +1609,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="category"
-                                value={editProduct.category}
+                                value={editProduct?.category}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1685,7 +1620,7 @@ const ManageProducts = () => {
                               <input
                                 type="text"
                                 name="regularPrice"
-                                value={editProduct.regularPrice}
+                                value={editProduct?.regularPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1695,8 +1630,8 @@ const ManageProducts = () => {
                             <td className="p-2 sm:p-4">
                               <input
                                 type="text"
-                                name="offerPrice"
-                                value={editProduct.offerPrice}
+                                name="sellPrice"
+                                value={editProduct?.sellPrice}
                                 onChange={handleChange}
                                 className="w-full p-1 border rounded"
                               />
@@ -1707,7 +1642,7 @@ const ManageProducts = () => {
                               <input
                                 type="checkbox"
                                 name="stock"
-                                checked={editProduct.stock}
+                                checked={editProduct?.stock}
                                 onChange={handleChange}
                                 className="w-4 h-4"
                               />
@@ -1738,7 +1673,7 @@ const ManageProducts = () => {
                               {product.regularPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
-                              {product.offerPrice}
+                              {product?.sellPrice}
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -1753,7 +1688,7 @@ const ManageProducts = () => {
                                 Edit
                               </button>
                               <button
-                                onClick={() => handleDelete(product.id)}
+                                onClick={() => handleDelete(product._id)}
                                 className="bg-red-500 hover:bg-red-700 text-white text-xs sm:text-sm font-bold py-1 sm:py-2 px-2 sm:px-4 rounded"
                               >
                                 Delete
