@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
 
 const AddProducts = () => {
-  const axiosSecure = useAxiosSecure()
+  const [loader, setLoader] = useState(false);
+  const axiosSecure = useAxiosSecure();
   const [product, setProduct] = useState({
     name: "",
     rate: "",
@@ -26,17 +27,7 @@ const AddProducts = () => {
   const [featureImage, setFeatureImage] = useState(null);
   const [galleryImages, setGalleryImages] = useState([]);
 
-  const categories = [
-    "Laptop",
-    "Camera",
-    "Watch",
-    "Tab",
-    "Data",
-    "Device",
-    "Game",
-    "Mobile",
-    "Headphone",
-  ];
+  const categories = ["Laptop", "Camera", "Watch", "Tab", "Game", "Mobile", "Headphone"];
 
   const handleInputChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -66,6 +57,7 @@ const AddProducts = () => {
   };
 
   const handleSubmit = async (e) => {
+    setLoader(true);
     e.preventDefault();
 
     // Upload feature image
@@ -82,17 +74,42 @@ const AddProducts = () => {
       galleryImages: galleryImageUrls,
     };
 
-    console.log(productData);
-
     // Make API call to add product
     try {
-      await axiosSecure.post("/products/add", productData);
-      alert("Product added successfully!");
-      toast.success('Product added successfully!')
+      await axiosSecure.post("/products/add", productData).then((res) => {
+        if (res?.status == 200) {
+          toast.success("Successfully Make admin");
+          setLoader(false);
+        }
+      });
     } catch (error) {
       console.error("Failed to add product:", error);
       alert("Failed to add product.");
+      setLoader(false);
     }
+
+    setProduct({
+      name: "",
+      rate: "",
+      regularPrice: "",
+      sellPrice: "",
+      brand: "",
+      modelName: "",
+      screenSize: "",
+      driveSize: "",
+      ram: "",
+      processor: "",
+      color: "",
+      gpuBrand: "",
+      KeyboardType: "",
+      category: "Laptop",
+      stock: true,
+      TouchPad: "",
+      WebCam: "",
+      Speaker: "",
+      BatteryCapacity: "",
+      WarrantyDetails: "",
+    });
   };
   return (
     <div className="container mx-auto p-4 sm:p-6">
@@ -101,6 +118,23 @@ const AddProducts = () => {
       {/* Breadcrumb end  */}
       <h2 className="text-2xl font-bold mb-6">Add New Product</h2>
       <form onSubmit={handleSubmit}>
+        {/* Category */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-semibold mb-2">Product Category</label>
+          <select
+            name="category"
+            value={product.category}
+            onChange={handleInputChange}
+            className="w-full p-2 border rounded"
+            required
+          >
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
         {/* Product Name */}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">Product Name</label>
@@ -148,7 +182,6 @@ const AddProducts = () => {
               value={product.sellPrice}
               onChange={handleInputChange}
               className="w-full p-2 border rounded"
-              required
             />
           </div>
         </div>
@@ -181,50 +214,57 @@ const AddProducts = () => {
 
         {/* Specifications */}
         <div className="grid grid-cols-2 gap-4">
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Screen Size</label>
-            <input
-              type="text"
-              name="screenSize"
-              value={product.screenSize}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Drive Size</label>
-            <input
-              type="text"
-              name="driveSize"
-              value={product.driveSize}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">RAM</label>
-            <input
-              type="text"
-              name="ram"
-              value={product.ram}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Processor</label>
-            <input
-              type="text"
-              name="processor"
-              value={product.processor}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
+          {(product.category === "Laptop" ||
+            product.category === "Tab" ||
+            product.category === "Mobile" ||
+            product.category === "Camera") && (
+            <div className="mb-4">
+              <label className="block text-gray-700 font-semibold mb-2">Drive Size</label>
+              <input
+                type="text"
+                name="driveSize"
+                value={product.driveSize}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+            </div>
+          )}
+
+          {(product.category === "Laptop" ||
+            product.category === "Tab" ||
+            product.category === "Mobile" ||
+            product.category === "Watch") && (
+            <div className="mb-4">
+              <label className="block text-gray-700 font-semibold mb-2">RAM</label>
+              <input
+                type="text"
+                name="ram"
+                value={product.ram}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+            </div>
+          )}
+
+          {(product.category === "Laptop" ||
+            product.category === "Tab" ||
+            product.category === "Mobile" ||
+            product.category === "Camera") && (
+            <div className="mb-4">
+              <label className="block text-gray-700 font-semibold mb-2">Processor</label>
+              <input
+                type="text"
+                name="processor"
+                value={product.processor}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+            </div>
+          )}
+
           <div className="mb-4">
             <label className="block text-gray-700 font-semibold mb-2">Color</label>
             <input
@@ -236,35 +276,109 @@ const AddProducts = () => {
               required
             />
           </div>
+          {(product.category === "Laptop" ||
+            product.category === "Tab" ||
+            product.category === "Mobile" ||
+            product.category === "Camera") && (
+            <div className="mb-4">
+              <label className="block text-gray-700 font-semibold mb-2">GPU Brand</label>
+              <input
+                type="text"
+                name="gpuBrand"
+                value={product.gpuBrand}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+            </div>
+          )}
+
+          {product.category === "Laptop" && (
+            <div className="mb-4">
+              <label className="block text-gray-700 font-semibold mb-2">Keyboard Type</label>
+              <input
+                type="text"
+                name="KeyboardType"
+                value={product.KeyboardType}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+            </div>
+          )}
+          {product.category === "Laptop" && (
+            <div className="mb-4">
+              <label className="block text-gray-700 font-semibold mb-2">WebCam</label>
+              <input
+                type="text"
+                name="WebCam"
+                value={product.WebCam}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+            </div>
+          )}
+
           <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">GPU Brand</label>
+            <label className="block text-gray-700 font-semibold mb-2">Battery Capacity</label>
             <input
               type="text"
-              name="gpuBrand"
-              value={product.gpuBrand}
+              name="BatteryCapacity"
+              value={product.BatteryCapacity}
               onChange={handleInputChange}
               className="w-full p-2 border rounded"
               required
             />
           </div>
-        </div>
 
-        {/* Category */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Product Category</label>
-          <select
-            name="category"
-            value={product.category}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded"
-            required
-          >
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+          {(product.category === "Laptop" ||
+            product.category === "Tab" ||
+            product.category === "Mobile" ||
+            product.category === "Watch") && (
+            <div className="mb-4">
+              <label className="block text-gray-700 font-semibold mb-2">Speaker</label>
+              <input
+                type="text"
+                name="Speaker"
+                value={product.Speaker}
+                onChange={handleInputChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+            </div>
+          )}
+
+          <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">Warranty Details</label>
+            <input
+              type="text"
+              name="WarrantyDetails"
+              value={product.WarrantyDetails}
+              onChange={handleInputChange}
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
+
+          {(product.category === "Laptop" ||
+            product.category === "Tab" ||
+            product.category === "Camera" ||
+            product.category === "Watch") && (
+            <div className="mb-4">
+              <label className="block text-gray-700 font-semibold mb-2">TouchPad</label>
+              <select
+                name="TouchPad"
+                value={product.TouchPad}
+                onChange={(e) => setProduct({ ...product, TouchPad: e.target.value === "true" })}
+                className="w-full p-2 border rounded"
+                required
+              >
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          )}
         </div>
 
         {/* Stock */}
@@ -305,12 +419,21 @@ const AddProducts = () => {
         </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
-        >
-          Add Product
-        </button>
+        {loader ? (
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
+          >
+            <span className="loading loading-dots loading-lg"></span>
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
+          >
+            Add Product
+          </button>
+        )}
       </form>
     </div>
   );
