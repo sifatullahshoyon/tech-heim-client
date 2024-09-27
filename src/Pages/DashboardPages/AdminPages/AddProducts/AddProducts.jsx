@@ -27,17 +27,7 @@ const AddProducts = () => {
   const [featureImage, setFeatureImage] = useState(null);
   const [galleryImages, setGalleryImages] = useState([]);
 
-  const categories = [
-    "Laptop",
-    "Camera",
-    "Watch",
-    "Tab",
-    "Data",
-    "Device",
-    "Game",
-    "Mobile",
-    "Headphone",
-  ];
+  const categories = ["Laptop", "Camera", "Watch", "Tab", "Game", "Mobile", "Headphone"];
 
   const handleInputChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -169,7 +159,6 @@ const AddProducts = () => {
               value={product.sellPrice}
               onChange={handleInputChange}
               className="w-full p-2 border rounded"
-              required
             />
           </div>
         </div>
