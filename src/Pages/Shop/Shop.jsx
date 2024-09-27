@@ -2170,7 +2170,7 @@ const Shop = () => {
 
           {/*showing product  start */}
           {activeTab === "Laptop" && (
-            <div className="mt-8 md:mt-10 lg:mt-12">
+            <div className="mt-[30px]">
               {productsLaptop?.length > 0 ? (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 ">
                   {productsLaptop?.map((pc, i) => (
@@ -2179,7 +2179,8 @@ const Shop = () => {
                 </div>
               ) : (
                 <div className="flex justify-center items-center h-32">
-                  <p className="text-center text-gray-500 text-base md:text-lg lg:text-xl">
+                  {" "}
+                  <p className="text-center text-[30px] font-bold text-gray-500">
                     No products available
                   </p>
                 </div>
