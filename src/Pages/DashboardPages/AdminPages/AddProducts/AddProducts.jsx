@@ -112,6 +112,23 @@ const AddProducts = () => {
       {/* Breadcrumb end  */}
       <h2 className="text-2xl font-bold mb-6">Add New Product</h2>
       <form onSubmit={handleSubmit}>
+        {/* Category */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-semibold mb-2">Product Category</label>
+          <select
+            name="category"
+            value={product.category}
+            onChange={handleInputChange}
+            className="w-full p-2 border rounded"
+            required
+          >
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
         {/* Product Name */}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">Product Name</label>
@@ -257,24 +274,6 @@ const AddProducts = () => {
               required
             />
           </div>
-        </div>
-
-        {/* Category */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Product Category</label>
-          <select
-            name="category"
-            value={product.category}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded"
-            required
-          >
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
         </div>
 
         {/* Stock */}
