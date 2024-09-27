@@ -44,7 +44,6 @@ const Shop = () => {
 
   const [products, setProducts] = useState([]);
 
-  
   const axiosPublic = useAxiosPublic();
 
   // tab category filter state
@@ -83,6 +82,47 @@ const Shop = () => {
   const uniqueGpuBrandForWatch = [...new Set(productsWatch?.map((item) => item?.gpuBrand))];
   const uniqueProcessorForWatch = [...new Set(productsWatch?.map((item) => item?.processor))];
   const uniqueScreenSizeForWatch = [...new Set(productsWatch?.map((item) => item?.screenSize))];
+
+  // Use Set to store unique brand names,color,ram,driveSize,gpuBrand,processor,screenSize for Tab
+  const uniqueBrandsForTab = [...new Set(productsTab?.map((item) => item?.brand))];
+  const uniqueColorsForTab = [...new Set(productsTab?.map((item) => item?.color))];
+  const uniqueRamsForTab = [...new Set(productsTab?.map((item) => item?.ram))];
+  const uniqueDriveSizeForTab = [...new Set(productsTab?.map((item) => item?.driveSize))];
+  const uniqueGpuBrandForTab = [...new Set(productsTab?.map((item) => item?.gpuBrand))];
+  const uniqueProcessorForTab = [...new Set(productsTab?.map((item) => item?.processor))];
+  const uniqueScreenSizeForTab = [...new Set(productsTab?.map((item) => item?.screenSize))];
+
+  // Use Set to store unique brand names,color,ram,driveSize,gpuBrand,processor,screenSize for Mobile
+  const uniqueBrandsForMobile = [...new Set(productsMobile?.map((item) => item?.brand))];
+  const uniqueColorsForMobile = [...new Set(productsMobile?.map((item) => item?.color))];
+  const uniqueRamsForMobile = [...new Set(productsMobile?.map((item) => item?.ram))];
+  const uniqueDriveSizeForMobile = [...new Set(productsMobile?.map((item) => item?.driveSize))];
+  const uniqueGpuBrandForMobile = [...new Set(productsMobile?.map((item) => item?.gpuBrand))];
+  const uniqueProcessorForMobile = [...new Set(productsMobile?.map((item) => item?.processor))];
+  const uniqueScreenSizeForMobile = [...new Set(productsMobile?.map((item) => item?.screenSize))];
+
+  // Use Set to store unique brand names,color,ram,driveSize,gpuBrand,processor,screenSize for Game
+  const uniqueBrandsForGame = [...new Set(productsGame?.map((item) => item?.brand))];
+  const uniqueColorsForGame = [...new Set(productsGame?.map((item) => item?.color))];
+  const uniqueRamsForGame = [...new Set(productsGame?.map((item) => item?.ram))];
+  const uniqueDriveSizeForGame = [...new Set(productsGame?.map((item) => item?.driveSize))];
+  const uniqueGpuBrandForGame = [...new Set(productsGame?.map((item) => item?.gpuBrand))];
+  const uniqueProcessorForGame = [...new Set(productsGame?.map((item) => item?.processor))];
+  const uniqueScreenSizeForGame = [...new Set(productsGame?.map((item) => item?.screenSize))];
+  // Use Set to store unique brand names,color,ram,driveSize,gpuBrand,processor,screenSize for Headphone
+  const uniqueBrandsForHeadphone = [...new Set(productsHeadphone?.map((item) => item?.brand))];
+  const uniqueColorsForHeadphone = [...new Set(productsHeadphone?.map((item) => item?.color))];
+  const uniqueRamsForHeadphone = [...new Set(productsHeadphone?.map((item) => item?.ram))];
+  const uniqueDriveSizeForHeadphone = [
+    ...new Set(productsHeadphone?.map((item) => item?.driveSize)),
+  ];
+  const uniqueGpuBrandForHeadphone = [...new Set(productsHeadphone?.map((item) => item?.gpuBrand))];
+  const uniqueProcessorForHeadphone = [
+    ...new Set(productsHeadphone?.map((item) => item?.processor)),
+  ];
+  const uniqueScreenSizeForHeadphone = [
+    ...new Set(productsHeadphone?.map((item) => item?.screenSize)),
+  ];
 
   // Function to fetch all products and update state initial call
   const fetchProducts = async () => {
@@ -242,7 +282,7 @@ const Shop = () => {
 
           <button
             onClick={() => {
-              setActiveTab("Watch");
+              handleClearAll();
               setActiveTab("Tab");
             }}
             className={`cursor-pointer px-[15px] py-[8px] ${
@@ -264,7 +304,7 @@ const Shop = () => {
           <button
             onClick={() => {
               setActiveTab("Mobile");
-              setActiveTab("Watch");
+              handleClearAll();
             }}
             className={`cursor-pointer px-[15px] py-[8px] ${
               activeTab === "Mobile" ? "active underline text-[#0C68F4]" : "text-[#444444]"
@@ -285,7 +325,7 @@ const Shop = () => {
           <button
             onClick={() => {
               setActiveTab("Game");
-              setActiveTab("Watch");
+              handleClearAll();
             }}
             className={`cursor-pointer px-[15px] py-[8px] ${
               activeTab === "Game" ? "active underline text-[#0C68F4]" : "text-[#444444]"
@@ -306,7 +346,7 @@ const Shop = () => {
           <button
             onClick={() => {
               setActiveTab("Headphones");
-              setActiveTab("Watch");
+              handleClearAll();
             }}
             className={`cursor-pointer px-[15px] py-[8px] ${
               activeTab === "Headphones" ? "active underline text-[#0C68F4]" : "text-[#444444]"
@@ -1102,6 +1142,998 @@ const Shop = () => {
                   >
                     <div>
                       {uniqueScreenSizeForCamera?.map((screenSize) => (
+                        <div className="form-control" key={screenSize}>
+                          <label className="label cursor-pointer px-[20px]">
+                            <p className="label-text text-[20px] font-light">{screenSize} </p>
+                            <input
+                              type="checkbox"
+                              className="checkbox"
+                              checked={selectedScreenSize.includes(screenSize)}
+                              onChange={() => handleScreenChange(screenSize)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                {/* filter with Screen Size end */}
+              </div>
+            )}
+            {/* Tab filter sidebar */}
+            {activeTab === "Tab" && (
+              <div>
+                {/* Filter with Brand */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setBrand(!brand)}
+                    className="text-lg lg:text-xl font-light w-full border-b border-t"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Brand</p>
+                      {brand ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueBrandsForTab?.map((brandName) => (
+                        <div key={brandName} className="form-control mb-2">
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{brandName}</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedBrands.includes(brandName)}
+                              onChange={() => handleBrandChange(brandName)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with Color */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setColor(!color)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Color</p>
+                      {color ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueColorsForTab?.map((colorName) => (
+                        <div key={colorName} className="form-control mb-2">
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{colorName}</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedColors.includes(colorName)}
+                              onChange={() => handleColorChange(colorName)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with RAM */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setRam(!ram)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>RAM</p>
+                      {ram ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueRamsForTab?.map((ramSize) => (
+                        <div className="form-control mb-2" key={ramSize}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{ramSize} GB</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedRamSizes.includes(ramSize)}
+                              onChange={() => handleRamChange(ramSize)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with Drive Size */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setDrive(!drive)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Drive Size</p>
+                      {drive ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueDriveSizeForTab?.map((driveSize) => (
+                        <div className="form-control mb-2" key={driveSize}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">
+                              {driveSize} GB
+                            </p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedDriveSizes.includes(driveSize)}
+                              onChange={() => handleDriveChange(driveSize)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with GPU Brand */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setGpu(!gpu)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>GPU Brand</p>
+                      {gpu ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueGpuBrandForTab?.map((gpuBrand) => (
+                        <div className="form-control mb-2" key={gpuBrand}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{gpuBrand}</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedGpuBrands.includes(gpuBrand)}
+                              onChange={() => handleGpuChange(gpuBrand)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with Processor */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setProcessor(!processor)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Processor</p>
+                      {processor ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueProcessorForTab?.map((processorType) => (
+                        <div className="form-control mb-2" key={processorType}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">
+                              {processorType}
+                            </p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedProcessor.includes(processorType)}
+                              onChange={() => handleProcessorChange(processorType)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                {/* filter with Processor end */}
+
+                {/* filter with Screen Size start */}
+                <div className=" ">
+                  <button
+                    onClick={() => setScreen(!screen)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Screen Size</p>
+                      {screen ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueScreenSizeForTab?.map((screenSize) => (
+                        <div className="form-control" key={screenSize}>
+                          <label className="label cursor-pointer px-[20px]">
+                            <p className="label-text text-[20px] font-light">{screenSize} </p>
+                            <input
+                              type="checkbox"
+                              className="checkbox"
+                              checked={selectedScreenSize.includes(screenSize)}
+                              onChange={() => handleScreenChange(screenSize)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                {/* filter with Screen Size end */}
+              </div>
+            )}
+            {/* Mobile filter sidebar */}
+            {activeTab === "Mobile" && (
+              <div>
+                {/* Filter with Brand */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setBrand(!brand)}
+                    className="text-lg lg:text-xl font-light w-full border-b border-t"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Brand</p>
+                      {brand ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueBrandsForMobile?.map((brandName) => (
+                        <div key={brandName} className="form-control mb-2">
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{brandName}</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedBrands.includes(brandName)}
+                              onChange={() => handleBrandChange(brandName)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with Color */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setColor(!color)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Color</p>
+                      {color ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueColorsForMobile?.map((colorName) => (
+                        <div key={colorName} className="form-control mb-2">
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{colorName}</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedColors.includes(colorName)}
+                              onChange={() => handleColorChange(colorName)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with RAM */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setRam(!ram)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>RAM</p>
+                      {ram ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueRamsForMobile?.map((ramSize) => (
+                        <div className="form-control mb-2" key={ramSize}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{ramSize} GB</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedRamSizes.includes(ramSize)}
+                              onChange={() => handleRamChange(ramSize)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with Drive Size */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setDrive(!drive)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Drive Size</p>
+                      {drive ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueDriveSizeForMobile?.map((driveSize) => (
+                        <div className="form-control mb-2" key={driveSize}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">
+                              {driveSize} GB
+                            </p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedDriveSizes.includes(driveSize)}
+                              onChange={() => handleDriveChange(driveSize)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with GPU Brand */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setGpu(!gpu)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>GPU Brand</p>
+                      {gpu ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueGpuBrandForMobile?.map((gpuBrand) => (
+                        <div className="form-control mb-2" key={gpuBrand}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{gpuBrand}</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedGpuBrands.includes(gpuBrand)}
+                              onChange={() => handleGpuChange(gpuBrand)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with Processor */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setProcessor(!processor)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Processor</p>
+                      {processor ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueProcessorForMobile?.map((processorType) => (
+                        <div className="form-control mb-2" key={processorType}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">
+                              {processorType}
+                            </p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedProcessor.includes(processorType)}
+                              onChange={() => handleProcessorChange(processorType)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                {/* filter with Processor end */}
+
+                {/* filter with Screen Size start */}
+                <div className=" ">
+                  <button
+                    onClick={() => setScreen(!screen)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Screen Size</p>
+                      {screen ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueScreenSizeForMobile?.map((screenSize) => (
+                        <div className="form-control" key={screenSize}>
+                          <label className="label cursor-pointer px-[20px]">
+                            <p className="label-text text-[20px] font-light">{screenSize} </p>
+                            <input
+                              type="checkbox"
+                              className="checkbox"
+                              checked={selectedScreenSize.includes(screenSize)}
+                              onChange={() => handleScreenChange(screenSize)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                {/* filter with Screen Size end */}
+              </div>
+            )}
+            {/* Game filter sidebar */}
+            {activeTab === "Game" && (
+              <div>
+                {/* Filter with Brand */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setBrand(!brand)}
+                    className="text-lg lg:text-xl font-light w-full border-b border-t"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Brand</p>
+                      {brand ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueBrandsForGame?.map((brandName) => (
+                        <div key={brandName} className="form-control mb-2">
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{brandName}</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedBrands.includes(brandName)}
+                              onChange={() => handleBrandChange(brandName)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with Color */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setColor(!color)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Color</p>
+                      {color ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueColorsForGame?.map((colorName) => (
+                        <div key={colorName} className="form-control mb-2">
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{colorName}</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedColors.includes(colorName)}
+                              onChange={() => handleColorChange(colorName)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with RAM */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setRam(!ram)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>RAM</p>
+                      {ram ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueRamsForGame?.map((ramSize) => (
+                        <div className="form-control mb-2" key={ramSize}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{ramSize} GB</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedRamSizes.includes(ramSize)}
+                              onChange={() => handleRamChange(ramSize)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with Drive Size */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setDrive(!drive)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Drive Size</p>
+                      {drive ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueDriveSizeForGame?.map((driveSize) => (
+                        <div className="form-control mb-2" key={driveSize}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">
+                              {driveSize} GB
+                            </p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedDriveSizes.includes(driveSize)}
+                              onChange={() => handleDriveChange(driveSize)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with GPU Brand */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setGpu(!gpu)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>GPU Brand</p>
+                      {gpu ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueGpuBrandForGame?.map((gpuBrand) => (
+                        <div className="form-control mb-2" key={gpuBrand}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{gpuBrand}</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedGpuBrands.includes(gpuBrand)}
+                              onChange={() => handleGpuChange(gpuBrand)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with Processor */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setProcessor(!processor)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Processor</p>
+                      {processor ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueProcessorForGame?.map((processorType) => (
+                        <div className="form-control mb-2" key={processorType}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">
+                              {processorType}
+                            </p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedProcessor.includes(processorType)}
+                              onChange={() => handleProcessorChange(processorType)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                {/* filter with Processor end */}
+
+                {/* filter with Screen Size start */}
+                <div className=" ">
+                  <button
+                    onClick={() => setScreen(!screen)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Screen Size</p>
+                      {screen ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueScreenSizeForGame?.map((screenSize) => (
+                        <div className="form-control" key={screenSize}>
+                          <label className="label cursor-pointer px-[20px]">
+                            <p className="label-text text-[20px] font-light">{screenSize} </p>
+                            <input
+                              type="checkbox"
+                              className="checkbox"
+                              checked={selectedScreenSize.includes(screenSize)}
+                              onChange={() => handleScreenChange(screenSize)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                {/* filter with Screen Size end */}
+              </div>
+            )}
+            {/* Headphone filter sidebar */}
+            {activeTab === "Headphones" && (
+              <div>
+                {/* Filter with Brand */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setBrand(!brand)}
+                    className="text-lg lg:text-xl font-light w-full border-b border-t"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Brand</p>
+                      {brand ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueBrandsForHeadphone?.map((brandName) => (
+                        <div key={brandName} className="form-control mb-2">
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{brandName}</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedBrands.includes(brandName)}
+                              onChange={() => handleBrandChange(brandName)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with Color */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setColor(!color)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Color</p>
+                      {color ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueColorsForHeadphone?.map((colorName) => (
+                        <div key={colorName} className="form-control mb-2">
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{colorName}</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedColors.includes(colorName)}
+                              onChange={() => handleColorChange(colorName)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with RAM */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setRam(!ram)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>RAM</p>
+                      {ram ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueRamsForHeadphone?.map((ramSize) => (
+                        <div className="form-control mb-2" key={ramSize}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{ramSize} GB</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedRamSizes.includes(ramSize)}
+                              onChange={() => handleRamChange(ramSize)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with Drive Size */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setDrive(!drive)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Drive Size</p>
+                      {drive ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueDriveSizeForHeadphone?.map((driveSize) => (
+                        <div className="form-control mb-2" key={driveSize}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">
+                              {driveSize} GB
+                            </p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedDriveSizes.includes(driveSize)}
+                              onChange={() => handleDriveChange(driveSize)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with GPU Brand */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setGpu(!gpu)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>GPU Brand</p>
+                      {gpu ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueGpuBrandForHeadphone?.map((gpuBrand) => (
+                        <div className="form-control mb-2" key={gpuBrand}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">{gpuBrand}</p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedGpuBrands.includes(gpuBrand)}
+                              onChange={() => handleGpuChange(gpuBrand)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter with Processor */}
+                <div className="mb-4">
+                  <button
+                    onClick={() => setProcessor(!processor)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Processor</p>
+                      {processor ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueProcessorForHeadphone?.map((processorType) => (
+                        <div className="form-control mb-2" key={processorType}>
+                          <label className="label cursor-pointer flex items-center">
+                            <p className="label-text text-lg lg:text-xl uppercase">
+                              {processorType}
+                            </p>
+                            <input
+                              type="checkbox"
+                              className="checkbox ml-2"
+                              checked={selectedProcessor.includes(processorType)}
+                              onChange={() => handleProcessorChange(processorType)}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                {/* filter with Processor end */}
+
+                {/* filter with Screen Size start */}
+                <div className=" ">
+                  <button
+                    onClick={() => setScreen(!screen)}
+                    className="text-lg lg:text-xl font-light w-full border-b"
+                  >
+                    <div className="flex justify-between items-center py-2 lg:py-3">
+                      <p>Screen Size</p>
+                      {screen ? <MdOutlineArrowDropUp /> : <MdOutlineArrowDropDown />}
+                    </div>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                      screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                    }`}
+                  >
+                    <div>
+                      {uniqueScreenSizeForHeadphone?.map((screenSize) => (
                         <div className="form-control" key={screenSize}>
                           <label className="label cursor-pointer px-[20px]">
                             <p className="label-text text-[20px] font-light">{screenSize} </p>
