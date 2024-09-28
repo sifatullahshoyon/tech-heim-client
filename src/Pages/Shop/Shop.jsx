@@ -20,6 +20,7 @@ import Progress from "../../Components/Shared/Progress/Progress";
 import useAxiosPublic from "../../Components/Hooks/useAxiosPublic/useAxiosPublic";
 
 const Shop = () => {
+  const [sortOption, setSortOption] = useState("");
   //  Tab state
   const [activeTab, setActiveTab] = useState("Laptop");
   //  filter  state
@@ -141,6 +142,13 @@ const Shop = () => {
       const data = response.data;
       console.log(response);
 
+        // Apply sorting based on the selected option
+    if (sortOption === "asc") {
+      data.sort((a, b) => a.regularPrice - b.regularPrice);
+    } else if (sortOption === "desc") {
+      data.sort((a, b) => b.regularPrice - a.regularPrice);
+    }
+
       setProducts(data);
       setProductsLaptop(data.filter((cat) => cat.category === "Laptop"));
       setProductsCamera(data.filter((cat) => cat.category === "Camera"));
@@ -165,6 +173,7 @@ const Shop = () => {
     selectedGpuBrands,
     selectedProcessor,
     selectedScreenSize,
+    sortOption
   ]);
 
   //   filter option select function
@@ -2176,12 +2185,15 @@ const Shop = () => {
         <div className="w-full lg:w-3/4 p-4 lg:p-6">
           {/* sort start */}
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-end mb-4">
-            <select className="select select-bordered select-sm w-[200px] max-w-xs ">
+            <select
+              className="select select-bordered select-sm w-[200px] max-w-xs"
+              onChange={(e) => setSortOption(e.target.value)} // Handle change
+            >
               <option disabled selected>
                 Sort BY
               </option>
-              <option>Price: ascending </option>
-              <option>Price: descending </option>
+              <option value="asc">Price: ascending</option>
+              <option value="desc">Price: descending</option>
             </select>
           </div>
           {/* sort end */}
