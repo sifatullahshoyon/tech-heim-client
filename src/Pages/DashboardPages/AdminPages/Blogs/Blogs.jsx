@@ -1,11 +1,17 @@
-import React from 'react';
+import React from "react";
+import BlogsForm from "./BlogsForm/BlogsForm";
+import BlogsDataFecth from "./BlogsFetch/BlogsDataFecth";
 
 const Blogs = () => {
-    return (
-        <div>
-            <h1>This is blogs</h1>
-        </div>
-    );
+  return (
+    <>
+      <BlogsForm />
+
+      <div className="my-6">
+        <BlogsDataFecth />
+      </div>
+    </>
+  );
 };
 
 export default Blogs;
