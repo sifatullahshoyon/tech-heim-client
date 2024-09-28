@@ -36,7 +36,8 @@ const ProductCard = ({ pc }) => {
           <>
             <div className="w-[50px] h-[32px]  px-[6px] bg-[#FDDBC9] py-[4px] mt-[10px] rounded-r-[8px]">
               <p className="text-[16px] font-light text-[#F45E0C]">
-                {-((Math.round(regularPrice - sellPrice)) / 100)}%
+                {regularPrice > 0 &&
+                  Math.round(((regularPrice - sellPrice) / regularPrice) * 100) + "%"}
               </p>
             </div>
           </>
@@ -87,19 +88,13 @@ const ProductCard = ({ pc }) => {
           <div className="flex items-center justify-between">
             {sellPrice ? (
               <>
-                <del className="text-3xl font-bold text-gray-900 ">
-                  ${regularPrice}
-                </del>
+                <del className="text-3xl font-bold text-gray-900 ">${regularPrice}</del>
 
-                <span className="text-3xl font-bold text-gray-900 ">
-                  ${sellPrice}
-                </span>
+                <span className="text-3xl font-bold text-gray-900 ">${sellPrice}</span>
               </>
             ) : (
               <>
-                <span className="text-3xl font-bold text-gray-900 ">
-                  ${regularPrice}
-                </span>
+                <span className="text-3xl font-bold text-gray-900 ">${regularPrice}</span>
               </>
             )}
           </div>
