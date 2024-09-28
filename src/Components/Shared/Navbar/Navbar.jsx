@@ -19,7 +19,7 @@ const Navbar = () => {
   const handleLogeOut = () => {
     logOut()
       .then(() => {
-
+        toast.success('Successfully logOut')
       })
       .catch(error => {
         console.log(error)
@@ -240,14 +240,16 @@ const Navbar = () => {
                       </button>
                     </> :
                       <>
-                        <button
-                          className=""
-                          onClick={() =>
-                            document.getElementById("my_modal_6").showModal()
-                          }
-                        >
-                          Sign In
-                        </button>
+                        <Link to='/login'>
+                          <button
+                            className=""
+                          // onClick={() =>
+                          //   document.getElementById("my_modal_6").showModal()
+                          // }
+                          >
+                            Sign In
+                          </button>
+                        </Link>
 
                         {/* <button
                           className=""

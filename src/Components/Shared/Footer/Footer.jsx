@@ -3,7 +3,6 @@ import { IoLocationOutline, IoLogoLinkedin } from 'react-icons/io5';
 import { LuPhoneCall } from 'react-icons/lu';
 import { MdMarkEmailRead } from 'react-icons/md';
 import { FaFacebookSquare, FaTwitter, FaInstagram } from 'react-icons/fa';
-
 const Footer = () => {
     return (
         <div>
@@ -122,7 +121,6 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-
             {/* Lower Footer Section */}
             <footer className="bg-[#021736] text-gray-100 border-t border-base-300 px-6 py-4">
                 <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">

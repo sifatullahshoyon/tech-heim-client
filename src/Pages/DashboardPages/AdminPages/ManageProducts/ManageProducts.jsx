@@ -27,38 +27,38 @@ const ManageProducts = () => {
   const [productsTab, setProductsTab] = useState([]);
   const [productsMobile, setProductsMobile] = useState([]);
   const [productsGame, setProductsGame] = useState([]);
- 
+
   const [productsHeadphone, setProductsHeadphone] = useState([]);
 
   // get all   product details and make an API call
 
   // Function to fetch all products and update state initial call
-const fetchProducts = async () => {
-  try {
-    const response = await axiosSecure.get("/products/all");
-    const data = response.data;
+  const fetchProducts = async () => {
+    try {
+      const response = await axiosSecure.get("/products/all");
+      const data = response.data;
 
-    setProducts(data);
-    setProductsLaptop(data.filter((cat) => cat.category === "Laptop"));
-    setProductsCamera(data.filter((cat) => cat.category === "Camera"));
-    setProductsWatch(data.filter((cat) => cat.category === "Watch"));
-    setProductsTab(data.filter((cat) => cat.category === "Tab"));
-    setProductsMobile(data.filter((cat) => cat.category === "Mobile"));
-    setProductsGame(data.filter((cat) => cat.category === "Game"));
-    
-    setProductsHeadphone(data.filter((cat) => cat.category === "Headphone"));
-  } catch (error) {
-    console.error("Error fetching products:", error);
-  }
-};
+      setProducts(data);
+      setProductsLaptop(data.filter((cat) => cat.category === "Laptop"));
+      setProductsCamera(data.filter((cat) => cat.category === "Camera"));
+      setProductsWatch(data.filter((cat) => cat.category === "Watch"));
+      setProductsTab(data.filter((cat) => cat.category === "Tab"));
+      setProductsMobile(data.filter((cat) => cat.category === "Mobile"));
+      setProductsGame(data.filter((cat) => cat.category === "Game"));
 
-// Fetch products on component mount
-useEffect(() => {
-  fetchProducts();
-}, []);
+      setProductsHeadphone(data.filter((cat) => cat.category === "Headphone"));
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
 
- 
-  
+  // Fetch products on component mount
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+
+
   // Delete the  product details and make an API call
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this product?");
@@ -68,19 +68,20 @@ useEffect(() => {
         const response = await axiosSecure.delete(`/products/delete/${id}`)
           .then((res => {
             if (res?.data?.deletedCount > 0) {
-               fetchProducts(); // Call fetchProducts to refresh the product list
+              fetchProducts(); // Call fetchProducts to refresh the product list
               setProducts(products.filter((product) => product._id !== id));
               toast.success('Product deleted successfully!')
             }
           }))
 
-        
+
       } catch (error) {
         console.error("Error deleting product:", error);
-        alert("An error occurred while deleting the product.");
+        toast.error('An error occurred while deleting the product.');
       }
     }
   };
+
 
   // Handle edit button click
 
@@ -112,7 +113,7 @@ useEffect(() => {
         .then((res) => {
           console.log(res.data)
           if (res.data.modifiedCount > 0) {
-             fetchProducts(); // Call fetchProducts to refresh the product list
+            fetchProducts(); // Call fetchProducts to refresh the product list
             toast.success('Successfully Make admin')
           }
         })
@@ -195,7 +196,7 @@ useEffect(() => {
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                           src={product?.featureImage}
+                            src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
@@ -285,7 +286,7 @@ useEffect(() => {
                             </td>
                             <td className="p-2 sm:p-4 text-red-500 font-bold text-sm sm:text-base">
                               {product?.sellPrice}
-                               
+
                             </td>
                             <td className="p-2 sm:p-4 text-sm sm:text-base">
                               {product.stock ? "In Stock" : "Out of Stock"}
@@ -369,7 +370,7 @@ useEffect(() => {
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                           src={product?.featureImage}
+                            src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
@@ -715,7 +716,7 @@ useEffect(() => {
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                           src={product?.featureImage}
+                            src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
@@ -888,7 +889,7 @@ useEffect(() => {
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                           src={product?.featureImage}
+                            src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
@@ -1061,7 +1062,7 @@ useEffect(() => {
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                           src={product?.featureImage}
+                            src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
@@ -1182,9 +1183,9 @@ useEffect(() => {
             {/* product table */}
           </div>
 
-         
 
-         
+
+
 
           <input
             type="radio"
@@ -1238,7 +1239,7 @@ useEffect(() => {
                         {/* Product Image */}
                         <td className="p-2 sm:p-4">
                           <img
-                           src={product?.featureImage}
+                            src={product?.featureImage}
                             alt={product.name}
                             className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded"
                           />
