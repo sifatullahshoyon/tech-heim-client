@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Shared/Navbar/Navbar';
 import { FaBook, FaBuffer, FaHome, FaList, FaRegHeart, FaUsers, FaWindowRestore } from 'react-icons/fa';
 import { MdContactMail, MdFormatListBulletedAdd, MdMenuOpen, MdOutlineAddCard, MdOutlineNotificationsActive } from 'react-icons/md';
@@ -230,6 +230,13 @@ const DashboardLayout = () => {
 
                         {/* divider  */}
                         <div className="divider"></div>
+                        {/* Logout */}
+                        <Link to='/'
+                            className="btn ml-4 mb-2 rounded-lg bg-blue-600  text-white border-white border-2 hover:text-blue-600  hover:border-blue-600  hover:bg-white text-xl flex items-center "
+                        // onClick={handleSignOut}
+                        >
+                            <CgLogOut className='w-7 h-7 pt-1' /> Back to home
+                        </Link>
                         {/* Logout */}
                         <button
                             onClick={handleLogeOut}
