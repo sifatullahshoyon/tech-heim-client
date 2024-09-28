@@ -240,14 +240,16 @@ const Navbar = () => {
                       </button>
                     </> :
                       <>
+                        <Link to='/login'>
                         <button
                           className=""
-                          onClick={() =>
-                            document.getElementById("my_modal_6").showModal()
-                          }
+                          // onClick={() =>
+                          //   document.getElementById("my_modal_6").showModal()
+                          // }
                         >
                           Sign In
                         </button>
+                        </Link>
 
                         {/* <button
                           className=""

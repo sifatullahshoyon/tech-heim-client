@@ -15,7 +15,7 @@ const BestSellers = () => {
           </p>
         </div>
         {/* Divider */}
-        <div class="divider divider-neutral"></div>
+        <div className="divider divider-neutral"></div>
         {/* Sellers Card */}
         <SellersCard />
       </>

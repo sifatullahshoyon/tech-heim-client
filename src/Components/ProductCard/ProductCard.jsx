@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
 import p1 from "../../assets/image1.png";
 import line from "../../assets/Line.png";
 
-import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaRegStar, FaShoppingCart, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { IoIosArrowRoundForward } from "react-icons/io";
 const ProductCard = ({ pc }) => {
   console.log(pc);
 
@@ -34,7 +36,7 @@ const ProductCard = ({ pc }) => {
           <>
             <div className="w-[50px] h-[32px]  px-[6px] bg-[#FDDBC9] py-[4px] mt-[10px] rounded-r-[8px]">
               <p className="text-[16px] font-light text-[#F45E0C]">
-                {-((regularPrice - sellPrice) / 100) * 100}%
+                {-(( Math.round(regularPrice - sellPrice) ) / 100) * 100}%
               </p>
             </div>
           </>
@@ -46,7 +48,7 @@ const ProductCard = ({ pc }) => {
 
         <a href="#">
           <img
-            className="p-8 pb-0 rounded-t-lg transform transition-transform duration-300 hover:scale-110"
+            className="p-8 pb-0 w-[400px] rounded-t-lg transform transition-transform duration-300 hover:scale-110"
             src={featureImage}
             alt="product image"
           />
@@ -55,7 +57,7 @@ const ProductCard = ({ pc }) => {
         <div className="px-5 pb-5">
           <a href="#">
             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-              {name}
+              {name?.slice(0, 68)}...
             </h5>
           </a>
           <div className="flex items-center mt-2.5 mb-5">
@@ -100,12 +102,22 @@ const ProductCard = ({ pc }) => {
                 </span>
               </>
             )}
-            <a
-              href="#"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Add to cart
-            </a>
+          </div>
+          <div className="flex justify-evenly mt-[30px]">
+            <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              <Link className="flex items-center " to="">
+                {" "}
+                <FaShoppingCart className="mr-[5px]" />
+                <span>Add to cart</span>
+              </Link>
+            </button>
+            <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              <Link to={`/productDetails/${_id}`} className="flex items-center ">
+                {" "}
+                <span>View Details</span>
+                <IoIosArrowRoundForward className="mr-[5px]" />
+              </Link>
+            </button>
           </div>
         </div>
       </div>
