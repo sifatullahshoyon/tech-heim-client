@@ -24,7 +24,7 @@ const DashboardLayout = () => {
         if (successSignOut) {
             alert("Do you want to logout...?");
             toast.success("Successfully Logout");
-            // localStorage.removeItem('access-token');
+            // localStorage.removeItem('access- token');
         }
     }
 
