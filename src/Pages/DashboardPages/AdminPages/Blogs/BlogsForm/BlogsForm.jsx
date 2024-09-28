@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import useAxiosSecure from "../../../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
+import { toast } from "react-toastify";
 
 const BlogsForm = () => {
+  const axiosSecure = useAxiosSecure();
   const [formValues, setFormValues] = useState({
     title: "",
     description: "",
@@ -28,6 +31,11 @@ const BlogsForm = () => {
     e.preventDefault();
     console.log("Form Submitted:", formValues);
     // You can handle form submission here (e.g., send data to the server)
+    axiosSecure.post('/blogs/add', formValues)
+      .then((res) => {
+        console.log(res)
+        toast.success('Successfully added a blog')
+      })
   };
 
   return (
