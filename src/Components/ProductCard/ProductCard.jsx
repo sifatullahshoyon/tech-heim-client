@@ -36,7 +36,7 @@ const ProductCard = ({ pc }) => {
           <>
             <div className="w-[50px] h-[32px]  px-[6px] bg-[#FDDBC9] py-[4px] mt-[10px] rounded-r-[8px]">
               <p className="text-[16px] font-light text-[#F45E0C]">
-                {-(( Math.round(regularPrice - sellPrice) ) / 100) * 100}%
+                {-(( Math.round(regularPrice - sellPrice) ) / 100) }%
               </p>
             </div>
           </>

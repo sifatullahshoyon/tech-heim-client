@@ -124,11 +124,22 @@ const Shop = () => {
     ...new Set(productsHeadphone?.map((item) => item?.screenSize)),
   ];
 
-  // Function to fetch all products and update state initial call
   const fetchProducts = async () => {
     try {
-      const response = await axiosPublic.get("/products/all");
+      // Construct the query parameters from the selected filters
+      const params = {
+        brands: selectedBrands.length > 0 ? selectedBrands.join(",") : undefined,
+        ramSizes: selectedRamSizes.length > 0 ? selectedRamSizes.join(",") : undefined,
+        colors: selectedColors.length > 0 ? selectedColors.join(",") : undefined,
+        driveSizes: selectedDriveSizes.length > 0 ? selectedDriveSizes.join(",") : undefined,
+        gpuBrands: selectedGpuBrands.length > 0 ? selectedGpuBrands.join(",") : undefined,
+        processors: selectedProcessor.length > 0 ? selectedProcessor.join(",") : undefined,
+        screenSizes: selectedScreenSize.length > 0 ? selectedScreenSize.join(",") : undefined,
+      };
+
+      const response = await axiosPublic.get("/products/all", { params });
       const data = response.data;
+      console.log(response);
 
       setProducts(data);
       setProductsLaptop(data.filter((cat) => cat.category === "Laptop"));
@@ -137,7 +148,6 @@ const Shop = () => {
       setProductsTab(data.filter((cat) => cat.category === "Tab"));
       setProductsMobile(data.filter((cat) => cat.category === "Mobile"));
       setProductsGame(data.filter((cat) => cat.category === "Game"));
-
       setProductsHeadphone(data.filter((cat) => cat.category === "Headphone"));
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -147,7 +157,15 @@ const Shop = () => {
   // Fetch products on component mount
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [
+    selectedBrands,
+    selectedRamSizes,
+    selectedColors,
+    selectedDriveSizes,
+    selectedGpuBrands,
+    selectedProcessor,
+    selectedScreenSize,
+  ]);
 
   //   filter option select function
   const handleBrandChange = (brandName) => {
