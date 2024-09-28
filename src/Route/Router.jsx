@@ -29,6 +29,9 @@ import ManageBookings from "../Pages/DashboardPages/AdminPages/ManageBookings/Ma
 import AllUsers from "../Pages/DashboardPages/AdminPages/AllUsers/AllUsers";
 import Blogs from "../Pages/DashboardPages/AdminPages/Blogs/Blogs";
 import OrderStatus from "../Pages/DashboardPages/UserPages/Orders/OrderStatus/OrderStatus";
+import Login from "../Pages/Login/Login";
+import Regastration from "../Pages/Regastration/Regastration";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +78,14 @@ const router = createBrowserRouter([
       {
         path: "/aboutUs",
         element: <AboutUS />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/registration",
+        element: <Regastration />,
       },
     ],
   },
