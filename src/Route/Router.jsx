@@ -30,8 +30,8 @@ import AllUsers from "../Pages/DashboardPages/AdminPages/AllUsers/AllUsers";
 import Blogs from "../Pages/DashboardPages/AdminPages/Blogs/Blogs";
 import OrderStatus from "../Pages/DashboardPages/UserPages/Orders/OrderStatus/OrderStatus";
 import Login from "../Pages/Login/Login";
-import Regastration from "../Pages/Regastration/Regastration";
-import PrivateRoute from "./PrivateRoute";
+import Register from "../Pages/Register/Register";
+import PrivateRoute from '../Route/PrivateRoute'
 
 const router = createBrowserRouter([
   {
@@ -77,21 +77,21 @@ const router = createBrowserRouter([
       },
       {
         path: "/aboutUs",
-        element: <AboutUS />,
+        element: <PrivateRoute><AboutUS /></PrivateRoute>,
       },
       {
         path: "/login",
         element: <Login />,
       },
       {
-        path: "/registration",
-        element: <Regastration />,
+        path: "/register",
+        element: <Register />,
       },
     ],
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     children: [
       /////// Admin Route /////////
       {

@@ -1,9 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import useAuth from '../../../Hooks/useAuth/useAuth';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const GoogleLogin = () => {
     const { googleSignIn } = useAuth()
+    const { user } = useAuth()
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    //location pathname
+    const formLocation = location?.state?.from?.pathname || '/'
 
     const handleGoogleSignIn = () => {
         googleSignIn()
@@ -11,6 +18,12 @@ const GoogleLogin = () => {
                 console.log(result.user)
             })
     }
+
+    useEffect(() => {
+        if (user) {
+            navigate(formLocation, { replace: true })
+        }
+    }, [user, formLocation, navigate])
     return (
         <div>
             <button

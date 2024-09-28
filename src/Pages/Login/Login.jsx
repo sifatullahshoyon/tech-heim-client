@@ -1,13 +1,20 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import loginImg from "../../assets/form/login.gif";
 import GoogleLogin from "../../Components/Shared/SocalLogin/GoogleLogin/GoogleLogin";
 import FaceBookLogin from "../../Components/Shared/SocalLogin/FacebookLogin/FaceBookLogin";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
+import useAuth from "../../Components/Hooks/useAuth/useAuth";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false); // State for show password
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const formLocation = location?.state?.form?.pathname || '/'
+
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -19,6 +26,8 @@ const Login = () => {
       console.log(result.user);
     });
   };
+
+
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -33,6 +42,13 @@ const Login = () => {
   const handleCheckboxChange = (e) => {
     setIsChecked(e.target.checked); // Update the checkbox state
   };
+
+
+  useEffect(() => {
+    if (user) {
+      navigate(formLocation, { replace: true })
+    }
+  }, [user, formLocation, navigate])
   return (
     <div className="container mx-auto">
       <div className="flex  items-center justify-center mt-10  md:p-0">
@@ -96,9 +112,8 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={!isChecked} // Button is disabled if checkbox is unchecked
-                className={`mx-auto form-control w-full block rounded-md border px-5 py-2 uppercase shadow-lg duration-200 bg-blue-500 hover:bg-blue-700 text-white ${
-                  !isChecked ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+                className={`mx-auto form-control w-full block rounded-md border px-5 py-2 uppercase shadow-lg duration-200 bg-blue-500 hover:bg-blue-700 text-white ${!isChecked ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
               >
                 Submit
               </button>
@@ -106,7 +121,7 @@ const Login = () => {
             <p className="text-center text-sm">
               Don&apos;t have an account?
               <Link
-                to="/registration"
+                to="/register"
                 className="font-semibold underline text-blue-500"
               >
                 Signup

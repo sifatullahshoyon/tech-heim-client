@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import Regastration from '../../Pages/Regastration/Regastration';
 import Login from '../../Pages/Login/Login';
+import Register from '../../Pages/Register/Register';
 
 const Form = () => {
   const [signUp, setSignUp] = useState(false);
   return (
     <div>
-      {/* <Regastration /> */}
+      {/* <Register /> */}
       <Login />
     </div>
 

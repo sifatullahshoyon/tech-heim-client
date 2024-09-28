@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Shared/Navbar/Navbar';
 import { FaBook, FaBuffer, FaHome, FaList, FaRegHeart, FaUsers, FaWindowRestore } from 'react-icons/fa';
 import { MdContactMail, MdFormatListBulletedAdd, MdMenuOpen, MdOutlineAddCard, MdOutlineNotificationsActive } from 'react-icons/md';
@@ -16,7 +16,8 @@ import useAuth from '../Components/Hooks/useAuth/useAuth';
 const DashboardLayout = () => {
 
     const { user, logOut } = useAuth()
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+
     const handleLogeOut = () => {
 
         const successSignOut = logOut();
@@ -27,17 +28,18 @@ const DashboardLayout = () => {
         }
     }
 
-    // useEffect(() => {
-    //     if (!user) {
-    //         navigate('/')
-    //     }
-    // }, [user, navigate])
+    useEffect(() => {
+        if (!user) {
+            navigate('/')
+        }
+    }, [user, navigate])
 
     // admin
-    const isAdmin = user;
+    const isAdmin = true;
+    console.log(user)
     return (
         <div>
-            <Navbar></Navbar>
+            {/* <Navbar></Navbar> */}
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col ">
@@ -59,7 +61,7 @@ const DashboardLayout = () => {
                                     <img src={user?.photoURL || `${userPhoto}`} />{" "}
                                 </div>
                             </div>
-                            <h1 className="font-bold  pl-3 text-3xl">Jimmy smith</h1>
+                            <h1 className="font-bold  pl-3 text-2xl">{user?.displayName}</h1>
                         </div>
                         {/* Sidebar content here */}
                         {
