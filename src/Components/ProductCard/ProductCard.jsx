@@ -31,12 +31,12 @@ const ProductCard = ({ pc }) => {
 
   return (
     <div className="flex flex-grow">
-      <div className="w-full max-w-sm bg-white shadow-md border border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700 ">
+      <div className="w-full max-w-sm bg-white shadow-md border border-gray-200 rounded-lg    ">
         {sellPrice ? (
           <>
             <div className="w-[50px] h-[32px]  px-[6px] bg-[#FDDBC9] py-[4px] mt-[10px] rounded-r-[8px]">
               <p className="text-[16px] font-light text-[#F45E0C]">
-                {-(( Math.round(regularPrice - sellPrice) ) / 100) }%
+                {-((Math.round(regularPrice - sellPrice)) / 100)}%
               </p>
             </div>
           </>
@@ -46,17 +46,17 @@ const ProductCard = ({ pc }) => {
           </>
         )}
 
-        <a href="#">
+        <Link to={`/productDetails/${_id}`}>
           <img
             className="p-8 pb-0 w-[400px] rounded-t-lg transform transition-transform duration-300 hover:scale-110"
             src={featureImage}
             alt="product image"
           />
           <img className="p-2 rounded-t-lg" src={line} alt="product image" />
-        </a>
+        </Link>
         <div className="px-5 pb-5">
           <a href="#">
-            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="text-xl font-semibold tracking-tight text-gray-900 ">
               {name?.slice(0, 68)}...
             </h5>
           </a>
@@ -79,7 +79,7 @@ const ProductCard = ({ pc }) => {
                   <FaRegStar key={index} className="text-gray-300" />
                 ))}
             </div>
-            <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">
+            <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded  dark:text-blue-800 ms-3">
               {rate}
             </span>
           </div>
@@ -87,17 +87,17 @@ const ProductCard = ({ pc }) => {
           <div className="flex items-center justify-between">
             {sellPrice ? (
               <>
-                <del className="text-3xl font-bold text-gray-900 dark:text-white">
+                <del className="text-3xl font-bold text-gray-900 ">
                   ${regularPrice}
                 </del>
 
-                <span className="text-3xl font-bold text-gray-900 dark:text-white">
+                <span className="text-3xl font-bold text-gray-900 ">
                   ${sellPrice}
                 </span>
               </>
             ) : (
               <>
-                <span className="text-3xl font-bold text-gray-900 dark:text-white">
+                <span className="text-3xl font-bold text-gray-900 ">
                   ${regularPrice}
                 </span>
               </>
