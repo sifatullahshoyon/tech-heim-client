@@ -32,6 +32,8 @@ import OrderStatus from "../Pages/DashboardPages/UserPages/Orders/OrderStatus/Or
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from '../Route/PrivateRoute'
+import Carts from "../Pages/DashboardPages/UserPages/Carts/Carts";
+
 
 const router = createBrowserRouter([
   {
@@ -86,7 +88,11 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
-      }
+      },
+      {
+        path: "/carts",
+        element: <Carts />,
+      },
     ],
   },
   {
@@ -164,6 +170,10 @@ const router = createBrowserRouter([
         path: "contact-us",
         element: <ContactUs />,
       },
+      // {
+      //   path: "carts",
+      //   element: <Carts />,
+      // },
     ],
   },
 ]);
