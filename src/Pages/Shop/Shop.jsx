@@ -21,7 +21,7 @@ import useAxiosPublic from "../../Components/Hooks/useAxiosPublic/useAxiosPublic
 import useAuth from "../../Components/Hooks/useAuth/useAuth";
 
 const Shop = () => {
-  const { user } = useAuth();
+  const { user,fetchWishList } = useAuth();
 
   const userEmail = user?.email;
 
@@ -170,6 +170,7 @@ const Shop = () => {
   // Fetch products on component mount and wishlist
   useEffect(() => {
     fetchProducts();
+    fetchWishList();
   }, [
     selectedBrands,
     selectedRamSizes,

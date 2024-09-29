@@ -25,6 +25,7 @@ const AuthProvider = ({ children }) => {
     }
     const logOut = () => {
         setLoading(true)
+        setWistList([])
         return signOut(auth)
     }
     const googleSignIn = () => {
