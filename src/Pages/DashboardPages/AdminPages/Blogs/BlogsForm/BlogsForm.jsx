@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import useAxiosSecure from "../../../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const BlogsForm = () => {
+  const axiosSecure = useAxiosSecure();
   const [formValues, setFormValues] = useState({
     title: "",
     description: "",
@@ -14,20 +18,57 @@ const BlogsForm = () => {
     setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
-  const handleImageUpload = (e) => {
+  const uploadImageToImageBB = async (image) => {
+    const formData = new FormData();
+    formData.append("image", image);
+
+    try {
+      const response = await axios.post(
+        `https://api.imgbb.com/1/upload?key=97099935520e7352c4d76225795a2662`,
+        formData
+      );
+      return response.data.data.url;
+    } catch (error) {
+      console.error("Image upload failed:", error);
+    }
+  };
+
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormValues((prevValues) => ({
-        ...prevValues,
-        imgSrc: URL.createObjectURL(file),
-      }));
+      try {
+        const imageUrl = await uploadImageToImageBB(file);
+        setFormValues((prevValues) => ({ ...prevValues, imgSrc: imageUrl }));
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        toast.error("Failed to upload image");
+      }
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Submitted:", formValues);
-    // You can handle form submission here (e.g., send data to the server)
+    axiosSecure
+      .post("/blogs/add", formValues)
+      .then((res) => {
+        console.log(res);
+        toast.success("Successfully added a blog");
+        // Clear all input fields after successful submission
+        setFormValues({
+          title: "",
+          description: "",
+          date: "August 28, 2023",
+          timeRead: "3 min read",
+          imgSrc: "",
+        });
+        // Clear the file input
+        e.target.reset();
+      })
+      .catch((error) => {
+        console.error("Error adding blog:", error);
+        toast.error("Failed to add blog");
+      });
   };
 
   return (

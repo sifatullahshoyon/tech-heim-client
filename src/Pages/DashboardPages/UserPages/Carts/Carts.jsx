@@ -1,17 +1,35 @@
 import React from "react";
 import MenuShoppingCart from "../../../../Components/MenuShoppingCart/MenuShoppingCart";
 import NewProducts from "../../../Home/NewProducts/NewProducts";
+import { IoCartSharp } from "react-icons/io5";
+import { TbTruckDelivery } from "react-icons/tb";
+import { MdOutlinePayment } from "react-icons/md";
+import { Link, useLocation } from "react-router-dom";
 import CalculatedPrice from "../../../../Components/Shared/Price/CalculatedPrice";
 import GrandTotal from "../../../../Components/Shared/Price/GrandTotal";
 
 const Carts = () => {
+  const location = useLocation();
+  const isCarsPage = location?.pathname?.includes("carts");
   return (
     <div className="container mx-auto px-5">
       {/* Tabs */}
       <div className="flex justify-center items-center gap-5 my-12">
-        <p>Cart</p>
-        <p>checkout</p>
-        <p>payment</p>
+        <p>
+          <IoCartSharp
+            className={`w-8 p-1 h-8 text-xl border rounded-full ${
+              isCarsPage ? "text-blue-600" : "text-[#9E9E9E]"
+            }`}
+          />
+        </p>
+        <div className="divider w-14 divider-neutral"></div>
+        <p>
+          <TbTruckDelivery className="w-6 h-6" />
+        </p>
+        <div className="divider w-14 divider-neutral"></div>
+        <p>
+          <MdOutlinePayment className="w-6 h-6" />
+        </p>
       </div>
       {/* Cart Detailes */}
       <div className="lg:flex justify-around gap-5">
@@ -21,32 +39,8 @@ const Carts = () => {
           <h1 className="text-2xl text-black font-normal pb-4">
             Payment Details
           </h1>
-          {/* <div>
-            <div className="flex justify-between mb-2">
-              <p className="text-[#717171] text-sm">Subtotal</p>
-              <p className="text-[#717171] text-sm">$5104.52</p>
-            </div>
-            <div className="flex justify-between mb-2">
-              <p className="text-[#717171] text-sm">Discount</p>
-              <p className="text-[#717171] text-sm">-$111.82</p>
-            </div>
-            <div className="flex justify-between mb-2">
-              <p className="text-[#717171] text-sm">Shipment Cost</p>
-              <p className="text-[#717171] text-sm">$364.73</p>
-            </div>
-          </div> */}
           <CalculatedPrice />
-          {/* <div className="divider"></div>
-          <div className="flex justify-between mb-6">
-            <p className="text-base text-black font-normal">Grand Total</p>
-            <p>$543.02</p>
-          </div>
-          <div className="w-full">
-            <button className="btn btn-primary w-full">
-              Procced to checkout
-            </button>
-          </div> */}
-          <GrandTotal props="Continue to pay" />
+          <GrandTotal props="Procced to checkout" />
         </div>
       </div>
       {/* Customers viewed  Product*/}

@@ -13,20 +13,13 @@ const Login = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  const formLocation = location?.state?.form?.pathname || '/'
+  const formLocation = location?.state?.form?.pathname || "/";
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
   const [isChecked, setIsChecked] = useState(false); // State for checkbox
   const { signIn, createUser } = useContext(AuthContext);
-  const onSubmit = (data) => {
-    console.log(data);
-    createUser(data?.email, data?.password).then((result) => {
-      console.log(result.user);
-    });
-  };
-
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -43,12 +36,11 @@ const Login = () => {
     setIsChecked(e.target.checked); // Update the checkbox state
   };
 
-
   useEffect(() => {
     if (user) {
-      navigate(formLocation, { replace: true })
+      navigate(formLocation, { replace: true });
     }
-  }, [user, formLocation, navigate])
+  }, [user, formLocation, navigate]);
   return (
     <div className="container mx-auto">
       <div className="flex  items-center justify-center mt-10  md:p-0">
@@ -112,8 +104,9 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={!isChecked} // Button is disabled if checkbox is unchecked
-                className={`mx-auto form-control w-full block rounded-md border px-5 py-2 uppercase shadow-lg duration-200 bg-blue-500 hover:bg-blue-700 text-white ${!isChecked ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
+                className={`mx-auto form-control w-full block rounded-md border px-5 py-2 uppercase shadow-lg duration-200 bg-blue-500 hover:bg-blue-700 text-white ${
+                  !isChecked ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               >
                 Submit
               </button>
