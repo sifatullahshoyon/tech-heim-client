@@ -15,16 +15,16 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext)
+  const { user, logOut } = useContext(AuthContext);
   const handleLogeOut = () => {
     logOut()
       .then(() => {
-        toast.success('Successfully logOut')
+        toast.success("Successfully logOut");
       })
-      .catch(error => {
-        console.log(error)
-      })
-  }
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="max-w-[1440px] px-6 mx-auto">
       <div className="navbar bg-base-100">
@@ -230,28 +230,29 @@ const Navbar = () => {
                     <CiLogout />
                   </p>
                   {/* Open the modal using document.getElementById('ID').showModal() method */}
-                  {
-                    user ? <>
+                  {user ? (
+                    <>
                       <button
                         className="hover:text-red-600"
                         onClick={handleLogeOut}
                       >
                         Log out
                       </button>
-                    </> :
-                      <>
-                        <Link to='/login'>
-                          <button
-                            className=""
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/login">
+                        <button
+                          className=""
                           // onClick={() =>
                           //   document.getElementById("my_modal_6").showModal()
                           // }
-                          >
-                            Sign In
-                          </button>
-                        </Link>
+                        >
+                          Sign In
+                        </button>
+                      </Link>
 
-                        {/* <button
+                      {/* <button
                           className=""
                           onClick={() =>
                             document.getElementById("my_modal_6").showModal()
@@ -259,9 +260,8 @@ const Navbar = () => {
                         >
                           Sign Up
                         </button> */}
-                      </>
-                  }
-
+                    </>
+                  )}
 
                   <dialog
                     id="my_modal_6"

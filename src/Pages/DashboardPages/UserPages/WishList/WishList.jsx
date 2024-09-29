@@ -1,3 +1,4 @@
+import useAuth from "../../../../Components/Hooks/useAuth/useAuth";
 import NavigationBreadcrumb from "../../../../Components/Shared/NavigationBreadcrumb/NavigationBreadcrumb";
 import WishProduct from "../../../../Components/WishProduct/WishProduct";
 import img1 from "../../../../assets/product/image1.png";
@@ -9,8 +10,9 @@ import img6 from "../../../../assets/product/image6.png";
 
 
 const WishList = () => {
-    const img=[img1,img2,img3,img4,img5,img6]
-    console.log(img)
+   
+    const { wishProduct} = useAuth();
+    
   return (
     <div className="container mx-auto px-[10px] md:px-[10px] mb-[100px]  ">
       {/* Breadcrumb start  */}
@@ -22,9 +24,9 @@ const WishList = () => {
       </div>
 
       <div>
-        { img.length > 0 ? (
+        { wishProduct.length > 0 ? (
           <div className="grid grid-cols-1 gap-[24px] sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
-            {img.map((pc,i) => (
+            {wishProduct.map((pc,i) => (
               <WishProduct key={i} pc={pc}></WishProduct>
             ))}
           </div>

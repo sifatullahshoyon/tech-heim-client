@@ -11,14 +11,13 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const formLocation = location?.state?.form?.pathname || '/'
+  const formLocation = location?.state?.form?.pathname || "/";
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
   const [isChecked, setIsChecked] = useState(false); // State for checkbox
   const { signIn, user } = useContext(AuthContext);
-
 
   const handleLogin = (e) => {
     e.preventDefault();

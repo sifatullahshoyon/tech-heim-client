@@ -4,8 +4,16 @@ import line from "../../assets/Line.png";
 
 import { FaRegStar, FaShoppingCart, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
+import { useState } from "react";
+import axios from "axios";
+import useAxiosPublic from "../Hooks/useAxiosPublic/useAxiosPublic";
+import useAuth from "../Hooks/useAuth/useAuth";
 const ProductCard = ({ pc }) => {
-  console.log(pc);
+  const { user, wistList, fetchWishList } = useAuth();
+  const axiosPublic = useAxiosPublic();
+
+  const userEmail = user?.email;
 
   const {
     category,
@@ -29,23 +37,78 @@ const ProductCard = ({ pc }) => {
   const hasHalfStar = rate % 1 !== 0; // Check if there is a half star
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0); // Calculate empty stars
 
+  const [showIcon, setShowIcon] = useState(false);
+
+  const handleWishlistToggle = async (_id, userEmail) => {
+    if (wistList.includes(_id)) {
+      // If the item is already in the wishlist, remove it
+      try {
+        const response = await axiosPublic.delete("/wishlist/remove", {
+          data: { userId: userEmail, productId: _id }, // Sending userId and productId in the body
+        });
+        fetchWishList();
+      } catch (error) {
+        console.error("Error removing from wishlist", error);
+      }
+    } else {
+      // If the item is not in the wishlist, add it
+      try {
+        const response = await axiosPublic.post("wishlist/add", { user: userEmail, product: pc });
+        fetchWishList();
+      } catch (error) {
+        console.error("Error adding to wishlist", error);
+      }
+    }
+  };
+
+  const handleMouseEnter = () => {
+    setShowIcon(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (wistList.includes(_id)) {
+      setShowIcon(true);
+    } else {
+      setShowIcon(false);
+    }
+  };
+
   return (
-    <div className="flex flex-grow">
+    <div
+      className="flex flex-grow relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="w-full max-w-sm bg-white shadow-md border border-gray-200 rounded-lg    ">
-        {sellPrice ? (
-          <>
-            <div className="w-[50px] h-[32px]  px-[6px] bg-[#FDDBC9] py-[4px] mt-[10px] rounded-r-[8px]">
-              <p className="text-[16px] font-light text-[#F45E0C]">
-                {regularPrice > 0 &&
-                  Math.round(((regularPrice - sellPrice) / regularPrice) * 100) + "%"}
-              </p>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="w-[50px] h-[32px]  px-[6px] bg-[white] py-[4px] mt-[10px] rounded-r-[8px]"></div>
-          </>
-        )}
+        <div className="flex justify-between items-center py-[20px]">
+          <div>
+            {sellPrice ? (
+              <>
+                <div className="w-[50px] h-[32px]  px-[6px] bg-[#FDDBC9] py-[4px] mt-[10px] rounded-r-[8px]">
+                  <p className="text-[16px] font-light text-[#F45E0C]">
+                    {regularPrice > 0 &&
+                      Math.round(((regularPrice - sellPrice) / regularPrice) * 100) + "%"}
+                  </p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="w-[50px] h-[32px]  px-[6px] bg-[white] py-[4px] mt-[10px] rounded-r-[8px]"></div>
+              </>
+            )}
+          </div>
+          <div className="pr-[20px] absolute top-[37px] right-0">
+            {(showIcon || wistList.includes(_id)) && (
+              <button onClick={() => handleWishlistToggle(_id, userEmail)}>
+                {wistList.includes(_id) ? (
+                  <MdOutlineFavorite className="text-red-500" />
+                ) : (
+                  <MdFavoriteBorder />
+                )}
+              </button>
+            )}
+          </div>
+        </div>
 
         <Link to={`/productDetails/${_id}`}>
           <img

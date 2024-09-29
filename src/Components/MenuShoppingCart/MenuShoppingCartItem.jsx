@@ -1,10 +1,17 @@
 import React from "react";
 import { ImageDisplayControl } from "@frameright/react-image-display-control";
 import { FaTrash } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 const MenuShoppingCartItem = ({ shoppingItem }) => {
+  const location = useLocation();
+  const isCheckoutPage = location?.pathname?.includes("checkout");
   return (
-    <div className="card card-side bg-base-100 shadow-xl">
+    <div
+      className={`card card-side bg-base-100 ${
+        isCheckoutPage ? "" : "shadow-xl"
+      }`}
+    >
       <figure>
         <ImageDisplayControl>
           <img src={shoppingItem.img} />
