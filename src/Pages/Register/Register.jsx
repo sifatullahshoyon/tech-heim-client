@@ -14,7 +14,7 @@ const Register = () => {
     setShowPassword(!showPassword);
   };
   const [isCheckedSignUP, setIsCheckedSignUp] = useState(false); // State for checkbox
-  const { createUser } = useContext(AuthContext);
+  const { createUser, user } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -23,7 +23,6 @@ const Register = () => {
   } = useForm();
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useAuth()
 
   const formLocation = location?.state?.form?.pathname || '/'
 
@@ -31,6 +30,7 @@ const Register = () => {
     console.log(data);
     createUser(data?.email, data?.password).then((result) => {
       console.log(result.user);
+      navigate(formLocation, { replace: true })
     });
   };
 
@@ -38,11 +38,6 @@ const Register = () => {
     setIsCheckedSignUp(e.target.checked); // Update the checkbox state
   };
 
-  useEffect(() => {
-    if (user) {
-      navigate(formLocation, { replace: true })
-    }
-  }, [navigate, formLocation, user])
   return (
     <div className="container mx-auto">
       <div className="flex  items-center justify-center mt-10  md:p-0">
