@@ -1,7 +1,8 @@
-import React from "react";
-import image1 from "../../assets/blog1.png";
-import image2 from "../../assets/blog2.png";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../Components/Hooks/useAxiosSecure/useAxiosSecure";
+import { toast } from "react-toastify";
+import LoadingSpinner from "../../Components/Shared/LoadingSpiner/LoadingSpinner";
 
 const truncateWords = (text, wordLimit) => {
   const words = text.split(" ");
@@ -12,51 +13,33 @@ const truncateWords = (text, wordLimit) => {
 };
 
 const BlogCard = () => {
-  // Blog data
-  const blogs = [
-    {
-      id: "1",
-      date: "August 28, 2023",
-      timeRead: "3 min read",
-      title: "Meta Platform Plans Release of Free Software",
-      description:
-        "The parent company of Facebook, Meta Platforms, is introducing software to help developers ",
-      imgSrc: image1,
-    },
-    {
-      id: "2",
-      date: "August 24, 2023",
-      timeRead: "2 min read",
-      title: "Mobile Users and Shopping Behavior",
-      description:
-        "80% of people never leave home without their phones in hand.",
-      imgSrc: image2,
-    },
-    {
-      id: "3",
-      date: "August 28, 2023",
-      timeRead: "3 min read",
-      title: "The best gaming headsets",
-      description:
-        "Immerse yourself in unparalleled gaming experiences with the ultimate gaming headset. Elevate your gameplay to new heights with crystal-clear audio, unrivaled comfort, and cutting-edge technology. The competition doesn't stand a chance! ",
-      imgSrc: image1,
-    },
-    {
-      id: "4",
-      date: "August 28, 2023",
-      timeRead: "3 min read",
-      title:
-        "Mobile carriers face fines in South Korea for false claims on 5G speeds",
-      description:
-        "South Korea's antitrust regulator fines aims to ensure transparency and accuracy in the telecommunications industry",
-      imgSrc: image2,
-    },
-  ];
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const axiosSecure = useAxiosSecure();
 
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await axiosSecure.get("/blogs/list");
+        setBlogs(res.data);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+        toast.error("Failed to fetch blogs");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, [axiosSecure]);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mx-auto">
-      {blogs.map((blog) => (
-        <Link to="/blog/blogDetails" key={blog.id}>
+      {blogs.slice(0, 4).map((blog) => (
+        <Link to={`/blog/list/${blog._id}`} key={blog.id}>
           <div
             key={blog.id}
             className="bg-white max-w-[392px] max-h-[400px] w-full shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-all transform duration-300 hover:scale-105 mx-auto"

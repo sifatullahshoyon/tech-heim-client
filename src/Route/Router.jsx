@@ -31,10 +31,9 @@ import Blogs from "../Pages/DashboardPages/AdminPages/Blogs/Blogs";
 import OrderStatus from "../Pages/DashboardPages/UserPages/Orders/OrderStatus/OrderStatus";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
-import PrivateRoute from '../Route/PrivateRoute'
+import PrivateRoute from "../Route/PrivateRoute";
 import Carts from "../Pages/DashboardPages/UserPages/Carts/Carts";
 import Checkout from "../Pages/DashboardPages/UserPages/Checkout/Checkout";
-
 
 const router = createBrowserRouter([
   {
@@ -63,7 +62,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/blog/blogDetails",
+        path: "/blog/list/:id",
         element: <BlogProductDetailsMain />,
       },
       {
@@ -102,7 +101,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     children: [
       /////// Admin Route /////////
       {

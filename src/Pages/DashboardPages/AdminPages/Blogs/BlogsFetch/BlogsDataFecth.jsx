@@ -1,26 +1,7 @@
-import React from "react";
-
-const Blogs = [
-  {
-    id: "1",
-    date: "August 28, 2023",
-    timeRead: "3 min read",
-    title: "Meta Platform Plans Release of Free Software",
-    description:
-      "The parent company of Facebook, Meta Platforms, is introducing software to help developers build modern solutions for the future.",
-    imgSrc: "https://via.placeholder.com/150",
-  },
-  {
-    id: "2",
-    date: "September 10, 2023",
-    timeRead: "5 min read",
-    title: "New AI Models Revolutionizing Tech Industry",
-    description:
-      "AI models are transforming the way tech companies handle data and innovate new products for the global market.",
-    imgSrc: "https://via.placeholder.com/150",
-  },
-  // More Blogs...
-];
+import React, { useState, useEffect } from "react";
+import useAxiosSecure from "../../../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
+import LoadingSpinner from "../../../../../Components/Shared/LoadingSpiner/LoadingSpinner";
+import { toast } from "react-toastify";
 
 const truncateDescription = (description, wordLimit) => {
   const words = description.split(" ");
@@ -30,14 +11,47 @@ const truncateDescription = (description, wordLimit) => {
   return description;
 };
 
-const BlogsDataFecth = () => {
+const BlogsDataFetch = () => {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const axiosSecure = useAxiosSecure();
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await axiosSecure.get("/blogs/list");
+        setBlogs(res.data);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+        toast.error("Failed to fetch blogs");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, [axiosSecure]);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  const handleDelete = async (id) => {
+    try {
+      await axiosSecure.delete(`/blogs/delete/${id}`);
+      setBlogs(blogs.filter((blog) => blog._id !== id));
+      toast.success("Blog deleted successfully");
+    } catch (error) {
+      console.error("Error deleting blog:", error);
+      toast.error("Failed to delete blog");
+    }
+  };
+
   return (
     <div className="w-full mt-8 p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-3xl font-bold mb-6">Blogs</h2>
-
       <div className="overflow-x-auto">
         <table className="table w-full">
-          {/* Table Head */}
           <thead>
             <tr>
               <th>Image</th>
@@ -48,10 +62,9 @@ const BlogsDataFecth = () => {
               <th>Actions</th>
             </tr>
           </thead>
-          {/* Table Body */}
           <tbody>
-            {Blogs.map((article) => (
-              <tr key={article.id}>
+            {blogs.map((article) => (
+              <tr key={article._id}>
                 <td>
                   <div className="avatar">
                     <div className="w-20 rounded">
@@ -64,8 +77,12 @@ const BlogsDataFecth = () => {
                 <td>{article.date}</td>
                 <td>{article.timeRead}</td>
                 <td>
-                  <button className="btn btn-sm btn-primary mr-2">Edit</button>
-                  <button className="btn btn-sm btn-error">Delete</button>
+                  <button
+                    onClick={() => handleDelete(article._id)}
+                    className="btn btn-sm btn-error"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
@@ -76,4 +93,4 @@ const BlogsDataFecth = () => {
   );
 };
 
-export default BlogsDataFecth;
+export default BlogsDataFetch;
