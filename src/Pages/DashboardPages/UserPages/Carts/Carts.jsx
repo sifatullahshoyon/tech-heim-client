@@ -1,6 +1,8 @@
 import React from "react";
 import MenuShoppingCart from "../../../../Components/MenuShoppingCart/MenuShoppingCart";
 import NewProducts from "../../../Home/NewProducts/NewProducts";
+import CalculatedPrice from "../../../../Components/Shared/Price/CalculatedPrice";
+import GrandTotal from "../../../../Components/Shared/Price/GrandTotal";
 
 const Carts = () => {
   return (
@@ -19,7 +21,7 @@ const Carts = () => {
           <h1 className="text-2xl text-black font-normal pb-4">
             Payment Details
           </h1>
-          <div>
+          {/* <div>
             <div className="flex justify-between mb-2">
               <p className="text-[#717171] text-sm">Subtotal</p>
               <p className="text-[#717171] text-sm">$5104.52</p>
@@ -32,8 +34,9 @@ const Carts = () => {
               <p className="text-[#717171] text-sm">Shipment Cost</p>
               <p className="text-[#717171] text-sm">$364.73</p>
             </div>
-          </div>
-          <div className="divider"></div>
+          </div> */}
+          <CalculatedPrice />
+          {/* <div className="divider"></div>
           <div className="flex justify-between mb-6">
             <p className="text-base text-black font-normal">Grand Total</p>
             <p>$543.02</p>
@@ -42,7 +45,8 @@ const Carts = () => {
             <button className="btn btn-primary w-full">
               Procced to checkout
             </button>
-          </div>
+          </div> */}
+          <GrandTotal props="Continue to pay" />
         </div>
       </div>
       {/* Customers viewed  Product*/}
