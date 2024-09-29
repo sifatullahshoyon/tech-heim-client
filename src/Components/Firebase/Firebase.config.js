@@ -17,7 +17,7 @@ const firebaseConfig = {
   projectId: "tech-heim-f9fc6",
   storageBucket: "tech-heim-f9fc6.appspot.com",
   messagingSenderId: "853819566727",
-  appId: "1:853819566727:web:f353ac91781a3cc36b6622"
+  appId: "1:853819566727:web:f353ac91781a3cc36b6622",
 };
 
 // Initialize Firebase

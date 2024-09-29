@@ -20,12 +20,6 @@ const Login = () => {
   };
   const [isChecked, setIsChecked] = useState(false); // State for checkbox
   const { signIn, createUser } = useContext(AuthContext);
-  const onSubmit = (data) => {
-    console.log(data);
-    createUser(data?.email, data?.password).then((result) => {
-      console.log(result.user);
-    });
-  };
 
 
   const handleLogin = (e) => {

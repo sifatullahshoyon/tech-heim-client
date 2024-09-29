@@ -142,12 +142,12 @@ const Shop = () => {
       const data = response.data;
       console.log(response);
 
-        // Apply sorting based on the selected option
-    if (sortOption === "asc") {
-      data.sort((a, b) => a.regularPrice - b.regularPrice);
-    } else if (sortOption === "desc") {
-      data.sort((a, b) => b.regularPrice - a.regularPrice);
-    }
+      // Apply sorting based on the selected option
+      if (sortOption === "asc") {
+        data.sort((a, b) => a.regularPrice - b.regularPrice);
+      } else if (sortOption === "desc") {
+        data.sort((a, b) => b.regularPrice - a.regularPrice);
+      }
 
       setProducts(data);
       setProductsLaptop(data.filter((cat) => cat.category === "Laptop"));
@@ -249,17 +249,15 @@ const Shop = () => {
               handleClearAll();
               setActiveTab("Laptop");
             }}
-            className={`cursor-pointer px-[15px] py-[8px] ${
-              activeTab === "Laptop" ? "active" : ""
-            }`}
+            className={`cursor-pointer px-[15px] py-[8px] ${activeTab === "Laptop" ? "active" : ""
+              }`}
           >
             <div className="w-[48px] h-[48px] mx-auto">
               <img className="w-full h-full hover:opacity-50" src={Laptop} alt="" />
             </div>
             <p
-              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
-                activeTab === "Laptop" ? "active underline text-[#0C68F4]" : "text-[#444444]"
-              }`}
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${activeTab === "Laptop" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+                }`}
             >
               Laptop
             </p>
@@ -270,17 +268,15 @@ const Shop = () => {
               handleClearAll();
               setActiveTab("Camera");
             }}
-            className={`cursor-pointer px-[15px] py-[8px] ${
-              activeTab === "Camera" ? "active underline text-[#0C68F4]" : "text-[#444444]"
-            }`}
+            className={`cursor-pointer px-[15px] py-[8px] ${activeTab === "Camera" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+              }`}
           >
             <div className="w-[48px] h-[48px] mx-auto">
               <img className="w-full h-full hover:opacity-50" src={camera} alt="" />
             </div>
             <p
-              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
-                activeTab === "Camera" ? "active underline text-[#0C68F4]" : "text-[#444444]"
-              }`}
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${activeTab === "Camera" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+                }`}
             >
               Camera
             </p>
@@ -291,17 +287,15 @@ const Shop = () => {
               handleClearAll();
               setActiveTab("Watch");
             }}
-            className={`cursor-pointer px-[15px] py-[8px] ${
-              activeTab === "Watch" ? "active underline" : ""
-            }`}
+            className={`cursor-pointer px-[15px] py-[8px] ${activeTab === "Watch" ? "active underline" : ""
+              }`}
           >
             <div className="w-[48px] h-[48px] mx-auto">
               <img className="w-full h-full hover:opacity-50" src={watch} alt="" />
             </div>
             <p
-              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
-                activeTab === "Watch" ? "active underline text-[#0C68F4]" : "text-[#444444]"
-              }`}
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${activeTab === "Watch" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+                }`}
             >
               Watch
             </p>
@@ -312,17 +306,15 @@ const Shop = () => {
               handleClearAll();
               setActiveTab("Tab");
             }}
-            className={`cursor-pointer px-[15px] py-[8px] ${
-              activeTab === "Tab" ? "active underline text-[#0C68F4]" : "text-[#444444]"
-            }`}
+            className={`cursor-pointer px-[15px] py-[8px] ${activeTab === "Tab" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+              }`}
           >
             <div className="w-[48px] h-[48px] mx-auto">
               <img className="w-full h-full hover:opacity-50" src={tab} alt="" />
             </div>
             <p
-              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
-                activeTab === "Tab" ? "active underline text-[#0C68F4]" : "text-[#444444]"
-              }`}
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${activeTab === "Tab" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+                }`}
             >
               Tab
             </p>
@@ -333,17 +325,15 @@ const Shop = () => {
               setActiveTab("Mobile");
               handleClearAll();
             }}
-            className={`cursor-pointer px-[15px] py-[8px] ${
-              activeTab === "Mobile" ? "active underline text-[#0C68F4]" : "text-[#444444]"
-            }`}
+            className={`cursor-pointer px-[15px] py-[8px] ${activeTab === "Mobile" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+              }`}
           >
             <div className="w-[48px] h-[48px] mx-auto">
               <img className="w-full h-full hover:opacity-50" src={mobile} alt="" />
             </div>
             <p
-              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
-                activeTab === "Mobile" ? "active underline text-[#0C68F4]" : "text-[#444444]"
-              }`}
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${activeTab === "Mobile" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+                }`}
             >
               Mobile
             </p>
@@ -354,17 +344,15 @@ const Shop = () => {
               setActiveTab("Game");
               handleClearAll();
             }}
-            className={`cursor-pointer px-[15px] py-[8px] ${
-              activeTab === "Game" ? "active underline text-[#0C68F4]" : "text-[#444444]"
-            }`}
+            className={`cursor-pointer px-[15px] py-[8px] ${activeTab === "Game" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+              }`}
           >
             <div className="w-[48px] h-[48px] mx-auto">
               <img className="w-full h-full hover:opacity-50" src={game} alt="" />
             </div>
             <p
-              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
-                activeTab === "Game" ? "active underline text-[#0C68F4]" : "text-[#444444]"
-              }`}
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${activeTab === "Game" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+                }`}
             >
               Game
             </p>
@@ -375,17 +363,15 @@ const Shop = () => {
               setActiveTab("Headphones");
               handleClearAll();
             }}
-            className={`cursor-pointer px-[15px] py-[8px] ${
-              activeTab === "Headphones" ? "active underline text-[#0C68F4]" : "text-[#444444]"
-            }`}
+            className={`cursor-pointer px-[15px] py-[8px] ${activeTab === "Headphones" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+              }`}
           >
             <div className="w-[48px] h-[48px] mx-auto">
               <img className="w-full h-full hover:opacity-50" src={headphones} alt="" />
             </div>
             <p
-              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${
-                activeTab === "Headphones" ? "active underline text-[#0C68F4]" : "text-[#444444]"
-              }`}
+              className={`text-[20px] font-light mt-[16px] text-center hover:text-[#0C68F4] uppercase ${activeTab === "Headphones" ? "active underline text-[#0C68F4]" : "text-[#444444]"
+                }`}
             >
               Headphones
             </p>
@@ -458,9 +444,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueBrandsForLaptop?.map((brandName) => (
@@ -492,9 +477,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueColorsForLaptop?.map((colorName) => (
@@ -526,9 +510,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueRamsForLaptop?.map((ramSize) => (
@@ -560,9 +543,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueDriveSizeForLaptop?.map((driveSize) => (
@@ -596,9 +578,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueGpuBrandForLaptop?.map((gpuBrand) => (
@@ -630,9 +611,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueProcessorForLaptop?.map((processorType) => (
@@ -667,9 +647,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueScreenSizeForLaptop?.map((screenSize) => (
@@ -706,9 +685,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueBrandsForWatch?.map((brandName) => (
@@ -740,9 +718,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueColorsForWatch?.map((colorName) => (
@@ -774,9 +751,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueRamsForWatch?.map((ramSize) => (
@@ -808,9 +784,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueDriveSizeForWatch?.map((driveSize) => (
@@ -844,9 +819,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueGpuBrandForWatch?.map((gpuBrand) => (
@@ -878,9 +852,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueProcessorForWatch?.map((processorType) => (
@@ -915,9 +888,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueScreenSizeForWatch?.map((screenSize) => (
@@ -954,9 +926,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueBrandsForCamera?.map((brandName) => (
@@ -988,9 +959,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueColorsForCamera?.map((colorName) => (
@@ -1022,9 +992,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueRamsForCamera?.map((ramSize) => (
@@ -1056,9 +1025,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueDriveSizeForCamera?.map((driveSize) => (
@@ -1092,9 +1060,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueGpuBrandForCamera?.map((gpuBrand) => (
@@ -1126,9 +1093,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueProcessorForCamera?.map((processorType) => (
@@ -1163,9 +1129,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueScreenSizeForCamera?.map((screenSize) => (
@@ -1202,9 +1167,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueBrandsForTab?.map((brandName) => (
@@ -1236,9 +1200,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueColorsForTab?.map((colorName) => (
@@ -1270,9 +1233,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueRamsForTab?.map((ramSize) => (
@@ -1304,9 +1266,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueDriveSizeForTab?.map((driveSize) => (
@@ -1340,9 +1301,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueGpuBrandForTab?.map((gpuBrand) => (
@@ -1374,9 +1334,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueProcessorForTab?.map((processorType) => (
@@ -1411,9 +1370,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueScreenSizeForTab?.map((screenSize) => (
@@ -1450,9 +1408,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueBrandsForMobile?.map((brandName) => (
@@ -1484,9 +1441,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueColorsForMobile?.map((colorName) => (
@@ -1518,9 +1474,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueRamsForMobile?.map((ramSize) => (
@@ -1552,9 +1507,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueDriveSizeForMobile?.map((driveSize) => (
@@ -1588,9 +1542,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueGpuBrandForMobile?.map((gpuBrand) => (
@@ -1622,9 +1575,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueProcessorForMobile?.map((processorType) => (
@@ -1659,9 +1611,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueScreenSizeForMobile?.map((screenSize) => (
@@ -1698,9 +1649,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueBrandsForGame?.map((brandName) => (
@@ -1732,9 +1682,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueColorsForGame?.map((colorName) => (
@@ -1766,9 +1715,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueRamsForGame?.map((ramSize) => (
@@ -1800,9 +1748,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueDriveSizeForGame?.map((driveSize) => (
@@ -1836,9 +1783,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueGpuBrandForGame?.map((gpuBrand) => (
@@ -1870,9 +1816,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueProcessorForGame?.map((processorType) => (
@@ -1907,9 +1852,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueScreenSizeForGame?.map((screenSize) => (
@@ -1946,9 +1890,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${brand ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueBrandsForHeadphone?.map((brandName) => (
@@ -1980,9 +1923,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${color ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueColorsForHeadphone?.map((colorName) => (
@@ -2014,9 +1956,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${ram ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueRamsForHeadphone?.map((ramSize) => (
@@ -2048,9 +1989,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${drive ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueDriveSizeForHeadphone?.map((driveSize) => (
@@ -2084,9 +2024,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${gpu ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueGpuBrandForHeadphone?.map((gpuBrand) => (
@@ -2118,9 +2057,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${processor ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueProcessorForHeadphone?.map((processorType) => (
@@ -2155,9 +2093,8 @@ const Shop = () => {
                     </div>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
-                    }`}
+                    className={`overflow-hidden transition-all duration-500 ease-in-out ${screen ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                      }`}
                   >
                     <div>
                       {uniqueScreenSizeForHeadphone?.map((screenSize) => (
