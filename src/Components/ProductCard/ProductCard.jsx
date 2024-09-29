@@ -9,6 +9,7 @@ import { useState } from "react";
 import axios from "axios";
 import useAxiosPublic from "../Hooks/useAxiosPublic/useAxiosPublic";
 import useAuth from "../Hooks/useAuth/useAuth";
+import { toast } from "react-toastify";
 const ProductCard = ({ pc }) => {
   const { user, wistList, fetchWishList } = useAuth();
   const axiosPublic = useAxiosPublic();
@@ -52,11 +53,15 @@ const ProductCard = ({ pc }) => {
       }
     } else {
       // If the item is not in the wishlist, add it
-      try {
-        const response = await axiosPublic.post("wishlist/add", { user: userEmail, product: pc });
-        fetchWishList();
-      } catch (error) {
-        console.error("Error adding to wishlist", error);
+      if (userEmail) {
+        try {
+          const response = await axiosPublic.post("wishlist/add", { user: userEmail, product: pc });
+          fetchWishList();
+        } catch (error) {
+          console.error("Error adding to wishlist", error);
+        }
+      } else {
+        toast.warning("Oops! Please log in to add items to your wishlist.");
       }
     }
   };
