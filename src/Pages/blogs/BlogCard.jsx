@@ -39,7 +39,7 @@ const BlogCard = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mx-auto">
       {blogs.slice(0, 4).map((blog) => (
-        <Link to="/blog/blogDetails" key={blog.id}>
+        <Link to={`/blog/list/${blog._id}`} key={blog.id}>
           <div
             key={blog.id}
             className="bg-white max-w-[392px] max-h-[400px] w-full shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-all transform duration-300 hover:scale-105 mx-auto"
