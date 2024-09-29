@@ -18,8 +18,16 @@ import Advertising from "../../Components/Advertising/Advertising";
 import Progress from "../../Components/Shared/Progress/Progress";
 
 import useAxiosPublic from "../../Components/Hooks/useAxiosPublic/useAxiosPublic";
+import useAuth from "../../Components/Hooks/useAuth/useAuth";
 
 const Shop = () => {
+  const { user } = useAuth();
+
+  const userEmail = user?.email;
+
+  //  wish product state
+  const [wistList, setWistList] = useState([]);
+  //  proce sort state
   const [sortOption, setSortOption] = useState("");
   //  Tab state
   const [activeTab, setActiveTab] = useState("Laptop");
@@ -140,14 +148,13 @@ const Shop = () => {
 
       const response = await axiosPublic.get("/products/all", { params });
       const data = response.data;
-      console.log(response);
 
-        // Apply sorting based on the selected option
-    if (sortOption === "asc") {
-      data.sort((a, b) => a.regularPrice - b.regularPrice);
-    } else if (sortOption === "desc") {
-      data.sort((a, b) => b.regularPrice - a.regularPrice);
-    }
+      // Apply sorting based on the selected option
+      if (sortOption === "asc") {
+        data.sort((a, b) => a.regularPrice - b.regularPrice);
+      } else if (sortOption === "desc") {
+        data.sort((a, b) => b.regularPrice - a.regularPrice);
+      }
 
       setProducts(data);
       setProductsLaptop(data.filter((cat) => cat.category === "Laptop"));
@@ -162,9 +169,18 @@ const Shop = () => {
     }
   };
 
-  // Fetch products on component mount
+  const fetchWishList = async () => {
+    const response = await axiosPublic.get(`/wishlist/${userEmail}`);
+    const data = response?.data?.products?.map(item => item?._id);;
+    
+    setWistList(data);
+    
+  };
+
+  // Fetch products on component mount and wishlist
   useEffect(() => {
     fetchProducts();
+    fetchWishList();
   }, [
     selectedBrands,
     selectedRamSizes,
@@ -173,8 +189,11 @@ const Shop = () => {
     selectedGpuBrands,
     selectedProcessor,
     selectedScreenSize,
-    sortOption
+    sortOption,
   ]);
+  useEffect(() => {
+    fetchWishList();
+  }, []);
 
   //   filter option select function
   const handleBrandChange = (brandName) => {
@@ -2204,7 +2223,7 @@ const Shop = () => {
               {productsLaptop?.length > 0 ? (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 ">
                   {productsLaptop?.map((pc, i) => (
-                    <ProductCard key={i} pc={pc} />
+                    <ProductCard key={i} pc={pc} wistList={wistList} setWistList={setWistList} fetchWishList={fetchWishList} />
                   ))}
                 </div>
               ) : (
@@ -2223,7 +2242,14 @@ const Shop = () => {
               {productsCamera?.length > 0 ? (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
                   {productsCamera?.map((pc, i) => (
-                    <ProductCard key={i} pc={pc}></ProductCard>
+                    <ProductCard
+                      key={i}
+                      pc={pc}
+                      wistList={wistList}
+                      setWistList={setWistList}
+                      fetchWishList={fetchWishList}
+                      
+                    ></ProductCard>
                   ))}
                 </div>
               ) : (
@@ -2242,7 +2268,14 @@ const Shop = () => {
               {productsWatch?.length > 0 ? (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
                   {productsWatch?.map((pc, i) => (
-                    <ProductCard key={i} pc={pc}></ProductCard>
+                    <ProductCard
+                      key={i}
+                      pc={pc}
+                      wistList={wistList}
+                      setWistList={setWistList}
+                      fetchWishList={fetchWishList}
+                      
+                    ></ProductCard>
                   ))}
                 </div>
               ) : (
@@ -2260,7 +2293,14 @@ const Shop = () => {
               {productsTab?.length > 0 ? (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
                   {productsTab?.map((pc, i) => (
-                    <ProductCard key={i} pc={pc}></ProductCard>
+                    <ProductCard
+                      key={i}
+                      pc={pc}
+                      wistList={wistList}
+                      setWistList={setWistList}
+                      fetchWishList={fetchWishList}
+                      
+                    ></ProductCard>
                   ))}
                 </div>
               ) : (
@@ -2278,7 +2318,14 @@ const Shop = () => {
               {productsMobile?.length > 0 ? (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
                   {productsMobile?.map((pc, i) => (
-                    <ProductCard key={i} pc={pc}></ProductCard>
+                    <ProductCard
+                      key={i}
+                      pc={pc}
+                      wistList={wistList}
+                      setWistList={setWistList}
+                      fetchWishList={fetchWishList}
+                      
+                    ></ProductCard>
                   ))}
                 </div>
               ) : (
@@ -2296,7 +2343,14 @@ const Shop = () => {
               {productsGame?.length > 0 ? (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
                   {productsGame?.map((pc, i) => (
-                    <ProductCard key={i} pc={pc}></ProductCard>
+                    <ProductCard
+                      key={i}
+                      pc={pc}
+                      wistList={wistList}
+                      setWistList={setWistList}
+                      fetchWishList={fetchWishList}
+                      
+                    ></ProductCard>
                   ))}
                 </div>
               ) : (
@@ -2315,7 +2369,14 @@ const Shop = () => {
               {productsHeadphone?.length > 0 ? (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
                   {productsHeadphone?.map((pc, i) => (
-                    <ProductCard key={i} pc={pc}></ProductCard>
+                    <ProductCard
+                      key={i}
+                      pc={pc}
+                      wistList={wistList}
+                      setWistList={setWistList}
+                      fetchWishList={fetchWishList}
+                     
+                    ></ProductCard>
                   ))}
                 </div>
               ) : (
