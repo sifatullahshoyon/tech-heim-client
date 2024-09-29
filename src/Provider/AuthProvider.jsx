@@ -47,11 +47,14 @@ const AuthProvider = ({ children }) => {
 
 
     // wishList product related state & function start
+    
+    
     const [wishProduct,setWishProduct]=useState([])
     const [wistList, setWistList] = useState([]);
 
     const fetchWishList = async () => {
-        const response = await axiosPublic.get(`/wishlist/${user?.email}`);
+        const userEmail=user?.email
+        const response = await axiosPublic.get(`/wishlist/${userEmail}`);
         const data = response?.data?.products?.map(item => item?._id);;
         setWishProduct(response?.data?.products)
         setWistList(data);
