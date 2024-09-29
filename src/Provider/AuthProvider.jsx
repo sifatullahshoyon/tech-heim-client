@@ -2,11 +2,15 @@ import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWith
 import { createContext, useEffect, useState } from 'react';
 import { app } from "../Components/Firebase/Firebase.config";
 import { GoogleAuthProvider } from "firebase/auth";
+import useAxiosPublic from "../Components/Hooks/useAxiosPublic/useAxiosPublic";
 
 export const AuthContext = createContext(null)
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
+    const axiosPublic = useAxiosPublic();
+
+    // user related state & function start
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
@@ -38,21 +42,38 @@ const AuthProvider = ({ children }) => {
             return unsubscribe();
         }
     }, [])
+    // user related state & function end
 
 
 
-    // wishList product related state
+    // wishList product related state & function start
     const [wishProduct,setWishProduct]=useState([])
+    const [wistList, setWistList] = useState([]);
+
+    const fetchWishList = async () => {
+        const response = await axiosPublic.get(`/wishlist/${user?.email}`);
+        const data = response?.data?.products?.map(item => item?._id);;
+        setWishProduct(response?.data?.products)
+        setWistList(data);
+        
+      };
+      useEffect(() => {
+        fetchWishList();
+      }, []);
+      // wishList product related state & function end
 
     const authInfo = {
         user,
         loading,
         wishProduct,
+        wistList,
         createUser,
         signIn,
         logOut,
         googleSignIn,
-        setWishProduct
+        setWishProduct,
+        setWistList,
+        fetchWishList
     }
     return (
         <AuthContext.Provider value={authInfo}>

@@ -9,9 +9,9 @@ import { useState } from "react";
 import axios from "axios";
 import useAxiosPublic from "../Hooks/useAxiosPublic/useAxiosPublic";
 import useAuth from "../Hooks/useAuth/useAuth";
-const ProductCard = ({ pc, wistList, setWistList, fetchWishList }) => {
+const ProductCard = ({ pc }) => {
+  const { user, wistList, fetchWishList } = useAuth();
   const axiosPublic = useAxiosPublic();
-  const { user } = useAuth();
 
   const userEmail = user?.email;
 

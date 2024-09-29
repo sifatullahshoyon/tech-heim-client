@@ -6,7 +6,8 @@ import useAxiosPublic from "../Hooks/useAxiosPublic/useAxiosPublic";
 
 const WishProduct = ({ pc }) => {
   const axiosPublic = useAxiosPublic();
-  const { user ,setWishProduct,wishProduct} = useAuth();
+  const { user ,fetchWishList} = useAuth();
+  
   const userEmail = user?.email;
   const {
     category,
@@ -33,6 +34,7 @@ const WishProduct = ({ pc }) => {
       const response = await axiosPublic.delete("/wishlist/remove", {
         data: { userId: userEmail, productId: _id }, // Sending userId and productId in the body
       });
+      fetchWishList()
       
     } catch (error) {
       console.error("Error removing from wishlist", error);
