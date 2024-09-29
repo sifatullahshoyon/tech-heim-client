@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import image1 from "../../assets/blog1.png";
-import image2 from "../../assets/blog2.png";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../Components/Hooks/useAxiosSecure/useAxiosSecure";
 import { toast } from "react-toastify";
@@ -40,7 +38,7 @@ const BlogCard = () => {
   }
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mx-auto">
-      {blogs.map((blog) => (
+      {blogs.slice(0, 4).map((blog) => (
         <Link to="/blog/blogDetails" key={blog.id}>
           <div
             key={blog.id}
