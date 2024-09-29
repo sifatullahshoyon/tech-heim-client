@@ -33,6 +33,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from '../Route/PrivateRoute'
 import Carts from "../Pages/DashboardPages/UserPages/Carts/Carts";
+import Checkout from "../Pages/DashboardPages/UserPages/Checkout/Checkout";
 
 
 const router = createBrowserRouter([
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
       {
         path: "/carts",
         element: <Carts />,
+      },
+      {
+        path: "/carts",
+        element: <Checkout />,
       },
     ],
   },
