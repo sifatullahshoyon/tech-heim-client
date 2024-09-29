@@ -5,13 +5,11 @@ import FaceBookLogin from "../../Components/Shared/SocalLogin/FacebookLogin/Face
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
-import useAuth from "../../Components/Hooks/useAuth/useAuth";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false); // State for show password
   const location = useLocation();
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   const formLocation = location?.state?.form?.pathname || '/'
 
@@ -19,13 +17,7 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
   const [isChecked, setIsChecked] = useState(false); // State for checkbox
-  const { signIn, createUser } = useContext(AuthContext);
-  const onSubmit = (data) => {
-    console.log(data);
-    createUser(data?.email, data?.password).then((result) => {
-      console.log(result.user);
-    });
-  };
+  const { signIn, user } = useContext(AuthContext);
 
 
   const handleLogin = (e) => {
@@ -37,18 +29,13 @@ const Login = () => {
     signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
+      navigate(formLocation, { replace: true })
     });
   };
   const handleCheckboxChange = (e) => {
     setIsChecked(e.target.checked); // Update the checkbox state
   };
 
-
-  useEffect(() => {
-    if (user) {
-      navigate(formLocation, { replace: true })
-    }
-  }, [user, formLocation, navigate])
   return (
     <div className="container mx-auto">
       <div className="flex  items-center justify-center mt-10  md:p-0">

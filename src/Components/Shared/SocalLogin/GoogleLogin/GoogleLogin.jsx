@@ -4,8 +4,7 @@ import useAuth from '../../../Hooks/useAuth/useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const GoogleLogin = () => {
-    const { googleSignIn } = useAuth()
-    const { user } = useAuth()
+    const { user, googleSignIn } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -16,14 +15,10 @@ const GoogleLogin = () => {
         googleSignIn()
             .then(result => {
                 console.log(result.user)
+                navigate(formLocation, { replace: true })
             })
     }
 
-    useEffect(() => {
-        if (user) {
-            navigate(formLocation, { replace: true })
-        }
-    }, [user, formLocation, navigate])
     return (
         <div>
             <button
