@@ -21,7 +21,8 @@ import useAxiosPublic from "../../Components/Hooks/useAxiosPublic/useAxiosPublic
 import useAuth from "../../Components/Hooks/useAuth/useAuth";
 
 const Shop = () => {
-  const { user } = useAuth();
+  const { user ,setWishProduct} = useAuth();
+  
 
   const userEmail = user?.email;
 
@@ -172,7 +173,7 @@ const Shop = () => {
   const fetchWishList = async () => {
     const response = await axiosPublic.get(`/wishlist/${userEmail}`);
     const data = response?.data?.products?.map(item => item?._id);;
-    
+    setWishProduct(response?.data?.products)
     setWistList(data);
     
   };
@@ -180,7 +181,7 @@ const Shop = () => {
   // Fetch products on component mount and wishlist
   useEffect(() => {
     fetchProducts();
-    fetchWishList();
+    
   }, [
     selectedBrands,
     selectedRamSizes,

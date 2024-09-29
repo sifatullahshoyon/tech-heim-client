@@ -39,13 +39,20 @@ const AuthProvider = ({ children }) => {
         }
     }, [])
 
+
+
+    // wishList product related state
+    const [wishProduct,setWishProduct]=useState([])
+
     const authInfo = {
         user,
         loading,
+        wishProduct,
         createUser,
         signIn,
         logOut,
-        googleSignIn
+        googleSignIn,
+        setWishProduct
     }
     return (
         <AuthContext.Provider value={authInfo}>
