@@ -35,7 +35,7 @@ const DashboardLayout = () => {
     }, [user, navigate])
 
     // admin
-    const isAdmin = true;
+    const isAdmin = false;
     console.log(user)
     return (
         <div>
