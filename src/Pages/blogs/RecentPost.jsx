@@ -74,7 +74,7 @@ const RecentPost = () => {
             <Link to={`/blog/list/${blog._id}`} key={blog._id}>
               <div
                 key={blog._id}
-                className="grid grid-cols-12 gap-4 p-4 bg-white shadow-md rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 mx-auto"
+                className="grid grid-cols-12 mb-2 gap-4 p-4 bg-white shadow-md rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 mx-auto"
               >
                 <div className="col-span-4">
                   <img
