@@ -15,7 +15,8 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut ,cartProduct} = useContext(AuthContext);
+  const { cart, totalPrice} =cartProduct
   const handleLogeOut = () => {
     logOut()
       .then(() => {
@@ -158,7 +159,7 @@ const Navbar = () => {
               onClick={() => document.getElementById("my_modal_5").showModal()}
             >
               <div className="indicator">
-                <span className="indicator-item badge badge-info">0</span>
+                <span className="indicator-item badge badge-info">{cart?.length}</span>
                 <img src={bagIcon} alt="bag Icon" />
               </div>
             </button>
@@ -168,7 +169,7 @@ const Navbar = () => {
             >
               <div className="modal-box w-11/12 lg:w-full mx-auto">
                 {/* open shopping cart */}
-                <MenuShoppingCart />
+                <MenuShoppingCart  />
                 <div className="modal-action">
                   <form method="dialog">
                     <button className="text-xl font-bold">
