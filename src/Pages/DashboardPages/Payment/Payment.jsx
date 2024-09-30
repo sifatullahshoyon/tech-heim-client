@@ -64,7 +64,7 @@ const Payment = () => {
       <div className="lg:flex justify-center gap-5">
         <div className="lg:w-1/2">
           <div className="w-3/4 border p-8 rounded">
-            <CheckoutForm />{" "}
+            <h1>Complete Your Payment with SSLCommerz</h1>
           </div>
           <Link
             to="/checkout"
