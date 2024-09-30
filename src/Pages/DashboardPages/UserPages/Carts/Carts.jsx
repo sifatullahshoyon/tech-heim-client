@@ -40,7 +40,14 @@ const Carts = () => {
             Payment Details
           </h1>
           <CalculatedPrice />
-          <GrandTotal props="Procced to checkout" />
+          <GrandTotal />
+          <div className="w-full">
+         <Link to="/checkout">
+          <button className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full">
+          Procced to checkout
+          </button>
+        </Link> 
+      </div>
         </div>
       </div>
       {/* Customers viewed  Product*/}

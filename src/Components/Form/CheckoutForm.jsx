@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { FaEdit } from "react-icons/fa";
+import CheckoutFormModal from "../Shared/Modals/CheckoutFormModal";
 
 const CheckoutForm = () => {
   const { user } = useContext(AuthContext);
@@ -38,7 +39,7 @@ const CheckoutForm = () => {
             onClick={""}
             className="absolute right-2 cursor-pointer text-blue-500"
           >
-            <FaEdit />
+            <CheckoutFormModal />
           </span>
         </div>
       </div>

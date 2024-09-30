@@ -35,6 +35,7 @@ import PrivateRoute from "../Route/PrivateRoute";
 import Carts from "../Pages/DashboardPages/UserPages/Carts/Carts";
 import Checkout from "../Pages/DashboardPages/UserPages/Checkout/Checkout";
 import AdminRoute from "./AdminRoute";
+import Payment from "../Pages/DashboardPages/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <Checkout />,
+      },
+      {
+        path: "/payment",
+        element: <Payment />,
       },
     ],
   },

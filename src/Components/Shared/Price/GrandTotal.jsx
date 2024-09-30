@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const GrandTotal = ({ props }) => {
+const GrandTotal = ({ props , handleCreatePayment }) => {
+  const location = useLocation();
+  const isCheckoutPage = location?.pathname?.includes('checkout');
   return (
     <div>
       <div className="divider"></div>
@@ -9,13 +11,17 @@ const GrandTotal = ({ props }) => {
         <p className="text-base text-black font-normal">Grand Total</p>
         <p>$543.02</p>
       </div>
-      <div className="w-full">
-        <Link to="/checkout">
+      {/* <div className="w-full">
+        {!isCheckoutPage? <Link to="/checkout">
           <button className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full">
             {props}
           </button>
-        </Link>
-      </div>
+        </Link> : <Link to="/payment">
+          <button onClick={handleCreatePayment} className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full">
+            {props}
+          </button>
+        </Link>}
+      </div> */}
     </div>
   );
 };

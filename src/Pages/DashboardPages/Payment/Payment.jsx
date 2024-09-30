@@ -3,18 +3,39 @@ import { IoCartSharp } from "react-icons/io5";
 import { TbTruckDelivery } from "react-icons/tb";
 import { MdOutlinePayment } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
-import CheckoutForm from "../../../../Components/Form/CheckoutForm";
 import { FaArrowLeft } from "react-icons/fa6";
-import CalculatedPrice from "../../../../Components/Shared/Price/CalculatedPrice";
-import GrandTotal from "../../../../Components/Shared/Price/GrandTotal";
-import MenuShoppingCartItem from "../../../../Components/MenuShoppingCart/MenuShoppingCartItem";
+import MenuShoppingCart from "../../../Components/MenuShoppingCart/MenuShoppingCart";
+import CalculatedPrice from "../../../Components/Shared/Price/CalculatedPrice";
+import GrandTotal from "../../../Components/Shared/Price/GrandTotal";
+import CheckoutForm from "../../../Components/Form/CheckoutForm";
+import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic/useAxiosPublic";
 
-const Checkout = () => {
-  const location = useLocation();
-  const isCarsPage = location?.pathname?.includes("carts");
-  const isCheckoutPage = location?.pathname?.includes("checkout");
-  return (
-    <div className="container mx-auto px-5">
+const Payment = () => {
+    const location = useLocation();
+    const isCarsPage = location?.pathname?.includes("carts");
+    const isCheckoutPage = location?.pathname?.includes("checkout");
+    const isPaymentPage = location?.pathname?.includes("payment");
+    const axiosPublic = useAxiosPublic();
+
+    const handleCreatePayment = () => {
+      axiosPublic.post('/create-payment', {
+            amount : 1000.56,
+            currency: 'USD',
+        })
+        .then((res) => {
+          console.log('payment page 25:' , res);
+          const  redirectUrl = res.data.paymentUrl;
+
+          if(redirectUrl){
+            window.location.replace(redirectUrl);
+          }
+        })
+        .catch((error) => {
+          console.error('Error creating payment:', error);
+      });
+    };
+    return (
+        <div className="container mx-auto px-5">
       {/* Tabs */}
       <div className="flex justify-center items-center gap-5 my-12">
         <p>
@@ -34,21 +55,23 @@ const Checkout = () => {
         </p>
         <div className="divider w-14 divider-neutral"></div>
         <p>
-          <MdOutlinePayment className="w-6 h-6" />
+          <MdOutlinePayment className={`w-8 p-1 h-8 text-xl border rounded-full ${
+              isPaymentPage ? "text-blue-600" : "text-[#9E9E9E]"
+            }`} />
         </p>
       </div>
       {/* Checkout Form */}
       <div className="lg:flex justify-center gap-5">
         <div className="lg:w-1/2">
           <div className="w-3/4 border p-8 rounded">
-            <CheckoutForm />{" "}
+            <h1>Complete Your Payment with SSLCommerz</h1>
           </div>
           <Link
-            to="/carts"
+            to="/checkout"
             className="flex items-center gap-2 text-blue-500 my-3"
           >
             <FaArrowLeft className="text-sm" />
-            Return to Cart
+            Return to Checkout
           </Link>
         </div>
         {/* Orders Info */}
@@ -59,7 +82,7 @@ const Checkout = () => {
           {/* Divider */}
           <div className="divider"></div>
           {/* Shopping Carts Item */}
-          <MenuShoppingCartItem />
+          <MenuShoppingCart />
           {/* Divider */}
           <div className="divider"></div>
           {/* Discount */}
@@ -74,18 +97,18 @@ const Checkout = () => {
           </div>
           {/* Total Price */}
           <CalculatedPrice />
-          <GrandTotal/>
+          <GrandTotal />
           <div className="w-full">
-         <Link to="/payment">
-          <button className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full">
+         
+          <button onClick={handleCreatePayment} className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full">
           Continue to pay
           </button>
-        </Link> 
+    
       </div>
         </div>
       </div>
     </div>
-  );
+    );
 };
 
-export default Checkout;
+export default Payment;
