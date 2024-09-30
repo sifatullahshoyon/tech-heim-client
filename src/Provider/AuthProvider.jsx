@@ -24,6 +24,9 @@ const AuthProvider = ({ children }) => {
   const [cartProduct, setCartProduct] = useState([]);
   const [cartProductID, setCartProductID] = useState([]);
 
+  /////////////////// user related state & function start /////////////////
+
+
   // user related state & function start
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -48,14 +51,26 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser), console.log("current user", currentUser);
-      setLoading(false);
-    });
+    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+      setUser(currentUser),
+        console.log('current user', currentUser)
+      if (currentUser) {
+        const userInfo = { email: currentUser.email };
+        axiosPublic.post('jwt', userInfo)
+          .then((res) => {
+            if (res?.data?.token) {
+              localStorage.setItem('access-token', res?.data?.token)
+            }
+          })
+      } else {
+        localStorage.removeItem('access-token')
+      }
+      setLoading(false)
+    })
     return () => {
       return unsubscribe();
-    };
-  }, []);
+    }
+  }, [axiosPublic])
   // user related state & function end
 
   // wishList product related function start
