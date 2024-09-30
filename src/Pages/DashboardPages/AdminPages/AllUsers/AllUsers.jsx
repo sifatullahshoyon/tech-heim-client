@@ -1,89 +1,118 @@
 import React from "react";
 import NavigationBreadcrumb from "../../../../Components/Shared/NavigationBreadcrumb/NavigationBreadcrumb";
-import { FaTrashAlt, FaUserShield } from "react-icons/fa";
-import { useForm } from "react-hook-form";
+import { RiDeleteBinLine } from "react-icons/ri";
+import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import userPhoto from '../../../../assets/images/logo/user-profile-icon-free-vector.jpg'
+import { FaUsers } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const axiosSecure = useAxiosSecure()
+  const { data: users = [], refetch } = useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+      const result = await axiosSecure.get('/users')
+      return result.data
+    }
+  })
+
+  const handleDeleteUser = async (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be delete user!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/delete/${user._id}`)
+          .then((res => {
+            if (res?.data?.deletedCount > 0) {
+              refetch()
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+            }
+          }))
+
+      }
+    });
+  }
   return (
-    <div className="flex flex-col justify-start min-h-screen w-full">
+    <div>
       {/* Navigation */}
       <NavigationBreadcrumb></NavigationBreadcrumb>
       {/* content */}
-      <div>
-        <h1 className="text-2xl text-black text-center font-bold">All Users</h1>
-        <div className="flex flex-row flex-wrap justify-between items-center p-4"></div>
-        {/* User Info */}
-        <div className="min-h-screen w-full p-5">
-          <div>
-            <h4 className="text-lg md:text-xl lg:text-2xl text-text-dark font-Poppins font-bold mt-10 mb-5">
-              Total Users : {users?.length ? users?.length : 0}
-            </h4>
-            <div className="overflow-x-auto">
-              <table className="min-w-[90%] border border-gray-100 my-6">
-                <thead>
-                  <tr className="bg-blue-500 text-white">
-                    <th className="py-4 px-6 text-lg text-left border-b">#</th>
-                    <th className="py-4 px-6 text-lg text-left border-b">
-                      Name
-                    </th>
-                    <th className="py-4 px-6 text-lg text-left border-b">
-                      Email
-                    </th>
-                    <th className="py-4 px-6 text-lg text-left border-b">
-                      Role
-                    </th>
-                    <th className="py-4 px-6 text-lg border-b text-end">
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {users?.map((user, index) => (
-                    <tr
-                      key={user._id}
-                      className="hover:bg-gray-50 border-b transition duration-300"
-                    >
-                      <td className="py-4 px-4 mx-auto">{index + 1}</td>
-                      <td className="py-4 px-4 flex">
-                        {user?.name ? user?.name : "Data Not Found"}
-                      </td>
-                      <td className="py-4 px-6 border-b text-xl font-medium">
-                        {user?.email ? user?.email : "Data Not Found"}
-                      </td>
-                      <td className="py-4 px-6 border-b text-lg font-medium">
-                        {user.role === "admin" ? (
-                          "Admin"
-                        ) : (
-                          <button
-                            onClick={() => handleMakeAdmin(user)}
-                            className="bg-primary-color scale-100 transition-all duration-100 text-black text-xl p-3 rounded-full"
-                          >
-                            <FaUserShield />
-                          </button>
-                        )}
-                      </td>
-                      <td className="py-4 px-6 border-b text-end">
-                        <button
-                          onClick={() => handleDeleteUser(user?._id)}
-                          className="bg-rose-500  scale-100 transition-all duration-100 text-white p-3 rounded-full"
-                        >
-                          <FaTrashAlt />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+      <div className="flex justify-evenly lg:gap-96  my-4">
+        <h1 className="text-4xl ">All Users </h1>
+        <h1 className="text-4xl lg:ml-48 ">Total  Users : <span className="text-red-500 font-semibold">{users.length}</span></h1>
+      </div>
+      <div className="overflow-x-auto ">
+        <table className="table lg:w-full font-semibold">
+          {/* head */}
+          <thead >
+            <tr className="bg-gradient-to-r from-blue-500 py-20 to-purple-600 text-white" >
+              <th></th>
+              <th className="text-xl font-semibold">Name</th>
+              <th className="text-xl font-semibold">Email</th>
+              <th className="text-xl font-semibold">Role</th>
+              <th className="text-xl font-semibold">Action</th>
+            </tr>
+          </thead>
+          <tbody >
+            {/* row 1 */}
+            {
+              users?.map((user, index) =>
+                <tr key={user._id}>
+                  <th>
+                    {index + 1}
+                  </th>
+                  <td>
+
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle h-12 w-12">
+                          <img
+                            src={user?.photoURL || `${userPhoto}`}
+                            alt="Avatar Tailwind CSS Component" />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-bold">{user?.name}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    {user?.email}
+                  </td>
+                  <td>
+                    {
+                      user?.role === 'admin' ? 'Admin' : <button
+                        onClick={() => handleMakeAdmin(user)}
+                        className="btn  btn-lg bg-orange-500">
+                        <FaUsers className="text-white text-xl " />
+                      </button>
+                    }
+                  </td>
+                  <th>
+                    <button
+                      onClick={() => handleDeleteUser(user)}
+                      className="btn btn-ghost btn-lg bg-red-500">
+                      <RiDeleteBinLine className="text-white text-xl" />
+                    </button>
+                  </th>
+                </tr>
+              )
+            }
+
+
+          </tbody>
+        </table>
       </div>
     </div>
   );
@@ -91,13 +120,3 @@ const AllUsers = () => {
 
 export default AllUsers;
 
-const users = [
-  {
-    _id: 1,
-    displayName: "jhon",
-  },
-  {
-    _id: 2,
-    displayName: "Jack",
-  },
-];

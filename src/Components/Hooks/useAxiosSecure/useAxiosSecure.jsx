@@ -30,7 +30,7 @@ const useAxiosSecure = () => {
     //         navigate('/login')
     //         localStorage.removeItem('access-token');
     //     }
-    //     return Promise.reject(status);;
+    //     return Promise.reject(status);
     // });
 
     return axiosSecure;
