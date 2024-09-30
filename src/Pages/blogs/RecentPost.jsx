@@ -43,7 +43,7 @@ const RecentPost = () => {
 
       <div className="max-w-[700px] w-full space-y-4 my-4">
         {blogs.map((blog) => (
-          <Link to={`/blog/blogDetails/${blog._id}`} key={blog.id}>
+          <Link to={`/blog/list/${blog._id}`} key={blog.id}>
             <div
               key={blog._id}
               className="grid grid-cols-12 gap-4 p-4 bg-white shadow-md rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 mx-auto"
