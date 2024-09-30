@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import MenuShoppingCart from "../../../../Components/MenuShoppingCart/MenuShoppingCart";
 import NewProducts from "../../../Home/NewProducts/NewProducts";
 import { IoCartSharp } from "react-icons/io5";
@@ -7,8 +7,11 @@ import { MdOutlinePayment } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import CalculatedPrice from "../../../../Components/Shared/Price/CalculatedPrice";
 import GrandTotal from "../../../../Components/Shared/Price/GrandTotal";
+import { AuthContext } from "../../../../Provider/AuthProvider";
 
 const Carts = () => {
+  const { cartProduct ,fetchCartDetails} = useContext(AuthContext);
+  const { cart, totalPrice } = cartProduct;
   const location = useLocation();
   const isCarsPage = location?.pathname?.includes("carts");
   return (
@@ -33,7 +36,7 @@ const Carts = () => {
       </div>
       {/* Cart Detailes */}
       <div className="lg:flex justify-around gap-5">
-        <MenuShoppingCart />
+        <MenuShoppingCart cart={cart} />
         {/* Payment Details */}
         <div className="border px-6 py-4 rounded lg:w-[416px] h-[300px] mt-12">
           <h1 className="text-2xl text-black font-normal pb-4">
