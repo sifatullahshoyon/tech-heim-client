@@ -194,10 +194,10 @@ const Navbar = () => {
                   </div>
                   <div className="flex flex-col gap-4">
                     <p className="text-[#0C68F4] text-sm md:text-lg font-normal">
-                      user name
+                      {user?.displayName}
                     </p>
-                    <p className="font-normal text-black text-sm text-balance">
-                      use email
+                    <p className="font-normal text-black hover:text-[#0C68F4] text-sm text-balance">
+                      {user?.email.slice(0, 18)}
                     </p>
                   </div>
                 </div>
@@ -244,9 +244,9 @@ const Navbar = () => {
                       <Link to="/login">
                         <button
                           className=""
-                          // onClick={() =>
-                          //   document.getElementById("my_modal_6").showModal()
-                          // }
+                        // onClick={() =>
+                        //   document.getElementById("my_modal_6").showModal()
+                        // }
                         >
                           Sign In
                         </button>

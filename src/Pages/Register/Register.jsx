@@ -6,19 +6,20 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import GoogleLogin from "../../Components/Shared/SocalLogin/GoogleLogin/GoogleLogin";
 import FaceBookLogin from "../../Components/Shared/SocalLogin/FacebookLogin/FaceBookLogin";
-import useAuth from "../../Components/Hooks/useAuth/useAuth";
+import useAxiosPublic from "../../Components/Hooks/useAxiosPublic/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false); // State for show password
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+  const axiosPublic = useAxiosPublic()
   const [isCheckedSignUP, setIsCheckedSignUp] = useState(false); // State for checkbox
   const { createUser, user } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
@@ -26,12 +27,34 @@ const Register = () => {
 
   const formLocation = location?.state?.form?.pathname || '/'
 
+
   const onSubmit = (data) => {
+    // firebase addition can not provide the name field. So I took the name field from to from
+    const name = data?.name;
     console.log(data);
-    createUser(data?.email, data?.password).then((result) => {
-      console.log(result.user);
-      navigate(formLocation, { replace: true })
-    });
+    createUser(data?.email, data?.password)
+      .then((result) => {
+        console.log(result)
+        const userInfo = {
+          name: name,
+          email: data?.email
+        }
+        axiosPublic.post('users', userInfo)
+          .then((data) => {
+
+            console.log('user added to the data base', data.data)
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Your work has been saved",
+              showConfirmButton: false,
+              timer: 1500
+            });
+
+
+          })
+        navigate(formLocation, { replace: true })
+      });
   };
 
   const handleCheckboxChangeSignUp = (e) => {
