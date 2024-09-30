@@ -34,6 +34,7 @@ import Register from "../Pages/Register/Register";
 import PrivateRoute from "../Route/PrivateRoute";
 import Carts from "../Pages/DashboardPages/UserPages/Carts/Carts";
 import Checkout from "../Pages/DashboardPages/UserPages/Checkout/Checkout";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -110,27 +111,27 @@ const router = createBrowserRouter([
       /////// Admin Route /////////
       {
         path: "admin-home",
-        element: <AdminHome />,
+        element: <AdminRoute><AdminHome /></AdminRoute>
       },
       {
         path: "add-products",
-        element: <AddProducts />,
+        element: <AdminRoute> <AddProducts /></AdminRoute>,
       },
       {
         path: "manage-products",
-        element: <ManageProducts />,
+        element: <AdminRoute><ManageProducts /></AdminRoute>,
       },
       {
         path: "manage-bookings",
-        element: <ManageBookings />,
+        element: <AdminRoute><ManageBookings /></AdminRoute>,
       },
       {
         path: "all-users",
-        element: <AllUsers />,
+        element: <AdminRoute><AllUsers /></AdminRoute>,
       },
       {
         path: "blogs",
-        element: <Blogs />,
+        element: <AdminRoute><Blogs /> </AdminRoute>,
       },
       /////// user Route /////////
       {

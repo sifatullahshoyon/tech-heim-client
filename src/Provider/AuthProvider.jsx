@@ -10,7 +10,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
     const axiosPublic = useAxiosPublic();
 
-    // user related state & function start
+    /////////////////// user related state & function start /////////////////
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
@@ -37,34 +37,45 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser),
                 console.log('current user', currentUser)
+            if (currentUser) {
+                const userInfo = { email: currentUser.email };
+                axiosPublic.post('jwt', userInfo)
+                    .then((res) => {
+                        if (res?.data?.token) {
+                            localStorage.setItem('access-token', res?.data?.token)
+                        }
+                    })
+            } else {
+                localStorage.removeItem('access-token')
+            }
             setLoading(false)
         })
         return () => {
             return unsubscribe();
         }
-    }, [])
-    // user related state & function end
+    }, [axiosPublic])
+    /////////////// user related state & function End //////////////////
 
 
 
-    // wishList product related state & function start
-    
-    
-    const [wishProduct,setWishProduct]=useState([])
+    ///////////// wishList product related state & function start///////// 
+
+
+    const [wishProduct, setWishProduct] = useState([])
     const [wistList, setWistList] = useState([]);
 
     const fetchWishList = async () => {
-        const userEmail=user?.email
+        const userEmail = user?.email
         const response = await axiosPublic.get(`/wishlist/${userEmail}`);
         const data = response?.data?.products?.map(item => item?._id);;
         setWishProduct(response?.data?.products)
         setWistList(data);
-        
-      };
-      useEffect(() => {
+
+    };
+    useEffect(() => {
         fetchWishList();
-      }, []);
-      // wishList product related state & function end
+    }, []);
+    // wishList product related state & function end
 
     const authInfo = {
         user,

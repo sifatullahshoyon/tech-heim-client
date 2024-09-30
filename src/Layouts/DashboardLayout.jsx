@@ -12,6 +12,7 @@ import { SiSpringsecurity } from 'react-icons/si';
 import { CgLogOut } from 'react-icons/cg';
 import { toast } from 'react-toastify';
 import useAuth from '../Components/Hooks/useAuth/useAuth';
+import useAdmin from '../Components/Hooks/useAdmin/useAdmin';
 
 const DashboardLayout = () => {
 
@@ -23,20 +24,18 @@ const DashboardLayout = () => {
         const successSignOut = logOut();
         if (successSignOut) {
             alert("Do you want to logout...?");
-            toast.success("Successfully Logout");
-            // localStorage.removeItem('access- token');
+            navigate('/')
         }
     }
 
     useEffect(() => {
         if (!user) {
-            navigate('/')
+
         }
     }, [user, navigate])
 
     // admin
-    const isAdmin = true;
-    console.log(user)
+    const [isAdmin] = useAdmin();
     return (
         <div>
             <Navbar></Navbar>
