@@ -10,10 +10,11 @@ const MenuShoppingCart = () => {
   const location = useLocation();
   const isCarts = location?.pathname?.includes("carts");
   const isCheckout = location?.pathname?.includes("checkout");
+  const isPayment = location?.pathname?.includes("payment");
   return (
     <div className=" flex flex-col">
       {/* Total Item */}
-      {!isCheckout ? <p className="text-sm md:text-lg">3 items</p> : ""}
+      {!isCheckout && !isPayment ? <p className="text-sm md:text-lg">3 items</p> : ""}
       {/* Cart Info */}
       <div className="my-2 flex flex-col gap-3">
         {/* Single Cart Info */}
@@ -25,7 +26,7 @@ const MenuShoppingCart = () => {
         ))}
       </div>
       {/* Total &  proceed to cart */}
-      {!isCarts && !isCheckout ? (
+      {!isCarts && !isCheckout && !isPayment ? (
         <div className="flex items-center w-full mt-2">
           <div className="flex flex-col mr-2">
             <p>Grand total</p>

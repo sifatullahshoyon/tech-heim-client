@@ -12,11 +12,13 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@frameright/react-image-display-control": "^1.0.7",
+    "@react-google-maps/api": "^2.19.3",
     "@react-icons/all-files": "^4.1.0",
     "@tanstack/react-query": "^5.56.2",
     "axios": "^1.7.7",
     "emailjs-com": "^3.2.0",
     "firebase": "^10.13.2",
+    "google-maps-current-location": "^0.4.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
     "react": "^18.3.1",

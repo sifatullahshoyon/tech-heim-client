@@ -14,21 +14,21 @@ const MenuShoppingCartItem = ({ shoppingItem }) => {
     >
       <figure>
         <ImageDisplayControl>
-          <img src={shoppingItem.img} />
+          <img src={shoppingItem?.img} />
         </ImageDisplayControl>
       </figure>
       <div className="card-body">
-        <h2 className="card-title text-balance">{shoppingItem.title}</h2>
+        <h2 className="card-title text-balance">{shoppingItem?.title}</h2>
         <p className="flex gap-1 items-center text-blue-500 text-base">
-          {shoppingItem.deliveryIcon}{" "}
-          <p className="text-[#717171]">{shoppingItem.delivery}</p>
+          {shoppingItem?.deliveryIcon}{" "}
+          <p className="text-[#717171]">{shoppingItem?.delivery}</p>
         </p>
         <p className="flex gap-1 items-center text-blue-500 text-base">
-          {shoppingItem.guaranteedIcon}{" "}
-          <p className="text-[#717171]">{shoppingItem.guaranteed}</p>
+          {shoppingItem?.guaranteedIcon}{" "}
+          <p className="text-[#717171]">{shoppingItem?.guaranteed}</p>
         </p>
         <div className="card-actions justify-between items-center">
-          <p>${shoppingItem.price}</p>
+          <p>${shoppingItem?.price}</p>
           <div className="flex items-center gap-2">
             <FaTrash className="text-rose-500" />
             <div className="flex gap-3 border-b">
