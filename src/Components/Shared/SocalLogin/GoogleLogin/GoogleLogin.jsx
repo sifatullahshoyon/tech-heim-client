@@ -2,28 +2,43 @@ import React, { useContext, useEffect } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import useAuth from '../../../Hooks/useAuth/useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useAxiosPublic from '../../../Hooks/useAxiosPublic/useAxiosPublic';
+import Swal from 'sweetalert2';
 
 const GoogleLogin = () => {
     const { googleSignIn } = useAuth()
-    const { user } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
+    const axiosPublic = useAxiosPublic()
 
     //location pathname
     const formLocation = location?.state?.from?.pathname || '/'
 
     const handleGoogleSignIn = () => {
         googleSignIn()
-            .then(result => {
-                console.log(result.user)
+            .then(data => {
+                if (data?.user?.email) {
+                    const userInfo = {
+                        email: data?.user?.email,
+                        name: data?.user?.displayName,
+                        photoURL: data?.user?.photoURL
+                    }
+                    axiosPublic.post('/users', userInfo)
+                        .then((data) => {
+                            console.log('user added to the data base', data.data)
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Your work has been saved",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        })
+                }
+                navigate(formLocation, { replace: true })
             })
     }
 
-    useEffect(() => {
-        if (user) {
-            navigate(formLocation, { replace: true })
-        }
-    }, [user, formLocation, navigate])
     return (
         <div>
             <button

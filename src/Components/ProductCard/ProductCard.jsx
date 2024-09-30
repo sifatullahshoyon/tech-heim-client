@@ -4,14 +4,15 @@ import line from "../../assets/Line.png";
 
 import { FaRegStar, FaShoppingCart, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import { MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
+import { MdAddShoppingCart, MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { useState } from "react";
 import axios from "axios";
 import useAxiosPublic from "../Hooks/useAxiosPublic/useAxiosPublic";
 import useAuth from "../Hooks/useAuth/useAuth";
-const ProductCard = ({ pc, wistList, setWistList, fetchWishList }) => {
+import { toast } from "react-toastify";
+const ProductCard = ({ pc }) => {
+  const { user, wistList, fetchWishList, cartProduct, cartProductID, fetchCartDetails } = useAuth();
   const axiosPublic = useAxiosPublic();
-  const { user } = useAuth();
 
   const userEmail = user?.email;
 
@@ -52,11 +53,15 @@ const ProductCard = ({ pc, wistList, setWistList, fetchWishList }) => {
       }
     } else {
       // If the item is not in the wishlist, add it
-      try {
-        const response = await axiosPublic.post("wishlist/add", { user: userEmail, product: pc });
-        fetchWishList();
-      } catch (error) {
-        console.error("Error adding to wishlist", error);
+      if (userEmail) {
+        try {
+          const response = await axiosPublic.post("wishlist/add", { user: userEmail, product: pc });
+          fetchWishList();
+        } catch (error) {
+          console.error("Error adding to wishlist", error);
+        }
+      } else {
+        toast.warning("Oops! Please log in to add items to your wishlist.");
       }
     }
   };
@@ -72,6 +77,38 @@ const ProductCard = ({ pc, wistList, setWistList, fetchWishList }) => {
       setShowIcon(false);
     }
   };
+
+  // add to cart function
+  const handleAddToCart = async (product, userEmail) => {
+    if (userEmail) {
+      try {
+        const response = await axiosPublic.post("/cart/add", {
+          product, // Full product object
+          userEmail,
+        });
+        if (response.data.message === "Product added to cart") {
+          // Handle success (e.g., show a message or update cart state)
+          toast.success("Product added to cart");
+          fetchCartDetails();
+        } else if (response.data.message === "Product already in cart") {
+          toast.warning("Product already in cart");
+          fetchCartDetails();
+        } else if (response.data.message === "Cart created and product added") {
+          toast.success("Cart created and product added");
+          fetchCartDetails();
+        } else {
+          console.log(response.data.message);
+        }
+      } catch (error) {
+        console.error("Error adding to cart:", error);
+      }
+    } else {
+      toast.warning("Oops! Please log in to add items to your cart.");
+    }
+  };
+
+
+  
 
   return (
     <div
@@ -162,13 +199,28 @@ const ProductCard = ({ pc, wistList, setWistList, fetchWishList }) => {
             )}
           </div>
           <div className="flex justify-evenly mt-[30px]">
-            <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              <Link className="flex items-center " to="">
-                {" "}
-                <FaShoppingCart className="mr-[5px]" />
-                <span>Add to cart</span>
-              </Link>
-            </button>
+            {cartProductID.includes(_id) ? (
+              <button
+                onClick={() => handleAddToCart(pc, userEmail)}
+                className="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-bold rounded-lg text-sm px-6 py-3 transition-transform transform hover:scale-105 shadow-lg"
+              >
+                <Link className="flex items-center space-x-2" to="">
+                  <MdAddShoppingCart className="text-white text-xl" />
+                  <span className="uppercase">In Cart</span>
+                </Link>
+              </button>
+            ) : (
+              <button
+                onClick={() => handleAddToCart(pc, userEmail)}
+                className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-6 py-3 transition-transform transform hover:scale-105 shadow-lg"
+              >
+                <Link className="flex items-center space-x-2" to="">
+                  <FaShoppingCart className="text-white text-xl" />
+                  <span className="uppercase">Add to Cart</span>
+                </Link>
+              </button>
+            )}
+
             <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
               <Link to={`/productDetails/${_id}`} className="flex items-center ">
                 {" "}

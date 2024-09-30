@@ -19,7 +19,7 @@ const BlogsDataFetch = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await axiosSecure.get("/blogs/list");
+        const res = await axiosSecure.get("/blogs/lists");
         setBlogs(res.data);
       } catch (error) {
         console.error("Error fetching blogs:", error);
