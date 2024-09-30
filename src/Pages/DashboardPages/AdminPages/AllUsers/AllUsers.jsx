@@ -6,9 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 import userPhoto from '../../../../assets/images/logo/user-profile-icon-free-vector.jpg'
 import { FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure()
+
+  // Get all users
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
@@ -16,7 +19,33 @@ const AllUsers = () => {
       return result.data
     }
   })
+  // Make admin
+  const handleMakeAdmin = async (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be make admin!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/users/admin/${user._id}`)
+          .then((res) => {
+            console.log(res.data)
+            if (res.data.modifiedCount > 0) {
+              refetch();
+              toast.success('Successfully Make admin')
+            }
+          })
 
+      }
+    });
+
+  }
+
+  // delete users
   const handleDeleteUser = async (user) => {
     Swal.fire({
       title: "Are you sure?",
