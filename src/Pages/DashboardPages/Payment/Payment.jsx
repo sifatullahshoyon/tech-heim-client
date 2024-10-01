@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { IoCartSharp } from "react-icons/io5";
 import { TbTruckDelivery } from "react-icons/tb";
 import { MdOutlinePayment } from "react-icons/md";
@@ -10,6 +10,7 @@ import GrandTotal from "../../../Components/Shared/Price/GrandTotal";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic/useAxiosPublic";
 import { ImageDisplayControl } from "@frameright/react-image-display-control";
 import paymentImg from '../../../assets/payment/SSLCommerz-Pay.png';
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Payment = () => {
     const location = useLocation();
@@ -17,6 +18,8 @@ const Payment = () => {
     const isCheckoutPage = location?.pathname?.includes("checkout");
     const isPaymentPage = location?.pathname?.includes("payment");
     const axiosPublic = useAxiosPublic();
+    const { cartProduct ,fetchCartDetails} = useContext(AuthContext);
+  const { cart, totalPrice } = cartProduct;
 
     const handleCreatePayment = () => {
       axiosPublic.post('/create-payment', {
@@ -35,6 +38,11 @@ const Payment = () => {
           console.error('Error creating payment:', error);
       });
     };
+
+    useEffect(() => {
+      fetchCartDetails()
+    }, [fetchCartDetails])
+  
     return (
         <div className="container mx-auto px-5">
       {/* Tabs */}
@@ -67,7 +75,7 @@ const Payment = () => {
         {/* Payment Img */}
           <div className="w-3/4">
           <ImageDisplayControl>
-            <img src={paymentImg}/>
+            <img src={paymentImg} className="lg:w-[500px]"/>
           </ImageDisplayControl>
           </div>
           <Link
@@ -86,7 +94,7 @@ const Payment = () => {
           {/* Divider */}
           <div className="divider"></div>
           {/* Shopping Carts Item */}
-          <MenuShoppingCart />
+          <MenuShoppingCart cart={cart} />
           {/* Divider */}
           <div className="divider"></div>
           {/* Discount */}

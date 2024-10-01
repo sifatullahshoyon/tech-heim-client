@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { LuBadgeCheck } from "react-icons/lu";
 import { TbTruckDelivery } from "react-icons/tb";
-import img1 from "../../assets/images/products/laptop.png";
 import MenuShoppingCartItem from "./MenuShoppingCartItem";
 import { FaShoppingCart } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
@@ -11,9 +10,15 @@ const MenuShoppingCart = () => {
 
   const { cartProduct ,fetchCartDetails} = useContext(AuthContext);
   const { cart, totalPrice } = cartProduct;
+  
+  useEffect(() => {
+    fetchCartDetails()
+  }, [])
+
   const location = useLocation();
   const isCarts = location?.pathname?.includes("carts");
   const isCheckout = location?.pathname?.includes("checkout");
+  const isPayment = location?.pathname?.includes("payment");
 
   console.log(cart?.length)
 
@@ -35,7 +40,7 @@ const MenuShoppingCart = () => {
             ))}
           </div>
           {/* Total &  proceed to cart */}
-          {!isCarts && !isCheckout ? (
+          {!isCarts && !isCheckout && !isPayment ? (
             <div className="flex items-center w-full mt-2">
               <div className="flex flex-col mr-2">
                 <p>Grand total</p>
