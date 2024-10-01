@@ -29,7 +29,7 @@ const GoogleLogin = () => {
                             Swal.fire({
                                 position: "top-end",
                                 icon: "success",
-                                title: "Your work has been saved",
+                                title: "Successfully Log-In",
                                 showConfirmButton: false,
                                 timer: 1500
                             });

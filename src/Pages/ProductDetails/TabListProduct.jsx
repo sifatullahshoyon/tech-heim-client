@@ -5,7 +5,7 @@ import TechnicalDetails from './TabListComponents/TechnicalDetails';
 import SimilarProduct from './TabListComponents/SimilarProduct';
 import Comments from './TabListComponents/Comments';
 
-const TabListProduct = () => {
+const TabListProduct = ({ product }) => {
     const [tabIndex, setTabIndex] = useState(0);
     return (
         <div className='mt-20'>
@@ -18,7 +18,7 @@ const TabListProduct = () => {
 
                 {/* tab-1  */}
                 <TabPanel>
-                    <TechnicalDetails></TechnicalDetails>
+                    <TechnicalDetails product={product} key={product._id}></TechnicalDetails>
                 </TabPanel>
                 {/* tab-2 */}
                 <TabPanel>
