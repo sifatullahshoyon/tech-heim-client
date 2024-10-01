@@ -3,15 +3,31 @@ import { IoStar } from "react-icons/io5";
 import { TbHomeRibbon, TbTruckDelivery } from "react-icons/tb";
 import { LuShieldCheck } from "react-icons/lu";
 import { FaAngleRight, FaCheck } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { RiDiscountPercentFill } from "react-icons/ri";
 import { BsFillCartCheckFill } from "react-icons/bs";
 import TabListProduct from "./TabListProduct";
 import ImageSlider from "./ImageSlider";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from 'react-scroll';
+import useAxiosPublic from "../../Components/Hooks/useAxiosPublic/useAxiosPublic";
 
 const ProductDetails = () => {
   const [selectedColor, setSelectedColor] = useState("");
+  const axiosPublic = useAxiosPublic();
+  const { id } = useParams()
 
+
+  const { data: product = [] } = useQuery({
+    queryKey: ['product'],
+    queryFn: async () => {
+      const result = await axiosPublic.get(`/products/details/${id}`)
+      return result.data
+    }
+  })
+  const { name, modelName, rate, regularPrice, sellPrice, screenSize, stock, processor, gpuBrand, driveSize, color, category, brand, WebCam, WarrantyDetails, Speaker, KeyboardType, BatteryCapacity, featureImage, galleryImages, _id } = product;
+
+  console.log(product)
   const handleColorSelect = (color) => {
     setSelectedColor(color);
   };
@@ -21,20 +37,22 @@ const ProductDetails = () => {
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-10 my-12 sm:my-16 lg:my-28">
           {/* <img src={laptop1} alt="" /> */}
           <div>
-            <ImageSlider />
+            <ImageSlider featureImage={featureImage} galleryImages={galleryImages} />
           </div>
 
           {/* card-1  */}
           <div className=" bg-base-100  ">
             <div className="card-body">
+              {/* name  */}
               <h2 className="text-3xl ">
-                MacBook Pro M2 MNEJ3 2022 LLA 13.3 inch
+                {name}
               </h2>
 
               <div className="flex my-2 items-center gap-4">
+                {/* rating */}
                 <div className="flex items-center gap-1 bg-[#063A88] text-white border rounded-lg px-2 p-1">
                   <IoStar className="w-5 h-5" />
-                  <p className="font-semibold">4.5</p>
+                  <p className="font-semibold">{rate}</p>
                 </div>
                 <div>
                   <p className="text-gray-500 font-semibold text-2xl ">
@@ -45,8 +63,8 @@ const ProductDetails = () => {
 
               <div className="flex my-4 items-center gap-2 flex-rap w-full">
                 {/* number-1 */}
-                <div className="flex items-center whitespace-nowrap">
-                  <TbHomeRibbon className="w-7 h-7 text-blue-500" />
+                <div className="flex items-center gap-1 whitespace-nowrap">
+                  <TbHomeRibbon className="w-6 h-7 text-blue-500" />
                   <p className="text-gray-500 font-semibold">In Stock</p>
                 </div>
                 {/* number-2 */}
@@ -66,9 +84,8 @@ const ProductDetails = () => {
                   <div className="flex gap-4 mt-4">
                     {/* Black color input */}
                     <div
-                      className={`w-8 h-8 rounded-full cursor-pointer flex justify-center items-center ${
-                        selectedColor === "Black" ? "ring-4 ring-black" : ""
-                      }`}
+                      className={`w-8 h-8 rounded-full cursor-pointer flex justify-center items-center ${selectedColor === "Black" ? "ring-4 ring-black" : ""
+                        }`}
                       style={{ backgroundColor: "Black" }}
                       onClick={() => handleColorSelect("Black")}
                     >
@@ -79,14 +96,13 @@ const ProductDetails = () => {
 
                     {/* gray color input */}
                     <div
-                      className={`w-8 h-8 rounded-full cursor-pointer flex justify-center items-center ${
-                        selectedColor === "Gray" ? "ring-4 ring-gray-500" : ""
-                      }`}
-                      style={{ backgroundColor: "gray" }}
-                      onClick={() => handleColorSelect("Gray")}
+                      className={`w-8 h-8 bg-base-300 rounded-full cursor-pointer flex justify-center items-center ${selectedColor === color ? "ring-4 ring-white border  shadow-2xl" : ""
+                        }`}
+                      style={{ backgroundColor: `${color}` }}
+                      onClick={() => handleColorSelect(`${color}`)}
                     >
-                      {selectedColor === "Gray" && (
-                        <FaCheck className="text-black" />
+                      {selectedColor === `${color}` && (
+                        <FaCheck className="text-white" />
                       )}
                     </div>
                   </div>
@@ -97,60 +113,48 @@ const ProductDetails = () => {
 
               {/* product-List  */}
               <div className="ml-8 mt-8">
-                <ul style={{ listStyleType: "disc" }}>
+                <ul style={{ listStyleType: "disc" }} className="space-y-4">
                   <li>
-                    <div className="flex items-center my-2">
-                      <p className="text-xl font-semibold text-gray-600">
-                        Brand
-                      </p>
-                      <p className="text-xl font-semibold text-black">Apple</p>
+                    <div className="flex items-center justify-between">
+                      {/* Left-aligned label */}
+                      <p className="text-xl font-semibold text-gray-600">Brand</p>
+                      {/* Left-aligned value */}
+                      <p className="text-xl font-semibold text-black text-right">{brand}</p>
                     </div>
                   </li>
                   <li>
-                    <div className="flex items-center my-2">
-                      <p className="text-xl font-semibold text-gray-600">
-                        Model Name
-                      </p>
-                      <p className="text-xl font-semibold text-black">
-                        Mackbook Pro
-                      </p>
+                    <div className="flex items-center justify-between">
+                      <p className="text-xl font-semibold text-gray-600">Model Name</p>
+                      <p className="text-xl font-semibold text-black text-right">{modelName}</p>
                     </div>
                   </li>
                   <li>
-                    <div className="flex items-center my-2">
-                      <p className="text-xl font-semibold text-gray-600">
-                        Screen Size
-                      </p>
-                      <p className="text-xl font-semibold text-black">
-                        13.3 Inches
-                      </p>
+                    <div className="flex items-center justify-between">
+                      <p className="text-xl font-semibold text-gray-600">Screen Size</p>
+                      <p className="text-xl font-semibold text-black text-right">{screenSize}</p>
                     </div>
                   </li>
                   <li>
-                    <div className="flex items-center my-2">
-                      <p className="text-xl font-semibold text-gray-600">
-                        Hard Disk size
-                      </p>
-                      <p className="text-xl font-semibold text-black">256 GB</p>
+                    <div className="flex items-center justify-between">
+                      <p className="text-xl font-semibold text-gray-600">Hard Disk Size</p>
+                      <p className="text-xl font-semibold text-black text-right">{driveSize}</p>
                     </div>
                   </li>
                   <li>
-                    <div className="flex items-center my-2">
-                      <p className="text-xl font-semibold text-gray-600">
-                        CPU Model
-                      </p>
-                      <p className="text-xl font-semibold text-black">
-                        core i5
-                      </p>
+                    <div className="flex items-center justify-between">
+                      <p className="text-xl font-semibold text-gray-600">CPU Model</p>
+                      <p className="text-xl font-semibold text-black text-right">{processor}</p>
                     </div>
                   </li>
                 </ul>
                 <div>
-                  <Link className="btn text-xl -ml-3 text-blue-600 bg-white hover:bg-white">
+                  <Link to="Technical-Details" className="btn  text-xl -ml-3 text-blue-600 bg-white hover:bg-white">
                     Show More <FaAngleRight />
                   </Link>
                 </div>
               </div>
+
+
             </div>
           </div>
           {/* card-2  */}
@@ -170,6 +174,7 @@ const ProductDetails = () => {
               <p className="text-xl font-semibold text-gray-500">
                 Last price $ 1410,87
               </p>
+
 
               <div>
                 <div className="flex items-center gap-4 my-4">
@@ -228,10 +233,10 @@ const ProductDetails = () => {
       </div>
 
       {/* tablist-components  */}
-      <TabListProduct></TabListProduct>
+      <TabListProduct product={product} key={_id}></TabListProduct>
 
       {/* Review  */}
-    </div>
+    </div >
   );
 };
 
