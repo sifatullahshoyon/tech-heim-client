@@ -15,7 +15,7 @@ const MenuShoppingCart = () => {
   const isCarts = location?.pathname?.includes("carts");
   const isCheckout = location?.pathname?.includes("checkout");
 
-  console.log(cart?.length)
+  
 
   return (
     <div>
