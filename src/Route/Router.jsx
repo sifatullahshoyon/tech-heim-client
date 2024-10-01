@@ -36,6 +36,9 @@ import Carts from "../Pages/DashboardPages/UserPages/Carts/Carts";
 import Checkout from "../Pages/DashboardPages/UserPages/Checkout/Checkout";
 import AdminRoute from "./AdminRoute";
 import Payment from "../Pages/DashboardPages/Payment/Payment";
+import Success from "../Pages/DashboardPages/Payment/Success/Success";
+import Cancel from "../Pages/DashboardPages/Payment/Cancel/Cancel";
+import Fail from "../Pages/DashboardPages/Payment/Fail/Fail";
 
 const router = createBrowserRouter([
   {
@@ -102,6 +105,18 @@ const router = createBrowserRouter([
       {
         path: "/payment",
         element: <Payment />,
+      },
+      {
+        path: "/payment-success",
+        element: <Success />,
+      },
+      {
+        path: "/payment-cancel",
+        element: <Cancel />,
+      },
+      {
+        path: "/payment-fail",
+        element: <Fail />,
       },
     ],
   },
@@ -185,8 +200,20 @@ const router = createBrowserRouter([
         element: <ContactUs />,
       },
       // {
-      //   path: "carts",
-      //   element: <Carts />,
+      //   path: "/dashboard/payment",
+      //   element: <Payment />,
+      // },
+      // {
+      //   path: "/dashboard/payment-success",
+      //   element: <Success />,
+      // },
+      // {
+      //   path: "/dashboard/payment-cancel",
+      //   element: <Cancel />,
+      // },
+      // {
+      //   path: "/dashboard/payment-fail",
+      //   element: <Fail />,
       // },
     ],
   },

@@ -74,14 +74,14 @@ const Checkout = () => {
           </div>
           {/* Total Price */}
           <CalculatedPrice />
-          <GrandTotal/>
+          <GrandTotal />
           <div className="w-full">
-         <Link to="/payment">
-          <button className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full">
-          Continue to pay
-          </button>
-        </Link> 
-      </div>
+            <Link to="/payment">
+              <button className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full">
+                Continue to pay
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
