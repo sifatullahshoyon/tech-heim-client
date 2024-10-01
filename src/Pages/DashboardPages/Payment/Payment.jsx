@@ -7,8 +7,9 @@ import { FaArrowLeft } from "react-icons/fa6";
 import MenuShoppingCart from "../../../Components/MenuShoppingCart/MenuShoppingCart";
 import CalculatedPrice from "../../../Components/Shared/Price/CalculatedPrice";
 import GrandTotal from "../../../Components/Shared/Price/GrandTotal";
-import CheckoutForm from "../../../Components/Form/CheckoutForm";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic/useAxiosPublic";
+import { ImageDisplayControl } from "@frameright/react-image-display-control";
+import paymentImg from '../../../assets/payment/SSLCommerz-Pay.png';
 
 const Payment = () => {
     const location = useLocation();
@@ -63,8 +64,11 @@ const Payment = () => {
       {/* Checkout Form */}
       <div className="lg:flex justify-center gap-5">
         <div className="lg:w-1/2">
-          <div className="w-3/4 border p-8 rounded">
-            <h1>Complete Your Payment with SSLCommerz</h1>
+        {/* Payment Img */}
+          <div className="w-3/4">
+          <ImageDisplayControl>
+            <img src={paymentImg}/>
+          </ImageDisplayControl>
           </div>
           <Link
             to="/checkout"
