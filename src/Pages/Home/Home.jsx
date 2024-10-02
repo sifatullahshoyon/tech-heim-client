@@ -14,7 +14,7 @@ const Home = () => {
       <ProductsInfo />
       <ProductOnSell />
       <NewProducts />
-      <Prebook />
+      <div className="flex justify-center"><Prebook /></div>
       <BestSellers />
       <AnotherHomePage />
     </>
