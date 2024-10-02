@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import p1 from "../../assets/image1.png";
+
 import line from "../../assets/Line.png";
 
 import { FaRegStar, FaShoppingCart, FaStar, FaStarHalfAlt } from "react-icons/fa";
@@ -134,7 +134,7 @@ const ProductCard = ({ pc }) => {
               </>
             )}
           </div>
-          <div className="pr-[20px] absolute top-[37px] right-0">
+          <div className="pr-[20px] absolute top-[6%] right-0">
             {(showIcon || wistList.includes(_id)) && (
               <button onClick={() => handleWishlistToggle(_id, userEmail)}>
                 {wistList.includes(_id) ? (

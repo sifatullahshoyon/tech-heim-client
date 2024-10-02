@@ -19,6 +19,10 @@
     "emailjs-com": "^3.2.0",
     "firebase": "^10.13.2",
     "framer-motion": "^11.9.0",
+<<<<<<< HEAD
+=======
+    "google-maps-current-location": "^0.4.0",
+>>>>>>> development
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
     "react": "^18.3.1",
@@ -30,6 +34,7 @@
     "react-id-swiper": "^4.0.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.26.2",
+    "react-scroll": "^1.9.0",
     "react-tabs": "^6.0.2",
     "react-toastify": "^10.0.5",
     "sort-by": "^1.2.0",

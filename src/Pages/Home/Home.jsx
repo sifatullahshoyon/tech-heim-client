@@ -6,6 +6,7 @@ import Prebook from "./Prebook/Prebook";
 import BestSellers from "./BestSellers/BestSellers";
 import ProductsInfo from "./ProductsInfo/ProductsInfo";
 import AnotherHomePage from "../AnotherHomePage/AnotherHomePage";
+import BlogCardForHome from "../blogs/BlogsForHome/BlogCardForHome";
 
 const Home = () => {
   return (
@@ -14,9 +15,10 @@ const Home = () => {
       <ProductsInfo />
       <ProductOnSell />
       <NewProducts />
-      <Prebook />
+      <div className="flex justify-center"><Prebook /></div>
       <BestSellers />
       <AnotherHomePage />
+      <BlogCardForHome />
     </>
   );
 };

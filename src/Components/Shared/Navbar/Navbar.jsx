@@ -13,10 +13,13 @@ import MenuShoppingCart from "../../MenuShoppingCart/MenuShoppingCart";
 import SearchItems from "../../SearchItems/SearchItems";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-toastify";
+import useAdmin from "../../Hooks/useAdmin/useAdmin";
 
 const Navbar = () => {
-  const { user, logOut ,cartProduct} = useContext(AuthContext);
-  const { cart, totalPrice} =cartProduct
+  const { user, logOut, cartProduct } = useContext(AuthContext);
+  const { cart, totalPrice } = cartProduct;
+  const [isAdmin] = useAdmin();
+
   const handleLogeOut = () => {
     logOut()
       .then(() => {
@@ -26,6 +29,8 @@ const Navbar = () => {
         console.log(error);
       });
   };
+
+
   return (
     <div className="max-w-[1440px] px-6 mx-auto">
       <div className="navbar bg-base-100">
@@ -124,7 +129,14 @@ const Navbar = () => {
                   <NavLink to={item.path}>{item.name}</NavLink>
                 )}
               </li>
+
             ))}
+            {
+              user && isAdmin && <NavLink to='/dashboard/admin-home' >Dashboard</NavLink>
+            }
+            {
+              user && !isAdmin && <NavLink to='/dashboard/personal-data'>Dashboard</NavLink>
+            }
           </ul>
         </div>
         <div className="navbar-end">
@@ -169,7 +181,7 @@ const Navbar = () => {
             >
               <div className="modal-box w-11/12 lg:w-full mx-auto">
                 {/* open shopping cart */}
-                <MenuShoppingCart  />
+                <MenuShoppingCart />
                 <div className="modal-action">
                   <form method="dialog">
                     <button className="text-xl font-bold">
@@ -322,8 +334,8 @@ const navItems = [
     name: "About Us",
     path: "/aboutUs",
   },
-  {
-    name: "Dashboard",
-    path: "/dashboard",
-  },
+  // {
+  //   name: "Dashboard",
+  //   path: "/dashboard",
+  // },
 ];
