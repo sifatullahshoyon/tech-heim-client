@@ -39,11 +39,7 @@ const Payment = () => {
       return;
     };
 
-    // 3. user login must
-    if (user) {
-      toast.error("Continue to pay please login first.");
-      return;
-    };
+    
   
     // Proceed with payment if validation passes
     axiosPublic.post('/create-payment', { 
