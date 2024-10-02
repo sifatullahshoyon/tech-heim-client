@@ -3,7 +3,7 @@ import { LuBadgeCheck } from "react-icons/lu";
 import { TbTruckDelivery } from "react-icons/tb";
 import MenuShoppingCartItem from "./MenuShoppingCartItem";
 import { FaShoppingCart } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const MenuShoppingCart = () => {
@@ -47,9 +47,11 @@ const MenuShoppingCart = () => {
                 <p>${totalPrice}</p>
               </div>
               <div className="w-4/5">
+                <Link to='/checkout'>
                 <button className="btn bg-[#0C68F4] hover:bg-blue-800 text-white  w-full flex">
                   Proceed to Cart <FaShoppingCart />{" "}
                 </button>
+                </Link>
               </div>
             </div>
           ) : (
