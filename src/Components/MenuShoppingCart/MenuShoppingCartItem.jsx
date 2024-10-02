@@ -59,10 +59,10 @@ const MenuShoppingCartItem = ({ shoppingItem }) => {
   const location = useLocation();
   const isCheckoutPage = location?.pathname?.includes("checkout");
   return (
-    <div className={`card card-side bg-base-100 ${isCheckoutPage ? "" : "shadow-xl"}`}>
+    <div className={`card card-side ${isCheckoutPage ? "" : "shadow-xl"}`}>
       <figure>
         <ImageDisplayControl>
-          <img src={shoppingItem?.product?.featureImage} />
+          <img src={shoppingItem?.product?.featureImage} className="w-[200px]" />
         </ImageDisplayControl>
       </figure>
       <div className="card-body">

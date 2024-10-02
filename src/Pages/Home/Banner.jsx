@@ -3,7 +3,6 @@ import { ImageDisplayControl } from "@frameright/react-image-display-control";
 import bannerImg from "../../assets/images/banner/banner.png";
 import PrimaryBtn from "../../Components/Shared/Buttons/PrimaryBtn";
 
-
 const Banner = () => {
   return (
     <section className="max-w-[1440px] mx-auto px-6 mb-12">

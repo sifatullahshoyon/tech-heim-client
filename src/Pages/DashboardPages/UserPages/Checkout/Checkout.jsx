@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { IoCartSharp } from "react-icons/io5";
 import { TbTruckDelivery } from "react-icons/tb";
 import { MdOutlinePayment } from "react-icons/md";
@@ -8,11 +8,19 @@ import { FaArrowLeft } from "react-icons/fa6";
 import CalculatedPrice from "../../../../Components/Shared/Price/CalculatedPrice";
 import GrandTotal from "../../../../Components/Shared/Price/GrandTotal";
 import MenuShoppingCartItem from "../../../../Components/MenuShoppingCart/MenuShoppingCartItem";
+import { AuthContext } from "../../../../Provider/AuthProvider";
+import MenuShoppingCart from "../../../../Components/MenuShoppingCart/MenuShoppingCart";
 
 const Checkout = () => {
   const location = useLocation();
   const isCarsPage = location?.pathname?.includes("carts");
   const isCheckoutPage = location?.pathname?.includes("checkout");
+  const { cartProduct ,fetchCartDetails} = useContext(AuthContext);
+  const { cart, totalPrice } = cartProduct;
+
+  useEffect(() => {
+    fetchCartDetails()
+  }, [cart])
   return (
     <div className="container mx-auto px-5">
       {/* Tabs */}
@@ -59,7 +67,8 @@ const Checkout = () => {
           {/* Divider */}
           <div className="divider"></div>
           {/* Shopping Carts Item */}
-          <MenuShoppingCartItem />
+          {/* <MenuShoppingCartItem cart={cart} /> */}
+          <MenuShoppingCart />
           {/* Divider */}
           <div className="divider"></div>
           {/* Discount */}
@@ -74,14 +83,14 @@ const Checkout = () => {
           </div>
           {/* Total Price */}
           <CalculatedPrice />
-          <GrandTotal/>
+          <GrandTotal />
           <div className="w-full">
-         <Link to="/payment">
-          <button className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full">
-          Continue to pay
-          </button>
-        </Link> 
-      </div>
+            <Link to="/payment">
+              <button className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full">
+                Continue to pay
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

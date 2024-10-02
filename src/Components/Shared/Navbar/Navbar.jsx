@@ -9,11 +9,13 @@ import { FaRegHeart } from "react-icons/fa";
 import { AiOutlineDollar } from "react-icons/ai";
 import { CiLogout } from "react-icons/ci";
 import Form from "../../Form/Form";
-import MenuShoppingCart from "../../MenuShoppingCart/MenuShoppingCart";
+
 import SearchItems from "../../SearchItems/SearchItems";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import useAdmin from "../../Hooks/useAdmin/useAdmin";
+import MenuShoppingCart from "../../MenuShoppingCart/MenuShoppingCart";
+
 
 const Navbar = () => {
   const { user, logOut, cartProduct } = useContext(AuthContext);
