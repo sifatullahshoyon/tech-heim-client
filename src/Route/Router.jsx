@@ -36,11 +36,13 @@ import Carts from "../Pages/DashboardPages/UserPages/Carts/Carts";
 import Checkout from "../Pages/DashboardPages/UserPages/Checkout/Checkout";
 import AdminRoute from "./AdminRoute";
 import Payment from "../Pages/DashboardPages/Payment/Payment";
+import ErrorPage from "../Components/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -62,7 +64,6 @@ const router = createBrowserRouter([
         path: "/blog",
         element: <BlogsMain />,
       },
-
       {
         path: "/blog/list/:id",
         element: <BlogProductDetailsMain />,
@@ -116,27 +117,52 @@ const router = createBrowserRouter([
       /////// Admin Route /////////
       {
         path: "admin-home",
-        element: <AdminRoute><AdminHome /></AdminRoute>
+        element: (
+          <AdminRoute>
+            <AdminHome />
+          </AdminRoute>
+        ),
       },
       {
         path: "add-products",
-        element: <AdminRoute> <AddProducts /></AdminRoute>,
+        element: (
+          <AdminRoute>
+            {" "}
+            <AddProducts />
+          </AdminRoute>
+        ),
       },
       {
         path: "manage-products",
-        element: <AdminRoute><ManageProducts /></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <ManageProducts />
+          </AdminRoute>
+        ),
       },
       {
         path: "manage-bookings",
-        element: <AdminRoute><ManageBookings /></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <ManageBookings />
+          </AdminRoute>
+        ),
       },
       {
         path: "all-users",
-        element: <AdminRoute><AllUsers /></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "blogs",
-        element: <AdminRoute><Blogs /> </AdminRoute>,
+        element: (
+          <AdminRoute>
+            <Blogs />{" "}
+          </AdminRoute>
+        ),
       },
       /////// user Route /////////
       {

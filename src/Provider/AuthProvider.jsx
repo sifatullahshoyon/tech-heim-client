@@ -26,7 +26,6 @@ const AuthProvider = ({ children }) => {
 
   /////////////////// user related state & function start /////////////////
 
-
   // user related state & function start
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -43,6 +42,8 @@ const AuthProvider = ({ children }) => {
   const logOut = () => {
     setLoading(true);
     setWistList([]);
+    setCartProduct({ cart: [], totalPrice: 0 });
+    setCartProductID([]);
     return signOut(auth);
   };
   const googleSignIn = () => {
@@ -51,9 +52,8 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, currentUser => {
-      setUser(currentUser),
-        console.log('current user', currentUser)
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser), console.log("current user", currentUser);
       if (currentUser) {
         const userInfo = { email: currentUser.email };
         axiosPublic.post('jwt', userInfo)
@@ -72,8 +72,8 @@ const AuthProvider = ({ children }) => {
     })
     return () => {
       return unsubscribe();
-    }
-  }, [axiosPublic])
+    };
+  }, [axiosPublic]);
   // user related state & function end
 
   // wishList product related function start
