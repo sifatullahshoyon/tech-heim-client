@@ -13,7 +13,7 @@ const MenuShoppingCart = () => {
   
   useEffect(() => {
     fetchCartDetails()
-  }, [])
+  }, [cart])
 
   const location = useLocation();
   const isCarts = location?.pathname?.includes("carts");

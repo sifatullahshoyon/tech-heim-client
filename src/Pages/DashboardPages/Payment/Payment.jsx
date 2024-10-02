@@ -11,6 +11,7 @@ import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic/useAxiosPub
 import { ImageDisplayControl } from "@frameright/react-image-display-control";
 import paymentImg from '../../../assets/payment/SSLCommerz-Pay.png';
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const Payment = () => {
     const location = useLocation();
@@ -18,30 +19,51 @@ const Payment = () => {
     const isCheckoutPage = location?.pathname?.includes("checkout");
     const isPaymentPage = location?.pathname?.includes("payment");
     const axiosPublic = useAxiosPublic();
-    const { cartProduct ,fetchCartDetails} = useContext(AuthContext);
+    const { cartProduct ,fetchCartDetails , user} = useContext(AuthContext);
   const { cart, totalPrice } = cartProduct;
 
-    const handleCreatePayment = () => {
-      axiosPublic.post('/create-payment', {
-            amount : 1000.56,
-            currency: 'USD',
-        })
-        .then((res) => {
-          console.log('payment page 25:' , res);
-          const  redirectUrl = res.data.paymentUrl;
+  console.log(cart, totalPrice)
 
-          if(redirectUrl){
-            window.location.replace(redirectUrl);
-          }
-        })
-        .catch((error) => {
-          console.error('Error creating payment:', error);
-      });
+  const handleCreatePayment = () => {
+    // Basic validation checks
+  
+    // 1. Check if the cart is empty
+    if (!cart || cart.length === 0) {
+      toast.error("Your cart is empty. Please add items to the cart before proceeding.");
+      return;
     };
+  
+    // 2. Check if totalPrice is a valid number
+    if (!totalPrice || isNaN(totalPrice) || totalPrice <= 0) {
+      toast.error("Invalid total price. Please check your cart.");
+      return;
+    };
+  
+    // Proceed with payment if validation passes
+    axiosPublic.post('/create-payment', { 
+        cart: cart,  // Send cart array with product information
+        totalPrice: parseFloat(totalPrice), // Send total price
+        userName: user.displayName, // Send User Name
+        userEmail: user.email    // Send User Email
+    })
+    .then((res) => {
+      console.log('payment page 25:', res);
+      const redirectUrl = res.data.paymentUrl;
+  
+      if (redirectUrl) {
+        window.location.replace(redirectUrl);
+      }
+    })
+    .catch((error) => {
+      console.error('Error creating payment:', error);
+      toast.error("There was an error processing your payment. Please try again.");
+    });
+  };
+  
 
     useEffect(() => {
       fetchCartDetails()
-    }, [fetchCartDetails])
+    }, [cart])
   
     return (
         <div className="container mx-auto px-5">

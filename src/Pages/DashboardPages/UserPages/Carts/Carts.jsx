@@ -12,11 +12,11 @@ import useAuth from "../../../../Components/Hooks/useAuth/useAuth";
 const Carts = () => {
   const { cartProduct ,fetchCartDetails} = useAuth();
   const { cart, totalPrice } = cartProduct;
-  console.log('carts page 15:' ,  fetchCartDetails)
+  console.log('carts page 15:' ,  cart)
 
   useEffect(() => {
     fetchCartDetails()
-  }, [fetchCartDetails])
+  }, [cart])
 
   const location = useLocation();
   const isCarsPage = location?.pathname?.includes("carts");
@@ -42,7 +42,7 @@ const Carts = () => {
       </div>
       {/* Cart Detailes */}
       <div className="lg:flex justify-around gap-10">
-        <MenuShoppingCart cart={cart} />
+        <MenuShoppingCart  />
         {/* Payment Details */}
         <div className="border px-6 py-4 rounded lg:w-[416px] h-[300px] mt-12">
           <h1 className="text-2xl text-black font-normal pb-4">

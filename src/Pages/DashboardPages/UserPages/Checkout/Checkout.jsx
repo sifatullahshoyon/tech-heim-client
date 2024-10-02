@@ -20,7 +20,7 @@ const Checkout = () => {
 
   useEffect(() => {
     fetchCartDetails()
-  }, [fetchCartDetails])
+  }, [cart])
   return (
     <div className="container mx-auto px-5">
       {/* Tabs */}
