@@ -130,12 +130,12 @@ const Footer = () => {
                             <Link to="/cookieSettings" className="text-gray-300 text-xl hover:text-white">
                                 Cookie Settings
                             </Link>
-                            <a href="/privacy-policy" className="text-gray-300 text-xl hover:text-white">
+                            <Link to="/PrivacyPolicy" className="text-gray-300 text-xl hover:text-white">
                                 Privacy Policy
-                            </a>
-                            <a href="/terms-conditions" className="text-gray-300 text-xl hover:text-white">
+                            </Link>
+                            <Link to="/termsConditions" className="text-gray-300 text-xl hover:text-white">
                                 Terms and Conditions
-                            </a>
+                            </Link>
                         </div>
                     </nav>
                 </div>

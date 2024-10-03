@@ -39,6 +39,8 @@ import Payment from "../Pages/DashboardPages/Payment/Payment";
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import Returns from "../Pages/FooterComponents/Returns";
 import CookieSettings from "../Pages/FooterComponents/CookieSettings";
+import PrivacyPolicy from "../Pages/FooterComponents/PrivacyPolicy";
+import TermsAndConditions from "../Pages/FooterComponents/TermsConditions";
 
 const router = createBrowserRouter([
   {
@@ -113,6 +115,14 @@ const router = createBrowserRouter([
       {
         path: "/cookieSettings",
         element: <CookieSettings />,
+      },
+      {
+        path: "/privacyPolicy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "/termsConditions",
+        element: <TermsAndConditions />,
       },
     ],
   },

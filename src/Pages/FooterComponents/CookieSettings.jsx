@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 
 const CookieSettings = () => {
     const [cookies, setCookies] = useState({
@@ -14,7 +15,13 @@ const CookieSettings = () => {
 
     const handleSaveSettings = () => {
         // Logic to save cookie settings goes here
-        alert('Your cookie preferences have been saved.');
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your cookie preferences have been saved.",
+            showConfirmButton: false,
+            timer: 1500
+        });
     };
 
     return (
