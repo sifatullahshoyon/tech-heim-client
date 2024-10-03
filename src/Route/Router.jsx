@@ -37,6 +37,8 @@ import Checkout from "../Pages/DashboardPages/UserPages/Checkout/Checkout";
 import AdminRoute from "./AdminRoute";
 import Payment from "../Pages/DashboardPages/Payment/Payment";
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
+import Returns from "../Pages/FooterComponents/Returns";
+import CookieSettings from "../Pages/FooterComponents/CookieSettings";
 
 const router = createBrowserRouter([
   {
@@ -103,6 +105,14 @@ const router = createBrowserRouter([
       {
         path: "/payment",
         element: <Payment />,
+      },
+      {
+        path: "/returns",
+        element: <Returns />,
+      },
+      {
+        path: "/cookieSettings",
+        element: <CookieSettings />,
       },
     ],
   },
