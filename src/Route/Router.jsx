@@ -36,7 +36,7 @@ import Carts from "../Pages/DashboardPages/UserPages/Carts/Carts";
 import Checkout from "../Pages/DashboardPages/UserPages/Checkout/Checkout";
 import AdminRoute from "./AdminRoute";
 import Payment from "../Pages/DashboardPages/Payment/Payment";
-import ErrorPage from "../Components/ErrorPage/ErrorPage";
+// import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import Returns from "../Pages/FooterComponents/Returns";
 import CookieSettings from "../Pages/FooterComponents/CookieSettings";
 import PrivacyPolicy from "../Pages/FooterComponents/PrivacyPolicy";
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <ErrorPage />,
+    // errorElement: <ErrorPage />,
     children: [
       {
         path: "/",

@@ -2,6 +2,7 @@ import React from "react";
 import { ImageDisplayControl } from "@frameright/react-image-display-control";
 import bannerImg from "../../assets/images/banner/banner.png";
 import PrimaryBtn from "../../Components/Shared/Buttons/PrimaryBtn";
+import { Link } from "react-router-dom";
 
 
 const Banner = () => {
@@ -17,15 +18,16 @@ const Banner = () => {
             "Join the <span className="text-[#F45E0C]">digital revolution</span>
             "
           </p>
-          <PrimaryBtn
-            width="w-[89px] md:w-60 lg:w-72"
-            height="h-9 lg:h-14"
-            color="text-white"
-            size="text-[10px]
+          <Link to='/shop'>
+            <PrimaryBtn
+              width="w-[89px] md:w-60 lg:w-72"
+              height="h-9 lg:h-14"
+              color="text-white"
+              size="text-[10px]
               md:text-xl lg:text-2xl"
-          >
-            Explore More
-          </PrimaryBtn>
+            >
+              Explore More
+            </PrimaryBtn></Link>
         </div>
         {/* Image */}
         <div>
