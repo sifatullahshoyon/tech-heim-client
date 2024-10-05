@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import GoogleLogin from "../../Components/Shared/SocalLogin/GoogleLogin/GoogleLogin";
-import FaceBookLogin from "../../Components/Shared/SocalLogin/FacebookLogin/FaceBookLogin";
+import FaceBookLogin from "../../Components/Shared/SocalLogin/FacebookLogin/FacebookLogin";
 import useAxiosPublic from "../../Components/Hooks/useAxiosPublic/useAxiosPublic";
 import Swal from "sweetalert2";
 
