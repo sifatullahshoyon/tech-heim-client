@@ -100,7 +100,7 @@ const DashboardLayout = () => {
                         : '  bg-white border-teal-600 border-2  border-none hover:bg-white  hover:text-teal-700 px-3  rounded-lg text-lg font-medium'
                     } to={"/dashboard/manage-bookings"}
                   >
-                    <FaBook /> Manage Booking
+                    <FaBook /> Manage Order
                   </NavLink>
                 </li>
                 <li className="mt-2">
