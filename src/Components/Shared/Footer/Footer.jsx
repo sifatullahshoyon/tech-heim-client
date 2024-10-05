@@ -3,6 +3,7 @@ import { IoLocationOutline, IoLogoLinkedin } from 'react-icons/io5';
 import { LuPhoneCall } from 'react-icons/lu';
 import { MdMarkEmailRead } from 'react-icons/md';
 import { FaFacebookSquare, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 const Footer = () => {
     return (
         <div>
@@ -14,25 +15,23 @@ const Footer = () => {
                         <nav className="flex-1">
                             <h6 className="footer-title text-xl mb-4">Company</h6>
                             <ul className="space-y-2">
+
                                 <li>
-                                    <a href="/about" className="link link-hover text-xl">
-                                        About Us
-                                    </a>
+                                    <Link to='/aboutUs' className="link link-hover text-xl">About Us</Link>
                                 </li>
                                 <li>
-                                    <a href="/blogs" className="link link-hover text-xl">
-                                        Blogs
-                                    </a>
+                                    <Link to='/blog' className="link link-hover text-xl">Blogs</Link>
                                 </li>
                                 <li>
-                                    <a href="/returns" className="link link-hover text-xl">
+                                    <Link to="/faqs" className="link link-hover text-xl">
+                                        FAQ
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <Link to="/returns" className="link link-hover text-xl">
                                         Returns
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/order-status" className="link link-hover text-xl">
-                                        Order Status
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </nav>
@@ -51,16 +50,13 @@ const Footer = () => {
                                         Our Promises
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="/faq" className="link link-hover text-xl">
-                                        FAQ
-                                    </a>
-                                </li>
+
                                 <li>
                                     <a href="/advertisement" className="link link-hover text-xl">
                                         Advertisement
                                     </a>
                                 </li>
+
                             </ul>
                         </nav>
 
@@ -78,7 +74,7 @@ const Footer = () => {
                                 </li>
                                 <li className="flex items-center gap-2">
                                     <MdMarkEmailRead className="w-5 h-5" />
-                                    <span className="text-xl">fashionhouse@gmail.com</span>
+                                    <span className="text-xl">infotechheim@gmail.com</span>
                                 </li>
                             </ul>
                         </nav>
@@ -126,20 +122,20 @@ const Footer = () => {
                 <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
                     <aside className="text-xl text-gray-400 mb-4 md:mb-0">
                         <p>
-                            © {new Date().getFullYear()} - All rights reserved by Fashion House Industries Ltd
+                            © {new Date().getFullYear()} - All rights reserved by Tech Heinpm m Industries Ltd
                         </p>
                     </aside>
                     <nav>
                         <div className="flex space-x-6">
-                            <a href="/cookie-settings" className="text-gray-300 text-xl hover:text-white">
+                            <Link to="/cookieSettings" className="text-gray-300 text-xl hover:text-white">
                                 Cookie Settings
-                            </a>
-                            <a href="/privacy-policy" className="text-gray-300 text-xl hover:text-white">
+                            </Link>
+                            <Link to="/PrivacyPolicy" className="text-gray-300 text-xl hover:text-white">
                                 Privacy Policy
-                            </a>
-                            <a href="/terms-conditions" className="text-gray-300 text-xl hover:text-white">
+                            </Link>
+                            <Link to="/termsConditions" className="text-gray-300 text-xl hover:text-white">
                                 Terms and Conditions
-                            </a>
+                            </Link>
                         </div>
                     </nav>
                 </div>

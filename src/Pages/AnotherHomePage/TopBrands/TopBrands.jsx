@@ -9,9 +9,9 @@ import topBanner from '../../../assets/Photos/Product-Details/topBanner.png';
 
 const TopBrands = () => {
     return (
-        <div className="container mx-auto px-4 ">
+        <div className="container mx-auto  ">
             {/* Title Section */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-center mt-8">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold mt-8">
                 Top Brands
             </h1>
             <div className="divider divider-neutral my-4"></div>
@@ -44,7 +44,7 @@ const TopBrands = () => {
             </div>
 
             {/* Top Banner */}
-            <div className="w-full">
+            <div className="w-full relative">
                 <img
                     src={topBanner}
                     className="w-full h-auto object-cover rounded-lg shadow-lg"

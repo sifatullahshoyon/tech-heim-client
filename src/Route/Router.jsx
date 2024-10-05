@@ -40,6 +40,10 @@ import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import Success from "../Pages/DashboardPages/Payment/Success/Success";
 import Cancel from "../Pages/DashboardPages/Payment/Cancel/Cancel";
 import Fail from "../Pages/DashboardPages/Payment/Fail/Fail";
+import Returns from "../Pages/FooterComponents/Returns";
+import CookieSettings from "../Pages/FooterComponents/CookieSettings";
+import PrivacyPolicy from "../Pages/FooterComponents/PrivacyPolicy";
+import TermsAndConditions from "../Pages/FooterComponents/TermsConditions";
 
 const router = createBrowserRouter([
   {
@@ -118,6 +122,20 @@ const router = createBrowserRouter([
       {
         path: "/payment-fail",
         element: <Fail />,
+        path: "/returns",
+        element: <Returns />,
+      },
+      {
+        path: "/cookieSettings",
+        element: <CookieSettings />,
+      },
+      {
+        path: "/privacyPolicy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "/termsConditions",
+        element: <TermsAndConditions />,
       },
     ],
   },

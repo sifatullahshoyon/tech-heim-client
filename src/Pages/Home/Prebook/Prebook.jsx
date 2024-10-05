@@ -2,6 +2,7 @@ import React from "react";
 import { ImageDisplayControl } from "@frameright/react-image-display-control";
 import phoneSeries from "../../../assets/images/banner/iPhone-series.png";
 import playstation from "../../../assets/images/banner/play-station-5.png";
+import { Link } from "react-router-dom";
 
 const Prebook = () => {
   return (
@@ -13,9 +14,11 @@ const Prebook = () => {
             <img src={phoneSeries} className="w-full" />
           </ImageDisplayControl>
           <div className="absolute bottom-5 right-5 lg:bottom-20 lg:right-40 ">
-            <button className="btn btn-primary bg-[#0C68F4] border-0 text-white">
-              Register Now
-            </button>
+            <Link to='/shop'>
+              <button className="btn btn-primary bg-[#0C68F4] border-0 text-white">
+                Explore More
+              </button>
+            </Link>
           </div>
         </div>
         {/* Image Two */}
@@ -24,9 +27,11 @@ const Prebook = () => {
             <img src={playstation} className="w-full" />
           </ImageDisplayControl>
           <div className="absolute bottom-10 left-20">
-            <button className="btn btn-primary bg-[#0C68F4] border-0 text-white px-10">
-              Buy Now
-            </button>
+            <Link to='/shop'>
+              <button className="btn btn-primary bg-[#0C68F4] border-0 text-white px-10">
+                Buy Now
+              </button>
+            </Link>
           </div>
         </div>
       </div>
