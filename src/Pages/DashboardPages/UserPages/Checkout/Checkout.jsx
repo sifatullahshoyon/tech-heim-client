@@ -18,9 +18,7 @@ const Checkout = () => {
   const { cartProduct ,fetchCartDetails} = useContext(AuthContext);
   const { cart, totalPrice } = cartProduct;
 
-  useEffect(() => {
-    fetchCartDetails()
-  }, [cart])
+  
   return (
     <div className="container mx-auto px-5">
       {/* Tabs */}
