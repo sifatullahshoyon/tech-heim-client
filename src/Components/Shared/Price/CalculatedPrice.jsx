@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../Provider/AuthProvider';
 
 const CalculatedPrice = () => {
+  const { cartProduct ,fetchCartDetails} = useContext(AuthContext);
+  const { cart, totalPrice } = cartProduct;
     return (
         <div>
             <div className="flex justify-between mb-2">
               <p className="text-[#717171] text-sm">Subtotal</p>
-              <p className="text-[#717171] text-sm">$5104.52</p>
+              <p className="text-[#717171] text-sm">${totalPrice}</p>
             </div>
             <div className="flex justify-between mb-2">
               <p className="text-[#717171] text-sm">Discount</p>

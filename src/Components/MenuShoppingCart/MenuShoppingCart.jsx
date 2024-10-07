@@ -11,9 +11,7 @@ const MenuShoppingCart = () => {
   const { cartProduct ,fetchCartDetails} = useContext(AuthContext);
   const { cart, totalPrice } = cartProduct;
   
-  useEffect(() => {
-    fetchCartDetails()
-  }, [cart])
+ 
 
   const location = useLocation();
   const isCarts = location?.pathname?.includes("carts");

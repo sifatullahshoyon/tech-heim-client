@@ -9,66 +9,74 @@ import CalculatedPrice from "../../../Components/Shared/Price/CalculatedPrice";
 import GrandTotal from "../../../Components/Shared/Price/GrandTotal";
 import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic/useAxiosPublic";
 import { ImageDisplayControl } from "@frameright/react-image-display-control";
-import paymentImg from '../../../assets/payment/SSLCommerz-Pay.png';
+import paymentImg from "../../../assets/payment/SSLCommerz-Pay.png";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 
 const Payment = () => {
-    const location = useLocation();
-    const isCarsPage = location?.pathname?.includes("carts");
-    const isCheckoutPage = location?.pathname?.includes("checkout");
-    const isPaymentPage = location?.pathname?.includes("payment");
-    const axiosPublic = useAxiosPublic();
-    const { cartProduct ,fetchCartDetails , user} = useContext(AuthContext);
+  const location = useLocation();
+  const isCarsPage = location?.pathname?.includes("carts");
+  const isCheckoutPage = location?.pathname?.includes("checkout");
+  const isPaymentPage = location?.pathname?.includes("payment");
+  const axiosPublic = useAxiosPublic();
+  const { cartProduct, fetchCartDetails, user } = useContext(AuthContext);
   const { cart, totalPrice } = cartProduct;
+  const userEmail = user?.email;
 
-  console.log(cart, totalPrice)
+  const clearCart = async (userEmail) => {
+    try {
+      const response = await axiosPublic.post(`http://localhost:5000/api/cart/clear/${userEmail}`);
+      console.log(response.data.message); // Cart cleared successfully
+      if (response.data.message == "Cart cleared successfully") {
+        fetchCartDetails();
+      }
+    } catch (error) {
+      console.error("Error clearing cart:", error);
+    }
+  };
 
   const handleCreatePayment = () => {
+    const userEmail = user?.email;
     // Basic validation checks
-  
+
     // 1. Check if the cart is empty
     if (!cart || cart.length === 0) {
       toast.error("Your cart is empty. Please add items to the cart before proceeding.");
       return;
-    };
-  
+    }
+
     // 2. Check if totalPrice is a valid number
     if (!totalPrice || isNaN(totalPrice) || totalPrice <= 0) {
       toast.error("Invalid total price. Please check your cart.");
       return;
-    };
+    }
 
-    
-  
     // Proceed with payment if validation passes
-    axiosPublic.post('/create-payment', { 
-        cart: cart,  // Send cart array with product information
+    axiosPublic
+      .post("/create-payment", {
+        cart: cart, // Send cart array with product information
         totalPrice: parseFloat(totalPrice), // Send total price
         userName: user.displayName, // Send User Name
-        userEmail: user.email    // Send User Email
-    })
-    .then((res) => {
-      console.log('payment page 25:', res);
-      const redirectUrl = res.data.paymentUrl;
-  
-      if (redirectUrl) {
-        window.location.replace(redirectUrl);
-      }
-    })
-    .catch((error) => {
-      console.error('Error creating payment:', error);
-      toast.error("There was an error processing your payment. Please try again.");
-    });
-  };
-  
+        userEmail: user.email, // Send User Email
+      })
+      .then((res) => {
+        console.log("payment page 25:", res);
+        const redirectUrl = res.data.paymentUrl;
 
-    useEffect(() => {
-      fetchCartDetails()
-    }, [cart])
-  
-    return (
-        <div className="container mx-auto px-5">
+        //
+        if (redirectUrl) {
+          window.location.replace(redirectUrl);
+          clearCart(userEmail);
+        }
+      })
+      .catch((error) => {
+        console.error("Error creating payment:", error);
+        toast.error("There was an error processing your payment. Please try again.");
+      });
+  };
+
+  return (
+    <div className="container mx-auto px-5">
       {/* Tabs */}
       <div className="flex justify-center items-center gap-5 my-12">
         <p>
@@ -88,45 +96,39 @@ const Payment = () => {
         </p>
         <div className="divider w-14 divider-neutral"></div>
         <p>
-          <MdOutlinePayment className={`w-8 p-1 h-8 text-xl border rounded-full ${
+          <MdOutlinePayment
+            className={`w-8 p-1 h-8 text-xl border rounded-full ${
               isPaymentPage ? "text-blue-600" : "text-[#9E9E9E]"
-            }`} />
+            }`}
+          />
         </p>
       </div>
       {/* Checkout Form */}
       <div className="lg:flex justify-center gap-5">
         <div className="lg:w-1/2">
-        {/* Payment Img */}
+          {/* Payment Img */}
           <div className="w-3/4">
-          <ImageDisplayControl>
-            <img src={paymentImg} className="lg:w-[500px]"/>
-          </ImageDisplayControl>
+            <ImageDisplayControl>
+              <img src={paymentImg} className="lg:w-[500px]" />
+            </ImageDisplayControl>
           </div>
-          <Link
-            to="/checkout"
-            className="flex items-center gap-2 text-blue-500 my-3"
-          >
+          <Link to="/checkout" className="flex items-center gap-2 text-blue-500 my-3">
             <FaArrowLeft className="text-sm" />
             Return to Checkout
           </Link>
         </div>
         {/* Orders Info */}
         <div className="border p-6 rounded">
-          <h1 className="text-base md:text-2xl text-black font-medium">
-            Your Order
-          </h1>
+          <h1 className="text-base md:text-2xl text-black font-medium">Your Order</h1>
           {/* Divider */}
           <div className="divider"></div>
           {/* Shopping Carts Item */}
-          <MenuShoppingCart cart={cart} />
+          <MenuShoppingCart />
           {/* Divider */}
           <div className="divider"></div>
           {/* Discount */}
           <div className="join w-full mb-10">
-            <input
-              className="input input-bordered join-item w-full"
-              placeholder="discount code"
-            />
+            <input className="input input-bordered join-item w-full" placeholder="discount code" />
             <button className="btn join-item rounded-r-full bg-blue-500 hover:bg-blue-600 text-white">
               Apply code
             </button>
@@ -135,16 +137,18 @@ const Payment = () => {
           <CalculatedPrice />
           <GrandTotal />
           <div className="w-full">
-         
-          <button onClick={handleCreatePayment} className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full">
-          Continue to pay
-          </button>
-    
-      </div>
+            <button
+              onClick={handleCreatePayment}
+              className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full"
+            >
+              Continue to pay
+            </button>
+            
+          </div>
         </div>
       </div>
     </div>
-    );
+  );
 };
 
 export default Payment;

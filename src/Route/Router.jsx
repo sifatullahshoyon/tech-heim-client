@@ -122,6 +122,8 @@ const router = createBrowserRouter([
       {
         path: "/payment-fail",
         element: <Fail />,
+      },
+      {
         path: "/returns",
         element: <Returns />,
       },
