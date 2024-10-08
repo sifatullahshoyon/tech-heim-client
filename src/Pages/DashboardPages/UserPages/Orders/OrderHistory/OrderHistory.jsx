@@ -16,7 +16,7 @@ const OrderHistory = () => {
   useEffect(() => {
     if (user?.email) {
       axiosSecure
-        .get(`http://localhost:5000/get-payments?email=${user.email}`)
+        .get(`/get-payments?email=${user.email}`)
         .then((response) => {
           setPaymentData(response.data?.userPayment || []);
         })
