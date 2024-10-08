@@ -3,7 +3,7 @@ import { ImageDisplayControl } from "@frameright/react-image-display-control";
 
 const SingleProduct = ({ pd }) => {
   return (
-    <div className="w-[180px] shadow rounded-lg">
+    <div className="w-[180px] shadow rounded-xl">
       <ImageDisplayControl>
         <img src={pd.image} width={148} className="mx-auto mb-2" />
       </ImageDisplayControl>

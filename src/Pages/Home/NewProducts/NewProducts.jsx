@@ -4,7 +4,7 @@ import ProductCards from "./ProductCards";
 
 const NewProducts = () => {
   return (
-    <section className="max-w-[1440px] mx-auto px-6 mb-12">
+    <section className="container mx-auto  mb-12">
       <>
         {/* heading */}
         <div className="flex justify-between">
