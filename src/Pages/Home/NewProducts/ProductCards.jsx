@@ -11,7 +11,7 @@ const ProductCards = () => {
   const { data: products = [], refetch } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
-      const result = await axiosPublic.get('/products/all/homePage')
+      const result = await axiosPublic.get('/products/all')
       return result.data
     }
   })
