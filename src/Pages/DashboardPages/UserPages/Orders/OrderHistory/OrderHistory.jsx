@@ -78,7 +78,7 @@ const OrderHistory = () => {
             {error}
           </div>
         ) : filteredOrders.length > 0 ? (
-          <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
+          <div className="grid gap-6 grid-cols-1 ">
             {filteredOrders.map((order, index) => (
               <OrderItem key={order._id || index} order={order} user={user} />
             ))}
