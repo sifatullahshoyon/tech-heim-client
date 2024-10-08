@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import loginImg from "../../assets/form/login.gif";
 import GoogleLogin from "../../Components/Shared/SocalLogin/GoogleLogin/GoogleLogin";
-import FaceBookLogin from "../../Components/Shared/SocalLogin/FacebookLogin/FaceBookLogin";
+
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
@@ -120,7 +120,7 @@ const Login = () => {
             </div>
             {/* Social icons */}
             <GoogleLogin />
-            <FaceBookLogin />
+            {/* <FacebookLogin /> */}
           </div>
         </div>
       </div>

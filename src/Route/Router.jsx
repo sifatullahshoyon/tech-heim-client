@@ -222,9 +222,10 @@ const router = createBrowserRouter([
         element: <Orders />,
       },
       {
-        path: "order-status",
+        path: "order-status/:id",
         element: <OrderStatus />,
       },
+
       {
         path: "wish-list",
         element: <WishList />,
