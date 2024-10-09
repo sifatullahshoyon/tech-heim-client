@@ -5,58 +5,31 @@ import NavigationBreadcrumb from "../../../../Components/Shared/NavigationBreadc
 import useAxiosSecure from "../../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
 
 const ManageOrders = () => {
-   const axiosSecure = useAxiosSecure();
-   const [orders, setOrders] = useState([]);
-   const [deliveryStatus, setDeliveryStatus] = useState({});
-   const [error, setError] = useState(null);
+  const axiosSecure = useAxiosSecure();
+  const [orders, setOrders] = useState([]);
+  const [deliveryStatus, setDeliveryStatus] = useState({});
+  const [error, setError] = useState(null);
 
-  // // Handle delivery status change
-  // const handleStatusChange = async (paymentId, newStatus) => {
-  //   setDeliveryStatus((prev) => ({ ...prev, [paymentId]: newStatus }));
-
-  //   try {
-  //     await axios.put(`/api/orders/${paymentId}`, { deliveryStatus: newStatus });
-  //     // Optionally, refresh the order data after updating
-  //     const response = await axios.get("/api/payments/alluser");
-  //     const groupedOrders = groupOrdersByDate(response.data);
-  //     setOrders(groupedOrders);
-  //   } catch (error) {
-  //     console.error("Error updating delivery status:", error);
-  //   }
-  // };
-
-
-  
-
-
-
-
-  
+  const fetchOrders = async () => {
+    try {
+      const response = await axiosSecure.get("/api/payments/alluser"); // Adjust the API endpoint as necessary
+      setOrders(response.data);
+      setError(null); // Clear any previous error
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      setError("Error fetching orders.");
+    }
+  };
 
   useEffect(() => {
-    // Fetch orders from the backend API
-    const fetchOrders = async () => {
-      try {
-        const response = await axiosSecure.get("/api/payments/alluser"); // Adjust the API endpoint as necessary
-        setOrders(response.data);
-      } catch (error) {
-        console.error("Error fetching orders:", error);
-        setError("Error fetching orders.");
-      }
-    };
-
+    // Call fetchOrders when the component mounts
     fetchOrders();
   }, []);
 
-  const handleStatusChange = (paymentId, newStatus) => {
-    setDeliveryStatus((prev) => ({ ...prev, [paymentId]: newStatus }));
-    // You can add logic to update the delivery status in the backend if needed
-  };
-
   // Group orders by date
-  const groupedOrders = orders.reduce((acc, order) => {
-    order.userPayment.forEach(payment => {
-      const date = new Date(payment.timestamp).toLocaleDateString();
+  const groupedOrders = orders?.reduce((acc, order) => {
+    order?.userPayment?.forEach((payment) => {
+      const date = new Date(payment?.timestamp).toLocaleDateString();
       if (!acc[date]) {
         acc[date] = [];
       }
@@ -68,93 +41,133 @@ const ManageOrders = () => {
   // Sort the dates from the most recent to the oldest
   const sortedDates = Object.keys(groupedOrders).sort((a, b) => new Date(b) - new Date(a));
 
+  // Handle delivery status change
+  const handleStatusChange = async (paymentId, newStatus) => {
+    try {
+      const response = await axiosSecure.put(`/api/payments/${paymentId}`, {
+        deliveryStatus: newStatus,
+      });
+
+      if (response.data) {
+        // Update local state if needed
+        fetchOrders();
+      }
+    } catch (error) {
+      console.error("Error updating delivery status:", error);
+    }
+  };
+
   return (
     <div className="container mx-auto">
       {/* Navigation */}
       <NavigationBreadcrumb></NavigationBreadcrumb>
       {/* content */}
 
-   
-     
-     <div className="container mx-auto p-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg">
-      <h1 className="text-4xl font-extrabold mb-8 text-center text-white">Manage Orders</h1>
-      <div className="overflow-x-auto">
-        {sortedDates.map(date => (
-          <div key={date}>
-            <h2 className="text-2xl font-bold text-white mb-4">{date}</h2>
-            <table className="min-w-full bg-white shadow-lg rounded-lg mb-6">
-              <thead className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
-                <tr>
-                  <th className="text-left py-4 px-6 uppercase font-semibold text-sm">Customer</th>
-                  <th className="text-left py-4 px-6 uppercase font-semibold text-sm">Payment Type</th>
-                  <th className="text-left py-4 px-6 uppercase font-semibold text-sm">Payment Issuer</th>
-                  <th className="text-left py-4 px-6 uppercase font-semibold text-sm">Payment ID</th>
-                  <th className="text-left py-4 px-6 uppercase font-semibold text-sm">Amount</th>
-                  <th className="text-left py-4 px-6 uppercase font-semibold text-sm">Payment Status</th>
-                  <th className="text-left py-4 px-6 uppercase font-semibold text-sm">Cart</th>
-                  <th className="text-left py-4 px-6 uppercase font-semibold text-sm">Timestamp</th>
-                  <th className="text-left py-4 px-6 uppercase font-semibold text-sm">Delivery Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {groupedOrders[date].map((payment, paymentIndex) => (
-                  <tr key={paymentIndex} className="bg-white border-b">
-                    <td className="py-4 px-6 text-sm text-gray-500">
-                      {payment.customerName || "N/A"} <br />
-                      {payment.customerEmail}
-                    </td>
-                    <td className="py-4 px-6 text-sm font-medium text-gray-900">
-                      {payment.paymentType || "N/A"}
-                    </td>
-                    <td className="py-4 px-6 text-sm text-gray-500">
-                      {payment.paymentIssuer || "N/A"}
-                    </td>
-                    <td className="py-4 px-6 text-sm text-gray-500">
-                      {payment.paymentId || "N/A"}
-                    </td>
-                    <td className="py-4 px-6 text-sm text-gray-500">
-                      {payment.amount || "N/A"}
-                    </td>
-                    <td className="py-4 px-6 text-sm text-gray-500">
-                      {payment.status || "N/A"}
-                    </td>
-                    <td className="py-4 px-6 text-sm text-gray-500">
-                      {payment.cart && payment.cart.length > 0 ? (
-                        <ul className="list-disc ml-4">
-                          {payment.cart.map((item, itemIndex) => (
-                            <li key={itemIndex} className="font-semibold">
-                              {item.product.name} -{" "}
-                              <span className="font-extrabold">{item.quantity || "N/A"}</span> pcs
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        "No items in cart"
-                      )}
-                    </td>
-                    <td className="py-4 px-6 text-sm text-gray-500">
-                      {payment.timestamp ? new Date(payment.timestamp).toLocaleString() : "N/A"}
-                    </td>
-                    <td className="py-4 px-6">
-                      <select
-                        value={deliveryStatus[payment.paymentId] || "processing"}
-                        onChange={(e) => handleStatusChange(payment.paymentId, e.target.value)}
-                        className="bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 p-2 rounded-md focus:ring-2 focus:ring-purple-400"
-                      >
-                        <option value="processing">Processing</option>
-                        <option value="on_the_way">On the way</option>
-                        <option value="delivered">Delivered</option>
-                      </select>
-                    </td>
+      <div className="container mx-auto p-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg">
+        <h1 className="text-4xl font-extrabold mb-8 text-center text-white">Manage Orders</h1>
+        <div className="overflow-x-auto">
+          {sortedDates.map((date) => (
+            <div key={date}>
+              <h2 className="text-2xl font-bold text-white mb-4">{date}</h2>
+              <table className="min-w-full bg-white shadow-lg rounded-lg mb-6">
+                <thead className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+                  <tr>
+                    <th className="text-left py-4 px-6 uppercase font-semibold text-sm">
+                      Customer
+                    </th>
+                    <th className="text-left py-4 px-6 uppercase font-semibold text-sm">
+                      Payment Type
+                    </th>
+                    <th className="text-left py-4 px-6 uppercase font-semibold text-sm">
+                      Payment Issuer
+                    </th>
+                    <th className="text-left py-4 px-6 uppercase font-semibold text-sm">
+                      Payment ID
+                    </th>
+                    <th className="text-left py-4 px-6 uppercase font-semibold text-sm">Amount</th>
+                    <th className="text-left py-4 px-6 uppercase font-semibold text-sm">
+                      Payment Status
+                    </th>
+                    <th className="text-left py-4 px-6 uppercase font-semibold text-sm">Cart</th>
+                    <th className="text-left py-4 px-6 uppercase font-semibold text-sm">
+                      Timestamp
+                    </th>
+                    <th className="text-left py-4 px-6 uppercase font-semibold text-sm">
+                      Delivery Status
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ))}
-        {error && <p className="text-red-500 text-center">{error}</p>}
+                </thead>
+                <tbody>
+                  {groupedOrders[date].length > 0 ? (
+                    groupedOrders[date].map((payment, paymentIndex) => (
+                      <tr key={paymentIndex} className="bg-white border-b">
+                        <td className="py-4 px-6 text-sm text-gray-500">
+                          {payment.customerName || "N/A"} <br />
+                          {payment.customerEmail}
+                        </td>
+                        <td className="py-4 px-6 text-sm font-medium text-gray-900">
+                          {payment.paymentType || "N/A"}
+                        </td>
+                        <td className="py-4 px-6 text-sm text-gray-500">
+                          {payment.paymentIssuer || "N/A"}
+                        </td>
+                        <td className="py-4 px-6 text-sm text-gray-500">
+                          {payment.paymentId || "N/A"}
+                        </td>
+                        <td className="py-4 px-6 text-sm text-gray-500">
+                          {payment.amount || "N/A"}
+                        </td>
+                        <td className="py-4 px-6 text-sm text-gray-500">
+                          {payment.status || "N/A"}
+                        </td>
+                        <td className="py-4 px-6 text-sm text-gray-500">
+                          {payment.cart && payment.cart.length > 0 ? (
+                            <ul className="list-disc ml-4">
+                              {payment.cart.map((item, itemIndex) => (
+                                <li key={itemIndex} className="font-semibold">
+                                  {item.product.name} -{" "}
+                                  <span className="font-extrabold">{item.quantity || "N/A"}</span>{" "}
+                                  pcs
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            "No items in cart"
+                          )}
+                        </td>
+                        <td className="py-4 px-6 text-sm text-gray-500">
+                          {payment.timestamp ? new Date(payment.timestamp).toLocaleString() : "N/A"}
+                        </td>
+                        <td className="py-4 px-6">
+                          <select
+                            value={payment?.deliveryStatus || "select"}
+                            onChange={(e) => handleStatusChange(payment.paymentId, e.target.value)}
+                            className="bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 p-2 rounded-md focus:ring-2 focus:ring-purple-400"
+                          >
+                            <option value="select" disabled>
+                              Select Status
+                            </option>
+                            <option value="processing">Processing</option>
+                            <option value="on_the_way">On the way</option>
+                            <option value="delivered">Delivered</option>
+                          </select>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="9" className="py-4 px-6 text-center text-gray-500">
+                        No orders placed yet.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          ))}
+          {error && <p className="text-red-500 text-center">{error}</p>}
+        </div>
       </div>
-    </div>
     </div>
   );
 };
