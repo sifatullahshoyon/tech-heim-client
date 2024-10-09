@@ -25,7 +25,7 @@ const Payment = () => {
 
   const clearCart = async (userEmail) => {
     try {
-      const response = await axiosPublic.post(`http://localhost:5000/api/cart/clear/${userEmail}`);
+      const response = await axiosPublic.post(`/api/cart/clear/${userEmail}`);
       console.log(response.data.message); // Cart cleared successfully
       if (response.data.message == "Cart cleared successfully") {
         fetchCartDetails();
