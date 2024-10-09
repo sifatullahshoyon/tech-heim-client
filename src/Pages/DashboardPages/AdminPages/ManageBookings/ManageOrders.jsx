@@ -44,7 +44,7 @@ const ManageOrders = () => {
   // Handle delivery status change
   const handleStatusChange = async (paymentId, newStatus) => {
     try {
-      const response = await axiosSecure.put(`/api/payments/${paymentId}`, {
+      const response = await axiosSecure.patch(`/api/payments/${paymentId}`, {
         deliveryStatus: newStatus,
       });
 
