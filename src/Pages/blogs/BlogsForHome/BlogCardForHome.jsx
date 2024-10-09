@@ -40,7 +40,7 @@ const BlogCardForHome = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 container  mx-auto  py-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 container px-4 sm:px-6 lg:px-8 mx-auto  py-8">
       {blogs.slice(0, 1).map((blog) => (
         <div key={blog._id} className="w-full mx-auto">
           <Link to={`/blog/list/${blog._id}`}>

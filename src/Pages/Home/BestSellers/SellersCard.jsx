@@ -8,7 +8,7 @@ const SellersCard = () => {
   const axiosPublic = useAxiosPublic()
 
   // Get all users
-  const { data: products = [], refetch } = useQuery({
+  const { data: products = [] } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
       const result = await axiosPublic.get('/products/all')
