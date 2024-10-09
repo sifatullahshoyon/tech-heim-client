@@ -38,7 +38,7 @@ const ManageOrders = () => {
     return acc;
   }, {});
 
-  // Sort the dates from the most recent to the oldest
+  // Sort the dates from the most recent to the oldest 
   const sortedDates = Object.keys(groupedOrders).sort((a, b) => new Date(b) - new Date(a));
 
   // Handle delivery status change
