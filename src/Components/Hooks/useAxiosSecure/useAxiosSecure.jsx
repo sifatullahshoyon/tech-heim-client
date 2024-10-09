@@ -4,7 +4,7 @@ import { AuthContext } from '../../../Provider/AuthProvider';
 import { useContext, useEffect } from 'react';
 
 const axiosSecure = axios.create({
-    baseURL: 'https://dev-daynamos-fashion-house-server.vercel.app',
+    baseURL: 'http://localhost:5000',
 });
 
 const useAxiosSecure = () => {

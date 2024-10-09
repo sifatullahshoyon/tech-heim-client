@@ -152,13 +152,43 @@
 
 // export default OrderStatus;
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaBox, FaCheck, FaTruck } from "react-icons/fa";
 import { FaBarsProgress } from "react-icons/fa6";
-import image1 from "../../../../../assets/product/image1.png";
-import image2 from "../../../../../assets/product/image2.png";
+import useAxiosSecure from "../../../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
+import useAuth from "../../../../../Components/Hooks/useAuth/useAuth";
+import LoadingSpinner from "../../../../../Components/Shared/LoadingSpiner/LoadingSpinner";
+import OrderDetails from "./OrderDetails";
+import OrderItemss from "./OrderItemss";
 
 const OrderStatus = () => {
+  const { user, loading } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const [paymentData, setPaymentData] = useState(null); // Store a single payment
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (user?.email) {
+      axiosSecure
+        .get(`/get-payments?email=${user.email}`)
+        .then((response) => {
+          setPaymentData(response.data?.userPayment || {});
+        })
+        .catch(() => {
+          setError("Error fetching payment data");
+        });
+    }
+  }, [user, axiosSecure]);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>;
+  }
+
+  // console.log(paymentData);
   return (
     <div className="w-full mx-auto p-6">
       {/* Order Status Tracker */}
@@ -170,34 +200,31 @@ const OrderStatus = () => {
           <div className="w-1/4 text-center">
             <div className="relative">
               <div className="bg-blue-500 w-10 h-10 mx-auto rounded-full text-white flex items-center justify-center">
-                <FaCheck className="fas fa-check"></FaCheck>
+                <FaCheck />
               </div>
               <p className="text-sm mt-2">Order Placed</p>
             </div>
           </div>
-
           <div className="w-1/4 text-center">
             <div className="relative">
               <div className="bg-blue-500 w-10 h-10 mx-auto rounded-full text-white flex items-center justify-center">
-                <FaBarsProgress className="fas fa-spinner"></FaBarsProgress>
+                <FaBarsProgress />
               </div>
               <p className="text-sm mt-2">Processing</p>
             </div>
           </div>
-
           <div className="w-1/4 text-center">
             <div className="relative">
               <div className="bg-gray-300 w-10 h-10 mx-auto rounded-full text-white flex items-center justify-center">
-                <FaTruck className="fas fa-truck"></FaTruck>
+                <FaTruck />
               </div>
               <p className="text-sm mt-2">On the way</p>
             </div>
           </div>
-
           <div className="w-1/4 text-center">
             <div className="relative">
               <div className="bg-gray-300 w-10 h-10 mx-auto rounded-full text-white flex items-center justify-center">
-                <FaBox className="fas fa-box"></FaBox>
+                <FaBox />
               </div>
               <p className="text-sm mt-2">Delivered</p>
             </div>
@@ -215,86 +242,13 @@ const OrderStatus = () => {
 
       {/* Order Details */}
       <div className="mt-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-          <div>
-            <p className="font-semibold text-gray-600">Order Code</p>
-            <p>#1050486</p>
-          </div>
-          <div>
-            <p className="font-semibold text-gray-600">Placed on</p>
-            <p>2023/04/15</p>
-          </div>
-          <div>
-            <p className="font-semibold text-gray-600">Sent to</p>
-            <p>31, Albuquerque, New York</p>
-          </div>
-          <div>
-            <p className="font-semibold text-gray-600">Payment Type</p>
-            <p>Net Banking</p>
-          </div>
-          <div>
-            <p className="font-semibold text-gray-600">Transaction ID</p>
-            <p>2345678910</p>
-          </div>
-          <div>
-            <p className="font-semibold text-gray-600">Amount Paid</p>
-            <p>$543.02</p>
-          </div>
-        </div>
+        <OrderDetails orderData={paymentData?.orderDetails} />
       </div>
 
       {/* Product List */}
       <div className="mt-6">
         <h3 className="font-semibold text-lg mb-4">Order Items</h3>
-        <div className="space-y-4">
-          <div className="flex items-center justify-between bg-gray-100 p-4 rounded-lg">
-            <img
-              src={image1}
-              alt="MacBook Pro"
-              className="w-16 h-16 object-cover"
-            />
-            <div>
-              <p className="font-semibold">
-                MacBook Pro X2 MNEJ3 2022 13.3 inch
-              </p>
-              <p>Black</p>
-            </div>
-            <p className="text-right">
-              $433.20{" "}
-              <span className="text-gray-400 line-through">$1299.00</span>
-            </p>
-          </div>
-
-          <div className="flex items-center justify-between bg-gray-100 p-4 rounded-lg">
-            <img
-              src={image2}
-              alt="Laptop Case"
-              className="w-16 h-16 object-cover"
-            />
-            <div>
-              <p className="font-semibold">
-                Inateck 13-13.3 Inch Laptop Case Sleeve 360°
-              </p>
-              <p>Blue</p>
-            </div>
-            <p className="text-right">$63.26</p>
-          </div>
-
-          <div className="flex items-center justify-between bg-gray-100 p-4 rounded-lg">
-            <img
-              src={image1}
-              alt="Privacy Screen"
-              className="w-16 h-16 object-cover"
-            />
-            <div>
-              <p className="font-semibold">
-                Laptop Privacy Screen 13 inch MacBook Pro & Air
-              </p>
-              <p>Black</p>
-            </div>
-            <p className="text-right">$23.26</p>
-          </div>
-        </div>
+        <OrderItemss items={paymentData?.orderItems || []} />
       </div>
     </div>
   );
