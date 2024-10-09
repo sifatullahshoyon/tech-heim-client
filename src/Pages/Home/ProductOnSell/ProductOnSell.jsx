@@ -5,7 +5,7 @@ import ProductOnSellSlider from "./ProductOnSellSlider";
 const ProductOnSell = () => {
   return (
     <section className="container mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-      <div className="h-auto lg:h-[325px] bg-[#063A88] w-full rounded-lg relative">
+      <div className="h-auto lg:h-[325px] bg-[#063A88] bg-opacity-90 w-full rounded-lg relative">
         {/* Background Img */}
         <div className="productOnSell"></div>
         {/* Content & Slider */}

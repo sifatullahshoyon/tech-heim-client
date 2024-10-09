@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
         />
         <img className="p-2 rounded-t-lg" src={line} alt="product image" />
       </Link>
-      <h1 className="text-2xl"><span className="font-semibold">Name:</span>  <span className=" hover:text-blue-800 ">{product?.name?.slice(0, 20)}</span></h1>
+      <h1 className="text-2xl mt-6"><span className="font-semibold">Name:</span>  <span className=" hover:text-blue-800 ">{product?.name?.slice(0, 20)}</span></h1>
       <div className="flex justify-between mb-2">
         <p className="mt-8 text-[#717171] text-2xl"><span className=" font-semibold text-black">Price : </span>${product?.regularPrice}</p>
         <p className="mt-8 text-2xl text-blue-600 font-semibold hover:text-blue-800  flex items-center gap-1">
