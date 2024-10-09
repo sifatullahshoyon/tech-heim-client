@@ -6,29 +6,34 @@ import { Link } from "react-router-dom";
 
 const Prebook = () => {
   return (
-    <section className="container mx-auto mb-12">
-      <div className=" md:flex md:flex-row gap-6 space-y-6 md:space-y-0">
+    <section className="container mx-auto mb-12 px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 gap-6">
         {/* Image One */}
-        <div className="relative">
-          <ImageDisplayControl>
-            <img src={phoneSeries} className="w-full" />
-          </ImageDisplayControl>
-          <div className="absolute bottom-5 right-5 lg:bottom-20 lg:right-40 ">
-            <Link to='/shop'>
-              <button className="btn btn-primary bg-[#0C68F4] border-0 text-white">
+        <div className="relative flex w-full flex-col items-center justify-center  h-[500px]"> {/* Increased fixed height */}
+          <img
+            src={phoneSeries}
+            className="w-full h-full object-cover rounded-lg shadow-lg" // Maintain aspect ratio
+            alt="Phone Series"
+          />
+          <div className="absolute bottom-5 lg:right-2 right-1 transform -translate-x-1/2">
+            <Link to="/shop">
+              <button className="btn btn-primary bg-[#0C68F4] border-0 text-white px-6 py-2 lg:px-8 lg:py-3 text-sm lg:text-base shadow-lg hover:bg-[#0051bf] transition-colors duration-300">
                 Explore More
               </button>
             </Link>
           </div>
         </div>
+
         {/* Image Two */}
-        <div className="relative">
-          <ImageDisplayControl>
-            <img src={playstation} className="w-full" />
-          </ImageDisplayControl>
-          <div className="absolute bottom-10 left-20">
-            <Link to='/shop'>
-              <button className="btn btn-primary bg-[#0C68F4] border-0 text-white px-10">
+        <div className="relative  flex flex-col items-center justify-center w-full h-[500px]"> {/* Increased fixed height */}
+          <img
+            src={playstation}
+            className="w-full h-full object-cover rounded-lg shadow-lg" // Maintain aspect ratio
+            alt="PlayStation 5"
+          />
+          <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2">
+            <Link to="/shop">
+              <button className="btn btn-primary bg-[#0C68F4] border-0 text-white px-6 py-2 lg:px-8 lg:py-3 text-sm lg:text-base shadow-lg hover:bg-[#0051bf] transition-colors duration-300">
                 Buy Now
               </button>
             </Link>

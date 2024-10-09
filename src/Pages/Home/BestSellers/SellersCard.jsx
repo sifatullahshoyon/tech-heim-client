@@ -7,8 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 const SellersCard = () => {
   const axiosPublic = useAxiosPublic()
 
-  // Get all users
-  const { data: products = [], refetch } = useQuery({
+  // Get all products
+  const { data: products = [] } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
       const result = await axiosPublic.get('/products/all')
