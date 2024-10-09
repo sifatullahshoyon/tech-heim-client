@@ -40,7 +40,7 @@ const BlogCardForHome = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-7xl mx-auto px-4 py-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 container  mx-auto  py-8">
       {blogs.slice(0, 1).map((blog) => (
         <div key={blog._id} className="w-full mx-auto">
           <Link to={`/blog/list/${blog._id}`}>
@@ -129,11 +129,10 @@ const BlogCardForHome = () => {
                 </div>
                 <div className="w-2/3 p-6">
                   <h2
-                    className={`text-xl font-bold mb-2 ${
-                      recentBlog.highlighted
-                        ? "text-orange-500"
-                        : "text-gray-800"
-                    }`}
+                    className={`text-xl font-bold mb-2 ${recentBlog.highlighted
+                      ? "text-orange-500"
+                      : "text-gray-800"
+                      }`}
                   >
                     {truncateWords(recentBlog.title, 8)}
                   </h2>

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Prebook = () => {
   return (
-    <section className="max-w-[1440px] mx-auto px-6 mb-12">
+    <section className="container mx-auto mb-12">
       <div className=" md:flex md:flex-row gap-6 space-y-6 md:space-y-0">
         {/* Image One */}
         <div className="relative">
