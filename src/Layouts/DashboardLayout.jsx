@@ -98,7 +98,7 @@ const DashboardLayout = () => {
                       isActive
                         ? 'text-teal-700 bg-white  border-teal-600  text-lg    hover:bg-white border-2  px-3  rounded-lg  font-medium'
                         : '  bg-white border-teal-600 border-2  border-none hover:bg-white  hover:text-teal-700 px-3  rounded-lg text-lg font-medium'
-                    } to={"/dashboard/manage-bookings"}
+                    } to={"/dashboard/manage-orders"}
                   >
                     <FaBook /> Manage Order
                   </NavLink>

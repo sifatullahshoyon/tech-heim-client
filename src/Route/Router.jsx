@@ -25,7 +25,7 @@ import Discount from "../Pages/DashboardPages/UserPages/Discount/Discount";
 import AdminHome from "../Pages/DashboardPages/AdminPages/AdminHome/AdminHome";
 import AddProducts from "../Pages/DashboardPages/AdminPages/AddProducts/AddProducts";
 import ManageProducts from "../Pages/DashboardPages/AdminPages/ManageProducts/ManageProducts";
-import ManageBookings from "../Pages/DashboardPages/AdminPages/ManageBookings/ManageBookings";
+
 import AllUsers from "../Pages/DashboardPages/AdminPages/AllUsers/AllUsers";
 import Blogs from "../Pages/DashboardPages/AdminPages/Blogs/Blogs";
 import OrderStatus from "../Pages/DashboardPages/UserPages/Orders/OrderStatus/OrderStatus";
@@ -44,6 +44,7 @@ import Returns from "../Pages/FooterComponents/Returns";
 import CookieSettings from "../Pages/FooterComponents/CookieSettings";
 import PrivacyPolicy from "../Pages/FooterComponents/PrivacyPolicy";
 import TermsAndConditions from "../Pages/FooterComponents/TermsConditions";
+import ManageOrders from "../Pages/DashboardPages/AdminPages/ManageBookings/ManageOrders";
 
 const router = createBrowserRouter([
   {
@@ -176,10 +177,10 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "manage-bookings",
+        path: "manage-orders",
         element: (
           <AdminRoute>
-            <ManageBookings />
+            <ManageOrders />
           </AdminRoute>
         ),
       },
