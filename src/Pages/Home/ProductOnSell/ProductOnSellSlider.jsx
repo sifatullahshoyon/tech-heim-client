@@ -118,16 +118,16 @@ const ProductOnSellSlider = () => {
       </Swiper>
 
       {/* Custom position for navigation buttons */}
-      <div className="absolute bottom-2 lg:-bottom-10 right-2 z-10 flex items-center gap-2">
+      <div className="absolute bottom-2  lg:-bottom-14 right-2 z-10 flex items-center gap-2">
         <button
           ref={prevRef}
-          className="btn swiper-button-prev-custom  shadow-lg text-black p-2 rounded-full cursor-pointer"
+          className="btn btn-info swiper-button-prev-custom  shadow-lg text-black p-2 rounded-full cursor-pointer"
         >
           <IoIosArrowBack />
         </button>
         <button
           ref={nextRef}
-          className="btn swiper-button-next-custom  shadow-lg text-black p-2 rounded-full cursor-pointer"
+          className="btn btn-info swiper-button-next-custom  shadow-lg text-black p-2 rounded-full cursor-pointer"
         >
           <IoIosArrowForward />
         </button>
