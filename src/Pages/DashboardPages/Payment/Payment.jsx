@@ -14,6 +14,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 
 const Payment = () => {
+  const axiosPublic = useAxiosPublic();
   const location = useLocation();
   const isCarsPage = location?.pathname?.includes("carts");
   const isCheckoutPage = location?.pathname?.includes("checkout");
