@@ -17,6 +17,7 @@ const OrderItem = ({ order, user }) => {
     customerName,
     timestamp,
     status,
+    deliveryStatus,
     cart = [],
   } = order;
 
@@ -74,6 +75,15 @@ const OrderItem = ({ order, user }) => {
 
         <div className="bg-green-500 rounded-3xl text-white px-4 py-1  ">
           {status}
+        </div>
+      </div>
+      <div className="flex items-center mb-8">
+        <span className="font-semibold text-gray-800 mr-3 text-lg">
+        Delivery Status:
+        </span>
+
+        <div className="bg-green-500 rounded-3xl text-white px-4 py-1  ">
+          {deliveryStatus || "Order Placed"}
         </div>
       </div>
       <div className="flex gap-4 flex-wrap">
