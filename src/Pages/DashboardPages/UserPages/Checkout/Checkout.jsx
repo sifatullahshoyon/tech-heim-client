@@ -23,6 +23,7 @@ const Checkout = () => {
     discountApplied,
     setDiscountApplied,
   } = useContext(AuthContext);
+  
   const { cart, totalPrice } = cartProduct;
   const [code, setCode] = useState("");
 
