@@ -156,9 +156,8 @@ const ProductDetails = () => {
                   <div className="flex gap-4 mt-4">
                     {/* Black color input */}
                     <div
-                      className={`w-8 h-8 rounded-full cursor-pointer flex justify-center items-center ${
-                        selectedColor === "Black" ? "ring-4 ring-black" : ""
-                      }`}
+                      className={`w-8 h-8 rounded-full cursor-pointer flex justify-center items-center ${selectedColor === "Black" ? "ring-4 ring-black" : ""
+                        }`}
                       style={{ backgroundColor: "Black" }}
                       onClick={() => handleColorSelect("Black")}
                     >
@@ -167,9 +166,8 @@ const ProductDetails = () => {
 
                     {/* gray color input */}
                     <div
-                      className={`w-8 h-8 bg-base-300 rounded-full cursor-pointer flex justify-center items-center ${
-                        selectedColor === color ? "ring-4 ring-white border  shadow-2xl" : ""
-                      }`}
+                      className={`w-8 h-8 bg-base-300 rounded-full cursor-pointer flex justify-center items-center ${selectedColor === color ? "ring-4 ring-white border  shadow-2xl" : ""
+                        }`}
                       style={{ backgroundColor: `${color}` }}
                       onClick={() => handleColorSelect(`${color}`)}
                     >

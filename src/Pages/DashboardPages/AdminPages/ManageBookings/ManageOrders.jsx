@@ -10,9 +10,9 @@ const ManageOrders = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axiosSecure.get("/api/payments/alluser"); // Adjust the API endpoint as necessary
+      const response = await axiosSecure.get("/api/payments/alluser");
       setOrders(response.data);
-      setError(null); // Clear any previous error
+      setError(null);
     } catch (error) {
       console.error("Error fetching orders:", error);
       setError("Error fetching orders.");
@@ -46,18 +46,23 @@ const ManageOrders = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 bg-gray-100 min-h-screen">
+      {/* Breadcrumb navigation */}
       <NavigationBreadcrumb />
 
-      <div className="container mx-auto p-8 bg-white rounded-lg shadow-lg">
-        <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">Manage Orders</h1>
+      <div className="container mx-auto p-8 bg-white rounded-lg shadow-xl">
+        <h1 className="text-4xl font-bold mb-8 text-center text-gray-900">Manage Orders</h1>
         <div className="overflow-x-auto">
           {sortedDates.map((date) => (
-            <div key={date}>
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">{date}</h2>
-              <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
+            <div key={date} className="mb-6">
+              {/* Highlighted date */}
+              <h2 className="text-2xl font-bold text-purple-600 mb-4 border-b-2 border-purple-300 pb-2">
+                {date}
+              </h2>
+
+              <table className="min-w-full bg-white shadow-lg rounded-lg">
                 <thead>
-                  <tr className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white">
+                  <tr className="bg-gradient-to-r from-purple-600 to-pink-500 text-white">
                     <th className="text-left py-4 px-6 uppercase font-bold text-sm">Customer</th>
                     <th className="text-left py-4 px-6 uppercase font-bold text-sm">Payment Type</th>
                     <th className="text-left py-4 px-6 uppercase font-bold text-sm">Payment Issuer</th>
@@ -74,22 +79,26 @@ const ManageOrders = () => {
                     groupedOrders[date].map((payment, paymentIndex) => (
                       <tr
                         key={paymentIndex}
-                        className="border-b border-gray-200 hover:bg-gray-50 transition-all duration-300"
+                        className={
+                          paymentIndex % 2 === 0
+                            ? "bg-gray-100 border-b"
+                            : "bg-gray-50 border-b hover:bg-gray-200 transition-all duration-300"
+                        }
                       >
-                        <td className="py-4 px-6 text-sm text-gray-600">
+                        <td className="py-4 px-6 text-sm text-gray-700">
                           {payment.customerName || "N/A"} <br />
                           <span className="text-gray-500">{payment.customerEmail}</span>
                         </td>
                         <td className="py-4 px-6 text-sm font-medium text-gray-800">
                           {payment.paymentType || "N/A"}
                         </td>
-                        <td className="py-4 px-6 text-sm text-gray-600">
+                        <td className="py-4 px-6 text-sm text-gray-700">
                           {payment.paymentIssuer || "N/A"}
                         </td>
-                        <td className="py-4 px-6 text-sm text-gray-600">{payment.paymentId || "N/A"}</td>
-                        <td className="py-4 px-6 text-sm text-gray-600">{payment.amount || "N/A"}</td>
-                        <td className="py-4 px-6 text-sm text-gray-600">{payment.status || "N/A"}</td>
-                        <td className="py-4 px-6 text-sm text-gray-600">
+                        <td className="py-4 px-6 text-sm text-gray-700">{payment.paymentId || "N/A"}</td>
+                        <td className="py-4 px-6 text-sm text-gray-700">{payment.amount || "N/A"}</td>
+                        <td className="py-4 px-6 text-sm text-gray-700">{payment.status || "N/A"}</td>
+                        <td className="py-4 px-6 text-sm text-gray-700">
                           {payment.cart && payment.cart.length > 0 ? (
                             <ul className="list-disc ml-4">
                               {payment.cart.map((item, itemIndex) => (
@@ -105,7 +114,7 @@ const ManageOrders = () => {
                             "No items in cart"
                           )}
                         </td>
-                        <td className="py-4 px-6 text-sm text-gray-600">
+                        <td className="py-4 px-6 text-sm text-gray-700">
                           {payment.timestamp
                             ? new Date(payment.timestamp).toLocaleString()
                             : "N/A"}
