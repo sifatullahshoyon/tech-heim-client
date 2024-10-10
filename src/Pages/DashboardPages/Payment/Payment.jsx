@@ -20,7 +20,7 @@ const Payment = () => {
   const isCheckoutPage = location?.pathname?.includes("checkout");
   const isPaymentPage = location?.pathname?.includes("payment");
 
-  const { cartProduct, fetchCartDetails, user } = useContext(AuthContext);
+  const { cartProduct, fetchCartDetails, user,finalPrice,setFinalPrice, } = useContext(AuthContext);
   const { cart, totalPrice } = cartProduct;
   const userEmail = user?.email;
 
@@ -59,7 +59,7 @@ const Payment = () => {
     axiosPublic
       .post("/create-payment", {
         cart: cart, // Send cart array with product information
-        totalPrice: parseFloat(totalPrice), // Send total price
+        totalPrice: parseFloat(finalPrice), // Send total price
         userName: user.displayName, // Send User Name
         userEmail: user.email, // Send User Email
       })
@@ -131,13 +131,7 @@ const Payment = () => {
           <MenuShoppingCart />
           {/* Divider */}
           <div className="divider"></div>
-          {/* Discount */}
-          <div className="join w-full mb-10">
-            <input className="input input-bordered join-item w-full" placeholder="discount code" />
-            <button className="btn join-item rounded-r-full bg-blue-500 hover:bg-blue-600 text-white">
-              Apply code
-            </button>
-          </div>
+          
           {/* Total Price */}
           <CalculatedPrice />
           <GrandTotal />

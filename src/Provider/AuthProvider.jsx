@@ -25,6 +25,13 @@ const AuthProvider = ({ children }) => {
   const [cartProduct, setCartProduct] = useState([]);
   const [cartProductID, setCartProductID] = useState([]);
 
+  // shipping cost state
+  const[shippingCost,setShippingCost]=useState(5)
+   // discountAmount state
+  const [discountAmount, setDiscountAmount] = useState(0);
+// final price with product cost , discount, shipping 
+  const[finalPrice,setFinalPrice]=useState(null);
+
   /////////////////// user related state & function start /////////////////
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -110,6 +117,9 @@ const AuthProvider = ({ children }) => {
     wistList,
     cartProduct,
     cartProductID,
+    shippingCost,
+    discountAmount, 
+    finalPrice,
     createUser,
     signIn,
     logOut,
@@ -120,6 +130,9 @@ const AuthProvider = ({ children }) => {
     setCartProduct,
     fetchCartDetails,
     setCartProductID,
+    setShippingCost,
+    setDiscountAmount,
+    setFinalPrice
   };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
