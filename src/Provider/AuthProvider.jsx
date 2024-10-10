@@ -29,6 +29,7 @@ const AuthProvider = ({ children }) => {
   const[shippingCost,setShippingCost]=useState(5)
    // discountAmount state
   const [discountAmount, setDiscountAmount] = useState(0);
+  const [discountApplied, setDiscountApplied] = useState(false);
 // final price with product cost , discount, shipping 
   const[finalPrice,setFinalPrice]=useState(null);
 
@@ -120,6 +121,7 @@ const AuthProvider = ({ children }) => {
     shippingCost,
     discountAmount, 
     finalPrice,
+    discountApplied, 
     createUser,
     signIn,
     logOut,
@@ -132,7 +134,8 @@ const AuthProvider = ({ children }) => {
     setCartProductID,
     setShippingCost,
     setDiscountAmount,
-    setFinalPrice
+    setFinalPrice,
+    setDiscountApplied
   };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;

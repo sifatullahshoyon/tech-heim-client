@@ -15,12 +15,17 @@ const Checkout = () => {
   const location = useLocation();
   const isCarsPage = location?.pathname?.includes("carts");
   const isCheckoutPage = location?.pathname?.includes("checkout");
-  const { cartProduct, fetchCartDetails, discountAmount, setDiscountAmount } =
-    useContext(AuthContext);
+  const {
+    cartProduct,
+    fetchCartDetails,
+    discountAmount,
+    setDiscountAmount,
+    discountApplied,
+    setDiscountApplied,
+  } = useContext(AuthContext);
   const { cart, totalPrice } = cartProduct;
   const [code, setCode] = useState("");
 
-  const [discountApplied, setDiscountApplied] = useState(false);
   const handleApplyCode = () => {
     if (code === "smile") {
       // Example: $100 discount for "smile"
