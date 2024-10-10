@@ -120,7 +120,7 @@ const OrderStatus = () => {
 
         <div className="bg-gray-200 h-2 w-full mx-auto mt-8 rounded-full overflow-hidden">
           <div
-            className={`h-full ${statusSteps[currentStatusIndex].color} transition-all duration-500 ease-out rounded-full`}
+            className={`h-full ${statusSteps[currentStatusIndex]?.color} transition-all duration-500 ease-out rounded-full`}
             style={{ width: getStatusWidth() }}
           ></div>
         </div>

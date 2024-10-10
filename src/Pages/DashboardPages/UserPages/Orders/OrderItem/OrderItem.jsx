@@ -69,22 +69,12 @@ const OrderItem = ({ order, user }) => {
 
       <div className="flex items-center mb-8">
         <span className="font-semibold text-gray-800 mr-3 text-lg">
-          Status:
+          Payment Status:
         </span>
-        <span
-          className={`${
-            status === "completed"
-              ? "bg-green-200 text-green-800"
-              : "bg-yellow-200 text-yellow-800"
-          } px-4 py-2 rounded-full text-sm font-bold flex items-center shadow-sm`}
-        >
-          {status === "completed" ? (
-            <FaCheckCircle className="mr-2" />
-          ) : (
-            <FaSpinner className="mr-2 animate-spin" />
-          )}
-          {status.charAt(0).toUpperCase() + status.slice(1)}
-        </span>
+
+        <div className="bg-green-500 rounded-3xl text-white px-4 py-1  ">
+          {status}
+        </div>
       </div>
       <div className="flex gap-4 flex-wrap">
         {cart.map((cr) => (
