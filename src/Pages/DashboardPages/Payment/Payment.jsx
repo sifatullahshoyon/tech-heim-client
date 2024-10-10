@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoCartSharp } from "react-icons/io5";
 import { TbTruckDelivery } from "react-icons/tb";
 import { MdOutlinePayment } from "react-icons/md";
@@ -19,10 +19,12 @@ const Payment = () => {
   const isCarsPage = location?.pathname?.includes("carts");
   const isCheckoutPage = location?.pathname?.includes("checkout");
   const isPaymentPage = location?.pathname?.includes("payment");
-  
+
   const { cartProduct, fetchCartDetails, user } = useContext(AuthContext);
   const { cart, totalPrice } = cartProduct;
   const userEmail = user?.email;
+
+  const [loader, setLoader] = useState(false);
 
   const clearCart = async (userEmail) => {
     try {
@@ -37,6 +39,7 @@ const Payment = () => {
   };
 
   const handleCreatePayment = () => {
+    setLoader(true);
     const userEmail = user?.email;
     // Basic validation checks
 
@@ -69,6 +72,7 @@ const Payment = () => {
           window.location.replace(redirectUrl);
           clearCart(userEmail);
         }
+        setLoader(false);
       })
       .catch((error) => {
         console.error("Error creating payment:", error);
@@ -138,13 +142,18 @@ const Payment = () => {
           <CalculatedPrice />
           <GrandTotal />
           <div className="w-full">
-            <button
-              onClick={handleCreatePayment}
-              className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full"
-            >
-              Continue to pay
-            </button>
-            
+            {loader ? (
+              <button className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full">
+                <span className="loading loading-dots loading-lg"></span>
+              </button>
+            ) : (
+              <button
+                onClick={handleCreatePayment}
+                className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full"
+              >
+                Continue to pay
+              </button>
+            )}
           </div>
         </div>
       </div>

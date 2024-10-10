@@ -85,7 +85,7 @@ const Checkout = () => {
           <div className="w-full">
             <Link to="/payment">
               <button className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full">
-                Continue to pay
+                Continue 
               </button>
             </Link>
           </div>
