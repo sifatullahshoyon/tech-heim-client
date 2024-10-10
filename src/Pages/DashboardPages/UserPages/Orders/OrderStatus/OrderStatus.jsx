@@ -1,159 +1,12 @@
-// import React, { useState, useEffect } from "react";
-
-// const OrderStatus = () => {
-//   // Step 1: Set up the state to store order data
-//   const [orderData, setOrderData] = useState(null);
-//   const [loading, setLoading] = useState(true);
-
-//   // Step 2: Fetch data when the component mounts
-//   useEffect(() => {
-//     const fetchOrderData = async () => {
-//       try {
-//         const response = await fetch(`/get-payments?email=${user.email}`); // Replace with your API URL
-//         const data = await response.json();
-//         setOrderData(data); // Save data to state
-//         setLoading(false); // Turn off loading state
-//       } catch (error) {
-//         console.error("Error fetching the order data:", error);
-//       }
-//     };
-
-//     fetchOrderData();
-//   }, []); // The empty array means the effect runs only once, when the component mounts.
-
-//   // Step 3: Show a loading state while the data is being fetched
-//   if (loading) {
-//     return <div>Loading...</div>;
-//   }
-
-//   // If no order data is found
-//   if (!orderData) {
-//     return <div>Order data not found</div>;
-//   }
-
-//   // Step 4: Render the fetched data
-//   return (
-//     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
-//       {/* Order Status Tracker */}
-//       <div className="text-center">
-//         <h2 className="text-xl font-semibold mb-4">Order Status</h2>
-//         <p className="text-gray-600">Track your order</p>
-
-//         <div className="flex items-center justify-center mt-6">
-//           <div className="w-1/4 text-center">
-//             <div className="relative">
-//               <div className="bg-blue-500 w-10 h-10 mx-auto rounded-full text-white flex items-center justify-center">
-//                 <i className="fas fa-check"></i>
-//               </div>
-//               <p className="text-sm mt-2">Order Placed</p>
-//             </div>
-//           </div>
-
-//           <div className="w-1/4 text-center">
-//             <div className="relative">
-//               <div className="bg-blue-500 w-10 h-10 mx-auto rounded-full text-white flex items-center justify-center">
-//                 <i className="fas fa-spinner"></i>
-//               </div>
-//               <p className="text-sm mt-2">Processing</p>
-//             </div>
-//           </div>
-
-//           <div className="w-1/4 text-center">
-//             <div className="relative">
-//               <div className="bg-gray-300 w-10 h-10 mx-auto rounded-full text-white flex items-center justify-center">
-//                 <i className="fas fa-truck"></i>
-//               </div>
-//               <p className="text-sm mt-2">On the way</p>
-//             </div>
-//           </div>
-
-//           <div className="w-1/4 text-center">
-//             <div className="relative">
-//               <div className="bg-gray-300 w-10 h-10 mx-auto rounded-full text-white flex items-center justify-center">
-//                 <i className="fas fa-box"></i>
-//               </div>
-//               <p className="text-sm mt-2">Delivered</p>
-//             </div>
-//           </div>
-//         </div>
-
-//         <div className="bg-gray-200 h-1 w-2/4 mx-auto mt-4">
-//           <div className="bg-blue-500 h-1 w-1/2"></div>
-//         </div>
-
-//         <p className="mt-4 text-sm text-gray-500">
-//           Please wait, we are still processing your order.
-//         </p>
-//       </div>
-
-//       {/* Order Details */}
-//       <div className="mt-6">
-//         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-//           <div>
-//             <p className="font-semibold text-gray-600">Order Code</p>
-//             <p>{orderData.orderCode}</p>
-//           </div>
-//           <div>
-//             <p className="font-semibold text-gray-600">Placed on</p>
-//             <p>{orderData.placedOn}</p>
-//           </div>
-//           <div>
-//             <p className="font-semibold text-gray-600">Sent to</p>
-//             <p>{orderData.address}</p>
-//           </div>
-//           <div>
-//             <p className="font-semibold text-gray-600">Payment Type</p>
-//             <p>{orderData.paymentType}</p>
-//           </div>
-//           <div>
-//             <p className="font-semibold text-gray-600">Transaction ID</p>
-//             <p>{orderData.transactionId}</p>
-//           </div>
-//           <div>
-//             <p className="font-semibold text-gray-600">Amount Paid</p>
-//             <p>${orderData.amountPaid}</p>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Product List */}
-//       <div className="mt-6">
-//         <h3 className="font-semibold text-lg mb-4">Order Items</h3>
-//         <div className="space-y-4">
-//           {orderData.items.map((item, index) => (
-//             <div
-//               key={index}
-//               className="flex items-center justify-between bg-gray-100 p-4 rounded-lg"
-//             >
-//               <img
-//                 src={item.image}
-//                 alt={item.name}
-//                 className="w-16 h-16 object-cover"
-//               />
-//               <div>
-//                 <p className="font-semibold">{item.name}</p>
-//                 <p>{item.color}</p>
-//               </div>
-//               <p className="text-right">
-//                 ${item.price}{" "}
-//                 {item.originalPrice && (
-//                   <span className="text-gray-400 line-through">
-//                     ${item.originalPrice}
-//                   </span>
-//                 )}
-//               </p>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default OrderStatus;
-
 import React, { useState, useEffect } from "react";
-import { FaBox, FaCheck, FaTruck } from "react-icons/fa";
+import {
+  FaBox,
+  FaCheck,
+  FaTruck,
+  FaShoppingCart,
+  FaCog,
+  FaClipboardCheck,
+} from "react-icons/fa";
 import { FaBarsProgress } from "react-icons/fa6";
 import OrderDetails from "./OrderDetails";
 import OrderItemss from "./OrderItemss";
@@ -196,10 +49,36 @@ const OrderStatus = () => {
   }
 
   const statusSteps = [
-    { status: "placed", icon: FaCheck, label: "Order Placed" },
-    { status: "processing", icon: FaBarsProgress, label: "Processing" },
-    { status: "on-the-way", icon: FaTruck, label: "On the way" },
-    { status: "delivered", icon: FaBox, label: "Delivered" },
+    {
+      status: "placed",
+      icon: FaShoppingCart,
+      label: "Order Placed",
+      color: "bg-green-500",
+    },
+    {
+      status: "processing",
+      icon: FaCog,
+      label: "Processing",
+      color: "bg-yellow-500",
+    },
+    {
+      status: "on-the-way",
+      icon: FaTruck,
+      label: "On the way",
+      color: "bg-blue-500",
+    },
+    {
+      status: "quality-check",
+      icon: FaClipboardCheck,
+      label: "Quality Check",
+      color: "bg-purple-500",
+    },
+    {
+      status: "delivered",
+      icon: FaBox,
+      label: "Delivered",
+      color: "bg-indigo-500",
+    },
   ];
 
   const currentStatusIndex = statusSteps.findIndex(
@@ -207,49 +86,58 @@ const OrderStatus = () => {
   );
 
   const getStatusWidth = () => {
-    return `w-${Math.min((currentStatusIndex + 1) * 25, 100)}%`;
+    return `${Math.min(
+      ((currentStatusIndex + 1) / statusSteps.length) * 100,
+      100
+    )}%`;
   };
 
   return (
     <div className="w-full mx-auto p-6">
       <div className="text-center">
-        <h2 className="text-xl font-semibold mb-4">Order Status</h2>
+        <h2 className="text-2xl font-bold mb-4">Order Status</h2>
         <p className="text-gray-600">Track your order</p>
 
-        <div className="flex items-center justify-center mt-6">
+        <div className="flex items-center justify-between mt-8 relative">
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-200 -translate-y-1/2 z-0"></div>
           {statusSteps.map((step, index) => (
-            <div key={step.status} className="w-1/4 text-center">
+            <div key={step.status} className="z-10">
               <div className="relative">
                 <div
                   className={`${
-                    index <= currentStatusIndex ? "bg-blue-500" : "bg-gray-300"
-                  } w-10 h-10 mx-auto rounded-full text-white flex items-center justify-center`}
+                    index <= currentStatusIndex ? step.color : "bg-gray-300"
+                  } w-12 h-12 mx-auto rounded-full text-white flex items-center justify-center shadow-lg transition-all duration-300 ${
+                    index <= currentStatusIndex ? "scale-110" : ""
+                  }`}
                 >
-                  <step.icon />
+                  <step.icon className="text-xl" />
                 </div>
-                <p className="text-sm mt-2">{step.label}</p>
+                <p className="text-sm mt-2 font-medium">{step.label}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="bg-gray-200 h-1 w-3/4 mx-auto mt-4">
-          <div className={`bg-blue-500 h-1 ${getStatusWidth()}`}></div>
+        <div className="bg-gray-200 h-2 w-full mx-auto mt-8 rounded-full overflow-hidden">
+          <div
+            className={`h-full ${statusSteps[currentStatusIndex].color} transition-all duration-500 ease-out rounded-full`}
+            style={{ width: getStatusWidth() }}
+          ></div>
         </div>
 
-        <p className="mt-4 text-sm text-gray-500">
+        <p className="mt-6 text-lg font-semibold text-gray-700">
           {orderData.deliveryStatus === "delivered"
             ? "Your order has been delivered."
             : `Your order is currently ${orderData.deliveryStatus}.`}
         </p>
       </div>
 
-      <div className="mt-6">
+      <div className="mt-10">
         <OrderDetails orderData={orderData} />
       </div>
 
-      <div className="mt-6">
-        <h3 className="font-semibold text-lg mb-4">Order Items</h3>
+      <div className="mt-10">
+        <h3 className="font-semibold text-xl mb-4">Order Items</h3>
         <OrderItemss items={orderData.cart || []} />
       </div>
     </div>
