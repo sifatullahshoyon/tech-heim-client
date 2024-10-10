@@ -155,30 +155,33 @@
 import React, { useState, useEffect } from "react";
 import { FaBox, FaCheck, FaTruck } from "react-icons/fa";
 import { FaBarsProgress } from "react-icons/fa6";
-import useAxiosSecure from "../../../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
-import useAuth from "../../../../../Components/Hooks/useAuth/useAuth";
-import LoadingSpinner from "../../../../../Components/Shared/LoadingSpiner/LoadingSpinner";
 import OrderDetails from "./OrderDetails";
 import OrderItemss from "./OrderItemss";
+import { useParams } from "react-router-dom";
+import LoadingSpinner from "../../../../../Components/Shared/LoadingSpiner/LoadingSpinner";
+import useAxiosSecure from "../../../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
 
 const OrderStatus = () => {
-  const { user, loading } = useAuth();
-  const axiosSecure = useAxiosSecure();
-  const [paymentData, setPaymentData] = useState(null); // Store a single payment
+  const { id } = useParams();
+  const [orderData, setOrderData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    if (user?.email) {
-      axiosSecure
-        .get(`/get-payments?email=${user.email}`)
-        .then((response) => {
-          setPaymentData(response.data?.userPayment || {});
-        })
-        .catch(() => {
-          setError("Error fetching payment data");
-        });
-    }
-  }, [user, axiosSecure]);
+    const fetchOrderData = async () => {
+      try {
+        const response = await axiosSecure.get(`/get-payments/${id}`);
+        setOrderData(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError("Error fetching order data");
+        setLoading(false);
+      }
+    };
+
+    fetchOrderData();
+  }, [id, axiosSecure]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -188,67 +191,66 @@ const OrderStatus = () => {
     return <div className="text-red-500">{error}</div>;
   }
 
-  console.log(paymentData);
+  if (!orderData) {
+    return <div>No order data found</div>;
+  }
+
+  const statusSteps = [
+    { status: "placed", icon: FaCheck, label: "Order Placed" },
+    { status: "processing", icon: FaBarsProgress, label: "Processing" },
+    { status: "on-the-way", icon: FaTruck, label: "On the way" },
+    { status: "delivered", icon: FaBox, label: "Delivered" },
+  ];
+
+  const currentStatusIndex = statusSteps.findIndex(
+    (step) => step.status === orderData.deliveryStatus
+  );
+
+  const getStatusWidth = () => {
+    return `w-${Math.min((currentStatusIndex + 1) * 25, 100)}%`;
+  };
+
   return (
     <div className="w-full mx-auto p-6">
-      {/* Order Status Tracker */}
       <div className="text-center">
         <h2 className="text-xl font-semibold mb-4">Order Status</h2>
         <p className="text-gray-600">Track your order</p>
 
         <div className="flex items-center justify-center mt-6">
-          <div className="w-1/4 text-center">
-            <div className="relative">
-              <div className="bg-blue-500 w-10 h-10 mx-auto rounded-full text-white flex items-center justify-center">
-                <FaCheck />
+          {statusSteps.map((step, index) => (
+            <div key={step.status} className="w-1/4 text-center">
+              <div className="relative">
+                <div
+                  className={`${
+                    index <= currentStatusIndex ? "bg-blue-500" : "bg-gray-300"
+                  } w-10 h-10 mx-auto rounded-full text-white flex items-center justify-center`}
+                >
+                  <step.icon />
+                </div>
+                <p className="text-sm mt-2">{step.label}</p>
               </div>
-              <p className="text-sm mt-2">Order Placed</p>
             </div>
-          </div>
-          <div className="w-1/4 text-center">
-            <div className="relative">
-              <div className="bg-blue-500 w-10 h-10 mx-auto rounded-full text-white flex items-center justify-center">
-                <FaBarsProgress />
-              </div>
-              <p className="text-sm mt-2">Processing</p>
-            </div>
-          </div>
-          <div className="w-1/4 text-center">
-            <div className="relative">
-              <div className="bg-gray-300 w-10 h-10 mx-auto rounded-full text-white flex items-center justify-center">
-                <FaTruck />
-              </div>
-              <p className="text-sm mt-2">On the way</p>
-            </div>
-          </div>
-          <div className="w-1/4 text-center">
-            <div className="relative">
-              <div className="bg-gray-300 w-10 h-10 mx-auto rounded-full text-white flex items-center justify-center">
-                <FaBox />
-              </div>
-              <p className="text-sm mt-2">Delivered</p>
-            </div>
-          </div>
+          ))}
         </div>
 
-        <div className="bg-gray-200 h-1 w-2/4 mx-auto mt-4">
-          <div className="bg-blue-500 h-1 w-1/2"></div>
+        <div className="bg-gray-200 h-1 w-3/4 mx-auto mt-4">
+          <div className={`bg-blue-500 h-1 ${getStatusWidth()}`}></div>
         </div>
 
         <p className="mt-4 text-sm text-gray-500">
-          Please wait, we are still processing your order.
+          {orderData.deliveryStatus === "delivered"
+            ? "Your order has been delivered."
+            : `Your order is currently ${orderData.deliveryStatus}.`}
         </p>
       </div>
 
-      {/* Order Details */}
       <div className="mt-6">
-        <OrderDetails orderData={paymentData?.orderDetails} />
+        <OrderDetails orderData={orderData} />
       </div>
 
-      {/* Product List */}
       <div className="mt-6">
         <h3 className="font-semibold text-lg mb-4">Order Items</h3>
-        <OrderItemss items={paymentData?.orderItems || []} />
+        <OrderItemss items={orderData.cart || []} />
       </div>
     </div>
   );

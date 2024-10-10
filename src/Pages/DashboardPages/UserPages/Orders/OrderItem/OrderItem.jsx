@@ -21,7 +21,6 @@ const OrderItem = ({ order, user }) => {
   } = order;
 
   const mainProduct = cart[0]?.product || {};
-  console.log(order);
   const { featureImage = [] } = mainProduct;
 
   return (
