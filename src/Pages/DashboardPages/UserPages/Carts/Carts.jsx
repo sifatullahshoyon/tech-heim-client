@@ -10,13 +10,12 @@ import GrandTotal from "../../../../Components/Shared/Price/GrandTotal";
 import useAuth from "../../../../Components/Hooks/useAuth/useAuth";
 
 const Carts = () => {
-  const { cartProduct ,fetchCartDetails} = useAuth();
+  const { cartProduct ,fetchCartDetails,user ,shippingCost,setShippingCost} = useAuth();
   const { cart, totalPrice } = cartProduct;
-  console.log('carts page 15:' ,  cart)
+  console.log('carts page 15:' ,  cart,shippingCost)
+ 
 
-  useEffect(() => {
-    fetchCartDetails()
-  }, [cart])
+  
 
   const location = useLocation();
   const isCarsPage = location?.pathname?.includes("carts");
