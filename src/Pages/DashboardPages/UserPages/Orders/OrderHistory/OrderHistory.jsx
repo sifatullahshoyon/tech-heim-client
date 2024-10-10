@@ -35,25 +35,28 @@ const OrderHistory = () => {
     {
       id: "processing",
       label: "Processing",
-      count: paymentData.filter((order) => order.status === "processing")
-        .length,
+      count: paymentData.filter(
+        (order) => order.deliveryStatus === "processing"
+      ).length,
     },
     {
-      id: "completed",
-      label: "Completed",
-      count: paymentData.filter((order) => order.status === "completed").length,
+      id: "delivered",
+      label: "delivered",
+      count: paymentData.filter((order) => order.deliveryStatus === "delivered")
+        .length,
     },
     {
       id: "canceled",
       label: "Canceled",
-      count: paymentData.filter((order) => order.status === "canceled").length,
+      count: paymentData.filter((order) => order.deliveryStatus === "canceled")
+        .length,
     },
   ];
 
   const filteredOrders =
     selectedTab === "all"
       ? paymentData
-      : paymentData.filter((order) => order.status === selectedTab);
+      : paymentData.filter((order) => order.deliveryStatus === selectedTab);
 
   return (
     <div className="p-4 md:p-6 bg-white w-full max-w-7xl mx-auto">
