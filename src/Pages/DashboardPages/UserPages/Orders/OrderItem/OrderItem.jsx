@@ -21,7 +21,7 @@ const OrderItem = ({ order, user }) => {
   } = order;
 
   const mainProduct = cart[0]?.product || {};
-  console.log(cart)
+  console.log(order);
   const { featureImage = [] } = mainProduct;
 
   return (
@@ -73,10 +73,11 @@ const OrderItem = ({ order, user }) => {
           Status:
         </span>
         <span
-          className={`${status === "completed"
-            ? "bg-green-200 text-green-800"
-            : "bg-yellow-200 text-yellow-800"
-            } px-4 py-2 rounded-full text-sm font-bold flex items-center shadow-sm`}
+          className={`${
+            status === "completed"
+              ? "bg-green-200 text-green-800"
+              : "bg-yellow-200 text-yellow-800"
+          } px-4 py-2 rounded-full text-sm font-bold flex items-center shadow-sm`}
         >
           {status === "completed" ? (
             <FaCheckCircle className="mr-2" />
@@ -87,12 +88,9 @@ const OrderItem = ({ order, user }) => {
         </span>
       </div>
       <div className="flex gap-4 flex-wrap">
-        {
-          cart.map(cr => (
-            <img className="w-20 h-20" src={cr?.product?.featureImage} alt="" />
-          ))
-        }
-
+        {cart.map((cr) => (
+          <img className="w-20 h-20" src={cr?.product?.featureImage} alt="" />
+        ))}
       </div>
 
       <div className="mt-8 text-center">

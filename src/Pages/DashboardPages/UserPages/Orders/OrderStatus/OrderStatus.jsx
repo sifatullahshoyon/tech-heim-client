@@ -9,10 +9,10 @@
 //   useEffect(() => {
 //     const fetchOrderData = async () => {
 //       try {
-//         const response = await fetch('https://api.example.com/orders/1050486'); // Replace with your API URL
+//         const response = await fetch(`/get-payments?email=${user.email}`); // Replace with your API URL
 //         const data = await response.json();
 //         setOrderData(data); // Save data to state
-//         setLoading(false);  // Turn off loading state
+//         setLoading(false); // Turn off loading state
 //       } catch (error) {
 //         console.error("Error fetching the order data:", error);
 //       }
@@ -188,7 +188,7 @@ const OrderStatus = () => {
     return <div className="text-red-500">{error}</div>;
   }
 
-  // console.log(paymentData);
+  console.log(paymentData);
   return (
     <div className="w-full mx-auto p-6">
       {/* Order Status Tracker */}

@@ -1,7 +1,7 @@
 import React from "react";
 
 const OrderDetails = ({ orderData }) => {
-  //   console.log(orderData);
+  console.log(orderData);
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
       <div>
