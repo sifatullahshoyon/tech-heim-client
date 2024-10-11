@@ -141,6 +141,9 @@ const router = createBrowserRouter([
       {
         path: "/termsConditions",
         element: <TermsAndConditions />,
+       
+      },
+      {
         path: "/lottery",
         element: <Lottery />,
       },
