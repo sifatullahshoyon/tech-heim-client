@@ -23,6 +23,8 @@ const AuthProvider = ({ children }) => {
   // cart product related state
   const [cartProduct, setCartProduct] = useState([]);
   const [cartProductID, setCartProductID] = useState([]);
+// lottery related state
+  const [ticketNumber, setTicketNumber] = useState(null);
 
   /////////////////// user related state & function start /////////////////
 
@@ -111,6 +113,7 @@ const AuthProvider = ({ children }) => {
     wistList,
     cartProduct,
     cartProductID,
+    ticketNumber, 
     createUser,
     signIn,
     logOut,
@@ -121,6 +124,7 @@ const AuthProvider = ({ children }) => {
     setCartProduct,
     fetchCartDetails,
     setCartProductID,
+    setTicketNumber
   };
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };

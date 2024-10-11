@@ -37,6 +37,7 @@ import Checkout from "../Pages/DashboardPages/UserPages/Checkout/Checkout";
 import AdminRoute from "./AdminRoute";
 import Payment from "../Pages/DashboardPages/Payment/Payment";
 import Lottery from "../Pages/Lottery/Lottery";
+import Spinner from "../Pages/Spinner/Spinner";
 
 const router = createBrowserRouter([
   {
@@ -107,6 +108,10 @@ const router = createBrowserRouter([
       {
         path: "/lottery",
         element: <Lottery />,
+      },
+      {
+        path: "/spinner",
+        element: <Spinner />,
       },
     ],
   },

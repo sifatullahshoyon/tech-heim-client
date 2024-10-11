@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Wheel } from "react-custom-roulette";
+import React from "react";
 
-const WheelSpinner = ({ ticketNumber }) => {
+const WheelSpinner = ({ ticketNumber}) => {
   const generateRandomNumbers = (count, exclude) => {
     const numbers = [];
     while (numbers.length < count) {
@@ -48,7 +49,6 @@ const WheelSpinner = ({ ticketNumber }) => {
         radiusLineColor={"#dedede"}
         radiusLineWidth={5}
         fontSize={18}
-        spinDuration={3} // Increase spin duration for smoother effect
         onStopSpinning={() => {
           setMustSpin(false); // Stop spinning
           if (data[prizeNumber].option === ticketNumber.toString()) {
@@ -67,3 +67,6 @@ const WheelSpinner = ({ ticketNumber }) => {
 };
 
 export default WheelSpinner;
+
+
+

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Countdown from "../../Components/Countdown/Counterdown";
+import useAuth from "../../Components/Hooks/useAuth/useAuth";
 
 const Lottery = () => {
-  const [ticketNumber, setTicketNumber] = useState(null);
+  const { ticketNumber, setTicketNumber } = useAuth();
+ 
   const [ticketPrice] = useState(10); // Example ticket price
   const [buyDate,setBuyDate]=useState(null);
 
@@ -53,7 +55,7 @@ const Lottery = () => {
               Remember, you can spin the wheel after a minute from your purchase time! Good luck!
             </p>
 
-            <Countdown purchaseDate={buyDate} ticketNumber={ticketNumber}></Countdown>
+            <Countdown purchaseDate={buyDate}></Countdown>
           </div>
         )}
       </div>
