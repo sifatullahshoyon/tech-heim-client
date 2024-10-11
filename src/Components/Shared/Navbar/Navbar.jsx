@@ -342,4 +342,12 @@ const navItems = [
   //   name: "Dashboard",
   //   path: "/dashboard",
   // },
+  {
+    name: "Dashboard",
+    path: "/dashboard",
+  },
+  {
+    name: "Lottery",
+    path: "/lottery",
+  },
 ];
