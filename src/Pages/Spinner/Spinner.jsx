@@ -56,14 +56,17 @@ const Spinner = () => {
             setMustSpin(false);
             if (data[prizeNumber].option === ticketNumber.toString()) {
               alert("Congratulations! You won!");
+              setTicketNumber(null);
             } else {
               alert("Sorry, better luck next time!");
+              setTicketNumber(null);
             }
           }}
           animationDuration={2}
           animationEase="cubic-bezier(0.68, -0.55, 0.27, 1.55)"
         />
         <button
+          disabled={!ticketNumber}
           onClick={handleSpinClick}
           className="mt-4 px-6 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"
         >
