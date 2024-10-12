@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useAxiosPublic from "../../../../Components/Hooks/useAxiosPublic/useAxiosPublic";
 import { TiTick } from "react-icons/ti";
 import useAuth from "../../../../Components/Hooks/useAuth/useAuth";
-import { v4 as uuidv4 } from "uuid";
 import LoadingSpinner from "../../../../Components/Shared/LoadingSpiner/LoadingSpinner";
 
 const Success = () => {
   const axiosPublic = useAxiosPublic();
-  const navigate = useNavigate();
   const { user, loading } = useAuth();
-  const tran_id = uuidv4();
 
   const userEmail = user?.email;
   console.log(userEmail);
