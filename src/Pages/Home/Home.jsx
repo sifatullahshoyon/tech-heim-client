@@ -7,7 +7,6 @@ import BestSellers from "./BestSellers/BestSellers";
 import ProductsInfo from "./ProductsInfo/ProductsInfo";
 import AnotherHomePage from "../AnotherHomePage/AnotherHomePage";
 import BlogCardForHome from "../blogs/BlogsForHome/BlogCardForHome";
-import FacebookMsg from "../../Components/FacebookMsg/FacebookMsg";
 
 const Home = () => {
   return (
@@ -20,7 +19,6 @@ const Home = () => {
       <BestSellers />
       <AnotherHomePage />
       <BlogCardForHome />
-      <FacebookMsg />
     </>
   );
 };
