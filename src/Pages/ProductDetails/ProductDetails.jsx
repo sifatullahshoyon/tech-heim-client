@@ -22,6 +22,10 @@ const ProductDetails = () => {
   const [selectedColor, setSelectedColor] = useState("");
   const axiosPublic = useAxiosPublic();
   const { id } = useParams();
+  const [pastOrder, setPastOrder] = useState([]);
+
+  const isPresentPastOrder = pastOrder.includes(id);
+  
 
   const { data: product = [] } = useQuery({
     queryKey: ["product"],
@@ -30,6 +34,25 @@ const ProductDetails = () => {
       return result.data;
     },
   });
+
+  useEffect(() => {
+    if (user?.email) {
+      axiosPublic
+        .get(`/get-payments?email=${user.email}`)
+        .then((response) => {
+          const pastOrderedProductsId = response?.data?.userPayment
+            ?.filter((payment) => payment.deliveryStatus === "delivered") // Filter by deliveryStatus
+            .flatMap(
+              (payment) => payment.cart.map((item) => item.product._id) // Extract product _id
+            );
+            setPastOrder(pastOrderedProductsId);
+        })
+        .catch((error) => {
+          setError("Error fetching payment data");
+        });
+    }
+  }, [user]);
+
   const {
     name,
     modelName,
@@ -156,8 +179,9 @@ const ProductDetails = () => {
                   <div className="flex gap-4 mt-4">
                     {/* Black color input */}
                     <div
-                      className={`w-8 h-8 rounded-full cursor-pointer flex justify-center items-center ${selectedColor === "Black" ? "ring-4 ring-black" : ""
-                        }`}
+                      className={`w-8 h-8 rounded-full cursor-pointer flex justify-center items-center ${
+                        selectedColor === "Black" ? "ring-4 ring-black" : ""
+                      }`}
                       style={{ backgroundColor: "Black" }}
                       onClick={() => handleColorSelect("Black")}
                     >
@@ -166,8 +190,9 @@ const ProductDetails = () => {
 
                     {/* gray color input */}
                     <div
-                      className={`w-8 h-8 bg-base-300 rounded-full cursor-pointer flex justify-center items-center ${selectedColor === color ? "ring-4 ring-white border  shadow-2xl" : ""
-                        }`}
+                      className={`w-8 h-8 bg-base-300 rounded-full cursor-pointer flex justify-center items-center ${
+                        selectedColor === color ? "ring-4 ring-white border  shadow-2xl" : ""
+                      }`}
                       style={{ backgroundColor: `${color}` }}
                       onClick={() => handleColorSelect(`${color}`)}
                     >
@@ -302,7 +327,7 @@ const ProductDetails = () => {
       </div>
 
       {/* tablist-components  */}
-      <TabListProduct product={product} key={_id} similarProduct={similarProduct}></TabListProduct>
+      <TabListProduct product={product} key={_id} similarProduct={similarProduct} isPresentPastOrder={isPresentPastOrder}></TabListProduct>
 
       {/* Review  */}
     </div>
