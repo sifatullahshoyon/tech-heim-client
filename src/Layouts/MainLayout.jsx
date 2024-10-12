@@ -3,7 +3,6 @@ import Navbar from "../Components/Shared/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 import Footer from "../Components/Shared/Footer/Footer";
 import useAuth from "../Components/Hooks/useAuth/useAuth";
-import FacebookMsg from "../Components/FacebookMsg/FacebookMsg";
 
 const MainLayout = () => {
   const { user, wistList, fetchWishList, cartProduct, cartProductID, fetchCartDetails } = useAuth();
@@ -19,7 +18,6 @@ const MainLayout = () => {
       <div className="min-h-screen">
         <Outlet />
       </div>
-      <FacebookMsg></FacebookMsg>
       <Footer />
 
     </>
