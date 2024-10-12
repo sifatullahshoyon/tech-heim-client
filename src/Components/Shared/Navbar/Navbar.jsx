@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import logo from "../../../assets/images/logo/logo.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import bagIcon from "../../../assets/images/icon/bag.png";
 import searchIcon from "../../../assets/images/icon/search-normal.png";
 import userIcon from "../../../assets/images/icon/user.png";
@@ -20,11 +20,13 @@ const Navbar = () => {
   const { user, logOut, cartProduct } = useContext(AuthContext);
   const { cart, totalPrice } = cartProduct;
   const [isAdmin] = useAdmin();
+  const navigate = useNavigate();
 
   const handleLogeOut = () => {
     logOut()
       .then(() => {
         toast.success("Successfully logOut");
+        navigate('/')
       })
       .catch((error) => {
         console.log(error);
