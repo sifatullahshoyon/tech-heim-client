@@ -53,8 +53,8 @@ const Countdown = ({ purchaseDate }) => {
   return (
     <div>
       {timeLeft !== "You can spin the wheel now!" ? (
-        <div>
-          <div>{timeLeft}</div>
+        <div  className="text-center">
+          <div><p className="text-[30px] font-medium">{timeLeft}</p></div>
         </div>
       ) : (
         <div className="text-center">

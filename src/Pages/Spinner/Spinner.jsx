@@ -62,7 +62,7 @@ const Spinner = () => {
               setTicketNumber(null);
             }
           }}
-          animationDuration={2}
+          animationDuration={3}
           animationEase="cubic-bezier(0.68, -0.55, 0.27, 1.55)"
         />
         <button
