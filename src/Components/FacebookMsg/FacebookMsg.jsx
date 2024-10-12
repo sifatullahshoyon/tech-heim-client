@@ -1,11 +1,28 @@
-import React from 'react';
-import { FacebookProvider, CustomChat } from 'react-facebook';
+import React, { useEffect } from 'react';
+
 const FacebookMsg = () => {
+    useEffect(() => {
+        // Initialize the Facebook SDK when the component mounts
+        if (window.FB) {
+            window.FB.init({
+                appId: '554825507079623',
+                autoLogAppEvents: true,
+                xfbml: true,
+                version: 'v16.0',
+            });
+            window.FB.XFBML.parse(); // Re-render any Facebook SDK widgets
+        }
+    }, []);
+
     return (
         <div>
-            <FacebookProvider appId="554825507079623" chatSupport>
-                <CustomChat pageId="2603869209623788" minimized={true} />
-            </FacebookProvider>
+            <div className="fb-customerchat"
+                attribution="setup_tool"
+                page_id="2603869209623788"
+                theme_color="#0084ff"
+                logged_in_greeting="Hi! How can we help you?"
+                logged_out_greeting="Please log in to chat with us.">
+            </div>
         </div>
     );
 };
