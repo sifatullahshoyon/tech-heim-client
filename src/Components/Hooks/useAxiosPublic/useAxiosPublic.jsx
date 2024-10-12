@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 const axiosPublic = axios.create({
     baseURL: 'http://localhost:5000'
 })
@@ -10,3 +9,5 @@ const useAxiosPublic = () => {
 }
 
 export default useAxiosPublic;
+// https://dev-daynamos-fashion-house-server.vercel.app
+// http://localhost:5000/
