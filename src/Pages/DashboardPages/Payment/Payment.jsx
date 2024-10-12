@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoCartSharp } from "react-icons/io5";
 import { TbTruckDelivery } from "react-icons/tb";
 import { MdOutlinePayment } from "react-icons/md";
@@ -14,18 +14,21 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 
 const Payment = () => {
+  const axiosPublic = useAxiosPublic();
   const location = useLocation();
   const isCarsPage = location?.pathname?.includes("carts");
   const isCheckoutPage = location?.pathname?.includes("checkout");
   const isPaymentPage = location?.pathname?.includes("payment");
-  const axiosPublic = useAxiosPublic();
-  const { cartProduct, fetchCartDetails, user } = useContext(AuthContext);
+
+  const { cartProduct, fetchCartDetails, user,finalPrice,setFinalPrice, } = useContext(AuthContext);
   const { cart, totalPrice } = cartProduct;
   const userEmail = user?.email;
 
+  const [loader, setLoader] = useState(false);
+
   const clearCart = async (userEmail) => {
     try {
-      const response = await axiosPublic.post(`http://localhost:5000/api/cart/clear/${userEmail}`);
+      const response = await axiosPublic.post(`/api/cart/clear/${userEmail}`);
       console.log(response.data.message); // Cart cleared successfully
       if (response.data.message == "Cart cleared successfully") {
         fetchCartDetails();
@@ -36,6 +39,7 @@ const Payment = () => {
   };
 
   const handleCreatePayment = () => {
+    setLoader(true);
     const userEmail = user?.email;
     // Basic validation checks
 
@@ -55,7 +59,7 @@ const Payment = () => {
     axiosPublic
       .post("/create-payment", {
         cart: cart, // Send cart array with product information
-        totalPrice: parseFloat(totalPrice), // Send total price
+        totalPrice: parseFloat(finalPrice), // Send total price
         userName: user.displayName, // Send User Name
         userEmail: user.email, // Send User Email
       })
@@ -68,6 +72,7 @@ const Payment = () => {
           window.location.replace(redirectUrl);
           clearCart(userEmail);
         }
+        setLoader(false);
       })
       .catch((error) => {
         console.error("Error creating payment:", error);
@@ -126,24 +131,23 @@ const Payment = () => {
           <MenuShoppingCart />
           {/* Divider */}
           <div className="divider"></div>
-          {/* Discount */}
-          <div className="join w-full mb-10">
-            <input className="input input-bordered join-item w-full" placeholder="discount code" />
-            <button className="btn join-item rounded-r-full bg-blue-500 hover:bg-blue-600 text-white">
-              Apply code
-            </button>
-          </div>
+          
           {/* Total Price */}
           <CalculatedPrice />
           <GrandTotal />
           <div className="w-full">
-            <button
-              onClick={handleCreatePayment}
-              className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full"
-            >
-              Continue to pay
-            </button>
-            
+            {loader ? (
+              <button className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full">
+                <span className="loading loading-dots loading-lg"></span>
+              </button>
+            ) : (
+              <button
+                onClick={handleCreatePayment}
+                className="btn  bg-blue-500 hover:bg-blue-600 border-0 text-white w-full"
+              >
+                Continue to pay
+              </button>
+            )}
           </div>
         </div>
       </div>

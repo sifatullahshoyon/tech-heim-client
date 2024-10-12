@@ -1,11 +1,12 @@
 import React from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 import ProductOnSellSlider from "./ProductOnSellSlider";
+import { Link } from "react-router-dom";
 
 const ProductOnSell = () => {
   return (
-    <section className="container mx-auto px-6 mb-12">
-      <div className="h-auto lg:h-[325px] bg-[#063A88] w-full rounded-lg relative">
+    <section className="container mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+      <div className="h-auto lg:h-[360px] bg-[#063A88] bg-opacity-90 w-full rounded-lg relative">
         {/* Background Img */}
         <div className="productOnSell"></div>
         {/* Content & Slider */}
@@ -18,10 +19,10 @@ const ProductOnSell = () => {
             <p className="text-xs lg:text-xl text-white font-light mb-14">
               Shop Now!
             </p>
-            <p className="flex items-center text-white text-sm lg:text-base font-normal">
+            <Link to='/shop' className="flex items-center  text-white text-sm lg:text-base font-normal">
               View all
               <RiArrowRightSLine />
-            </p>
+            </Link>
           </div>
           {/* Slider */}
           <div className="w-full lg:w-3/4">

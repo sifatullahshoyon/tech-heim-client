@@ -15,7 +15,7 @@ const Home = () => {
       <ProductsInfo />
       <ProductOnSell />
       <NewProducts />
-      <div className="flex justify-center"><Prebook /></div>
+      <Prebook />
       <BestSellers />
       <AnotherHomePage />
       <BlogCardForHome />

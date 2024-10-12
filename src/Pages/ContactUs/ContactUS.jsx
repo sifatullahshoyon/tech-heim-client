@@ -2,15 +2,16 @@ import NavigationBreadcrumb from "../../Components/Shared/NavigationBreadcrumb/N
 import location from "../../assets/contactUS/location.png";
 import sms from "../../assets/contactUS/sms.png";
 import call from "../../assets/contactUS/call.png";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import swal from 'sweetalert';
-
+import swal from "sweetalert";
 
 const ContactUS = () => {
+  const [loader, setLoader] = useState(false);
   const form = useRef();
 
   const sendEmail = (e) => {
+    setLoader(true);
     e.preventDefault();
 
     emailjs
@@ -21,10 +22,12 @@ const ContactUS = () => {
         () => {
           console.log("SUCCESS!");
           swal("Good job!", "You mail sent successfully!", "success");
+          setLoader(false);
         },
         (error) => {
           console.log("FAILED...", error.text);
           swal("oops!", "You mail not sent successfully!", "error");
+          setLoader(false);
         }
       );
     // Reset the form fields
@@ -130,13 +133,18 @@ const ContactUS = () => {
                   value="Send"
                   className="w-full bg-indigo-600 text-white p-4 rounded-md hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
                 >
-                  Send Message
+                  {loader ? (
+                    <span className="loading loading-dots loading-lg"></span>
+                  ) : (
+                    <span>Send Message</span>
+                  )}
                 </button>
               </div>
             </form>
           </div>
         </div>
       </div>
+      
     </div>
   );
 };

@@ -4,13 +4,22 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { ImageDisplayControl } from "@frameright/react-image-display-control";
 import img1 from "../../../assets/images/products/macbook.png";
+import { useQuery } from "@tanstack/react-query";
 
 const ProductOnSellSlider = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
+  // Get all products
+  const { data: products = [] } = useQuery({
+    queryKey: ['products'],
+    queryFn: async () => {
+      const result = await axiosPublic.get('/products/all')
+      return result.data
+    }
+  })
+  console.log(products)
   return (
     <div className="relative w-full">
       <Swiper
@@ -48,32 +57,59 @@ const ProductOnSellSlider = () => {
         modules={[Navigation]}
         className="mySwiper"
       >
-        {productOnSell?.map((pd) => (
+        {products?.map((pd) => (
           <SwiperSlide key={pd._id}>
-            <div className="flex justify-center">
-              <div className="rounded-lg hover:transition h-[237px]  hover:ease-in hover:duration-300  lg:max-w-[184px] bg-white overflow-hidden relative p-2 sm:w-auto ">
-                <div className="badge absolute top-2 left-2 rounded bg-[#FDDBC9] text-black p-1">
-                  -{pd.discount}%
+            <div className="flex justify-center mr-2">
+              <div className="rounded-lg hover:transition h-[237px]  hover:ease-in hover:duration-300  lg:max-w-[184px]  bg-white overflow-hidden relative p-2 sm:w-auto ">
+                <div className=" absolute -top-2 -ml-2  rounded text-black ">
+                  {pd?.sellPrice ? (
+                    <>
+                      <div className="w-[50px] h-[32px]  px-[6px] bg-[#FDDBC9] py-[4px] mt-[10px] rounded-r-[8px]">
+                        <p className="text-[16px] font-light text-[#F45E0C]">
+                          {pd?.regularPrice > 0 &&
+                            Math.round(((pd?.regularPrice - pd?.sellPrice) / pd?.regularPrice) * 100) + "%"}
+                        </p>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="w-[50px] h-[32px]  px-[6px]  py-[4px] mt-[10px] rounded-r-[8px]"></div>
+                    </>
+                  )}
                 </div>
-                <ImageDisplayControl>
-                  <img
-                    src={pd.img}
-                    alt={pd.title}
-                    className="w-full object-cover h-[150px] sm:h-[130px]"
-                  />
-                </ImageDisplayControl>
-                <h4 className="text-xs text-black font-light mt-2">
-                  {pd.title.length > 30
-                    ? pd.title.slice(0, 30) + "..."
-                    : pd.title}
+                {/* image  */}
+                <img
+                  src={pd.featureImage}
+                  alt='pd image'
+                  className="w-full object-cover h-[150px] sm:h-[130px]"
+                />
+                <h4 className="text-lg text-black font-light mt-2">
+                  {pd.name.length > 20
+                    ? pd.name.slice(0, 20) + "..."
+                    : pd.name}
                 </h4>
+                {/* price  */}
+
                 <div className="flex justify-between mt-2">
-                  <p className="text-gray-500 line-through text-sm sm:text-xs">
-                    ${parseFloat(pd.lastPrice).toFixed(2)}
-                  </p>
-                  <p className="text-black font-semibold text-sm sm:text-xs">
-                    ${parseFloat(pd.currentPrice).toFixed(2)}
-                  </p>
+                  {/* Display regular price only if it exists */}
+                  {pd?.regularPrice && (
+                    <p className="text-gray-500 line-through text-lg sm:text-xs">
+                      ${parseFloat(pd?.regularPrice).toFixed(2)}
+                    </p>
+                  )}
+
+                  {/* Display sell price if it exists; if not, just show regular price */}
+                  {pd?.sellPrice ? (
+                    <p className="text-black font-semibold text-sm sm:text-xs">
+                      ${parseFloat(pd?.sellPrice).toFixed(2)}
+                    </p>
+                  ) : (
+                    pd?.regularPrice && (
+                      <p className="text-black font-semibold text-sm sm:text-xs">
+                        ${parseFloat(pd?.regularPrice).toFixed(2)}
+                      </p>
+                    )
+                  )}
                 </div>
               </div>
             </div>
@@ -82,107 +118,22 @@ const ProductOnSellSlider = () => {
       </Swiper>
 
       {/* Custom position for navigation buttons */}
-      <div className="absolute bottom-2 lg:-bottom-10 right-2 z-10 flex items-center gap-2">
-        <div
+      <div className="absolute bottom-2  lg:-bottom-14 right-2 z-10 flex items-center gap-2">
+        <button
           ref={prevRef}
-          className="swiper-button-prev-custom bg-white shadow-lg text-black p-2 rounded-full cursor-pointer"
+          className="btn btn-info swiper-button-prev-custom  shadow-lg text-black p-2 rounded-full cursor-pointer"
         >
           <IoIosArrowBack />
-        </div>
-        <div
+        </button>
+        <button
           ref={nextRef}
-          className="swiper-button-next-custom bg-white shadow-lg text-black p-2 rounded-full cursor-pointer"
+          className="btn btn-info swiper-button-next-custom  shadow-lg text-black p-2 rounded-full cursor-pointer"
         >
           <IoIosArrowForward />
-        </div>
+        </button>
       </div>
     </div>
   );
 };
 
 export default ProductOnSellSlider;
-
-const productOnSell = [
-  {
-    _id: 1,
-    title: "Logitech G502 Gaming Mouse",
-    img: img1,
-    discount: 50,
-    lastPrice: 38.0,
-    currentPrice: 19.0,
-  },
-  {
-    _id: 2,
-    title:
-      "NPET K10 Wired Gaming Keyboard, LED Backlit, Spill-Resistant Design",
-    img: img1,
-    discount: 30,
-    lastPrice: 49.0,
-    currentPrice: 34.0,
-  },
-  {
-    _id: 3,
-    title: "Apple Watch Series 7 (GPS, 41MM)",
-    img: img1,
-    discount: 20,
-    lastPrice: 289.0,
-    currentPrice: 231.0,
-  },
-  {
-    _id: 4,
-    title: "Apple 2022 MacBook Air M2 Chip (8GB RAM, 256GB SSD)",
-    img: img1,
-    discount: 25,
-    lastPrice: 950.0,
-    currentPrice: 712.0,
-  },
-  {
-    _id: 5,
-    title: "Samsung Titan Smart Watch",
-    img: img1,
-    discount: 17,
-    lastPrice: 120.0,
-    currentPrice: 99.0,
-  },
-  {
-    _id: 6,
-    title: "Logitech G502 Gaming Mouse",
-    img: img1,
-    discount: 50,
-    lastPrice: 38.0,
-    currentPrice: 19.0,
-  },
-  {
-    _id: 7,
-    title:
-      "NPET K10 Wired Gaming Keyboard, LED Backlit, Spill-Resistant Design",
-    img: img1,
-    discount: 30,
-    lastPrice: 49.0,
-    currentPrice: 34.0,
-  },
-  {
-    _id: 8,
-    title: "Apple Watch Series 7 (GPS, 41MM)",
-    img: img1,
-    discount: 20,
-    lastPrice: 289.0,
-    currentPrice: 231.0,
-  },
-  {
-    _id: 9,
-    title: "Apple 2022 MacBook Air M2 Chip (8GB RAM, 256GB SSD)",
-    img: img1,
-    discount: 25,
-    lastPrice: 950.0,
-    currentPrice: 712.0,
-  },
-  {
-    _id: 10,
-    title: "Samsung Titan Smart Watch",
-    img: img1,
-    discount: 17,
-    lastPrice: 120.0,
-    currentPrice: 99.0,
-  },
-];

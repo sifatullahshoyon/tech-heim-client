@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure/useAxiosSecure";
 import LoadingSpinner from "../../../Components/Shared/LoadingSpiner/LoadingSpinner";
+import { fadeIn } from '../../../variants'
+import { motion } from 'framer-motion'
 
 const truncateWords = (text, wordLimit) => {
   const words = text.split(" ");
@@ -40,9 +42,14 @@ const BlogCardForHome = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-7xl mx-auto px-4 py-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 container px-4 sm:px-6 lg:px-8 mx-auto  py-8">
       {blogs.slice(0, 1).map((blog) => (
-        <div key={blog._id} className="w-full mx-auto">
+        <motion.div
+          variants={fadeIn('right', 0.3)}
+          initial='hidden'
+          whileInView={'show'}
+          viewport={{ once: false, amount: 0.4 }}
+          key={blog._id} className="w-full mx-auto">
           <Link to={`/blog/list/${blog._id}`}>
             <div className="bg-white w-full shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-102 mx-auto">
               <img
@@ -112,14 +119,19 @@ const BlogCardForHome = () => {
               </div>
             </div>
           </Link>
-        </div>
+        </motion.div>
       ))}
 
       <div className="w-full space-y-6">
         {blogs && blogs.length > 0 ? (
           blogs.slice(1, 3).map((recentBlog) => (
             <Link to={`/blog/list/${recentBlog._id}`} key={recentBlog._id}>
-              <div className="flex bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 my-2">
+              <motion.div
+                variants={fadeIn('left', 0.1)}
+                initial='hidden'
+                whileInView={'show'}
+                viewport={{ once: false, amount: 0.7 }}
+                className="flex bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 my-2">
                 <div className="w-1/3">
                   <img
                     src={recentBlog.imgSrc}
@@ -129,11 +141,10 @@ const BlogCardForHome = () => {
                 </div>
                 <div className="w-2/3 p-6">
                   <h2
-                    className={`text-xl font-bold mb-2 ${
-                      recentBlog.highlighted
-                        ? "text-orange-500"
-                        : "text-gray-800"
-                    }`}
+                    className={`text-xl font-bold mb-2 ${recentBlog.highlighted
+                      ? "text-orange-500"
+                      : "text-gray-800"
+                      }`}
                   >
                     {truncateWords(recentBlog.title, 8)}
                   </h2>
@@ -162,7 +173,7 @@ const BlogCardForHome = () => {
                     <span>{recentBlog.date}</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </Link>
           ))
         ) : (
