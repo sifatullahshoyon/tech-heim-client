@@ -12,11 +12,11 @@ import { motion } from 'framer-motion'
 const ProductsInfo = () => {
   return (
     <motion.section
-      variants={fadeIn('down', 0.3)}
+      variants={fadeIn('down', 0.2)}
       initial='hidden'
       whileInView={'show'}
-      viewport={{ once: false, amount: 0.5 }}
-      className="container mx-auto px-4 my-12 sm:px-6 lg:px-8 mb-20">
+      viewport={{ once: false, amount: 0.7 }}
+      className="container mx-auto px-4 my-20 sm:px-6 lg:px-8 mb-20">
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-6">
         {someProductsInfo?.map((pd) => (
           <SingleProduct key={pd.id} pd={pd} />
