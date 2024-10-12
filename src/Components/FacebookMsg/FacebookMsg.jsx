@@ -5,7 +5,7 @@ const FacebookMsg = () => {
         // Initialize the Facebook SDK when the component mounts
         if (window.FB) {
             window.FB.init({
-                appId: '554825507079623',
+                appId: '551244857297329',
                 autoLogAppEvents: true,
                 xfbml: true,
                 version: 'v16.0',
