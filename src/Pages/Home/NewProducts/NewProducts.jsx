@@ -2,10 +2,11 @@ import React from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 import ProductCards from "./ProductCards";
 import { Link } from "react-router-dom";
-
 const NewProducts = () => {
   return (
-    <section className="container mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+    <section
+
+      className="container mx-auto px-4 sm:px-6 lg:px-8 mb-12">
       <>
         {/* heading */}
         <div className="flex justify-between">

@@ -45,6 +45,8 @@ import CookieSettings from "../Pages/FooterComponents/CookieSettings";
 import PrivacyPolicy from "../Pages/FooterComponents/PrivacyPolicy";
 import TermsAndConditions from "../Pages/FooterComponents/TermsConditions";
 import ManageOrders from "../Pages/DashboardPages/AdminPages/ManageBookings/ManageOrders";
+import Lottery from "../Pages/Lottery/Lottery";
+import Spinner from "../Pages/Spinner/Spinner";
 
 const router = createBrowserRouter([
   {
@@ -139,6 +141,15 @@ const router = createBrowserRouter([
       {
         path: "/termsConditions",
         element: <TermsAndConditions />,
+       
+      },
+      {
+        path: "/lottery",
+        element: <Lottery />,
+      },
+      {
+        path: "/spinner",
+        element: <Spinner />,
       },
     ],
   },

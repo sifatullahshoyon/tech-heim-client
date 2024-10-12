@@ -16,24 +16,22 @@ import { toast } from "react-toastify";
 import useAdmin from "../../Hooks/useAdmin/useAdmin";
 import MenuShoppingCart from "../../MenuShoppingCart/MenuShoppingCart";
 
-
 const Navbar = () => {
   const { user, logOut, cartProduct } = useContext(AuthContext);
   const { cart, totalPrice } = cartProduct;
   const [isAdmin] = useAdmin();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleLogeOut = () => {
     logOut()
       .then(() => {
         toast.success("Successfully logOut");
-        navigate('/')
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
 
   return (
     <div className="container mx-auto">
@@ -70,9 +68,7 @@ const Navbar = () => {
                         {item.subItems.map((subItem) => (
                           <li key={subItem.name}>
                             <NavLink
-                              className={({ isActive }) =>
-                                isActive ? "active" : "default"
-                              }
+                              className={({ isActive }) => (isActive ? "active" : "default")}
                               to={subItem.path}
                             >
                               {subItem.name}
@@ -83,9 +79,7 @@ const Navbar = () => {
                     </>
                   ) : (
                     <NavLink
-                      className={({ isActive }) =>
-                        isActive ? "default" : "active"
-                      }
+                      className={({ isActive }) => (isActive ? "default" : "active")}
                       to={item.path}
                     >
                       {item.name}
@@ -106,10 +100,7 @@ const Navbar = () => {
               <li key={item.name} className="relative group">
                 {item.subItems ? (
                   <>
-                    <NavLink
-                      to={item.path}
-                      className="group-hover:text-primary"
-                    >
+                    <NavLink to={item.path} className="group-hover:text-primary">
                       {item.name}
                     </NavLink>
                     <ul className="absolute left-0 top-full hidden group-hover:block bg-base-100 shadow-lg p-2">
@@ -118,9 +109,7 @@ const Navbar = () => {
                           <li key={subItem.name}>
                             <NavLink
                               to={subItem.path}
-                              className={({ isActive }) =>
-                                isActive ? "default" : "active "
-                              }
+                              className={({ isActive }) => (isActive ? "default" : "active ")}
                             >
                               {subItem.name}
                             </NavLink>
@@ -133,14 +122,9 @@ const Navbar = () => {
                   <NavLink to={item.path}>{item.name}</NavLink>
                 )}
               </li>
-
             ))}
-            {
-              user && isAdmin && <NavLink to='/dashboard/admin-home' >Dashboard</NavLink>
-            }
-            {
-              user && !isAdmin && <NavLink to='/dashboard/personal-data'>Dashboard</NavLink>
-            }
+            {user && isAdmin && <NavLink to="/dashboard/admin-home">Dashboard</NavLink>}
+            {user && !isAdmin && <NavLink to="/dashboard/personal-data">Dashboard</NavLink>}
           </ul>
         </div>
         <div className="navbar-end">
@@ -148,9 +132,7 @@ const Navbar = () => {
             {/* Search Button */}
 
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
-            <button
-              onClick={() => document.getElementById("my_modal_4").showModal()}
-            >
+            <button onClick={() => document.getElementById("my_modal_4").showModal()}>
               <img src={searchIcon} alt="bag Icon" />
             </button>
             <dialog id="my_modal_4" className="modal">
@@ -170,19 +152,13 @@ const Navbar = () => {
             {/* Shopping Cart Button */}
 
             {/* Open the modal using document.getElementById('ID').showModal() method */}
-            <button
-              className=""
-              onClick={() => document.getElementById("my_modal_5").showModal()}
-            >
+            <button className="" onClick={() => document.getElementById("my_modal_5").showModal()}>
               <div className="indicator">
                 <span className="indicator-item badge badge-info">{cart?.length}</span>
                 <img src={bagIcon} alt="bag Icon" />
               </div>
             </button>
-            <dialog
-              id="my_modal_5"
-              className="modal modal-center sm:modal-middle"
-            >
+            <dialog id="my_modal_5" className="modal modal-center sm:modal-middle">
               <div className="modal-box w-11/12 lg:w-full mx-auto">
                 {/* open shopping cart */}
                 <MenuShoppingCart />
@@ -222,25 +198,19 @@ const Navbar = () => {
                   <p className="text-black text-sm md:text-lg font-normal">
                     <HiOutlineShoppingBag />
                   </p>
-                  <p className="font-normal text-black text-sm text-balance">
-                    Orders
-                  </p>
+                  <p className="font-normal text-black text-sm text-balance">Orders</p>
                 </div>
                 <div className="flex items-center gap-4 mb-6">
                   <p className="text-black text-sm md:text-lg font-normal">
                     <FaRegHeart />
                   </p>
-                  <p className="font-normal text-black text-sm text-balance">
-                    Wish List
-                  </p>
+                  <p className="font-normal text-black text-sm text-balance">Wish List</p>
                 </div>
                 <div className="flex items-center gap-4 mb-6">
                   <p className="text-black text-sm md:text-lg font-normal">
                     <AiOutlineDollar />
                   </p>
-                  <p className="font-normal text-black text-sm text-balance">
-                    Payments
-                  </p>
+                  <p className="font-normal text-black text-sm text-balance">Payments</p>
                 </div>
                 <div className="flex items-center gap-4 mb-6">
                   <p className="text-black text-sm md:text-lg font-normal">
@@ -249,10 +219,7 @@ const Navbar = () => {
                   {/* Open the modal using document.getElementById('ID').showModal() method */}
                   {user ? (
                     <>
-                      <button
-                        className="hover:text-red-600"
-                        onClick={handleLogeOut}
-                      >
+                      <button className="hover:text-red-600" onClick={handleLogeOut}>
                         Log out
                       </button>
                     </>
@@ -261,9 +228,9 @@ const Navbar = () => {
                       <Link to="/login">
                         <button
                           className=""
-                        // onClick={() =>
-                        //   document.getElementById("my_modal_6").showModal()
-                        // }
+                          // onClick={() =>
+                          //   document.getElementById("my_modal_6").showModal()
+                          // }
                         >
                           Sign In
                         </button>
@@ -280,10 +247,7 @@ const Navbar = () => {
                     </>
                   )}
 
-                  <dialog
-                    id="my_modal_6"
-                    className="modal modal-center sm:modal-middle"
-                  >
+                  <dialog id="my_modal_6" className="modal modal-center sm:modal-middle">
                     <div className="modal-box w-11/12 lg:w-full mx-auto">
                       <Form />
                       <div className="modal-action">
@@ -342,4 +306,9 @@ const navItems = [
   //   name: "Dashboard",
   //   path: "/dashboard",
   // },
+
+  {
+    name: "Lottery",
+    path: "/lottery",
+  },
 ];
