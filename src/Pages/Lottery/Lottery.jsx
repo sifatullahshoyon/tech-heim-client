@@ -52,7 +52,7 @@ const Lottery = () => {
             </p>
             <p className="text-gray-700 mt-4">
               Thank you for purchasing your Coupon! You can now participate in the lottery draw.
-              Remember, you can spin the wheel after a minute from your purchase time! Good luck!
+              Remember, you can spin the wheel after a seconds from your purchase time! Good luck!
             </p>
 
             <Countdown purchaseDate={buyDate}></Countdown>

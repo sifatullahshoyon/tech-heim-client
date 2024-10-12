@@ -5,7 +5,7 @@ import TechnicalDetails from "./TabListComponents/TechnicalDetails";
 import SimilarProduct from "./TabListComponents/SimilarProduct";
 import Comments from "./TabListComponents/Comments";
 
-const TabListProduct = ({ product, similarProduct }) => {
+const TabListProduct = ({ product, similarProduct,isPresentPastOrder }) => {
   const [tabIndex, setTabIndex] = useState(0);
   return (
     <div className="mt-20">
@@ -50,7 +50,7 @@ const TabListProduct = ({ product, similarProduct }) => {
         </TabPanel>
         {/* tab-3  */}
         <TabPanel>
-          <Comments></Comments>
+          <Comments isPresentPastOrder={isPresentPastOrder}></Comments>
         </TabPanel>
       </Tabs>
     </div>
