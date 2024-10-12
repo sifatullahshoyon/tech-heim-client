@@ -4,7 +4,6 @@ import { FiPhone } from 'react-icons/fi';
 import { MdMarkEmailUnread } from 'react-icons/md';
 import PopUpModal from './PopUpModal';
 import useAuth from '../../../../Components/Hooks/useAuth/useAuth';
-import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../../../Components/Hooks/useAxiosPublic/useAxiosPublic';
 
