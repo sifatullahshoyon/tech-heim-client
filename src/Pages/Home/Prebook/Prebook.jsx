@@ -3,13 +3,20 @@ import { ImageDisplayControl } from "@frameright/react-image-display-control";
 import phoneSeries from "../../../assets/images/banner/iPhone-series.png";
 import playstation from "../../../assets/images/banner/play-station-5.png";
 import { Link } from "react-router-dom";
+import { fadeIn } from '../../../variants'
+import { motion } from 'framer-motion'
 
 const Prebook = () => {
   return (
-    <section className="container mx-auto mb-12 px-4 sm:px-6 lg:px-8">
+    <section className="container mx-auto mb-12 my-28 px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 gap-6">
         {/* Image One */}
-        <div className="relative flex w-full flex-col items-center justify-center  h-[500px]"> {/* Increased fixed height */}
+        <motion.div
+          variants={fadeIn('right', 0.1)}
+          initial='hidden'
+          whileInView={'show'}
+          viewport={{ once: false, amount: 0.2 }}
+          className="relative flex w-full flex-col items-center justify-center  h-[500px]"> {/* Increased fixed height */}
           <img
             src={phoneSeries}
             className="w-full h-full object-cover rounded-lg shadow-lg" // Maintain aspect ratio
@@ -22,10 +29,15 @@ const Prebook = () => {
               </button>
             </Link>
           </div>
-        </div>
+        </motion.div>
 
         {/* Image Two */}
-        <div className="relative  flex flex-col items-center justify-center w-full h-[500px]"> {/* Increased fixed height */}
+        <motion.div
+          variants={fadeIn('up', 0.1)}
+          initial='hidden'
+          whileInView={'show'}
+          viewport={{ once: false, amount: 0.2 }}
+          className="relative  flex flex-col items-center justify-center w-full h-[500px]"> {/* Increased fixed height */}
           <img
             src={playstation}
             className="w-full h-full object-cover rounded-lg shadow-lg" // Maintain aspect ratio
@@ -38,7 +50,7 @@ const Prebook = () => {
               </button>
             </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
