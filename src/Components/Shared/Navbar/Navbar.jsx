@@ -34,7 +34,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto ">
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           {/* Mobile Device s*/}
