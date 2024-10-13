@@ -360,4 +360,8 @@ const navItems = [
     name: "About Us",
     path: "/aboutUs",
   },
+  {
+    name: "Lottery",
+    path: "/lottery",
+  },
 ];
