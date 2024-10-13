@@ -4,9 +4,9 @@ import useAuth from "../../Components/Hooks/useAuth/useAuth";
 
 const Lottery = () => {
   const { ticketNumber, setTicketNumber } = useAuth();
- 
+
   const [ticketPrice] = useState(10); // Example ticket price
-  const [buyDate,setBuyDate]=useState(null);
+  const [buyDate, setBuyDate] = useState(null);
 
   const handleBuyTicket = () => {
     setBuyDate(new Date())
@@ -15,7 +15,7 @@ const Lottery = () => {
     alert(`Your ticket number is ${randomTicket}.`);
   };
 
-  
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
@@ -59,7 +59,7 @@ const Lottery = () => {
           </div>
         )}
       </div>
-      
+
     </div>
   );
 };
