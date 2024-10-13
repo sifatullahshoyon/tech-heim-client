@@ -8,17 +8,17 @@ import { AuthContext } from "../../Provider/AuthProvider";
 
 const MenuShoppingCart = () => {
 
-  const { cartProduct ,fetchCartDetails} = useContext(AuthContext);
+  const { cartProduct, fetchCartDetails } = useContext(AuthContext);
   const { cart, totalPrice } = cartProduct;
-  
- 
+
+
 
   const location = useLocation();
   const isCarts = location?.pathname?.includes("carts");
   const isCheckout = location?.pathname?.includes("checkout");
   const isPayment = location?.pathname?.includes("payment");
 
-  
+
 
   return (
     <div>
@@ -45,10 +45,10 @@ const MenuShoppingCart = () => {
                 <p>${totalPrice}</p>
               </div>
               <div className="w-4/5">
-                <Link to='/checkout'>
-                <button className="btn bg-[#0C68F4] hover:bg-blue-800 text-white  w-full flex">
-                  Proceed to Cart <FaShoppingCart />{" "}
-                </button>
+                <Link to='/carts'>
+                  <button className="btn bg-[#0C68F4] hover:bg-blue-800 text-white  w-full flex">
+                    Proceed to Cart <FaShoppingCart />{" "}
+                  </button>
                 </Link>
               </div>
             </div>
