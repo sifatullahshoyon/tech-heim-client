@@ -32,7 +32,7 @@ const Success = () => {
       };
 
       // Send a request to generate the receipt
-      const response = await axiosPublic.post("/api/generate-receipt", transactionData, {
+      const response = await axiosPublic.post("/api/generate-receipt", latestPayment, {
         responseType: "blob", // Important to handle binary response
       });
 
@@ -42,7 +42,7 @@ const Success = () => {
       // Create a download link
       const link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
-      link.setAttribute("download", `receipt_${transactionData.transactionId}.pdf`);
+      link.setAttribute("download", `receipt_${latestPayment.paymentId}.pdf`);
 
       // Trigger the download
       document.body.appendChild(link);
@@ -140,7 +140,8 @@ const Success = () => {
             >
               Download Receipt
             </button>
-            <Link to="/dashboard/orders">
+            
+            <Link to={`/dashboard/order-status/${latestPayment?.paymentId}`}>
               <button className="btn bg-blue-500 hover:bg-blue-600 border-0 text-white w-[187px] h-12 text-base">
                 Order Status
               </button>
