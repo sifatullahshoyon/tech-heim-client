@@ -28,7 +28,7 @@ const BlogCardForHome = () => {
         setBlogs(res.data);
       } catch (error) {
         console.error("Error fetching blogs:", error);
-        toast.error("Failed to fetch blogs");
+        // toast.error("Failed to fetch blogs");
       } finally {
         setLoading(false);
       }

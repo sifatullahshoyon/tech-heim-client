@@ -27,7 +27,7 @@ const AdminHome = () => {
             return result.data;
         }
     });
-
+    console.log(stats)
 
     if (error) {
         return <div className="text-center mt-10 text-lg text-red-500">Failed to load stats. Please try again later.</div>;
