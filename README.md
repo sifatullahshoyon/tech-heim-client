@@ -82,9 +82,9 @@ To set up the project locally, follow these instructions:
         VITE_appId=
 
 4. **Start the development server**: 
-  ```bash 
-   npm run dev
 
+   ```bash 
+   npm install
 
 ### Frontend Setup
 
