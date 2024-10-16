@@ -63,6 +63,7 @@ To set up the project locally, follow these instructions:
 
    ```bash
    git clone https://github.com/Waheedulislam/Dev-Daynamos-Fashion-House-
+
    cd tech-heim
 
 2. **Install dependencies**: 
@@ -74,12 +75,12 @@ To set up the project locally, follow these instructions:
 
 
    ```bash 
-    VITE_apiKey=
-    VITE_authDomain=
-    VITE_projectId=
-    VITE_storageBucket=
-    VITE_messagingSenderId=
-    VITE_appId=
+   VITE_apiKey=
+   VITE_authDomain=
+   VITE_projectId=
+   VITE_storageBucket=
+   VITE_messagingSenderId=
+   VITE_appId=
 
 4. **Start the development server**: 
 
@@ -102,11 +103,11 @@ To set up the project locally, follow these instructions:
 3. **Create a .env file in the root of your backend folder and add the following environment variables**:
   
    ```bash
-    DB_USER=
-    DB_PASS=
-    ACCESS_TOKEN_SECRET=
-    SSL_STORE_ID=
-    SSL_STORE_PASSWORD=
+   DB_USER=
+   DB_PASS=
+   ACCESS_TOKEN_SECRET=
+   SSL_STORE_ID=
+   SSL_STORE_PASSWORD=
 
 4. **Start the backend server**:
   
@@ -141,4 +142,4 @@ This project was developed and maintained by:
 
 ## Contact 
 
-For any inquiries or feedback, feel free to contact us at **infotechheim@gmail.com*
+For any inquiries or feedback, feel free to contact us at *infotechheim@gmail.com*
