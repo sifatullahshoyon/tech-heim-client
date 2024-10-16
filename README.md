@@ -62,5 +62,20 @@ To set up the project locally, follow these instructions:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-repo-url.git
+   git clone https://github.com/Waheedulislam/Dev-Daynamos-Fashion-House-
    cd tech-heim
+
+2. **Install dependencies**: 
+
+   ```bash 
+   npm install
+
+3. **Create a .env file in the root of your frontend folder and add the following environment variables**: 
+
+```bash 
+VITE_apiKey=AIzaSyD0j4nz0jJmcRkN161ALmv5T9mp6uxkcXc
+VITE_authDomain=tech-heim-f9fc6.firebaseapp.com
+VITE_projectId=tech-heim-f9fc6
+VITE_storageBucket=tech-heim-f9fc6.appspot.com
+VITE_messagingSenderId=853819566727
+VITE_appId=1:853819566727:web:f353ac91781a3cc36b6622
