@@ -72,15 +72,68 @@ To set up the project locally, follow these instructions:
 
 3. **Create a .env file in the root of your frontend folder and add the following environment variables**: 
 
-```bash 
-VITE_apiKey=AIzaSyD0j4nz0jJmcRkN161ALmv5T9mp6uxkcXc
-VITE_authDomain=tech-heim-f9fc6.firebaseapp.com
-VITE_projectId=tech-heim-f9fc6
-VITE_storageBucket=tech-heim-f9fc6.appspot.com
-VITE_messagingSenderId=853819566727
-VITE_appId=1:853819566727:web:f353ac91781a3cc36b6622 .
 
-4. **Install dependencies**:
+   ```bash 
+        VITE_apiKey=
+        VITE_authDomain=
+        VITE_projectId=
+        VITE_storageBucket=
+        VITE_messagingSenderId=
+        VITE_appId=
 
-```bash 
-npm run dev
+4. **Start the development server**: 
+  ```bash 
+   npm run dev
+
+### Backend Setup 
+
+1. **Navigate to the backend directory**:
+  ```bash 
+cd backend  # Adjust this if your backend is in a different directory
+
+2. **Install dependencies**:
+  ```bash 
+  npm install
+
+3. **Create a .env file in the root of your backend folder and add the following environment variables**:
+  ```bash 
+  DB_USER=
+  DB_PASS=
+  ACCESS_TOKEN_SECRET=
+  SSL_STORE_ID=
+  SSL_STORE_PASSWORD=
+
+4. **Start the backend server**:
+
+   ```bash 
+    npm run dev
+
+---
+
+## Admin and User Roles 
+
+ For admin-level access, you can log in using the following credentials:
+
+- **Admin Email**: adminuser@gmail.com
+- **Admin Password**: Adminuser2#
+
+This account has the ability to manage users and products, including the ability to add, update, and delete items in the inventory.
+
+For regular users, they can register, log in, and manage their own profiles and orders.
+
+---
+
+## Contributors
+
+This project was developed and maintained by:
+
+- **Waheedul Islam**: (Team Leader)
+- **Sifat Ullah Shawon**
+- **Omor Faruk**
+- **Mominul Islam**
+
+---
+
+## Contact 
+
+For any inquiries or feedback, feel free to contact us at **infotechheim@gmail.com*
