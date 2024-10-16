@@ -85,7 +85,9 @@ To set up the project locally, follow these instructions:
   ```bash 
    npm run dev
 
+
 ### Backend Setup 
+
 
 1. **Navigate to the backend directory**:
   ```bash 
