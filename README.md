@@ -86,7 +86,7 @@ To set up the project locally, follow these instructions:
    npm run dev
 
 
-### Backend Setup 
+### Frontend Setup
 
 
 1. **Navigate to the backend directory**:
