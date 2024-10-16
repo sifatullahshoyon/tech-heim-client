@@ -78,4 +78,9 @@ VITE_authDomain=tech-heim-f9fc6.firebaseapp.com
 VITE_projectId=tech-heim-f9fc6
 VITE_storageBucket=tech-heim-f9fc6.appspot.com
 VITE_messagingSenderId=853819566727
-VITE_appId=1:853819566727:web:f353ac91781a3cc36b6622
+VITE_appId=1:853819566727:web:f353ac91781a3cc36b6622 .
+
+4. **Install dependencies**:
+
+```bash 
+npm run dev
