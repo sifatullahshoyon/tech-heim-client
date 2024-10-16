@@ -86,7 +86,7 @@ To set up the project locally, follow these instructions:
    ```bash 
    npm install
 
-### Frontend Setup
+### Backend  Setup
 
 
 1. **Navigate to the backend directory**:
@@ -97,7 +97,7 @@ To set up the project locally, follow these instructions:
 2. **Install dependencies**:
   
    ```bash
-  npm install
+         npm install
 
 3. **Create a .env file in the root of your backend folder and add the following environment variables**:
   
