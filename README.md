@@ -90,25 +90,28 @@ To set up the project locally, follow these instructions:
 
 
 1. **Navigate to the backend directory**:
-  ```bash 
-cd backend  # Adjust this if your backend is in a different directory
+  
+   ```bash 
+         cd backend  # Adjust this if your backend is in a different directory
 
 2. **Install dependencies**:
-  ```bash 
+  
+   ```bash
   npm install
 
 3. **Create a .env file in the root of your backend folder and add the following environment variables**:
-  ```bash 
-  DB_USER=
-  DB_PASS=
-  ACCESS_TOKEN_SECRET=
-  SSL_STORE_ID=
-  SSL_STORE_PASSWORD=
+  
+   ```bash
+        DB_USER=
+        DB_PASS=
+        ACCESS_TOKEN_SECRET=
+        SSL_STORE_ID=
+        SSL_STORE_PASSWORD=
 
 4. **Start the backend server**:
-
-   ```bash 
-    npm run dev
+  
+   ```bash
+         npm run dev
 
 ---
 
