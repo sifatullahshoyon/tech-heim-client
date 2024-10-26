@@ -14,8 +14,8 @@ Click here to visit the live site: [https://techheim.netlify.app](https://techhe
 
 ## Team Members
 
-1. **Waheedul Islam** (Team Leader)
-2. **Sifat Ullah Shawon**
+1. **Waheedul Islam**: (Team Leader)
+2. **Sifat Ullah Shoyon**: (Team Co-Leader)
 3. **Omor Faruk**
 4. **Mominul Islam**
 
@@ -50,6 +50,7 @@ Click here to visit the live site: [https://techheim.netlify.app](https://techhe
 - **Email Verification**: Users receive email verification upon registration.
 - **Dynamic Product Management**: Admins can add, update, and delete products.
 - **Secure Payments**: Integrated payment system using SSLCommerz for safe transactions.
+- **Unique Features**: Implement lottery features.
 
 ---
 
@@ -134,7 +135,7 @@ For regular users, they can register, log in, and manage their own profiles and 
 This project was developed and maintained by:
 
 - **Waheedul Islam**: (Team Leader)
-- **Sifat Ullah Shawon**
+- **Sifat Ullah Shoyon**: (Team Co-Leader)
 - **Omor Faruk**
 - **Mominul Islam**
 
