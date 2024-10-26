@@ -51,6 +51,7 @@ Click here to visit the live site: [https://techheim.netlify.app](https://techhe
 - **Dynamic Product Management**: Admins can add, update, and delete products.
 - **Secure Payments**: Integrated payment system using SSLCommerz for safe transactions.
 - **Unique Features**: Implement lottery features.
+- **Live Chat**: Users can directly Connect to Admin via message chat.
 
 ---
 
